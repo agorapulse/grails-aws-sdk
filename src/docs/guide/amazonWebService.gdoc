@@ -1,0 +1,66 @@
+Reference @amazonWebService@ from any of your grails artefacts (controllers, domain, services...) to automatically inject it.
+
+{code}
+def amazonWebService
+{code}
+
+You can then access any services directly from @amazonWebService@.
+
+{code}
+// Available service clients
+amazonWebService.autoScaling
+amazonWebService.cloudformation
+amazonWebService.cloudfront
+amazonWebService.cloudsearch
+amazonWebService.cloudwatch
+amazonWebService.dynamodb
+amazonWebService.ec2
+amazonWebService.elasticbeanstalk
+amazonWebService.elasticmapreduce
+amazonWebService.elasticache
+amazonWebService.iam
+amazonWebService.importexport
+amazonWebService.rds
+amazonWebService.route53
+amazonWebService.s3
+amazonWebService.ses
+amazonWebService.simpledb
+amazonWebService.sns
+amazonWebService.sqs
+amazonWebService.storagegateway
+{code}
+
+It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html.
+
+You can then call any available method on the client.
+
+For example, to send and receive SQS messages.
+
+{code}
+// Send message
+amazonWebService.sqs.sendMessage(new SendMessageRequest(queueUrl, messageBody))
+// Receives messages
+List messages = amazonWebService.sqs.receiveMessage(new ReceiveMessageRequest(queueUrl)).messages
+{code}
+
+To know available methods for each service clients, check the latest version of "AWS SDK for Java":http://aws.amazon.com/sdkforjava/.
+
+h3. Custom region
+
+If required, you pass the region name, to get a client different from the default region.
+
+{code}
+// Use SQS for region 'eu-west-1'
+amazonWebService.getSqs('eu-west-1').sendMessage(new SendMessageRequest(queueUrl, messageBody))
+{code}
+
+h3. Async clients
+
+If required, you can also get the asynchronous version for each client.
+
+{code}
+// Get async client
+amazonWebService.sqsAsync.sendMessage(new SendMessageRequest(queueUrl, messageBody))
+// Get async client for region 'eu-west-1'
+amazonWebService.getSqsAsync('eu-west-1').sendMessage(new SendMessageRequest(queueUrl, messageBody))
+{code}

@@ -1,0 +1,80 @@
+h4. Credentials
+
+Add your AWS credentials parameters to your _grails-app/conf/Config.groovy_:
+
+{code}
+grails.plugins.awssdk.accessKey = {ACCESS_KEY}
+grails.plugins.awssdk.secretKey = {SECRET_KEY}
+{code}
+
+This is the minimal config.
+
+h4. Region
+
+The default region used is *us-east-1*.
+You might override it in your config:
+
+{code}
+grails.plugins.awssdk.region = 'eu-west-1'
+{code}
+
+h4. Client config
+
+If required, you can override default client configuration, which will be used each time a new client is created by @amazonWebService@.
+
+{code}
+grails.plugins.awssdk {
+    // Amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out.
+    connectionTimeout = {CONNECTION_TIMEOUT}
+    // Maximum number of allowed open HTTP connections.
+    maxConnections = {MAX_CONNECTIONS}
+    // Maximum number of retry attempts for failed retryable requests (ex: 5xx error responses from a service).
+    maxErrorRetry = {MAX_ERROR_RETRY}
+    // Protocol (HTTP or HTTPS) to use when connecting to Amazon Web Services.
+    protocol = {PROTOCOL}
+    // Size hints (in bytes) for the low level TCP send and receive buffers.
+    socketBufferSizeHints = [{SOCKET_SEND_BUFFER _SIZE_HINT},{SOCKET_RECEIVE_BUFFER_SIZE_HINT}]
+    // Amount of time to wait (in milliseconds) for data to be transfered over an established, open connection before the connection times out and is closed.
+    socketTimeout = {SOCKET_TIMEOUT}
+    // HTTP user agent header to send with all requests.
+    userAgent = {USER_AGENT}
+}
+{code}
+
+If required, you can also override default client configuration for each service. For example this will define specific properties for SQS.
+
+{code}
+grails.plugins.awssdk {
+    sqs {
+        // Custom access key
+        accessKey = {SQS_ACCESS_KEY}
+        // Custom secret key
+        secretKey = {SQS_SECRET_KEY}
+        // Custom region
+        region = {SQS_REGION}
+        // Custom timeout
+        connectionTimeout = {SQS_CONNECTION_TIMEOUT}
+    }
+    // Other available services
+    autoscaling {}
+    cloudformation {}
+    cloudfront {}
+    cloudsearch {}
+    cloudwatch {}
+    dynamodb {}
+    ec2 {}
+    elasticbeanstalk {}
+    elasticmapreduce {}
+    elasticache {}
+    iam {}
+    importexport {}
+    rds {}
+    route53 {}
+    s3 {}
+    ses {}
+    simpledb {}
+    sns {}
+    sqs {}
+    storagegateway {}
+}
+{code}
