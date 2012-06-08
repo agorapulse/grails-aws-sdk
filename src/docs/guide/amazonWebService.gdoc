@@ -30,7 +30,7 @@ amazonWebService.sqs
 amazonWebService.storagegateway
 {code}
 
-It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html.
+It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html with default region endpoint.
 
 You can then call any available method on the client.
 
@@ -43,11 +43,11 @@ amazonWebService.sqs.sendMessage(new SendMessageRequest(queueUrl, messageBody))
 List messages = amazonWebService.sqs.receiveMessage(new ReceiveMessageRequest(queueUrl)).messages
 {code}
 
-To know available methods for each service clients, check the latest version of "AWS SDK for Java":http://aws.amazon.com/sdkforjava/.
+To know available methods for each service clients, check the latest version of online "AWS SDK Java docs":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html/ .
 
 h3. Custom region
 
-If required, you pass the region name, to get a client different from the default region.
+If required, you pass the region name, to get a client with different region endpoint.
 
 {code}
 // Use SQS for region 'eu-west-1'
@@ -60,7 +60,7 @@ If required, you can also get the asynchronous version for each client.
 
 {code}
 // Get async client
-amazonWebService.sqsAsync.sendMessage(new SendMessageRequest(queueUrl, messageBody))
+amazonWebService.sqsAsync.sendMessageAsync(new SendMessageRequest(queueUrl, messageBody))
 // Get async client for region 'eu-west-1'
-amazonWebService.getSqsAsync('eu-west-1').sendMessage(new SendMessageRequest(queueUrl, messageBody))
+amazonWebService.getSqsAsync('eu-west-1').sendMessageAsync(new SendMessageRequest(queueUrl, messageBody))
 {code}
