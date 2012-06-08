@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Aws-sdk-grails-plugin : AWS SDK Grails Plugin" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Aws-sdk-grails-plugin</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/benorama/aws-sdk-grails-plugin">View on GitHub</a>
+
+          <h1 id="project_title">Aws-sdk-grails-plugin</h1>
+          <h2 id="project_tagline">AWS SDK Grails Plugin</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/benorama/aws-sdk-grails-plugin/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/benorama/aws-sdk-grails-plugin/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>AWS SDK Grails Plugin</h1>
+
+<h1>Introduction</h1>
+
+<p>The AWS SDK Plugin allows your <a href="http://grails.org">Grails</a> application to use the <a href="http://aws.amazon.com/">Amazon Web Services</a> infrastructure services.</p>
+
+<p>It uses the official <a href="http://aws.amazon.com/sdkforjava/">AWS SDK for Java</a>, which provides a Java API for AWS infrastructure services, making it even easier for developers to build applications that tap into the cost-effective, scalable, and reliable AWS cloud.</p>
+
+<p>Using the SDK, developers can build solutions for Amazon Simple Storage Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon SimpleDB, and more.</p>
+
+<p><strong>AWS SDK Grails Plugin</strong> provides :</p>
+
+<ul>
+<li>
+<strong>amazonWebService</strong> - A lightweight service wrapper around the <a href="http://aws.amazon.com/sdkforjava/">AWS SDK for Java</a> to easily access AWS services clients.</li>
+</ul><h1>Installation</h1>
+
+<p>Declare the plugin dependency in the BuildConfig.groovvy file, as shown here:</p>
+
+<div class="highlight">
+<pre><span class="n">grails</span><span class="o">.</span><span class="na">project</span><span class="o">.</span><span class="na">dependency</span><span class="o">.</span><span class="na">resolution</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="n">inherits</span><span class="o">(</span><span class="s2">"global"</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+        <span class="n">log</span> <span class="s2">"info"</span>
+        <span class="n">repositories</span> <span class="o">{</span>
+                <span class="c1">//your repositories</span>
+        <span class="o">}</span>
+        <span class="n">dependencies</span> <span class="o">{</span>
+                <span class="c1">//your regular dependencies</span>
+        <span class="o">}</span>
+        <span class="n">plugins</span> <span class="o">{</span>
+                <span class="c1">//here go your plugin dependencies</span>
+                <span class="n">runtime</span> <span class="s1">':aws-sdk:0.1.0'</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+</div>
+
+
+<h1>Config</h1>
+
+<p>Create an AWS account <a href="http://aws.amazon.com/">Amazon Web Services</a>, in order to get your own credentials accessKey and secretKey.</p>
+
+<p>Add your AWS credentials parameters to your <em>grails-app/conf/Config.groovy</em>:</p>
+
+<div class="highlight">
+<pre><span class="n">grails</span><span class="o">.</span><span class="na">plugins</span><span class="o">.</span><span class="na">awssdk</span><span class="o">.</span><span class="na">accessKey</span> <span class="o">=</span> <span class="o">{</span><span class="n">ACCESS_KEY</span><span class="o">}</span>
+<span class="n">grails</span><span class="o">.</span><span class="na">plugins</span><span class="o">.</span><span class="na">awssdk</span><span class="o">.</span><span class="na">secretKey</span> <span class="o">=</span> <span class="o">{</span><span class="n">SECRET_KEY</span><span class="o">}</span>
+</pre>
+</div>
+
+
+<h1>Documentation</h1>
+
+<p>Project documentation is located here:</p>
+
+<ul>
+<li><a href="http://benorama.github.com/aws-sdk-grails-plugin/guide">Reference Documentation (Page per chapter)</a></li>
+<li><a href="http://benorama.github.com/aws-sdk-grails-plugin/guide/single.html">Reference Documentation (Single page)</a></li>
+<li><a href="http://benorama.github.com/aws-sdk-grails-plugin/gapi/">Groovy API docs</a></li>
+</ul><p>AWS SDK for Java documentation is located here:</p>
+
+<ul>
+<li><a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html">AWS SDK for Java</a></li>
+</ul><h1>Supported AWS Services</h1>
+
+<p>All services supported by <a href="http://aws.amazon.com/sdkforjava/">AWS SDK for Java</a> are available:</p>
+
+<ul>
+<li>Amazon CloudFormation</li>
+<li>Amazon CloudFront</li>
+<li>Amazon CloudSearch</li>
+<li>Amazon CloudWatch</li>
+<li>Amazon DynamoDB</li>
+<li>Amazon Elastic Compute Cloud (EC2)</li>
+<li>Amazon Elastic MapReduce</li>
+<li>Amazon ElastiCache</li>
+<li>Amazon Relational Database Service (RDS)</li>
+<li>Amazon Route 53</li>
+<li>Amazon Simple Email Service (SES)</li>
+<li>Amazon SimpleDB</li>
+<li>Amazon Simple Notification Service (SNS)</li>
+<li>Amazon Simple Queue Service (SQS)</li>
+<li>Amazon Simple Storage Service (S3)</li>
+<li>Auto Scaling</li>
+<li>AWS Elastic Beanstalk</li>
+<li>AWS Identity &amp; Access Management (IAM)</li>
+<li>AWS Import/Export</li>
+<li>AWS Storage Gateway</li>
+<li>Elastic Load Balancing</li>
+</ul><h1>Bugs</h1>
+
+<p>To report any bug, please use the project <a href="http://github.com/benorama/aws-sdk-grails-plugin/issues">Issues</a> section on GitHub.</p>
+
+<h1>Alpha status</h1>
+
+<p>This is an <strong>alpha release</strong>.
+The underlying APIs are generally stable, however we may make changes to the library in response to developer feedback.</p>
+
+<h1>Other AWS plugin</h1>
+
+<p>There is another <a href="http://grails.org/plugin/aws">AWS Grails plugin</a> which provides groovy DSL to use SES and adds methods to easily use S3 (based on JetS3 java lib).
+If you just need basic SES or S3 features, you might give it a try.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Aws-sdk-grails-plugin maintained by <a href="https://github.com/benorama">benorama</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
