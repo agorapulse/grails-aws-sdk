@@ -98,3 +98,4 @@ The underlying APIs are generally stable, however we may make changes to the lib
 
 There is another [AWS Grails plugin](http://grails.org/plugin/aws) which provides groovy DSL to use SES and adds methods to easily use S3 (based on JetS3 java lib).
 If you just need basic SES or S3 features, you might give it a try.
+
