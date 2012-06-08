@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>2 Getting started 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/gettingStarted.html"><strong>2</strong><span>Getting started</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/amazonWebService.html"><strong>3</strong><span>Amazon Web Service</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>The AWS SDK Plugin allows your Grails application to use the Amazon Web Services infrastructure services.
+It provides simple wrapper service around the official AWS SDK for Java.
+Using the SDK, developers can build solutions for Amazon Simple Storage Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon SimpleDB, and more.
+</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../guide/amazonWebService.html"><strong>3</strong><span>Amazon Web Service</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>2 Getting started - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Benoit HEDIARD</p>
+
+                    <p><strong>Version:</strong> 0.1</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h1 id="gettingStarted">2 Getting started</h1>
+3. Installation<p class="paragraph"/>Declare the plugin dependency in the BuildConfig.groovvy file, as shown here:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
+		inherits(<span class="java&#45;quote">"global"</span>) &#123; &#125;
+		log <span class="java&#45;quote">"info"</span>
+		repositories &#123;
+				//your repositories
+		&#125;
+		dependencies &#123;
+				//your regular dependencies
+		&#125;
+		plugins &#123;
+				//here go your plugin dependencies
+				runtime ':aws&#45;sdk:0.1.0'
+		&#125;
+&#125;</pre></div><p class="paragraph"/>
+<h3>Config</h3><p class="paragraph"/>Create an AWS account Amazon Web Services(http://aws.amazon.com/), in order to get your own credentials accessKey and secretKey.<p class="paragraph"/><h4>Credentials</h4><p class="paragraph"/>Add your AWS credentials parameters to your  <em class="italic">grails-app/conf/Config.groovy</em> :<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk.accessKey = &#123;ACCESS_KEY&#125;
+grails.plugins.awssdk.secretKey = &#123;SECRET_KEY&#125;</pre></div><p class="paragraph"/>This is the minimal config.<p class="paragraph"/><h4>Client config</h4><p class="paragraph"/>If required, you can override default client configuration, which will be used each time a new client is created by <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
+    // Amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out.
+    connectionTimeout = &#123;CONNECTION_TIMEOUT&#125;
+    // Maximum number of allowed open HTTP connections.
+    maxConnections = &#123;MAX_CONNECTIONS&#125;
+    // Maximum number of retry attempts <span class="java&#45;keyword">for</span> failed retryable requests (ex: 5xx error responses from a service).
+    maxErrorRetry = &#123;MAX_ERROR_RETRY&#125;
+    // Protocol (HTTP or HTTPS) to use when connecting to Amazon Web Services.
+    protocol = &#123;PROTOCOL&#125;
+    // Size hints (in bytes) <span class="java&#45;keyword">for</span> the low level TCP send and receive buffers.
+    socketBufferSizeHints = &#91;&#123;SOCKET_SEND_BUFFER _SIZE_HINT&#125;,&#123;SOCKET_RECEIVE_BUFFER_SIZE_HINT&#125;&#93;
+    // Amount of time to wait (in milliseconds) <span class="java&#45;keyword">for</span> data to be transfered over an established, open connection before the connection times out and is closed.
+    socketTimeout = &#123;SOCKET_TIMEOUT&#125;
+    // HTTP user agent header to send with all requests.
+    userAgent = &#123;USER_AGENT&#125;
+&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service. For example this will define specific properties for SQS.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk.sqs &#123;
+    // Specific access key <span class="java&#45;keyword">for</span> SQS
+    accessKey = &#123;SQS_ACCESS_KEY&#125;
+    // Specific access key <span class="java&#45;keyword">for</span> SQS
+    secretKey = &#123;SQS_SECRET_KEY&#125;
+    // Custom timeout <span class="java&#45;keyword">for</span> SQS clients
+    connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;
+&#125;</pre></div>
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/amazonWebService.html"><strong>3</strong><span>Amazon Web Service</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>
