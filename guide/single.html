@@ -77,16 +77,29 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                             
                             <div class="toc-item" style="margin-left:0px"><a href="#amazonWebService"><strong>4</strong><span>Amazon Web Service</span></a></div>
                             
+                            <div class="toc-item" style="margin-left:10px"><a href="#ec2"><strong>4.1</strong><span>EC2 example</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#rds"><strong>4.2</strong><span>RDS example</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#s3"><strong>4.3</strong><span>S3 example</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#ses"><strong>4.4</strong><span>SES example</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#sqs"><strong>4.5</strong><span>SQS example</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#other"><strong>4.6</strong><span>Other services</span></a></div>
+                            
                             <div style="clear:both" ></div>
                         </div>
                         
                         
 
 <h1 id="introduction">1 Introduction</h1>
-The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails</a> application to use the <a href="http://aws.amazon.com/" target="blank">Amazon Web Services</a> infrastructure services.<p class="paragraph"/>It uses the official <a href="http://aws.amazon.com/sdkforjava/," target="blank">AWS SDK for Java</a> which provides a Java API for AWS infrastructure services, making it even easier for developers to build applications that tap into the cost-effective, scalable, and reliable AWS cloud.<p class="paragraph"/>Using the SDK, developers can build solutions for Amazon Simple Storage Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon SimpleDB, and more.<p class="paragraph"/><strong class="bold">AWS SDK Grails Plugin</strong> provides the following Grails artefact:
+The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails</a> application to use the <a href="http://aws.amazon.com/" target="blank">Amazon Web Services</a> infrastructure services.<p class="paragraph"/>The aim is to provide a lightweight <code>amazonWebService</code> Grails service wrapper around the official <a href="http://aws.amazon.com/sdkforjava/." target="blank">AWS SDK for Java</a><p class="paragraph"/>It uses the official <a href="http://aws.amazon.com/sdkforjava/," target="blank">AWS SDK for Java</a> which provides a Java API for AWS infrastructure services, making it even easier for developers to build applications that tap into the cost-effective, scalable, and reliable AWS cloud.<p class="paragraph"/>Using the SDK, developers can build solutions for Amazon Simple Storage Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon SimpleDB, and more.<p class="paragraph"/>The Grails plugin handles :
 <ul class="star">
-<li><code>amazonWebService</code> - A service wrapper around the <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> to easily access AWS services clients.</li>
-</ul><p class="paragraph"/><h3>Supported AWS Services</h3><p class="paragraph"/>All services supported by <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> are available:
+<li>convenient Grails configuration/management of all AWS API java clients for each AWS region,</li>
+<li>easy access to all AWS API java clients through an <code>amazonWebService</code> Grails service wrapper.</li>
+</ul><p class="paragraph"/><h3>Supported AWS Services</h3><p class="paragraph"/>AWS clients supported by <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> :
 <ul class="star">
 <li>Amazon CloudFormation</li>
 <li>Amazon CloudFront</li>
@@ -99,10 +112,11 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Amazon Relational Database Service (RDS)</li>
 <li>Amazon Route 53</li>
 <li>Amazon Simple Email Service (SES)</li>
-<li>Amazon SimpleDB</li>
+<li>Amazon SimpleDB (SDB)</li>
 <li>Amazon Simple Notification Service (SNS)</li>
 <li>Amazon Simple Queue Service (SQS)</li>
 <li>Amazon Simple Storage Service (S3)</li>
+<li>Amazon Simple Workflow (SWF)</li>
 <li>Auto Scaling</li>
 <li>AWS Elastic Beanstalk</li>
 <li>AWS Identity &#38; Access Management (IAM)</li>
@@ -110,8 +124,13 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>AWS Storage Gateway</li>
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/benorama/aws-sdk-grails-plugin/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
-<h3>Alpha status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>alpha release<strong class="bold"></strong>.
-The underlying APIs are generally stable, however we may make changes to the library in response to developer feedback.
+<h3>Alpha status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>alpha release<strong class="bold"></strong>.<p class="paragraph"/>
+<h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> .<p class="paragraph"/>It provides an easy access to SES and S3, through a groovy DSL for SES and methods injection for S3 (based on JetS3 java lib).<p class="paragraph"/>If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because we wanted :
+<ol>
+<li>to have a direct access to <strong class="bold">ALL</strong> <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> features, including <strong class="bold">ALL</strong> AWS services,</li>
+<li>to only use <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> with a consistent way to access <strong class="bold">ALL</strong> AWS services (and not JetS3 java lib specific methods and a specific SES DSL),</li>
+<li>to have 100% compatibility with future <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> , as it is just a simple lightweight wrapper around the official java clients.</li>
+</ol><p class="paragraph"/>
 
 
 <h1 id="installation">2 Installation</h1>
@@ -149,71 +168,148 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
     socketTimeout = &#123;SOCKET_TIMEOUT&#125;
     // HTTP user agent header to send with all requests.
     userAgent = &#123;USER_AGENT&#125;
-&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service. For example this will define specific properties for SQS.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
+&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service.<p class="paragraph"/>For example this will define specific properties for SQS.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
+    accessKey = &#123;ACCESS_KEY&#125;    // Default access key
+    secretKey = &#123;SECRET_KEY&#125;    // Default secret key
+    region = 'eu&#45;west&#45;1'        // Default region
     sqs &#123;
-        // Custom access key
-        accessKey = &#123;SQS_ACCESS_KEY&#125;
-        // Custom secret key
-        secretKey = &#123;SQS_SECRET_KEY&#125;
-        // Custom region
-        region = &#123;SQS_REGION&#125;
-        // Custom timeout
-        connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;
+        accessKey = &#123;SQS_ACCESS_KEY&#125;    // Custom access key
+        secretKey = &#123;SQS_SECRET_KEY&#125;    // Custom secret key
+        region = &#123;SQS_REGION&#125;           // Custom region
+        connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;  // Custom timeout
     &#125;
     // Other available services
-    autoscaling &#123;&#125;
-    cloudformation &#123;&#125;
-    cloudfront &#123;&#125;
-    cloudsearch &#123;&#125;
-    cloudwatch &#123;&#125;
-    dynamodb &#123;&#125;
+    autoScaling &#123;&#125;
+    cloudFormation &#123;&#125;
+    cloudFront &#123;&#125;
+    cloudSearch &#123;&#125;
+    cloudWatch &#123;&#125;
+    dynamoDB &#123;&#125;
     ec2 &#123;&#125;
-    elasticbeanstalk &#123;&#125;
-    elasticmapreduce &#123;&#125;
-    elasticache &#123;&#125;
+    elasticBeanstalk &#123;&#125;
+    elasticLoadBalancing &#123;&#125;
+    elasticMapReduce &#123;&#125;
+    elastiCache &#123;&#125;
     iam &#123;&#125;
-    importexport &#123;&#125;
+    importExport &#123;&#125;
     rds &#123;&#125;
     route53 &#123;&#125;
     s3 &#123;&#125;
     ses &#123;&#125;
-    simpledb &#123;&#125;
+    sdb &#123;&#125;
     sns &#123;&#125;
     sqs &#123;&#125;
     storagegateway &#123;&#125;
+    swf &#123;&#125;
 &#125;</pre></div>
 
 
 <h1 id="amazonWebService">4 Amazon Web Service</h1>
 Reference <code>amazonWebService</code> from any of your grails artefacts (controllers, domain, services...) to automatically inject it.<p class="paragraph"/><div class="code"><pre>def amazonWebService</pre></div><p class="paragraph"/>You can then access any services directly from <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>// Available service clients
 amazonWebService.autoScaling
-amazonWebService.cloudformation
-amazonWebService.cloudfront
-amazonWebService.cloudsearch
-amazonWebService.cloudwatch
-amazonWebService.dynamodb
+amazonWebService.cloudFormation
+amazonWebService.cloudFront
+amazonWebService.cloudSearch
+amazonWebService.cloudWatch
+amazonWebService.dynamoDB
 amazonWebService.ec2
-amazonWebService.elasticbeanstalk
-amazonWebService.elasticmapreduce
-amazonWebService.elasticache
+amazonWebService.elasticBeanstalk
+amazonWebService.elasticLoadBalancing
+amazonWebService.elasticMapreduce
+amazonWebService.elastiCache
 amazonWebService.iam
-amazonWebService.importexport
+amazonWebService.importExport
 amazonWebService.rds
 amazonWebService.route53
 amazonWebService.s3
 amazonWebService.ses
-amazonWebService.simpledb
+amazonWebService.sdb
 amazonWebService.sns
 amazonWebService.sqs
-amazonWebService.storagegateway</pre></div><p class="paragraph"/>It will return an instance of java client class extending <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html" target="blank">AmazonWebServiceClient</a> with default region endpoint.<p class="paragraph"/>You can then call any available method on the client.<p class="paragraph"/>For example, to send and receive SQS messages.<p class="paragraph"/><div class="code"><pre>// Send message
-amazonWebService.sqs.sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))
-// Receives messages
-List messages = amazonWebService.sqs.receiveMessage(<span class="java&#45;keyword">new</span> ReceiveMessageRequest(queueUrl)).messages</pre></div><p class="paragraph"/>To know available methods for each service clients, check the latest version of online <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html/" target="blank">AWS SDK Java docs</a> .<p class="paragraph"/><h3>Custom region</h3><p class="paragraph"/>If required, you pass the region name, to get a client with different region endpoint.<p class="paragraph"/><div class="code"><pre>// Use SQS <span class="java&#45;keyword">for</span> region 'eu&#45;west&#45;1'
-amazonWebService.getSqs('eu&#45;west&#45;1').sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))</pre></div><p class="paragraph"/><h3>Async clients</h3><p class="paragraph"/>If required, you can also get the asynchronous version for each client.<p class="paragraph"/><div class="code"><pre>// Get async client
+amazonWebService.storageGateway
+amazonWebService.swf</pre></div><p class="paragraph"/>It will return an instance of java client class extending <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html" target="blank">AmazonWebServiceClient</a> with default region endpoint (defined in our <code>Config.groovy</code>).<p class="paragraph"/>You can then call any available client methods.<p class="paragraph"/>To know available methods for each service clients, check the latest version of online <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html." target="blank">AWS SDK Java docs</a><p class="paragraph"/>
+<h3>Custom region</h3><p class="paragraph"/>If required, you can pass the region name, to get a client with different region endpoint.<p class="paragraph"/><div class="code"><pre>// Use SQS <span class="java&#45;keyword">for</span> region 'eu&#45;west&#45;1'
+amazonWebService.getSqs('eu&#45;west&#45;1').sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))</pre></div><p class="paragraph"/>
+<h3>Async clients</h3><p class="paragraph"/>If required, you can also get asynchronous client (which return Future on each async methods).<p class="paragraph"/><div class="code"><pre>// Get async client
 amazonWebService.sqsAsync.sendMessageAsync(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))
 // Get async client <span class="java&#45;keyword">for</span> region 'eu&#45;west&#45;1'
-amazonWebService.getSqsAsync('eu&#45;west&#45;1').sendMessageAsync(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))</pre></div>
+amazonWebService.getSqsAsync('eu&#45;west&#45;1').sendMessageAsync(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))</pre></div><p class="paragraph"/>
+<h3>Exception handling</h3><p class="paragraph"/>You should surround all your <code>amazonWebService</code> client calls around try/catch block, in order to catch <code>AmazonServiceException</code> or <code>AmazonClientException</code>.
 
+
+<h2 id="ec2">4.1 EC2 example</h2>
+Start an EC2 instance.<p class="paragraph"/><div class="code"><pre>def reservation = amazonWebService.ec2.runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest(imageId, 1, 1).withInstanceType('m1.micro'))</pre></div><p class="paragraph"/>List all your EC2 instances.<p class="paragraph"/><div class="code"><pre>List reservations = amazonWebService.ec2.describeInstances().reservations
+reservations.each &#123; Reservation reservation
+    println <span class="java&#45;quote">"reservationId: $&#123;reservation.reservationId&#125;"</span>
+    reservation.instances.each() &#123; Instance instance
+        println <span class="java&#45;quote">"instanceId: $&#123;instance.instanceId&#125;, imageId: $&#123;instance.imageId&#125;, instanceType: $&#123;instance.instanceType&#125;"</span>
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Stop an EC2 instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.ec2.stopInstances(<span class="java&#45;keyword">new</span> StopInstancesRequest(&#91;instanceId&#93;))</pre></div><p class="paragraph"/>Terminate an EC2 instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.ec2.terminateInstances(<span class="java&#45;keyword">new</span> TerminateInstancesRequest(&#91;instanceId&#93;))</pre></div><p class="paragraph"/>
+<h3>Java doc</h3><p class="paragraph"/>To know available methods for EC2 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html." target="blank">AmazonEC2Client Java doc</a>
+
+
+
+<h2 id="rds">4.2 RDS example</h2>
+Start a RDS instance.<p class="paragraph"/><div class="code"><pre>DBInstance dbInstance = amazonWebService.rds.createDBInstance(<span class="java&#45;keyword">new</span> CreateDBInstanceRequest('dbServer', 2, 'm1.micro', 'mysql', 'admin', 'password'))</pre></div><p class="paragraph"/>List all your RDS instances.<p class="paragraph"/><div class="code"><pre>List dbInstances = amazonWebService.rds.describeDBInstances().DBInstances
+dbInstances.each &#123; DBInstance dbInstance &#45;&#62;
+    println <span class="java&#45;quote">"DBName: $&#123;dbInstance.DBName&#125;, DBInstanceStatus: $&#123;dbInstance.DBInstanceStatus&#125;, engine: $&#123;dbInstance.engine&#125;, allocatedStorage: $&#123;dbInstance.allocatedStorage&#125;"</span><p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Snapshot a RDS instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.createDBSnapshot(<span class="java&#45;keyword">new</span> CreateDBSnapshotRequest('someSnapshot', dbInstance.DBName))</pre></div><p class="paragraph"/>Terminate a RDS instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.deleteDBInstance(<span class="java&#45;keyword">new</span> DeleteDBInstanceRequest(dbInstance.DBName))</pre></div><p class="paragraph"/>
+<h3>Java doc</h3><p class="paragraph"/>To know available methods for RDS client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html." target="blank">AmazonRDSClient Java doc</a>
+
+
+
+<h2 id="s3">4.3 S3 example</h2>
+Create a bucket.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.createBucket('someBucket')</pre></div><p class="paragraph"/>List buckets.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.listBuckets()</pre></div><p class="paragraph"/>Upload a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject('someBucket', 'somePath/someKey', <span class="java&#45;keyword">new</span> File(''))</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('someBucket')
+objectListing.objectSummaries.each &#123; S3ObjectSummary summary &#45;&#62;
+    println <span class="java&#45;quote">"key: $&#123;summary.key&#125;, lastModified: $&#123;summary.lastModified&#125;, size: $&#123;summary.size&#125;"</span>
+&#125;</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('someBucket', key)</pre></div><p class="paragraph"/><h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html." target="blank">AmazonS3Client Java doc</a>
+
+
+
+<h2 id="ses">4.4 SES example</h2>
+Verifies an email address (send a confirmation email).<p class="paragraph"/><div class="code"><pre>amazonWebService.ses.verifyEmailAddress(<span class="java&#45;keyword">new</span> VerifyEmailAddressRequest('myemail&#64;gmail.com'))</pre></div><p class="paragraph"/>List verified address.<p class="paragraph"/><div class="code"><pre>amazonWebService.ses.listVerifiedEmailAddresses()</pre></div><p class="paragraph"/>Send an email.<p class="paragraph"/><div class="code"><pre>Message message = <span class="java&#45;keyword">new</span> Message('Some subject...', 'Some body...')
+amazonWebService.ses.sendEmail(<span class="java&#45;keyword">new</span> SendEmailRequest('notification&#64;mydomain.com', 'myemail&#64;gmail.com', message))</pre></div><p class="paragraph"/>Get send statistics<p class="paragraph"/><div class="code"><pre>GetSendStatisticsResult statistics = amazonWebService.ses.getSendStatistics()
+statistics.sendDataPoints.each &#123; SendDataPoint sendDataPoint &#45;&#62;
+    println <span class="java&#45;quote">"bounces=$&#123;sendDataPoint.bounces&#125;, complaints=$&#123;sendDataPoint.complaints&#125;, deliveryAttempts=$&#123;sendDataPoint.deliveryAttempts&#125;, rejects=$&#123;sendDataPoint.rejects&#125;"</span>
+&#125;</pre></div><p class="paragraph"/>Get send quota<p class="paragraph"/><div class="code"><pre>GetSendQuotaResult quota = amazonWebService.ses.getSendQuota()
+println <span class="java&#45;quote">"max24HourSend: $&#123;quota.max24HourSend&#125;, sentLast24Hours: $&#123;quota.sentLast24Hours&#125;, sentLast24Hours: $&#123;quota.sentLast24Hours&#125;"</span></pre></div><p class="paragraph"/>
+<h3>Java doc</h3><p class="paragraph"/>To know available methods for SES client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html." target="blank">AmazonSimpleEmailServiceClient Java doc</a>
+
+
+
+<h2 id="sqs">4.5 SQS example</h2>
+Create a queue.<p class="paragraph"/><div class="code"><pre><span class="java&#45;object">String</span> queueUrl = amazonWebService.sqs.createQueue(<span class="java&#45;keyword">new</span> CreateQueueRequest('someQueue'))</pre></div><p class="paragraph"/>Send a message<p class="paragraph"/><div class="code"><pre>amazonWebService.sqs.sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, 'Some message...'))</pre></div><p class="paragraph"/>Receive and delete messages<p class="paragraph"/><div class="code"><pre>List messages = amazonWebService.sqs.receiveMessage(<span class="java&#45;keyword">new</span> ReceiveMessageRequest(queueUrl)).messages
+messages.each &#123; Message message &#45;&#62;
+    println <span class="java&#45;quote">"id: $&#123;message.messageId&#125;, body: $&#123;message.body&#125;"</span>
+    amazonWebService.sqs.deleteMessage(<span class="java&#45;keyword">new</span> DeleteMessageRequest(queueUrl, message.receiptHandle))
+&#125;</pre></div><p class="paragraph"/>
+<h3>Java doc</h3><p class="paragraph"/>To know available methods for SQS client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sqs/AmazonSQSClient.html." target="blank">AmazonSQSClient Java doc</a>
+
+
+
+<h2 id="other">4.6 Other services</h2>
+For other services, check the Java doc :
+<ul class="star">
+<li><code>amazonWebService.autoScaling</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/autoscaling/AmazonAutoScalingClient.html" target="blank">AmazonAutoScalingClient Java doc</a></li>
+<li><code>amazonWebService.cloudFormation</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudformation/AmazonCloudFormationClient.html" target="blank">AmazonCloudFormationClient Java doc</a></li>
+<li><code>amazonWebService.cloudFront</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudfront/AmazonCloudFrontClient.html" target="blank">AmazonCloudFrontClient Java doc</a></li>
+<li><code>amazonWebService.cloudSearch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudSearchClient.html" target="blank">AmazonCloudSearchClient Java doc</a></li>
+<li><code>amazonWebService.cloudWatch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudwatch/AmazonCloudWatchClient.html" target="blank">AmazonCloudWatchClient Java doc</a></li>
+<li><code>amazonWebService.dynamoDB</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/dynamodb/AmazonDynamoDBClient.html" target="blank">AmazonDynamoDBClient Java doc</a></li>
+<li><code>amazonWebService.ec2</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html" target="blank">AmazonEC2Client Java doc</a></li>
+<li><code>amazonWebService.elastiCache</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticache/AmazonElastiCacheClient.html" target="blank">AmazonElastiCacheClient Java doc</a></li>
+<li><code>amazonWebService.elasticBeanstalk</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticbeanstalk/AWSElasticBeanstalkClient.html" target="blank">AWSElasticBeanstalkClient Java doc</a></li>
+<li><code>amazonWebService.elasticLoadBalancing</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticloadbalancing/AmazonElasticLoadBalancingClient.html" target="blank">AmazonElasticLoadBalancingClient Java doc</a></li>
+<li><code>amazonWebService.elasticMapReduce</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/AmazonElasticMapReduceClient.html" target="blank">AmazonElasticMapReduceClient Java doc</a></li>
+<li><code>amazonWebService.iam</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html" target="blank">AmazonIdentityManagementClient Java doc</a></li>
+<li><code>amazonWebService.importExport</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html" target="blank">AmazonImportExportClient Java doc</a></li>
+<li><code>amazonWebService.rds</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html" target="blank">AmazonRDSClient Java doc</a></li>
+<li><code>amazonWebService.s3</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html" target="blank">AmazonS3Client Java doc</a></li>
+<li><code>amazonWebService.sdb</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpledb/AmazonSimpleDBClient.html" target="blank">AmazonSimpleDBClient Java doc</a></li>
+<li><code>amazonWebService.ses</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html" target="blank">AmazonSimpleEmailServiceClient Java doc</a></li>
+<li><code>amazonWebService.sns</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sns/AmazonSNSClient.html" target="blank">AmazonSNSClient Java doc</a></li>
+<li><code>amazonWebService.sqs</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sqs/AmazonSQSClient.html" target="blank">AmazonSQSClient Java doc</a></li>
+<li><code>amazonWebService.storageGateway</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/storagegateway/AWSStorageGatewayClient.html" target="blank">AWSStorageGatewayClient Java doc</a></li>
+<li><code>amazonWebService.swf</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleworkflow/AmazonSimpleWorkflowClient.html" target="blank">AmazonSimpleWorkflowClient Java doc</a></li>
+</ul><p class="paragraph"/>
 
                     </div>
                 </td>

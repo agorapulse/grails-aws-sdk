@@ -104,38 +104,39 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
     socketTimeout = &#123;SOCKET_TIMEOUT&#125;
     // HTTP user agent header to send with all requests.
     userAgent = &#123;USER_AGENT&#125;
-&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service. For example this will define specific properties for SQS.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
+&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service.<p class="paragraph"/>For example this will define specific properties for SQS.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
+    accessKey = &#123;ACCESS_KEY&#125;    // Default access key
+    secretKey = &#123;SECRET_KEY&#125;    // Default secret key
+    region = 'eu&#45;west&#45;1'        // Default region
     sqs &#123;
-        // Custom access key
-        accessKey = &#123;SQS_ACCESS_KEY&#125;
-        // Custom secret key
-        secretKey = &#123;SQS_SECRET_KEY&#125;
-        // Custom region
-        region = &#123;SQS_REGION&#125;
-        // Custom timeout
-        connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;
+        accessKey = &#123;SQS_ACCESS_KEY&#125;    // Custom access key
+        secretKey = &#123;SQS_SECRET_KEY&#125;    // Custom secret key
+        region = &#123;SQS_REGION&#125;           // Custom region
+        connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;  // Custom timeout
     &#125;
     // Other available services
-    autoscaling &#123;&#125;
-    cloudformation &#123;&#125;
-    cloudfront &#123;&#125;
-    cloudsearch &#123;&#125;
-    cloudwatch &#123;&#125;
-    dynamodb &#123;&#125;
+    autoScaling &#123;&#125;
+    cloudFormation &#123;&#125;
+    cloudFront &#123;&#125;
+    cloudSearch &#123;&#125;
+    cloudWatch &#123;&#125;
+    dynamoDB &#123;&#125;
     ec2 &#123;&#125;
-    elasticbeanstalk &#123;&#125;
-    elasticmapreduce &#123;&#125;
-    elasticache &#123;&#125;
+    elasticBeanstalk &#123;&#125;
+    elasticLoadBalancing &#123;&#125;
+    elasticMapReduce &#123;&#125;
+    elastiCache &#123;&#125;
     iam &#123;&#125;
-    importexport &#123;&#125;
+    importExport &#123;&#125;
     rds &#123;&#125;
     route53 &#123;&#125;
     s3 &#123;&#125;
     ses &#123;&#125;
-    simpledb &#123;&#125;
+    sdb &#123;&#125;
     sns &#123;&#125;
     sqs &#123;&#125;
     storagegateway &#123;&#125;
+    swf &#123;&#125;
 &#125;</pre></div>
 
 
