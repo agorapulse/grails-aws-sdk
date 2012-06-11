@@ -39,6 +39,8 @@ import com.amazonaws.services.simpledb.AmazonSimpleDBAsyncClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsyncClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
+import com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflowAsyncClient
+import com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflowClient
 import com.amazonaws.services.sns.AmazonSNSAsyncClient
 import com.amazonaws.services.sns.AmazonSNSClient
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
@@ -56,51 +58,51 @@ class AmazonWebService {
     private Map clients = [:]
 
     AmazonAutoScalingAsyncClient getAutoScalingAsync(region = '') {
-        getServiceClient('autoscaling', region, true) as AmazonAutoScalingAsyncClient
+        getServiceClient('autoScaling', region, true) as AmazonAutoScalingAsyncClient
     }
 
     AmazonAutoScalingClient getAutoScaling(region = '') {
-        getServiceClient('autoscaling', region) as AmazonAutoScalingClient
+        getServiceClient('autoScaling', region) as AmazonAutoScalingClient
     }
 
     AmazonCloudFormationAsyncClient getCloudFormationAsync(region = '') {
-        getServiceClient('cloudformation', region, true) as AmazonCloudFormationAsyncClient
+        getServiceClient('cloudFormation', region, true) as AmazonCloudFormationAsyncClient
     }
 
     AmazonCloudFormationClient getCloudFormation(region = '') {
-        getServiceClient('cloudformation', region) as AmazonCloudFormationClient
+        getServiceClient('cloudFormation', region) as AmazonCloudFormationClient
     }
 
     AmazonCloudFrontAsyncClient getCloudFrontAsync() {
-        getServiceClient('cloudfront', '', true) as AmazonCloudFrontAsyncClient
+        getServiceClient('cloudFront', '', true) as AmazonCloudFrontAsyncClient
     }
 
     AmazonCloudFrontClient getCloudFront() {
-        getServiceClient('cloudfront') as AmazonCloudFrontClient
+        getServiceClient('cloudFront') as AmazonCloudFrontClient
     }
 
     AmazonCloudSearchAsyncClient getCloudSearchAsync(region = '') {
-        getServiceClient('cloudsearch', region, true) as AmazonCloudSearchAsyncClient
+        getServiceClient('cloudSearch', region, true) as AmazonCloudSearchAsyncClient
     }
 
     AmazonCloudSearchClient getCloudSearch(region = '') {
-        getServiceClient('cloudsearch', region) as AmazonCloudSearchClient
+        getServiceClient('cloudSearch', region) as AmazonCloudSearchClient
     }
 
     AmazonCloudWatchAsyncClient getCloudWatchAsync(region = '') {
-        getServiceClient('cloudwatch', region, true) as AmazonCloudWatchAsyncClient
+        getServiceClient('cloudWatch', region, true) as AmazonCloudWatchAsyncClient
     }
 
     AmazonCloudWatchClient getCloudWatch(region = '') {
-        getServiceClient('cloudwatch', region) as AmazonCloudWatchClient
+        getServiceClient('cloudWatch', region) as AmazonCloudWatchClient
     }
 
     AmazonDynamoDBAsyncClient getDynamoDBAsync(region = '') {
-        getServiceClient('dynamodb', region, true) as AmazonDynamoDBAsyncClient
+        getServiceClient('dynamoDB', region, true) as AmazonDynamoDBAsyncClient
     }
 
     AmazonDynamoDBClient getDynamoDB(region = '') {
-        getServiceClient('dynamodb', region) as AmazonDynamoDBClient
+        getServiceClient('dynamoDB', region) as AmazonDynamoDBClient
     }
 
     AmazonEC2AsyncClient getEc2Async(region = '') {
@@ -112,35 +114,35 @@ class AmazonWebService {
     }
 
     AWSElasticBeanstalkAsyncClient getElasticBeanstalkAsync(region = '') {
-        getServiceClient('elasticbeanstalk', region, true) as AWSElasticBeanstalkAsyncClient
+        getServiceClient('elasticBeanstalk', region, true) as AWSElasticBeanstalkAsyncClient
     }
 
     AWSElasticBeanstalkClient getElasticBeanstalk(region = '') {
-        getServiceClient('elasticbeanstalk', region) as AWSElasticBeanstalkClient
+        getServiceClient('elasticBeanstalk', region) as AWSElasticBeanstalkClient
     }
 
     AmazonElastiCacheAsyncClient getElastiCacheAsync(region = '') {
-        getServiceClient('elasticache', region, true) as AmazonElastiCacheAsyncClient
+        getServiceClient('elastiCache', region, true) as AmazonElastiCacheAsyncClient
     }
 
     AmazonElastiCacheClient getElastiCache(region = '') {
-        getServiceClient('elasticache', region) as AmazonElastiCacheClient
+        getServiceClient('elastiCache', region) as AmazonElastiCacheClient
     }
 
     AmazonElasticLoadBalancingAsyncClient getElbAsync(region = '') {
-        getServiceClient('elasticloadbalancing', region, true) as AmazonElasticLoadBalancingAsyncClient
+        getServiceClient('elasticLoadBalancing', region, true) as AmazonElasticLoadBalancingAsyncClient
     }
 
     AmazonElasticLoadBalancingClient getElb(region = '') {
-        getServiceClient('elasticloadbalancing', region) as AmazonElasticLoadBalancingClient
+        getServiceClient('elasticLoadBalancing', region) as AmazonElasticLoadBalancingClient
     }
 
     AmazonElasticMapReduceAsyncClient getElasticMapReduceAsync(region = '') {
-        getServiceClient('elasticmapreduce', region, true) as AmazonElasticMapReduceAsyncClient
+        getServiceClient('elasticMapReduce', region, true) as AmazonElasticMapReduceAsyncClient
     }
 
     AmazonElasticMapReduceClient getElasticMapReduce(region = '') {
-        getServiceClient('elasticmapreduce', region) as AmazonElasticMapReduceClient
+        getServiceClient('elasticMapReduce', region) as AmazonElasticMapReduceClient
     }
 
     AmazonIdentityManagementAsyncClient getIamAsync() {
@@ -152,11 +154,11 @@ class AmazonWebService {
     }
 
     AmazonImportExportAsyncClient getImportExportAsync() {
-        getServiceClient('importexport', '', true) as AmazonImportExportAsyncClient
+        getServiceClient('importExport', '', true) as AmazonImportExportAsyncClient
     }
 
     AmazonImportExportClient getImportExport(region = '') {
-        getServiceClient('importexport') as AmazonImportExportClient
+        getServiceClient('importExport') as AmazonImportExportClient
     }
 
     AmazonRDSAsyncClient getRdsAsync(region = '') {
@@ -179,6 +181,14 @@ class AmazonWebService {
         getServiceClient('s3', region) as AmazonS3Client
     }
 
+    AmazonSimpleDBAsyncClient getSdbAsync(String region = '') {
+        getServiceClient('sdb', region, true) as AmazonSimpleDBAsyncClient
+    }
+
+    AmazonSimpleDBClient getSdb(String region = '') {
+        getServiceClient('sdb', region) as AmazonSimpleDBClient
+    }
+
     AmazonSimpleEmailServiceAsyncClient getSesAsync(String region = '') {
         getServiceClient('ses', region) as AmazonSimpleEmailServiceAsyncClient
     }
@@ -187,15 +197,7 @@ class AmazonWebService {
         getServiceClient('ses', region) as AmazonSimpleEmailServiceClient
     }
 
-    AmazonSimpleDBAsyncClient getSimpleDBAsync(String region = '') {
-        getServiceClient('simpledb', region, true) as AmazonSimpleDBAsyncClient
-    }
-
-    AmazonSimpleDBClient getSimpleDB(String region = '') {
-        getServiceClient('simpledb', region) as AmazonSimpleDBClient
-    }
-
-    AmazonSNSAsyncClient getSnsAsync(String region = '') {
+   AmazonSNSAsyncClient getSnsAsync(String region = '') {
         getServiceClient('sns', region, true) as AmazonSNSAsyncClient
     }
 
@@ -212,11 +214,19 @@ class AmazonWebService {
     }
 
     AWSStorageGatewayAsyncClient getStorageGatewayAsync(String region = '') {
-        getServiceClient('storagegateway', region, true) as AWSStorageGatewayAsyncClient
+        getServiceClient('storageGateway', region, true) as AWSStorageGatewayAsyncClient
     }
 
     AWSStorageGatewayClient getStorageGateway(String region = '') {
-        getServiceClient('storagegateway', region) as AWSStorageGatewayClient
+        getServiceClient('storageGateway', region) as AWSStorageGatewayClient
+    }
+
+    AmazonSimpleWorkflowAsyncClient getSwfAsync(String region = '') {
+        getServiceClient('swf', region, true) as AmazonSimpleWorkflowAsyncClient
+    }
+
+    AmazonSimpleWorkflowClient getSwf(String region = '') {
+        getServiceClient('swf', region) as AmazonSimpleWorkflowClient
     }
 
     // PRIVATE
@@ -278,123 +288,123 @@ class AmazonWebService {
             || (!async && !clients[service].hasProperty(region))) {
             AmazonWebServiceClient client
             switch(service) {
-                case 'autoscaling':
+                case 'autoScaling':
                     if (async) {
-                        client = new AmazonAutoScalingAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonAutoScalingAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonAutoScalingClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonAutoScalingClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "autoscaling.${region}.amazonaws.com"
                     break
-                case 'cloudformation':
+                case 'cloudFormation':
                     if (async) {
-                        client = new AmazonCloudFormationAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudFormationAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonCloudFormationClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudFormationClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
-                    client.endpoint = "autoscaling.${region}.amazonaws.com"
+                    client.endpoint = "cloudformation.${region}.amazonaws.com"
                     break
-                case 'cloudfront':
+                case 'cloudFront':
                     if (async) {
-                        client = new AmazonCloudFrontAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudFrontAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonCloudFrontClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudFrontClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "cloudfront.amazonaws.com"
                     break
-                case 'cloudsearch':
+                case 'cloudSearch':
                     if (async) {
-                        client = new AmazonCloudSearchAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudSearchAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonCloudSearchClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudSearchClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "cloudsearch.${region}.amazonaws.com"
                     break
-                case 'cloudwatch':
+                case 'cloudWatch':
                     if (async) {
-                        client = new AmazonCloudWatchAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudWatchAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonCloudWatchClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonCloudWatchClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "monitoring.${region}.amazonaws.com"
                     break
-                case 'dynamodb':
+                case 'dynamoDB':
                     if (async) {
-                        client = new AmazonDynamoDBAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonDynamoDBAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonDynamoDBClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonDynamoDBClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "dynamodb.${region}.amazonaws.com"
                     break
                 case 'ec2':
                     if (async) {
-                        client = new AmazonEC2AsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonEC2AsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonEC2Client(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonEC2Client(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "ec2.${region}.amazonaws.com"
                     break
-                case 'elasticbeanstalk':
+                case 'elasticBeanstalk':
                     if (async) {
-                        client = new AWSElasticBeanstalkAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AWSElasticBeanstalkAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AWSElasticBeanstalkClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AWSElasticBeanstalkClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "elasticbeanstalk.${region}.amazonaws.com"
                     break
-                case 'elasticache':
+                case 'elastiCache':
                     if (async) {
-                        client = new AmazonElastiCacheAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonElastiCacheAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonElastiCacheClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonElastiCacheClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "elasticache.${region}.amazonaws.com"
                     break
-                case 'elasticloadbalancing':
+                case 'elasticLoadBalancing':
                     if (async) {
-                        client = new AmazonElasticLoadBalancingAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonElasticLoadBalancingAsyncClient(buildCredentials(awsConfig, awsConfig.elasticLoadBalancing), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonElasticLoadBalancingClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonElasticLoadBalancingClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "elasticloadbalancing.${region}.amazonaws.com"
                     break
-                case 'elasticmapreduce':
+                case 'elasticMapReduce':
                     if (async) {
-                        client = new AmazonElasticMapReduceAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonElasticMapReduceAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonElasticMapReduceClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonElasticMapReduceClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "elasticmapreduce.${region}.amazonaws.com"
                     break
                 case 'iam':
                     if (async) {
-                        client = new AmazonIdentityManagementAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonIdentityManagementAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonIdentityManagementClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonIdentityManagementClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "iam.amazonaws.com"
                     break
-                case 'importexport':
+                case 'importExport':
                     if (async) {
-                        client = new AmazonImportExportAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonImportExportAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonImportExportClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonImportExportClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "importexport.amazonaws.com"
                     break
                 case 'rds':
                     if (async) {
-                        client = new AmazonRDSAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonRDSAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonRDSClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonRDSClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "rds.${region}.amazonaws.com"
                     break
                 case 'route53':
                     if (async) {
-                        client = new AmazonRoute53AsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonRoute53AsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonRoute53Client(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonRoute53Client(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "route53.amazonaws.com"
                     break
@@ -407,19 +417,11 @@ class AmazonWebService {
                         client.endpoint = "s3-${region}.amazonaws.com"
                     }
                     break
-                case 'ses':
+                case 'sdb':
                     if (async) {
-                        client = new AmazonSimpleEmailServiceAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AmazonSimpleDBAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonSimpleEmailServiceClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
-                    }
-                    client.endpoint = "email.${region}.amazonaws.com"
-                    break
-                case 'simpledb':
-                    if (async) {
-                        client = new AmazonSimpleDBAsyncClient(buildCredentials(awsConfig, awsConfig.sqs), buildClientConfiguration(awsConfig, awsConfig.sqs))
-                    } else {
-                        client = new AmazonSimpleDBClient(buildCredentials(awsConfig, awsConfig.sqs), buildClientConfiguration(awsConfig, awsConfig.sqs))
+                        client = new AmazonSimpleDBClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     if (region == 'us-east-1') {
                         client.endpoint = "sdb.amazonaws.com"
@@ -427,30 +429,47 @@ class AmazonWebService {
                         client.endpoint = "sdb.${region}.amazonaws.com"
                     }
                     break
+                case 'ses':
+                    if (async) {
+                        client = new AmazonSimpleEmailServiceAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
+                    } else {
+                        client = new AmazonSimpleEmailServiceClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
+                    }
+                    client.endpoint = "email.${region}.amazonaws.com"
+                    break
                 case 'sns':
                     if (async) {
-                        client = new AmazonSNSAsyncClient(buildCredentials(awsConfig, awsConfig.sqs), buildClientConfiguration(awsConfig, awsConfig.sqs))
+                        client = new AmazonSNSAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonSNSClient(buildCredentials(awsConfig, awsConfig.sqs), buildClientConfiguration(awsConfig, awsConfig.sqs))
+                        client = new AmazonSNSClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "sns.${region}.amazonaws.com"
                     break
                 case 'sqs':
                     if (async) {
-                        client = new AmazonSQSAsyncClient(buildCredentials(awsConfig, awsConfig.sqs), buildClientConfiguration(awsConfig, awsConfig.sqs))
+                        client = new AmazonSQSAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AmazonSQSClient(buildCredentials(awsConfig, awsConfig.sqs), buildClientConfiguration(awsConfig, awsConfig.sqs))
+                        client = new AmazonSQSClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "sqs.${region}.amazonaws.com"
                     break
-                case 'storagegateway':
+                case 'storageGateway':
                     if (async) {
-                        client = new AWSStorageGatewayAsyncClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AWSStorageGatewayAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     } else {
-                        client = new AWSStorageGatewayClient(buildCredentials(awsConfig, awsConfig.ses), buildClientConfiguration(awsConfig, awsConfig.ses))
+                        client = new AWSStorageGatewayClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
                     }
                     client.endpoint = "storagegateway.${region}.amazonaws.com"
                     break
+                case 'swf':
+                    if (async) {
+                        client = new AmazonSimpleWorkflowAsyncClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
+                    } else {
+                        client = new AmazonSimpleWorkflowClient(buildCredentials(awsConfig, awsConfig[service]), buildClientConfiguration(awsConfig, awsConfig[service]))
+                    }
+                    client.endpoint = "swf.${region}.amazonaws.com"
+                    break
+
             }
             if (async) {
                 asyncClients[service][region] = client
