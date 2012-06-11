@@ -1,0 +1,32 @@
+Start a RDS instance.
+
+{code}
+DBInstance dbInstance = amazonWebService.rds.createDBInstance(new CreateDBInstanceRequest('dbServer', 2, 'm1.micro', 'mysql', 'admin', 'password'))
+{code}
+
+List all your RDS instances.
+
+{code}
+List dbInstances = amazonWebService.rds.describeDBInstances().DBInstances
+dbInstances.each { DBInstance dbInstance ->
+    println "DBName: ${dbInstance.DBName}, DBInstanceStatus: ${dbInstance.DBInstanceStatus}, engine: ${dbInstance.engine}, allocatedStorage: ${dbInstance.allocatedStorage}"
+
+}
+{code}
+
+Snapshot a RDS instance.
+
+{code}
+amazonWebService.rds.createDBSnapshot(new CreateDBSnapshotRequest('someSnapshot', dbInstance.DBName))
+{code}
+
+Terminate a RDS instance.
+
+{code}
+amazonWebService.rds.deleteDBInstance(new DeleteDBInstanceRequest(dbInstance.DBName))
+{code}
+
+
+h3. Java doc
+
+To know available methods for RDS client, check "AmazonRDSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html.

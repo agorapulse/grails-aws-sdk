@@ -41,40 +41,43 @@ grails.plugins.awssdk {
 }
 {code}
 
-If required, you can also override default client configuration for each service. For example this will define specific properties for SQS.
+If required, you can also override default client configuration for each service.
+
+For example this will define specific properties for SQS.
 
 {code}
 grails.plugins.awssdk {
+    accessKey = {ACCESS_KEY}    // Default access key
+    secretKey = {SECRET_KEY}    // Default secret key
+    region = 'eu-west-1'        // Default region
     sqs {
-        // Custom access key
-        accessKey = {SQS_ACCESS_KEY}
-        // Custom secret key
-        secretKey = {SQS_SECRET_KEY}
-        // Custom region
-        region = {SQS_REGION}
-        // Custom timeout
-        connectionTimeout = {SQS_CONNECTION_TIMEOUT}
+        accessKey = {SQS_ACCESS_KEY}    // Custom access key
+        secretKey = {SQS_SECRET_KEY}    // Custom secret key
+        region = {SQS_REGION}           // Custom region
+        connectionTimeout = {SQS_CONNECTION_TIMEOUT}  // Custom timeout
     }
     // Other available services
-    autoscaling {}
-    cloudformation {}
-    cloudfront {}
-    cloudsearch {}
-    cloudwatch {}
-    dynamodb {}
+    autoScaling {}
+    cloudFormation {}
+    cloudFront {}
+    cloudSearch {}
+    cloudWatch {}
+    dynamoDB {}
     ec2 {}
-    elasticbeanstalk {}
-    elasticmapreduce {}
-    elasticache {}
+    elasticBeanstalk {}
+    elasticLoadBalancing {}
+    elasticMapReduce {}
+    elastiCache {}
     iam {}
-    importexport {}
+    importExport {}
     rds {}
     route53 {}
     s3 {}
     ses {}
-    simpledb {}
+    sdb {}
     sns {}
     sqs {}
     storagegateway {}
+    swf {}
 }
 {code}

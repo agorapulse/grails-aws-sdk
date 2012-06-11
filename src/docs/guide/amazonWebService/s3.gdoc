@@ -1,0 +1,36 @@
+Create a bucket.
+
+{code}
+amazonWebService.s3.createBucket('someBucket')
+{code}
+
+List buckets.
+
+{code}
+amazonWebService.s3.listBuckets()
+{code}
+
+Upload a file.
+
+{code}
+amazonWebService.s3.putObject('someBucket', 'somePath/someKey', new File(''))
+{code}
+
+List bucket files.
+
+{code}
+ObjectListing objectListing = amazonWebService.s3.listObjects('someBucket')
+objectListing.objectSummaries.each { S3ObjectSummary summary ->
+    println "key: ${summary.key}, lastModified: ${summary.lastModified}, size: ${summary.size}"
+}
+{code}
+
+Delete a file.
+
+{code}
+amazonWebService.s3.deleteObject('someBucket', key)
+{code}
+
+h3. Java doc
+
+To know available methods for S3 client, check "AmazonS3Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html.

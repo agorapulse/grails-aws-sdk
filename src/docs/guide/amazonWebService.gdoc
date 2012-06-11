@@ -9,54 +9,49 @@ You can then access any services directly from @amazonWebService@.
 {code}
 // Available service clients
 amazonWebService.autoScaling
-amazonWebService.cloudformation
-amazonWebService.cloudfront
-amazonWebService.cloudsearch
-amazonWebService.cloudwatch
-amazonWebService.dynamodb
+amazonWebService.cloudFormation
+amazonWebService.cloudFront
+amazonWebService.cloudSearch
+amazonWebService.cloudWatch
+amazonWebService.dynamoDB
 amazonWebService.ec2
-amazonWebService.elasticbeanstalk
-amazonWebService.elasticmapreduce
-amazonWebService.elasticache
+amazonWebService.elasticBeanstalk
+amazonWebService.elasticLoadBalancing
+amazonWebService.elasticMapreduce
+amazonWebService.elastiCache
 amazonWebService.iam
-amazonWebService.importexport
+amazonWebService.importExport
 amazonWebService.rds
 amazonWebService.route53
 amazonWebService.s3
 amazonWebService.ses
-amazonWebService.simpledb
+amazonWebService.sdb
 amazonWebService.sns
 amazonWebService.sqs
-amazonWebService.storagegateway
+amazonWebService.storageGateway
+amazonWebService.swf
 {code}
 
-It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html with default region endpoint.
+It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html with default region endpoint (defined in our @Config.groovy@).
 
-You can then call any available method on the client.
+You can then call any available client methods.
 
-For example, to send and receive SQS messages.
+To know available methods for each service clients, check the latest version of online "AWS SDK Java docs":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html.
 
-{code}
-// Send message
-amazonWebService.sqs.sendMessage(new SendMessageRequest(queueUrl, messageBody))
-// Receives messages
-List messages = amazonWebService.sqs.receiveMessage(new ReceiveMessageRequest(queueUrl)).messages
-{code}
-
-To know available methods for each service clients, check the latest version of online "AWS SDK Java docs":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html/ .
 
 h3. Custom region
 
-If required, you pass the region name, to get a client with different region endpoint.
+If required, you can pass the region name, to get a client with different region endpoint.
 
 {code}
 // Use SQS for region 'eu-west-1'
 amazonWebService.getSqs('eu-west-1').sendMessage(new SendMessageRequest(queueUrl, messageBody))
 {code}
 
+
 h3. Async clients
 
-If required, you can also get the asynchronous version for each client.
+If required, you can also get asynchronous client (which return Future on each async methods).
 
 {code}
 // Get async client
@@ -64,3 +59,8 @@ amazonWebService.sqsAsync.sendMessageAsync(new SendMessageRequest(queueUrl, mess
 // Get async client for region 'eu-west-1'
 amazonWebService.getSqsAsync('eu-west-1').sendMessageAsync(new SendMessageRequest(queueUrl, messageBody))
 {code}
+
+
+h3. Exception handling
+
+You should surround all your @amazonWebService@ client calls around try/catch block, in order to catch @AmazonServiceException@ or @AmazonClientException@.

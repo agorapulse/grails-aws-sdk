@@ -1,0 +1,26 @@
+Create a queue.
+
+{code}
+String queueUrl = amazonWebService.sqs.createQueue(new CreateQueueRequest('someQueue'))
+{code}
+
+Send a message
+
+{code}
+amazonWebService.sqs.sendMessage(new SendMessageRequest(queueUrl, 'Some message...'))
+{code}
+
+Receive and delete messages
+
+{code}
+List messages = amazonWebService.sqs.receiveMessage(new ReceiveMessageRequest(queueUrl)).messages
+messages.each { Message message ->
+    println "id: ${message.messageId}, body: ${message.body}"
+    amazonWebService.sqs.deleteMessage(new DeleteMessageRequest(queueUrl, message.receiptHandle))
+}
+{code}
+
+
+h3. Java doc
+
+To know available methods for SQS client, check "AmazonSQSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sqs/AmazonSQSClient.html.

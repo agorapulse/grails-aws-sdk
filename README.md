@@ -5,13 +5,14 @@ AWS SDK Grails Plugin
 
 The AWS SDK Plugin allows your [Grails](http://grails.org) application to use the [Amazon Web Services](http://aws.amazon.com/) infrastructure services.
 
-It uses the official [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), which provides a Java API for AWS infrastructure services, making it even easier for developers to build applications that tap into the cost-effective, scalable, and reliable AWS cloud.
+The aim is to provide a lightweight **amazonWebService** Grails service wrapper around the official[AWS SDK for Java](http://aws.amazon.com/sdkforjava/).
 
-Using the SDK, developers can build solutions for Amazon Simple Storage Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon SimpleDB, and more.
+The [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) provides a Java API for AWS infrastructure services, making it even easier for developers to build applications that tap into the cost-effective, scalable, and reliable AWS cloud.
 
-**AWS SDK Grails Plugin** provides :
+The Grails plugin handles :
 
-* **amazonWebService** - A lightweight service wrapper around the [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) to easily access AWS services clients.
+* convenient Grails configuration/management of all AWS API clients for each AWS region,
+* easy access to all AWS API java clients through the **amazonWebService** Grails service wrapper.
 
 
 # Installation
@@ -61,7 +62,7 @@ AWS SDK for Java documentation is located here:
 
 # Supported AWS Services
 
-All services supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) are available:
+AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 * Amazon CloudFormation
 * Amazon CloudFront
@@ -73,11 +74,12 @@ All services supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) 
 * Amazon ElastiCache
 * Amazon Relational Database Service (RDS)
 * Amazon Route 53
+* Amazon Simple Storage Service (S3)
 * Amazon Simple Email Service (SES)
 * Amazon SimpleDB
 * Amazon Simple Notification Service (SNS)
 * Amazon Simple Queue Service (SQS)
-* Amazon Simple Storage Service (S3)
+* Amazon Simple Workflow (SWF)
 * Auto Scaling
 * AWS Elastic Beanstalk
 * AWS Identity & Access Management (IAM)
@@ -85,17 +87,27 @@ All services supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) 
 * AWS Storage Gateway
 * Elastic Load Balancing
 
+
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/benorama/aws-sdk-grails-plugin/issues) section on GitHub.
 
+
 # Alpha status
 
 This is an **alpha release**.
-The underlying APIs are generally stable, however we may make changes to the library in response to developer feedback.
 
-# Other AWS plugin
 
-There is another [AWS Grails plugin](http://grails.org/plugin/aws) which provides groovy DSL to use SES and adds methods to easily use S3 (based on JetS3 java lib).
+# Other AWS Grails plugin
+
+FYI, there is another [AWS Grails plugin](http://grails.org/plugin/aws) .
+
+It provides an easy access SES and S3, through a groovy DSL for SES and methods injection for S3 (based on JetS3 java lib).
+
 If you just need basic SES or S3 features, you might give it a try.
 
+We decided to write our own AWS plugin because we wanted :
+
+1. to have direct access to **ALL** [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) features, including **ALL** AWS services,
+2. to only use [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services (and not JetS3 java lib specific methods and a specific SES DSL),
+3. to have 100% compatibility with future [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients.
