@@ -1,25 +1,31 @@
 Create a bucket.
 
 {code}
-amazonWebService.s3.createBucket('someBucket')
+import com.amazonaws.services.s3.model.*
+
+// Bucket will be created in default config region
+amazonWebService.s3.createBucket('some-grails-bucket')
 {code}
 
 List buckets.
 
 {code}
-amazonWebService.s3.listBuckets()
+List buckets = amazonWebService.s3.listBuckets()
+buckets.each { Bucket bucket ->
+    println "bucketName: ${bucket.name}, creationDate: ${bucket.creationDate}"
+}
 {code}
 
-Upload a file.
+Upload a file with public read permissions.
 
 {code}
-amazonWebService.s3.putObject('someBucket', 'somePath/someKey', new File(''))
+amazonWebService.s3.putObject(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Downloads/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))
 {code}
 
 List bucket files.
 
 {code}
-ObjectListing objectListing = amazonWebService.s3.listObjects('someBucket')
+ObjectListing objectListing = amazonWebService.s3.listObjects('some-grails-bucket')
 objectListing.objectSummaries.each { S3ObjectSummary summary ->
     println "key: ${summary.key}, lastModified: ${summary.lastModified}, size: ${summary.size}"
 }
@@ -28,7 +34,7 @@ objectListing.objectSummaries.each { S3ObjectSummary summary ->
 Delete a file.
 
 {code}
-amazonWebService.s3.deleteObject('someBucket', key)
+amazonWebService.s3.deleteObject('some-grails-bucket', 'somePath/someKey.jpg')
 {code}
 
 h3. Java doc

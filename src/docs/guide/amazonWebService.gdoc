@@ -4,6 +4,12 @@ Reference @amazonWebService@ from any of your grails artefacts (controllers, dom
 def amazonWebService
 {code}
 
+Or get it from @ctx@ if you want to test it in Grails console.
+
+{code}
+def amazonWebService = ctx.getBean('amazonWebService')
+{code}
+
 You can then access any services directly from @amazonWebService@.
 
 {code}
@@ -41,7 +47,7 @@ To know available methods for each service clients, check the latest version of 
 
 h3. Custom region
 
-If required, you can pass the region name, to get a client with different region endpoint.
+If required, you can pass the region name, to get a client with a different region endpoint.
 
 {code}
 // Use SQS for region 'eu-west-1'

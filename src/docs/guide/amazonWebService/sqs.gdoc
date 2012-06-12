@@ -1,6 +1,8 @@
 Create a queue.
 
 {code}
+import com.amazonaws.services.sqs.model.*
+
 String queueUrl = amazonWebService.sqs.createQueue(new CreateQueueRequest('someQueue'))
 {code}
 
@@ -18,6 +20,12 @@ messages.each { Message message ->
     println "id: ${message.messageId}, body: ${message.body}"
     amazonWebService.sqs.deleteMessage(new DeleteMessageRequest(queueUrl, message.receiptHandle))
 }
+{code}
+
+Delete a queue.
+
+{code}
+amazonWebService.sqs.deleteQueue(new DeleteQueueRequest('someQueue'))
 {code}
 
 

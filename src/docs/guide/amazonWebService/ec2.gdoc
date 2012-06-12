@@ -1,16 +1,21 @@
-Start an EC2 instance.
+Start an EC2 t1.micro instance with Amazon Linux in eu-west1.
 
 {code}
-def reservation = amazonWebService.ec2.runInstances(new RunInstancesRequest(imageId, 1, 1).withInstanceType('m1.micro'))
+import com.amazonaws.services.ec2.model.*
+
+// If your default region is eu-west-1
+def reservation = amazonWebService.ec2.runInstances(new RunInstancesRequest('ami-fd231b89', 1, 1).withInstanceType('t1.micro'))
+// Or if your default region is not eu-west-1 (this ami ID is only runnable eu-west-1)
+def reservation = amazonWebService.getEc2('eu-west-1').runInstances(new RunInstancesRequest('ami-fd231b89', 1, 1).withInstanceType('t1.micro'))
 {code}
 
 List all your EC2 instances.
 
 {code}
 List reservations = amazonWebService.ec2.describeInstances().reservations
-reservations.each { Reservation reservation
+reservations.each { Reservation reservation ->
     println "reservationId: ${reservation.reservationId}"
-    reservation.instances.each() { Instance instance
+    reservation.instances.each() { Instance instance ->
         println "instanceId: ${instance.instanceId}, imageId: ${instance.imageId}, instanceType: ${instance.instanceType}"
     }
 

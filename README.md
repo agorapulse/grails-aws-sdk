@@ -44,8 +44,8 @@ Create an AWS account [Amazon Web Services](http://aws.amazon.com/), in order to
 Add your AWS credentials parameters to your _grails-app/conf/Config.groovy_:
 
 ```groovy
-grails.plugins.awssdk.accessKey = {ACCESS_KEY}
-grails.plugins.awssdk.secretKey = {SECRET_KEY}
+grails.plugin.awssdk.accessKey = {ACCESS_KEY}
+grails.plugin.awssdk.secretKey = {SECRET_KEY}
 ```
 
 # Documentation
@@ -100,14 +100,10 @@ This is an **alpha release**.
 
 # Other AWS Grails plugin
 
-FYI, there is another [AWS Grails plugin](http://grails.org/plugin/aws) .
+FYI, there is another great [AWS Grails plugin](http://grails.org/plugin/aws) with a different approach: its aim is to provide an easy access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.
 
-It provides an easy access SES and S3, through a groovy DSL for SES and methods injection for S3 (based on JetS3 java lib).
+We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 
-If you just need basic SES or S3 features, you might give it a try.
-
-We decided to write our own AWS plugin because we wanted :
-
-1. to have direct access to **ALL** [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) features, including **ALL** AWS services,
-2. to only use [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services (and not JetS3 java lib specific methods and a specific SES DSL),
+1. to have direct access to **ALL** [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) features including **ALL** AWS services, with custom client configuration,
+2. to only use [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services (and not JetS3 java lib specific methods and a custom SES DSL),
 3. to have 100% compatibility with future [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients.

@@ -1,20 +1,36 @@
+{note}
+SES is currently only available in us-east-1 region, so you might define it in your config if required or use @amazonWebService.getSes('us-east-1')@.
+{note}
+
 Verifies an email address (send a confirmation email).
 
 {code}
-amazonWebService.ses.verifyEmailAddress(new VerifyEmailAddressRequest('myemail\@gmail.com'))
+import com.amazonaws.services.ses.model.*
+
+amazonWebService.ses.verifyEmailIdentity(new VerifyEmailIdentityRequest().withEmailAddress('notification\@mydomain.com'))
 {code}
 
 List verified address.
 
 {code}
-amazonWebService.ses.listVerifiedEmailAddresses()
+List emailAddresses = amazonWebService.ses.listVerifiedEmailAddresses().verifiedEmailAddresses
+emailAddresses.each {
+    println it
+}
 {code}
 
 Send an email.
 
 {code}
-Message message = new Message('Some subject...', 'Some body...')
-amazonWebService.ses.sendEmail(new SendEmailRequest('notification\@mydomain.com', 'myemail\@gmail.com', message))
+String source = 'notification\@mydomain.com'
+Destination destination = new Destination(['myemail\@gmail.com'])
+Content subject = new Content('Some subject...')
+Body body = new Body().withHtml(new Content('''Hi,<br />
+<br />
+Some <b>HTML</b> body...
+'''))
+Message message = new Message(subject, body)
+amazonWebService.ses.sendEmail(new SendEmailRequest(source, destination, message))
 {code}
 
 Get send statistics

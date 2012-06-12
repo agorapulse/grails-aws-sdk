@@ -3,8 +3,8 @@ h4. Credentials
 Add your AWS credentials parameters to your _grails-app/conf/Config.groovy_:
 
 {code}
-grails.plugins.awssdk.accessKey = {ACCESS_KEY}
-grails.plugins.awssdk.secretKey = {SECRET_KEY}
+grails.plugin.awssdk.accessKey = {ACCESS_KEY}
+grails.plugin.awssdk.secretKey = {SECRET_KEY}
 {code}
 
 This is the minimal config.
@@ -15,7 +15,7 @@ The default region used is *us-east-1*.
 You might override it in your config:
 
 {code}
-grails.plugins.awssdk.region = 'eu-west-1'
+grails.plugin.awssdk.region = 'eu-west-1'
 {code}
 
 h4. Client config
@@ -23,61 +23,71 @@ h4. Client config
 If required, you can override default client configuration, which will be used each time a new client is created by @amazonWebService@.
 
 {code}
-grails.plugins.awssdk {
-    // Amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out.
-    connectionTimeout = {CONNECTION_TIMEOUT}
-    // Maximum number of allowed open HTTP connections.
-    maxConnections = {MAX_CONNECTIONS}
-    // Maximum number of retry attempts for failed retryable requests (ex: 5xx error responses from a service).
-    maxErrorRetry = {MAX_ERROR_RETRY}
-    // Protocol (HTTP or HTTPS) to use when connecting to Amazon Web Services.
-    protocol = {PROTOCOL}
-    // Size hints (in bytes) for the low level TCP send and receive buffers.
-    socketBufferSizeHints = [{SOCKET_SEND_BUFFER _SIZE_HINT},{SOCKET_RECEIVE_BUFFER_SIZE_HINT}]
-    // Amount of time to wait (in milliseconds) for data to be transfered over an established, open connection before the connection times out and is closed.
-    socketTimeout = {SOCKET_TIMEOUT}
-    // HTTP user agent header to send with all requests.
-    userAgent = {USER_AGENT}
+grails {
+    plugin {
+        awssdk {
+            // Amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out.
+            connectionTimeout = {CONNECTION_TIMEOUT}
+            // Maximum number of allowed open HTTP connections.
+            maxConnections = {MAX_CONNECTIONS}
+            // Maximum number of retry attempts for failed retryable requests (ex: 5xx error responses from a service).
+            maxErrorRetry = {MAX_ERROR_RETRY}
+            // Protocol (HTTP or HTTPS) to use when connecting to Amazon Web Services.
+            protocol = {PROTOCOL}
+            // Size hints (in bytes) for the low level TCP send and receive buffers.
+            socketBufferSizeHints = [{SOCKET_SEND_BUFFER _SIZE_HINT},{SOCKET_RECEIVE_BUFFER_SIZE_HINT}]
+            // Amount of time to wait (in milliseconds) for data to be transfered over an established, open connection before the connection times out and is closed.
+            socketTimeout = {SOCKET_TIMEOUT}
+            // HTTP user agent header to send with all requests.
+            userAgent = {USER_AGENT}
+        }
+    }
 }
 {code}
 
 If required, you can also override default client configuration for each service.
 
-For example this will define specific properties for SQS.
+For example this will define specific properties for SQS and SES.
 
 {code}
-grails.plugins.awssdk {
-    accessKey = {ACCESS_KEY}    // Default access key
-    secretKey = {SECRET_KEY}    // Default secret key
-    region = 'eu-west-1'        // Default region
-    sqs {
-        accessKey = {SQS_ACCESS_KEY}    // Custom access key
-        secretKey = {SQS_SECRET_KEY}    // Custom secret key
-        region = {SQS_REGION}           // Custom region
-        connectionTimeout = {SQS_CONNECTION_TIMEOUT}  // Custom timeout
+grails {
+    plugin {
+        awssdk {
+            accessKey = {ACCESS_KEY}    // Default access key
+            secretKey = {SECRET_KEY}    // Default secret key
+            region = 'eu-west-1'        // Default region
+            sqs {
+                accessKey = {SQS_ACCESS_KEY}    // Custom access key
+                secretKey = {SQS_SECRET_KEY}    // Custom secret key
+                region = {SQS_REGION}           // Custom region
+                connectionTimeout = {SQS_CONNECTION_TIMEOUT}  // Custom timeout
+            }
+            ses {
+                region = 'us-east-1'    // Since SES is currently only available in this region
+            }
+            // Other available services
+            autoScaling {}
+            cloudFormation {}
+            cloudFront {}
+            cloudSearch {}
+            cloudWatch {}
+            dynamoDB {}
+            ec2 {}
+            elasticBeanstalk {}
+            elasticLoadBalancing {}
+            elasticMapReduce {}
+            elastiCache {}
+            iam {}
+            importExport {}
+            rds {}
+            route53 {}
+            s3 {}
+            sdb {}
+            sns {}
+            sqs {}
+            storagegateway {}
+            swf {}
+        }
     }
-    // Other available services
-    autoScaling {}
-    cloudFormation {}
-    cloudFront {}
-    cloudSearch {}
-    cloudWatch {}
-    dynamoDB {}
-    ec2 {}
-    elasticBeanstalk {}
-    elasticLoadBalancing {}
-    elasticMapReduce {}
-    elastiCache {}
-    iam {}
-    importExport {}
-    rds {}
-    route53 {}
-    s3 {}
-    ses {}
-    sdb {}
-    sns {}
-    sqs {}
-    storagegateway {}
-    swf {}
 }
 {code}
