@@ -1,4 +1,4 @@
-package grails.plugins.awssdk
+package grails.plugin.awssdk
 
 import com.amazonaws.AmazonWebServiceClient
 import com.amazonaws.ClientConfiguration
@@ -232,7 +232,7 @@ class AmazonWebService {
     // PRIVATE
 
     private def getAwsConfig() {
-        grailsApplication.config.grails?.plugins?.awssdk
+        grailsApplication.config.grails?.plugin?.awssdk
     }
 
     private BasicAWSCredentials buildCredentials(defaultConfig, serviceConfig) {
