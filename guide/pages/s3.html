@@ -85,10 +85,14 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                 
 
 <h2 id="s3">4.3 S3 example</h2>
-Create a bucket.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.createBucket('someBucket')</pre></div><p class="paragraph"/>List buckets.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.listBuckets()</pre></div><p class="paragraph"/>Upload a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject('someBucket', 'somePath/someKey', <span class="java&#45;keyword">new</span> File(''))</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('someBucket')
+Create a bucket.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.s3.model.&#42;<p class="paragraph"/>// Bucket will be created in <span class="java&#45;keyword">default</span> config region
+amazonWebService.s3.createBucket('some&#45;grails&#45;bucket')</pre></div><p class="paragraph"/>List buckets.<p class="paragraph"/><div class="code"><pre>List buckets = amazonWebService.s3.listBuckets()
+buckets.each &#123; Bucket bucket &#45;&#62;
+    println <span class="java&#45;quote">"bucketName: $&#123;bucket.name&#125;, creationDate: $&#123;bucket.creationDate&#125;"</span>
+&#125;</pre></div><p class="paragraph"/>Upload a file with public read permissions.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('some&#45;grails&#45;bucket')
 objectListing.objectSummaries.each &#123; S3ObjectSummary summary &#45;&#62;
     println <span class="java&#45;quote">"key: $&#123;summary.key&#125;, lastModified: $&#123;summary.lastModified&#125;, size: $&#123;summary.size&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('someBucket', key)</pre></div><p class="paragraph"/><h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html." target="blank">AmazonS3Client Java doc</a>
+&#125;</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('some&#45;grails&#45;bucket', 'somePath/someKey.jpg')</pre></div><p class="paragraph"/><h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html." target="blank">AmazonS3Client Java doc</a>
 
 
 

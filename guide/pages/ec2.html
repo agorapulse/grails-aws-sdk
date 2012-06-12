@@ -85,10 +85,13 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                 
 
 <h2 id="ec2">4.1 EC2 example</h2>
-Start an EC2 instance.<p class="paragraph"/><div class="code"><pre>def reservation = amazonWebService.ec2.runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest(imageId, 1, 1).withInstanceType('m1.micro'))</pre></div><p class="paragraph"/>List all your EC2 instances.<p class="paragraph"/><div class="code"><pre>List reservations = amazonWebService.ec2.describeInstances().reservations
-reservations.each &#123; Reservation reservation
+Start an EC2 t1.micro instance with Amazon Linux in eu-west1.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.ec2.model.&#42;<p class="paragraph"/>// If your <span class="java&#45;keyword">default</span> region is eu&#45;west&#45;1
+def reservation = amazonWebService.ec2.runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest('ami&#45;fd231b89', 1, 1).withInstanceType('t1.micro'))
+// Or <span class="java&#45;keyword">if</span> your <span class="java&#45;keyword">default</span> region is not eu&#45;west&#45;1 (<span class="java&#45;keyword">this</span> ami ID is only runnable eu&#45;west&#45;1)
+def reservation = amazonWebService.getEc2('eu&#45;west&#45;1').runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest('ami&#45;fd231b89', 1, 1).withInstanceType('t1.micro'))</pre></div><p class="paragraph"/>List all your EC2 instances.<p class="paragraph"/><div class="code"><pre>List reservations = amazonWebService.ec2.describeInstances().reservations
+reservations.each &#123; Reservation reservation &#45;&#62;
     println <span class="java&#45;quote">"reservationId: $&#123;reservation.reservationId&#125;"</span>
-    reservation.instances.each() &#123; Instance instance
+    reservation.instances.each() &#123; Instance instance &#45;&#62;
         println <span class="java&#45;quote">"instanceId: $&#123;instance.instanceId&#125;, imageId: $&#123;instance.imageId&#125;, instanceType: $&#123;instance.instanceType&#125;"</span>
     &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Stop an EC2 instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.ec2.stopInstances(<span class="java&#45;keyword">new</span> StopInstancesRequest(&#91;instanceId&#93;))</pre></div><p class="paragraph"/>Terminate an EC2 instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.ec2.terminateInstances(<span class="java&#45;keyword">new</span> TerminateInstancesRequest(&#91;instanceId&#93;))</pre></div><p class="paragraph"/>
 <h3>Java doc</h3><p class="paragraph"/>To know available methods for EC2 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html." target="blank">AmazonEC2Client Java doc</a>

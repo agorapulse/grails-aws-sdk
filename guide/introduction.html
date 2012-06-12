@@ -115,10 +115,10 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/benorama/aws-sdk-grails-plugin/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
 <h3>Alpha status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>alpha release<strong class="bold"></strong>.<p class="paragraph"/>
-<h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> .<p class="paragraph"/>It provides an easy access to SES and S3, through a groovy DSL for SES and methods injection for S3 (based on JetS3 java lib).<p class="paragraph"/>If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because we wanted :
+<h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another great <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> with a different approach: its aim is to provide an easy access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 <ol>
-<li>to have a direct access to <strong class="bold">ALL</strong> <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> features, including <strong class="bold">ALL</strong> AWS services,</li>
-<li>to only use <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> with a consistent way to access <strong class="bold">ALL</strong> AWS services (and not JetS3 java lib specific methods and a specific SES DSL),</li>
+<li>to have a direct access to <strong class="bold">ALL</strong> <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> features, including <strong class="bold">ALL</strong> AWS services with custom client configuration,</li>
+<li>to only use <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> with a consistent way to access <strong class="bold">ALL</strong> AWS services (and not JetS3 java lib specific methods and a custom SES DSL),</li>
 <li>to have 100% compatibility with future <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> , as it is just a simple lightweight wrapper around the official java clients.</li>
 </ol><p class="paragraph"/>
 

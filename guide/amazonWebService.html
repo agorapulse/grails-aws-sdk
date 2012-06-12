@@ -108,7 +108,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                 
 
 <h1 id="amazonWebService">4 Amazon Web Service</h1>
-Reference <code>amazonWebService</code> from any of your grails artefacts (controllers, domain, services...) to automatically inject it.<p class="paragraph"/><div class="code"><pre>def amazonWebService</pre></div><p class="paragraph"/>You can then access any services directly from <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>// Available service clients
+Reference <code>amazonWebService</code> from any of your grails artefacts (controllers, domain, services...) to automatically inject it.<p class="paragraph"/><div class="code"><pre>def amazonWebService</pre></div><p class="paragraph"/>Or get it from <code>ctx</code> if you want to test it in Grails console.<p class="paragraph"/><div class="code"><pre>def amazonWebService = ctx.getBean('amazonWebService')</pre></div><p class="paragraph"/>You can then access any services directly from <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>// Available service clients
 amazonWebService.autoScaling
 amazonWebService.cloudFormation
 amazonWebService.cloudFront
@@ -131,7 +131,7 @@ amazonWebService.sns
 amazonWebService.sqs
 amazonWebService.storageGateway
 amazonWebService.swf</pre></div><p class="paragraph"/>It will return an instance of java client class extending <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html" target="blank">AmazonWebServiceClient</a> with default region endpoint (defined in our <code>Config.groovy</code>).<p class="paragraph"/>You can then call any available client methods.<p class="paragraph"/>To know available methods for each service clients, check the latest version of online <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html." target="blank">AWS SDK Java docs</a><p class="paragraph"/>
-<h3>Custom region</h3><p class="paragraph"/>If required, you can pass the region name, to get a client with different region endpoint.<p class="paragraph"/><div class="code"><pre>// Use SQS <span class="java&#45;keyword">for</span> region 'eu&#45;west&#45;1'
+<h3>Custom region</h3><p class="paragraph"/>If required, you can pass the region name, to get a client with a different region endpoint.<p class="paragraph"/><div class="code"><pre>// Use SQS <span class="java&#45;keyword">for</span> region 'eu&#45;west&#45;1'
 amazonWebService.getSqs('eu&#45;west&#45;1').sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))</pre></div><p class="paragraph"/>
 <h3>Async clients</h3><p class="paragraph"/>If required, you can also get asynchronous client (which return Future on each async methods).<p class="paragraph"/><div class="code"><pre>// Get async client
 amazonWebService.sqsAsync.sendMessageAsync(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))
@@ -141,10 +141,13 @@ amazonWebService.getSqsAsync('eu&#45;west&#45;1').sendMessageAsync(<span class="
 
 
 <h2 id="ec2">4.1 EC2 example</h2>
-Start an EC2 instance.<p class="paragraph"/><div class="code"><pre>def reservation = amazonWebService.ec2.runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest(imageId, 1, 1).withInstanceType('m1.micro'))</pre></div><p class="paragraph"/>List all your EC2 instances.<p class="paragraph"/><div class="code"><pre>List reservations = amazonWebService.ec2.describeInstances().reservations
-reservations.each &#123; Reservation reservation
+Start an EC2 t1.micro instance with Amazon Linux in eu-west1.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.ec2.model.&#42;<p class="paragraph"/>// If your <span class="java&#45;keyword">default</span> region is eu&#45;west&#45;1
+def reservation = amazonWebService.ec2.runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest('ami&#45;fd231b89', 1, 1).withInstanceType('t1.micro'))
+// Or <span class="java&#45;keyword">if</span> your <span class="java&#45;keyword">default</span> region is not eu&#45;west&#45;1 (<span class="java&#45;keyword">this</span> ami ID is only runnable eu&#45;west&#45;1)
+def reservation = amazonWebService.getEc2('eu&#45;west&#45;1').runInstances(<span class="java&#45;keyword">new</span> RunInstancesRequest('ami&#45;fd231b89', 1, 1).withInstanceType('t1.micro'))</pre></div><p class="paragraph"/>List all your EC2 instances.<p class="paragraph"/><div class="code"><pre>List reservations = amazonWebService.ec2.describeInstances().reservations
+reservations.each &#123; Reservation reservation &#45;&#62;
     println <span class="java&#45;quote">"reservationId: $&#123;reservation.reservationId&#125;"</span>
-    reservation.instances.each() &#123; Instance instance
+    reservation.instances.each() &#123; Instance instance &#45;&#62;
         println <span class="java&#45;quote">"instanceId: $&#123;instance.instanceId&#125;, imageId: $&#123;instance.imageId&#125;, instanceType: $&#123;instance.instanceType&#125;"</span>
     &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Stop an EC2 instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.ec2.stopInstances(<span class="java&#45;keyword">new</span> StopInstancesRequest(&#91;instanceId&#93;))</pre></div><p class="paragraph"/>Terminate an EC2 instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.ec2.terminateInstances(<span class="java&#45;keyword">new</span> TerminateInstancesRequest(&#91;instanceId&#93;))</pre></div><p class="paragraph"/>
 <h3>Java doc</h3><p class="paragraph"/>To know available methods for EC2 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html." target="blank">AmazonEC2Client Java doc</a>
@@ -152,24 +155,40 @@ reservations.each &#123; Reservation reservation
 
 
 <h2 id="rds">4.2 RDS example</h2>
-Start a RDS instance.<p class="paragraph"/><div class="code"><pre>DBInstance dbInstance = amazonWebService.rds.createDBInstance(<span class="java&#45;keyword">new</span> CreateDBInstanceRequest('dbServer', 2, 'm1.micro', 'mysql', 'admin', 'password'))</pre></div><p class="paragraph"/>List all your RDS instances.<p class="paragraph"/><div class="code"><pre>List dbInstances = amazonWebService.rds.describeDBInstances().DBInstances
+Start a RDS instance.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.rds.model.&#42;<p class="paragraph"/>DBInstance dbInstance = amazonWebService.rds.createDBInstance(<span class="java&#45;keyword">new</span> CreateDBInstanceRequest('mydbserver', 5, 'db.t1.micro', 'MySQL', 'admin', 'password'))</pre></div><p class="paragraph"/>List all your RDS instances.<p class="paragraph"/><div class="code"><pre>List dbInstances = amazonWebService.rds.describeDBInstances().DBInstances
 dbInstances.each &#123; DBInstance dbInstance &#45;&#62;
-    println <span class="java&#45;quote">"DBName: $&#123;dbInstance.DBName&#125;, DBInstanceStatus: $&#123;dbInstance.DBInstanceStatus&#125;, engine: $&#123;dbInstance.engine&#125;, allocatedStorage: $&#123;dbInstance.allocatedStorage&#125;"</span><p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Snapshot a RDS instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.createDBSnapshot(<span class="java&#45;keyword">new</span> CreateDBSnapshotRequest('someSnapshot', dbInstance.DBName))</pre></div><p class="paragraph"/>Terminate a RDS instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.deleteDBInstance(<span class="java&#45;keyword">new</span> DeleteDBInstanceRequest(dbInstance.DBName))</pre></div><p class="paragraph"/>
+    println <span class="java&#45;quote">"DBInstanceIdentifier: $&#123;dbInstance.DBInstanceIdentifier&#125;, DBInstanceStatus: $&#123;dbInstance.DBInstanceStatus&#125;, engine: $&#123;dbInstance.engine&#125;, allocatedStorage: $&#123;dbInstance.allocatedStorage&#125;"</span><p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Snapshot a RDS instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.createDBSnapshot(<span class="java&#45;keyword">new</span> CreateDBSnapshotRequest('someSnapshot', 'mydbserver'))</pre></div><p class="paragraph"/>Terminate a RDS instance without final snapshot.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.deleteDBInstance(<span class="java&#45;keyword">new</span> DeleteDBInstanceRequest('mydbserver').withSkipFinalSnapshot(<span class="java&#45;keyword">true</span>))</pre></div><p class="paragraph"/>
 <h3>Java doc</h3><p class="paragraph"/>To know available methods for RDS client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html." target="blank">AmazonRDSClient Java doc</a>
 
 
 
 <h2 id="s3">4.3 S3 example</h2>
-Create a bucket.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.createBucket('someBucket')</pre></div><p class="paragraph"/>List buckets.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.listBuckets()</pre></div><p class="paragraph"/>Upload a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject('someBucket', 'somePath/someKey', <span class="java&#45;keyword">new</span> File(''))</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('someBucket')
+Create a bucket.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.s3.model.&#42;<p class="paragraph"/>// Bucket will be created in <span class="java&#45;keyword">default</span> config region
+amazonWebService.s3.createBucket('some&#45;grails&#45;bucket')</pre></div><p class="paragraph"/>List buckets.<p class="paragraph"/><div class="code"><pre>List buckets = amazonWebService.s3.listBuckets()
+buckets.each &#123; Bucket bucket &#45;&#62;
+    println <span class="java&#45;quote">"bucketName: $&#123;bucket.name&#125;, creationDate: $&#123;bucket.creationDate&#125;"</span>
+&#125;</pre></div><p class="paragraph"/>Upload a file with public read permissions.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('some&#45;grails&#45;bucket')
 objectListing.objectSummaries.each &#123; S3ObjectSummary summary &#45;&#62;
     println <span class="java&#45;quote">"key: $&#123;summary.key&#125;, lastModified: $&#123;summary.lastModified&#125;, size: $&#123;summary.size&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('someBucket', key)</pre></div><p class="paragraph"/><h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html." target="blank">AmazonS3Client Java doc</a>
+&#125;</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('some&#45;grails&#45;bucket', 'somePath/someKey.jpg')</pre></div><p class="paragraph"/><h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html." target="blank">AmazonS3Client Java doc</a>
 
 
 
 <h2 id="ses">4.4 SES example</h2>
-Verifies an email address (send a confirmation email).<p class="paragraph"/><div class="code"><pre>amazonWebService.ses.verifyEmailAddress(<span class="java&#45;keyword">new</span> VerifyEmailAddressRequest('myemail&#64;gmail.com'))</pre></div><p class="paragraph"/>List verified address.<p class="paragraph"/><div class="code"><pre>amazonWebService.ses.listVerifiedEmailAddresses()</pre></div><p class="paragraph"/>Send an email.<p class="paragraph"/><div class="code"><pre>Message message = <span class="java&#45;keyword">new</span> Message('Some subject...', 'Some body...')
-amazonWebService.ses.sendEmail(<span class="java&#45;keyword">new</span> SendEmailRequest('notification&#64;mydomain.com', 'myemail&#64;gmail.com', message))</pre></div><p class="paragraph"/>Get send statistics<p class="paragraph"/><div class="code"><pre>GetSendStatisticsResult statistics = amazonWebService.ses.getSendStatistics()
+<blockquote class="note">
+SES is currently only available in us-east-1 region, so you might define it in your config if required or use <code>amazonWebService.getSes('us-east-1')</code>.
+</blockquote><p class="paragraph"/>Verifies an email address (send a confirmation email).<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.ses.model.&#42;<p class="paragraph"/>amazonWebService.ses.verifyEmailIdentity(<span class="java&#45;keyword">new</span> VerifyEmailIdentityRequest().withEmailAddress('notification&#64;mydomain.com'))</pre></div><p class="paragraph"/>List verified address.<p class="paragraph"/><div class="code"><pre>List emailAddresses = amazonWebService.ses.listVerifiedEmailAddresses().verifiedEmailAddresses
+emailAddresses.each &#123;
+    println it
+&#125;</pre></div><p class="paragraph"/>Send an email.<p class="paragraph"/><div class="code"><pre><span class="java&#45;object">String</span> source = 'notification&#64;mydomain.com'
+Destination destination = <span class="java&#45;keyword">new</span> Destination(&#91;'myemail&#64;gmail.com'&#93;)
+Content subject = <span class="java&#45;keyword">new</span> Content('Some subject...')
+Body body = <span class="java&#45;keyword">new</span> Body().withHtml(<span class="java&#45;keyword">new</span> Content('''Hi,&#60;br /&#62;
+&#60;br /&#62;
+Some &#60;b&#62;HTML&#60;/b&#62; body&#8230;
+'''))
+Message message = <span class="java&#45;keyword">new</span> Message(subject, body)
+amazonWebService.ses.sendEmail(<span class="java&#45;keyword">new</span> SendEmailRequest(source, destination, message))</pre></div><p class="paragraph"/>Get send statistics<p class="paragraph"/><div class="code"><pre>GetSendStatisticsResult statistics = amazonWebService.ses.getSendStatistics()
 statistics.sendDataPoints.each &#123; SendDataPoint sendDataPoint &#45;&#62;
     println <span class="java&#45;quote">"bounces=$&#123;sendDataPoint.bounces&#125;, complaints=$&#123;sendDataPoint.complaints&#125;, deliveryAttempts=$&#123;sendDataPoint.deliveryAttempts&#125;, rejects=$&#123;sendDataPoint.rejects&#125;"</span>
 &#125;</pre></div><p class="paragraph"/>Get send quota<p class="paragraph"/><div class="code"><pre>GetSendQuotaResult quota = amazonWebService.ses.getSendQuota()
@@ -179,11 +198,11 @@ println <span class="java&#45;quote">"max24HourSend: $&#123;quota.max24HourSend&
 
 
 <h2 id="sqs">4.5 SQS example</h2>
-Create a queue.<p class="paragraph"/><div class="code"><pre><span class="java&#45;object">String</span> queueUrl = amazonWebService.sqs.createQueue(<span class="java&#45;keyword">new</span> CreateQueueRequest('someQueue'))</pre></div><p class="paragraph"/>Send a message<p class="paragraph"/><div class="code"><pre>amazonWebService.sqs.sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, 'Some message...'))</pre></div><p class="paragraph"/>Receive and delete messages<p class="paragraph"/><div class="code"><pre>List messages = amazonWebService.sqs.receiveMessage(<span class="java&#45;keyword">new</span> ReceiveMessageRequest(queueUrl)).messages
+Create a queue.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.sqs.model.&#42;<p class="paragraph"/><span class="java&#45;object">String</span> queueUrl = amazonWebService.sqs.createQueue(<span class="java&#45;keyword">new</span> CreateQueueRequest('someQueue'))</pre></div><p class="paragraph"/>Send a message<p class="paragraph"/><div class="code"><pre>amazonWebService.sqs.sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, 'Some message...'))</pre></div><p class="paragraph"/>Receive and delete messages<p class="paragraph"/><div class="code"><pre>List messages = amazonWebService.sqs.receiveMessage(<span class="java&#45;keyword">new</span> ReceiveMessageRequest(queueUrl)).messages
 messages.each &#123; Message message &#45;&#62;
     println <span class="java&#45;quote">"id: $&#123;message.messageId&#125;, body: $&#123;message.body&#125;"</span>
     amazonWebService.sqs.deleteMessage(<span class="java&#45;keyword">new</span> DeleteMessageRequest(queueUrl, message.receiptHandle))
-&#125;</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>Delete a queue.<p class="paragraph"/><div class="code"><pre>amazonWebService.sqs.deleteQueue(<span class="java&#45;keyword">new</span> DeleteQueueRequest('someQueue'))</pre></div><p class="paragraph"/>
 <h3>Java doc</h3><p class="paragraph"/>To know available methods for SQS client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sqs/AmazonSQSClient.html." target="blank">AmazonSQSClient Java doc</a>
 
 

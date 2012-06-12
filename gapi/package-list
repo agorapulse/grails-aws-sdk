@@ -1,2 +1,2 @@
 DefaultPackage
-grails.plugins.awssdk
+grails.plugin.awssdk

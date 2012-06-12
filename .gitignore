@@ -4,3 +4,4 @@
 .project
 *.iml
 target/
+web-app/

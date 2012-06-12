@@ -87,56 +87,66 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                 
 
 <h1 id="configuration">3 Configuration</h1>
-<h4>Credentials</h4><p class="paragraph"/>Add your AWS credentials parameters to your  <em class="italic">grails-app/conf/Config.groovy</em> :<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk.accessKey = &#123;ACCESS_KEY&#125;
-grails.plugins.awssdk.secretKey = &#123;SECRET_KEY&#125;</pre></div><p class="paragraph"/>This is the minimal config.<p class="paragraph"/><h4>Region</h4><p class="paragraph"/>The default region used is <strong class="bold">us-east-1</strong>.
-You might override it in your config:<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk.region = 'eu&#45;west&#45;1'</pre></div><p class="paragraph"/><h4>Client config</h4><p class="paragraph"/>If required, you can override default client configuration, which will be used each time a new client is created by <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
-    // Amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out.
-    connectionTimeout = &#123;CONNECTION_TIMEOUT&#125;
-    // Maximum number of allowed open HTTP connections.
-    maxConnections = &#123;MAX_CONNECTIONS&#125;
-    // Maximum number of retry attempts <span class="java&#45;keyword">for</span> failed retryable requests (ex: 5xx error responses from a service).
-    maxErrorRetry = &#123;MAX_ERROR_RETRY&#125;
-    // Protocol (HTTP or HTTPS) to use when connecting to Amazon Web Services.
-    protocol = &#123;PROTOCOL&#125;
-    // Size hints (in bytes) <span class="java&#45;keyword">for</span> the low level TCP send and receive buffers.
-    socketBufferSizeHints = &#91;&#123;SOCKET_SEND_BUFFER _SIZE_HINT&#125;,&#123;SOCKET_RECEIVE_BUFFER_SIZE_HINT&#125;&#93;
-    // Amount of time to wait (in milliseconds) <span class="java&#45;keyword">for</span> data to be transfered over an established, open connection before the connection times out and is closed.
-    socketTimeout = &#123;SOCKET_TIMEOUT&#125;
-    // HTTP user agent header to send with all requests.
-    userAgent = &#123;USER_AGENT&#125;
-&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service.<p class="paragraph"/>For example this will define specific properties for SQS.<p class="paragraph"/><div class="code"><pre>grails.plugins.awssdk &#123;
-    accessKey = &#123;ACCESS_KEY&#125;    // Default access key
-    secretKey = &#123;SECRET_KEY&#125;    // Default secret key
-    region = 'eu&#45;west&#45;1'        // Default region
-    sqs &#123;
-        accessKey = &#123;SQS_ACCESS_KEY&#125;    // Custom access key
-        secretKey = &#123;SQS_SECRET_KEY&#125;    // Custom secret key
-        region = &#123;SQS_REGION&#125;           // Custom region
-        connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;  // Custom timeout
+<h4>Credentials</h4><p class="paragraph"/>Add your AWS credentials parameters to your  <em class="italic">grails-app/conf/Config.groovy</em> :<p class="paragraph"/><div class="code"><pre>grails.plugin.awssdk.accessKey = &#123;ACCESS_KEY&#125;
+grails.plugin.awssdk.secretKey = &#123;SECRET_KEY&#125;</pre></div><p class="paragraph"/>This is the minimal config.<p class="paragraph"/><h4>Region</h4><p class="paragraph"/>The default region used is <strong class="bold">us-east-1</strong>.
+You might override it in your config:<p class="paragraph"/><div class="code"><pre>grails.plugin.awssdk.region = 'eu&#45;west&#45;1'</pre></div><p class="paragraph"/><h4>Client config</h4><p class="paragraph"/>If required, you can override default client configuration, which will be used each time a new client is created by <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>grails &#123;
+    plugin &#123;
+        awssdk &#123;
+            // Amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out.
+            connectionTimeout = &#123;CONNECTION_TIMEOUT&#125;
+            // Maximum number of allowed open HTTP connections.
+            maxConnections = &#123;MAX_CONNECTIONS&#125;
+            // Maximum number of retry attempts <span class="java&#45;keyword">for</span> failed retryable requests (ex: 5xx error responses from a service).
+            maxErrorRetry = &#123;MAX_ERROR_RETRY&#125;
+            // Protocol (HTTP or HTTPS) to use when connecting to Amazon Web Services.
+            protocol = &#123;PROTOCOL&#125;
+            // Size hints (in bytes) <span class="java&#45;keyword">for</span> the low level TCP send and receive buffers.
+            socketBufferSizeHints = &#91;&#123;SOCKET_SEND_BUFFER _SIZE_HINT&#125;,&#123;SOCKET_RECEIVE_BUFFER_SIZE_HINT&#125;&#93;
+            // Amount of time to wait (in milliseconds) <span class="java&#45;keyword">for</span> data to be transfered over an established, open connection before the connection times out and is closed.
+            socketTimeout = &#123;SOCKET_TIMEOUT&#125;
+            // HTTP user agent header to send with all requests.
+            userAgent = &#123;USER_AGENT&#125;
+        &#125;
     &#125;
-    // Other available services
-    autoScaling &#123;&#125;
-    cloudFormation &#123;&#125;
-    cloudFront &#123;&#125;
-    cloudSearch &#123;&#125;
-    cloudWatch &#123;&#125;
-    dynamoDB &#123;&#125;
-    ec2 &#123;&#125;
-    elasticBeanstalk &#123;&#125;
-    elasticLoadBalancing &#123;&#125;
-    elasticMapReduce &#123;&#125;
-    elastiCache &#123;&#125;
-    iam &#123;&#125;
-    importExport &#123;&#125;
-    rds &#123;&#125;
-    route53 &#123;&#125;
-    s3 &#123;&#125;
-    ses &#123;&#125;
-    sdb &#123;&#125;
-    sns &#123;&#125;
-    sqs &#123;&#125;
-    storagegateway &#123;&#125;
-    swf &#123;&#125;
+&#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service.<p class="paragraph"/>For example this will define specific properties for SQS and SES.<p class="paragraph"/><div class="code"><pre>grails &#123;
+    plugin &#123;
+        awssdk &#123;
+            accessKey = &#123;ACCESS_KEY&#125;    // Default access key
+            secretKey = &#123;SECRET_KEY&#125;    // Default secret key
+            region = 'eu&#45;west&#45;1'        // Default region
+            sqs &#123;
+                accessKey = &#123;SQS_ACCESS_KEY&#125;    // Custom access key
+                secretKey = &#123;SQS_SECRET_KEY&#125;    // Custom secret key
+                region = &#123;SQS_REGION&#125;           // Custom region
+                connectionTimeout = &#123;SQS_CONNECTION_TIMEOUT&#125;  // Custom timeout
+            &#125;
+            ses &#123;
+                region = 'us&#45;east&#45;1'    // Since SES is currently only available in <span class="java&#45;keyword">this</span> region
+            &#125;
+            // Other available services
+            autoScaling &#123;&#125;
+            cloudFormation &#123;&#125;
+            cloudFront &#123;&#125;
+            cloudSearch &#123;&#125;
+            cloudWatch &#123;&#125;
+            dynamoDB &#123;&#125;
+            ec2 &#123;&#125;
+            elasticBeanstalk &#123;&#125;
+            elasticLoadBalancing &#123;&#125;
+            elasticMapReduce &#123;&#125;
+            elastiCache &#123;&#125;
+            iam &#123;&#125;
+            importExport &#123;&#125;
+            rds &#123;&#125;
+            route53 &#123;&#125;
+            s3 &#123;&#125;
+            sdb &#123;&#125;
+            sns &#123;&#125;
+            sqs &#123;&#125;
+            storagegateway &#123;&#125;
+            swf &#123;&#125;
+        &#125;
+    &#125;
 &#125;</pre></div>
 
 

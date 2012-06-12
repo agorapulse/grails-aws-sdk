@@ -85,8 +85,20 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                 
 
 <h2 id="ses">4.4 SES example</h2>
-Verifies an email address (send a confirmation email).<p class="paragraph"/><div class="code"><pre>amazonWebService.ses.verifyEmailAddress(<span class="java&#45;keyword">new</span> VerifyEmailAddressRequest('myemail&#64;gmail.com'))</pre></div><p class="paragraph"/>List verified address.<p class="paragraph"/><div class="code"><pre>amazonWebService.ses.listVerifiedEmailAddresses()</pre></div><p class="paragraph"/>Send an email.<p class="paragraph"/><div class="code"><pre>Message message = <span class="java&#45;keyword">new</span> Message('Some subject...', 'Some body...')
-amazonWebService.ses.sendEmail(<span class="java&#45;keyword">new</span> SendEmailRequest('notification&#64;mydomain.com', 'myemail&#64;gmail.com', message))</pre></div><p class="paragraph"/>Get send statistics<p class="paragraph"/><div class="code"><pre>GetSendStatisticsResult statistics = amazonWebService.ses.getSendStatistics()
+<blockquote class="note">
+SES is currently only available in us-east-1 region, so you might define it in your config if required or use <code>amazonWebService.getSes('us-east-1')</code>.
+</blockquote><p class="paragraph"/>Verifies an email address (send a confirmation email).<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.ses.model.&#42;<p class="paragraph"/>amazonWebService.ses.verifyEmailIdentity(<span class="java&#45;keyword">new</span> VerifyEmailIdentityRequest().withEmailAddress('notification&#64;mydomain.com'))</pre></div><p class="paragraph"/>List verified address.<p class="paragraph"/><div class="code"><pre>List emailAddresses = amazonWebService.ses.listVerifiedEmailAddresses().verifiedEmailAddresses
+emailAddresses.each &#123;
+    println it
+&#125;</pre></div><p class="paragraph"/>Send an email.<p class="paragraph"/><div class="code"><pre><span class="java&#45;object">String</span> source = 'notification&#64;mydomain.com'
+Destination destination = <span class="java&#45;keyword">new</span> Destination(&#91;'myemail&#64;gmail.com'&#93;)
+Content subject = <span class="java&#45;keyword">new</span> Content('Some subject...')
+Body body = <span class="java&#45;keyword">new</span> Body().withHtml(<span class="java&#45;keyword">new</span> Content('''Hi,&#60;br /&#62;
+&#60;br /&#62;
+Some &#60;b&#62;HTML&#60;/b&#62; body&#8230;
+'''))
+Message message = <span class="java&#45;keyword">new</span> Message(subject, body)
+amazonWebService.ses.sendEmail(<span class="java&#45;keyword">new</span> SendEmailRequest(source, destination, message))</pre></div><p class="paragraph"/>Get send statistics<p class="paragraph"/><div class="code"><pre>GetSendStatisticsResult statistics = amazonWebService.ses.getSendStatistics()
 statistics.sendDataPoints.each &#123; SendDataPoint sendDataPoint &#45;&#62;
     println <span class="java&#45;quote">"bounces=$&#123;sendDataPoint.bounces&#125;, complaints=$&#123;sendDataPoint.complaints&#125;, deliveryAttempts=$&#123;sendDataPoint.deliveryAttempts&#125;, rejects=$&#123;sendDataPoint.rejects&#125;"</span>
 &#125;</pre></div><p class="paragraph"/>Get send quota<p class="paragraph"/><div class="code"><pre>GetSendQuotaResult quota = amazonWebService.ses.getSendQuota()
