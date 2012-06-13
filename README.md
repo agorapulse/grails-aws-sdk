@@ -5,7 +5,7 @@ AWS SDK Grails Plugin
 
 The AWS SDK Plugin allows your [Grails](http://grails.org) application to use the [Amazon Web Services](http://aws.amazon.com/) infrastructure services.
 
-The aim is to provide a lightweight **amazonWebService** Grails service wrapper around the official[AWS SDK for Java](http://aws.amazon.com/sdkforjava/).
+The aim is to provide a lightweight **amazonWebService** Grails service wrapper around the official [AWS SDK for Java](http://aws.amazon.com/sdkforjava/).
 
 The [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) provides a Java API for AWS infrastructure services, making it even easier for developers to build applications that tap into the cost-effective, scalable, and reliable AWS cloud.
 
@@ -100,7 +100,7 @@ This is an **alpha release**.
 
 # Other AWS Grails plugin
 
-FYI, there is another great [AWS Grails plugin](http://grails.org/plugin/aws) with a different approach: its aim is to provide an easy access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.
+FYI, there is another great [AWS Grails plugin](http://grails.org/plugin/aws) with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.
 
 We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 
