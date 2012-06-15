@@ -1,4 +1,4 @@
-AWS SDK Grails Plugin
+Grails AWS SDK Plugin
 ================================
 
 # Introduction
@@ -98,12 +98,14 @@ To report any bug, please use the project [Issues](http://github.com/benorama/aw
 This is an **alpha release**.
 
 
-# Other AWS Grails plugin
+# Other Grails AWS Plugin
 
-FYI, there is another great [AWS Grails plugin](http://grails.org/plugin/aws) with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.
+FYI, there is another great [Grails AWS plugin](http://grails.org/plugin/aws) with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.
 
-We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
+We decided to write our own AWS plugin because it did not meet our requirements:
 
-1. to have direct access to **ALL** [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) features including **ALL** AWS services, with custom client configuration,
-2. to only use [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services (and not JetS3 java lib specific methods and a custom SES DSL),
-3. to have 100% compatibility with future [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients.
+1. direct access to **ALL** [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) features including **ALL** AWS services, with custom client configuration,
+2. only [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services,
+3. 100% compatibility with future [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients.
+
+Moreover, we found that [AWS SDK for Java](http://aws.amazon.com/sdkforjava/)
