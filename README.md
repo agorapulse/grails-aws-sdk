@@ -108,4 +108,3 @@ We decided to write our own AWS plugin because it did not meet our requirements:
 2. only [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services,
 3. 100% compatibility with future [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients.
 
-Moreover, we found that [AWS SDK for Java](http://aws.amazon.com/sdkforjava/)
