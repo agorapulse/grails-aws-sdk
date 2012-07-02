@@ -5,3 +5,5 @@
 *.iml
 target/
 web-app/
+grails-aws-sdk-*.zip
+plugin.xml

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Grails Plugin 0.1.0</title>
+        <title>AWS SDK Grails Plugin 0.1.1</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Grails Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit HEDIARD</p>
-                            <p><strong>Version:</strong> 0.1.0</p>
+                            <p><strong>Version:</strong> 0.1.1</p>
                             
                         </div>
 
@@ -125,7 +125,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/benorama/aws-sdk-grails-plugin/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
 <h3>Alpha status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>alpha release<strong class="bold"></strong>.<p class="paragraph"/>
-<h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another great <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> with a different approach: its aim is to provide an easy access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
+<h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another great <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 <ol>
 <li>to have a direct access to <strong class="bold">ALL</strong> <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> features, including <strong class="bold">ALL</strong> AWS services with custom client configuration,</li>
 <li>to only use <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> with a consistent way to access <strong class="bold">ALL</strong> AWS services (and not JetS3 java lib specific methods and a custom SES DSL),</li>
@@ -152,7 +152,12 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
 
 <h1 id="configuration">3 Configuration</h1>
 <h4>Credentials</h4><p class="paragraph"/>Add your AWS credentials parameters to your  <em class="italic">grails-app/conf/Config.groovy</em> :<p class="paragraph"/><div class="code"><pre>grails.plugin.awssdk.accessKey = &#123;ACCESS_KEY&#125;
-grails.plugin.awssdk.secretKey = &#123;SECRET_KEY&#125;</pre></div><p class="paragraph"/>This is the minimal config.<p class="paragraph"/><h4>Region</h4><p class="paragraph"/>The default region used is <strong class="bold">us-east-1</strong>.
+grails.plugin.awssdk.secretKey = &#123;SECRET_KEY&#125;</pre></div><p class="paragraph"/>If you do not provide credentials in  <em class="italic">grails-app/conf/Config.groovy</em> , a credentials provider chain will be used that searches for credentials in this order:
+<ul class="star">
+<li>Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY</li>
+<li>Java System Properties - aws.accessKeyId and aws.secretKey</li>
+<li>Instance profile credentials delivered through the Amazon EC2 metadata service</li>
+</ul><p class="paragraph"/><h4>Region</h4><p class="paragraph"/>The default region used is <strong class="bold">us-east-1</strong>.
 You might override it in your config:<p class="paragraph"/><div class="code"><pre>grails.plugin.awssdk.region = 'eu&#45;west&#45;1'</pre></div><p class="paragraph"/><h4>Client config</h4><p class="paragraph"/>If required, you can override default client configuration, which will be used each time a new client is created by <code>amazonWebService</code>.<p class="paragraph"/><div class="code"><pre>grails &#123;
     plugin &#123;
         awssdk &#123;
