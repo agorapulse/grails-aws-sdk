@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
-        compile 'com.amazonaws:aws-java-sdk:1.3.10'
+        compile 'com.amazonaws:aws-java-sdk:1.3.11'
     }
 
     plugins {
