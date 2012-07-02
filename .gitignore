@@ -26,3 +26,4 @@ grails-facebook-sdk-*.zip
 web-app/WEB-INF/tld/c.tld
 web-app/WEB-INF/tld/fmt.tld
 grails-aws-sdk-*.zip
+plugin.xml
