@@ -9,6 +9,13 @@ grails.plugin.awssdk.secretKey = {SECRET_KEY}
 
 This is the minimal config.
 
+If you do not provide credentials in _grails-app/conf/Config.groovy_, a credentials provider chain will be used that searches for credentials in this order:
+
+* Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY
+* Java System Properties - aws.accessKeyId and aws.secretKey
+* Instance profile credentials delivered through the Amazon EC2 metadata service
+
+
 h4. Region
 
 The default region used is *us-east-1*.

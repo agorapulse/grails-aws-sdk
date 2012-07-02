@@ -1,5 +1,5 @@
-Grails AWS SDK Plugin
-================================
+AWS SDK Grails Plugin
+=====================
 
 # Introduction
 
