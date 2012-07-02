@@ -7,8 +7,6 @@ grails.plugin.awssdk.accessKey = {ACCESS_KEY}
 grails.plugin.awssdk.secretKey = {SECRET_KEY}
 {code}
 
-This is the minimal config.
-
 If you do not provide credentials in _grails-app/conf/Config.groovy_, a credentials provider chain will be used that searches for credentials in this order:
 
 * Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY
