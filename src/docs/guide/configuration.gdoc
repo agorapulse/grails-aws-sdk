@@ -13,6 +13,14 @@ If you do not provide credentials in _grails-app/conf/Config.groovy_, a credenti
 * Java System Properties - aws.accessKeyId and aws.secretKey
 * Instance profile credentials delivered through the Amazon EC2 metadata service
 
+For example, you can pass your credentials through VM Options:
+
+{code}
+grails run-app -Daws.accessKeyId={ACCESS_KEY} -Daws.secretKey={SECRET_KEY}
+{code}
+
+Or you can create an IAM role with custom permissions/policy and select this role when you launch your EC2 instance.
+
 
 h4. Region
 
