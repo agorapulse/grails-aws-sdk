@@ -288,161 +288,161 @@ class AmazonWebService {
             || (!async && !clients[service].hasProperty(region))) {
             AmazonWebServiceClient client
             BasicAWSCredentials credentials = buildCredentials(awsConfig, awsConfig[service])
-            ClientConfiguration clientConfiguration = buildClientConfiguration(awsConfig, awsConfig[service])
-            switch(service) {
+             switch(service) {
                 case 'autoScaling':
                    if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonAutoScalingAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingAsyncClient(credentials)
+                        else client = new AmazonAutoScalingAsyncClient()
                     } else {
-                       if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingClient(credentials, clientConfiguration)
-                       else client = new AmazonAutoScalingClient(clientConfiguration)
+                       if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingClient(credentials)
+                       else client = new AmazonAutoScalingClient()
                     }
                     client.endpoint = "autoscaling.${region}.amazonaws.com"
                     break
                 case 'cloudFormation':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudFormationAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationAsyncClient(credentials)
+                        else client = new AmazonCloudFormationAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudFormationClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationClient(credentials)
+                        else client = new AmazonCloudFormationClient()
                     }
                     client.endpoint = "cloudformation.${region}.amazonaws.com"
                     break
                 case 'cloudFront':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudFrontAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontAsyncClient(credentials)
+                        else client = new AmazonCloudFrontAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontClient(credentials, clientConfiguration)
-                        else  client = new AmazonCloudFrontClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontClient(credentials)
+                        else  client = new AmazonCloudFrontClient()
                     }
                     client.endpoint = "cloudfront.amazonaws.com"
                     break
                 case 'cloudSearch':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudSearchAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchAsyncClient(credentials)
+                        else client = new AmazonCloudSearchAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudSearchClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchClient(credentials)
+                        else client = new AmazonCloudSearchClient()
                     }
                     client.endpoint = "cloudsearch.${region}.amazonaws.com"
                     break
                 case 'cloudWatch':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudWatchAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchAsyncClient(credentials)
+                        else client = new AmazonCloudWatchAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchClient(credentials, clientConfiguration)
-                        else client = new AmazonCloudWatchClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchClient(credentials)
+                        else client = new AmazonCloudWatchClient()
                     }
                     client.endpoint = "monitoring.${region}.amazonaws.com"
                     break
                 case 'dynamoDB':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonDynamoDBAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBAsyncClient(credentials)
+                        else client = new AmazonDynamoDBAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBClient(credentials, clientConfiguration)
-                        else client = new AmazonDynamoDBClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBClient(credentials)
+                        else client = new AmazonDynamoDBClient()
                     }
                     client.endpoint = "dynamodb.${region}.amazonaws.com"
                     break
                 case 'ec2':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2AsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonEC2AsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2AsyncClient(credentials)
+                        else client = new AmazonEC2AsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2Client(credentials, clientConfiguration)
-                        else client = new AmazonEC2Client(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2Client(credentials)
+                        else client = new AmazonEC2Client()
                     }
                     client.endpoint = "ec2.${region}.amazonaws.com"
                     break
                 case 'elasticBeanstalk':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkAsyncClient(credentials, clientConfiguration)
-                        else client = new AWSElasticBeanstalkAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkAsyncClient(credentials)
+                        else client = new AWSElasticBeanstalkAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkClient(credentials, clientConfiguration)
-                        else client = new AWSElasticBeanstalkClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkClient(credentials)
+                        else client = new AWSElasticBeanstalkClient()
                     }
                     client.endpoint = "elasticbeanstalk.${region}.amazonaws.com"
                     break
                 case 'elastiCache':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonElastiCacheAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheAsyncClient(credentials)
+                        else client = new AmazonElastiCacheAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheClient(credentials, clientConfiguration)
-                        else client = new AmazonElastiCacheClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheClient(credentials)
+                        else client = new AmazonElastiCacheClient()
                     }
                     client.endpoint = "elasticache.${region}.amazonaws.com"
                     break
                 case 'elasticLoadBalancing':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingAsyncClient(credentials, clientConfiguratio)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingAsyncClient(credentials)
+                        else client = new AmazonElasticLoadBalancingAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingClient(credentials, clientConfiguration)
-                        else client = new AmazonElasticLoadBalancingClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingClient(credentials)
+                        else client = new AmazonElasticLoadBalancingClient()
                     }
                     client.endpoint = "elasticloadbalancing.${region}.amazonaws.com"
                     break
                 case 'elasticMapReduce':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonElasticMapReduceAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceAsyncClient(credentials)
+                        else client = new AmazonElasticMapReduceAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceClient(credentials, clientConfiguration)
-                        else client = new AmazonElasticMapReduceClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceClient(credentials)
+                        else client = new AmazonElasticMapReduceClient()
                     }
                     client.endpoint = "elasticmapreduce.${region}.amazonaws.com"
                     break
                 case 'iam':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonIdentityManagementAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementAsyncClient(credentials)
+                        else client = new AmazonIdentityManagementAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementClient(credentials, clientConfiguration)
-                        else client = new AmazonIdentityManagementClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementClient(credentials)
+                        else client = new AmazonIdentityManagementClient()
                     }
                     client.endpoint = "iam.amazonaws.com"
                     break
                 case 'importExport':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonImportExportAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportAsyncClient(credentials)
+                        else client = new AmazonImportExportAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportClient(credentials, clientConfiguration)
-                        else client = new AmazonImportExportClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportClient(credentials)
+                        else client = new AmazonImportExportClient()
                     }
                     client.endpoint = "importexport.amazonaws.com"
                     break
                 case 'rds':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonRDSAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSAsyncClient(credentials)
+                        else client = new AmazonRDSAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSClient(credentials, clientConfiguration)
-                        else client = new AmazonRDSClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSClient(credentials)
+                        else client = new AmazonRDSClient()
                     }
                     client.endpoint = "rds.${region}.amazonaws.com"
                     break
                 case 'route53':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53AsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonRoute53AsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53AsyncClient(credentials)
+                        else client = new AmazonRoute53AsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53Client(credentials, clientConfiguration)
-                        else client = new AmazonRoute53Client(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53Client(credentials)
+                        else client = new AmazonRoute53Client()
                     }
                     client.endpoint = "route53.amazonaws.com"
                     break
                 case 's3':
                     if (async) throw new Exception("Sorry, there is no async client for AmazonS3")
-                    if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonS3Client(credentials, clientConfiguration)
-                    else client = new AmazonS3Client(clientConfiguration)
+                    if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonS3Client(credentials)
+                    else client = new AmazonS3Client()
                     if (region == 'us' || region == defaultRegion) {
                         client.endpoint = "s3.amazonaws.com"
                     } else {
@@ -451,11 +451,11 @@ class AmazonWebService {
                     break
                 case 'sdb':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonSimpleDBAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBAsyncClient(credentials)
+                        else client = new AmazonSimpleDBAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBClient(credentials, clientConfiguration)
-                        else client = new AmazonSimpleDBClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBClient(credentials)
+                        else client = new AmazonSimpleDBClient()
                     }
                     if (region == 'us-east-1') {
                         client.endpoint = "sdb.amazonaws.com"
@@ -465,56 +465,57 @@ class AmazonWebService {
                     break
                 case 'ses':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonSimpleEmailServiceAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceAsyncClient(credentials)
+                        else client = new AmazonSimpleEmailServiceAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceClient(credentials, clientConfiguration)
-                        else client = new AmazonSimpleEmailServiceClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceClient(credentials)
+                        else client = new AmazonSimpleEmailServiceClient()
                     }
                     client.endpoint = "email.${region}.amazonaws.com"
                     break
                 case 'sns':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSNSAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonSNSAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSNSAsyncClient(credentials)
+                        else client = new AmazonSNSAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSNSClient(credentials, clientConfiguration)
-                        else client = new AmazonSNSClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSNSClient(credentials)
+                        else client = new AmazonSNSClient()
                     }
                     client.endpoint = "sns.${region}.amazonaws.com"
                     break
                 case 'sqs':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSQSAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonSQSAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSQSAsyncClient(credentials)
+                        else client = new AmazonSQSAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSQSClient(credentials, clientConfiguration)
-                        else client = new AmazonSQSClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSQSClient(credentials)
+                        else client = new AmazonSQSClient()
                     }
                     client.endpoint = "sqs.${region}.amazonaws.com"
                     break
                 case 'storageGateway':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSStorageGatewayAsyncClient(credentials, clientConfiguration)
-                        else client = new AWSStorageGatewayAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSStorageGatewayAsyncClient(credentials)
+                        else client = new AWSStorageGatewayAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSStorageGatewayClient(credentials, clientConfiguration)
-                        else client = new AWSStorageGatewayClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSStorageGatewayClient(credentials)
+                        else client = new AWSStorageGatewayClient()
                     }
                     client.endpoint = "storagegateway.${region}.amazonaws.com"
                     break
                 case 'swf':
                     if (async) {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleWorkflowAsyncClient(credentials, clientConfiguration)
-                        else client = new AmazonSimpleWorkflowAsyncClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleWorkflowAsyncClient(credentials)
+                        else client = new AmazonSimpleWorkflowAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleWorkflowClient(credentials, clientConfiguration)
-                        else client = new AmazonSimpleWorkflowClient(clientConfiguration)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleWorkflowClient(credentials)
+                        else client = new AmazonSimpleWorkflowClient()
                     }
                     client.endpoint = "swf.${region}.amazonaws.com"
                     break
 
             }
+            client.configuration = buildClientConfiguration(awsConfig, awsConfig[service])
             if (async) {
                 asyncClients[service][region] = client
             } else {
