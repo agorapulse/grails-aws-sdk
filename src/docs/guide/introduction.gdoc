@@ -62,4 +62,5 @@ We decided to write our own AWS plugin because it did not meet our requirements 
 
 # to have a direct access to *ALL* "AWS SDK for Java":http://aws.amazon.com/sdkforjava/ features, including *ALL* AWS services with custom client configuration,
 # to only use "AWS SDK for Java":http://aws.amazon.com/sdkforjava/ with a consistent way to access *ALL* AWS services (and not JetS3 java lib specific methods and a custom SES DSL),
-# to have 100% compatibility with future "AWS SDK for Java":http://aws.amazon.com/sdkforjava/ , as it is just a simple lightweight wrapper around the official java clients.
+# fast release update with 100% compatibility with "AWS SDK for Java":http://aws.amazon.com/sdkforjava/, as it is just a simple lightweight wrapper around the official java clients,
+# no need for additional DSL/methods injection, since we found the "AWS SDK for Java":http://aws.amazon.com/sdkforjava/ clients pretty straightforward to use
