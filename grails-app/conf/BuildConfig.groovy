@@ -23,7 +23,11 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
-        compile 'com.amazonaws:aws-java-sdk:1.3.11'
+        compile('com.amazonaws:aws-java-sdk:1.3.12') {
+            excludes 'jackson-core-asl', 'jackson-mapper-asl' // Workaround for V1.3.12 jackson dependency bug (version 1.8 does not exists, it should be 1.8.0)
+        }
+        compile('org.codehaus.jackson:jackson-core-asl:1.8.0',
+                'org.codehaus.jackson:jackson-mapper-asl:1.8.0')
     }
 
     plugins {
