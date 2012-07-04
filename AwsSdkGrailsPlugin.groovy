@@ -9,7 +9,7 @@ class AwsSdkGrailsPlugin {
     ]
 
     def title = "AWS SDK Grails Plugin"
-    def author = "Benoit HEDIARD"
+    def author = "Benoit Hediard"
     def authorEmail = "ben@benorama.com"
     def description = '''The AWS SDK Plugin allows your Grails application to use the Amazon Web Services infrastructure services.
 It provides simple wrapper service around the official AWS SDK for Java.
