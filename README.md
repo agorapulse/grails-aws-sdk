@@ -87,6 +87,10 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * AWS Storage Gateway
 * Elastic Load Balancing
 
+# Latest releases
+
+* 2012-07-04 **V1.3.12** : AWS SDK for Java updated to V1.3.12
+* 2012-07-02 **V1.3.11** : initial release
 
 # Bugs
 
