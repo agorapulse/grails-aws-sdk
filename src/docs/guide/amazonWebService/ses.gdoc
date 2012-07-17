@@ -5,7 +5,7 @@ SES is currently only available in us-east-1 region, so you might define it in y
 Verifies an email address (send a confirmation email).
 
 {code}
-import com.amazonaws.services.ses.model.*
+import com.amazonaws.services.simpleemail.model.*
 
 amazonWebService.ses.verifyEmailIdentity(new VerifyEmailIdentityRequest().withEmailAddress('notification\@mydomain.com'))
 {code}
@@ -52,4 +52,4 @@ println "max24HourSend: ${quota.max24HourSend}, sentLast24Hours: ${quota.sentLas
 
 h3. Java doc
 
-To know available methods for SES client, check "AmazonSimpleEmailServiceClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html.
+To know available methods for SES client, check "AmazonSimpleEmailServiceClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html .

@@ -39,4 +39,4 @@ amazonWebService.s3.deleteObject('some-grails-bucket', 'somePath/someKey.jpg')
 
 h3. Java doc
 
-To know available methods for S3 client, check "AmazonS3Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html.
+To know available methods for S3 client, check "AmazonS3Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html .

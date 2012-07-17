@@ -31,4 +31,4 @@ amazonWebService.sqs.deleteQueue(new DeleteQueueRequest('someQueue'))
 
 h3. Java doc
 
-To know available methods for SQS client, check "AmazonSQSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sqs/AmazonSQSClient.html.
+To know available methods for SQS client, check "AmazonSQSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/sqs/AmazonSQSClient.html .

@@ -37,4 +37,4 @@ amazonWebService.ec2.terminateInstances(new TerminateInstancesRequest([instanceI
 
 h3. Java doc
 
-To know available methods for EC2 client, check "AmazonEC2Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html.
+To know available methods for EC2 client, check "AmazonEC2Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html .
