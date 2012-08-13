@@ -52,4 +52,4 @@ println "max24HourSend: ${quota.max24HourSend}, sentLast24Hours: ${quota.sentLas
 
 h3. Java doc
 
-To know available methods for SES client, check "AmazonSimpleEmailServiceClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html .
+To know available methods for SES client, check "AmazonSimpleEmailServiceClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html
