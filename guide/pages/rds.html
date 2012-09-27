@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.2 RDS example 1.3.12</title>
+    <title>4.2 RDS example 1.3.21</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -75,7 +75,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
 
                     <p><strong>Authors:</strong> Benoit Hediard</p>
 
-                    <p><strong>Version:</strong> 1.3.12</p>
+                    <p><strong>Version:</strong> 1.3.21</p>
 
                     
                 </div>
@@ -88,7 +88,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
 Start a RDS instance.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.rds.model.&#42;<p class="paragraph"/>DBInstance dbInstance = amazonWebService.rds.createDBInstance(<span class="java&#45;keyword">new</span> CreateDBInstanceRequest('mydbserver', 5, 'db.t1.micro', 'MySQL', 'admin', 'password'))</pre></div><p class="paragraph"/>List all your RDS instances.<p class="paragraph"/><div class="code"><pre>List dbInstances = amazonWebService.rds.describeDBInstances().DBInstances
 dbInstances.each &#123; DBInstance dbInstance &#45;&#62;
     println <span class="java&#45;quote">"DBInstanceIdentifier: $&#123;dbInstance.DBInstanceIdentifier&#125;, DBInstanceStatus: $&#123;dbInstance.DBInstanceStatus&#125;, engine: $&#123;dbInstance.engine&#125;, allocatedStorage: $&#123;dbInstance.allocatedStorage&#125;"</span><p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>Snapshot a RDS instance.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.createDBSnapshot(<span class="java&#45;keyword">new</span> CreateDBSnapshotRequest('someSnapshot', 'mydbserver'))</pre></div><p class="paragraph"/>Terminate a RDS instance without final snapshot.<p class="paragraph"/><div class="code"><pre>amazonWebService.rds.deleteDBInstance(<span class="java&#45;keyword">new</span> DeleteDBInstanceRequest('mydbserver').withSkipFinalSnapshot(<span class="java&#45;keyword">true</span>))</pre></div><p class="paragraph"/>
-<h3>Java doc</h3><p class="paragraph"/>To know available methods for RDS client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html." target="blank">AmazonRDSClient Java doc</a>
+<h3>Java doc</h3><p class="paragraph"/>To know available methods for RDS client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html" target="blank">AmazonRDSClient Java doc</a>
 
 
 
