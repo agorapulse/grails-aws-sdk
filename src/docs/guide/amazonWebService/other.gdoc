@@ -11,6 +11,7 @@ For other services, check the Java doc :
 * @amazonWebService.elasticBeanstalk@ - "AWSElasticBeanstalkClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticbeanstalk/AWSElasticBeanstalkClient.html
 * @amazonWebService.elasticLoadBalancing@ - "AmazonElasticLoadBalancingClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticloadbalancing/AmazonElasticLoadBalancingClient.html
 * @amazonWebService.elasticMapReduce@ - "AmazonElasticMapReduceClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/AmazonElasticMapReduceClient.html
+* @amazonWebService.glacier@ - "AmazonGlacierClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/glacier/AmazonGlacierClient.html
 * @amazonWebService.iam@ - "AmazonIdentityManagementClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html
 * @amazonWebService.importExport@ - "AmazonImportExportClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html
 * @amazonWebService.rds@ - "AmazonRDSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html

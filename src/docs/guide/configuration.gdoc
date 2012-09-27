@@ -90,6 +90,7 @@ grails {
             elasticLoadBalancing {}
             elasticMapReduce {}
             elastiCache {}
+            glacier {}
             iam {}
             importExport {}
             rds {}

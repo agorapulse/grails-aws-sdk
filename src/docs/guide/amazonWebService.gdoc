@@ -25,6 +25,7 @@ amazonWebService.elasticBeanstalk
 amazonWebService.elasticLoadBalancing
 amazonWebService.elasticMapreduce
 amazonWebService.elastiCache
+amazonWebService.glacier
 amazonWebService.iam
 amazonWebService.importExport
 amazonWebService.rds

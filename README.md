@@ -72,6 +72,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * Amazon Elastic Compute Cloud (EC2)
 * Amazon Elastic MapReduce
 * Amazon ElastiCache
+* Amazon Glacier
 * Amazon Relational Database Service (RDS)
 * Amazon Route 53
 * Amazon Simple Storage Service (S3)
@@ -89,6 +90,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2012-09-27 **V1.3.21** : AWS SDK for Java updated to V1.3.21.1 and Amazon Glacier added
 * 2012-07-04 **V1.3.12** : AWS SDK for Java updated to V1.3.12
 * 2012-07-02 **V1.3.11** : initial release
 
