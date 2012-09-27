@@ -26,6 +26,8 @@ import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingAsy
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceAsyncClient
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient
+import com.amazonaws.services.glacier.AmazonGlacierAsyncClient
+import com.amazonaws.services.glacier.AmazonGlacierClient
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementAsyncClient
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient
 import com.amazonaws.services.importexport.AmazonImportExportAsyncClient
@@ -143,6 +145,10 @@ class AmazonWebService {
 
     AmazonElasticMapReduceClient getElasticMapReduce(region = '') {
         getServiceClient('elasticMapReduce', region) as AmazonElasticMapReduceClient
+    }
+
+    AmazonGlacierClient getGlacier(region = '') {
+        getServiceClient('glacier', region) as AmazonGlacierClient
     }
 
     AmazonIdentityManagementAsyncClient getIamAsync() {
@@ -289,7 +295,7 @@ class AmazonWebService {
             AmazonWebServiceClient client
             BasicAWSCredentials credentials = buildCredentials(awsConfig, awsConfig[service])
              switch(service) {
-                case 'autoScaling':
+                 case 'autoScaling':
                    if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingAsyncClient(credentials)
                         else client = new AmazonAutoScalingAsyncClient()
@@ -299,7 +305,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "autoscaling.${region}.amazonaws.com"
                     break
-                case 'cloudFormation':
+                 case 'cloudFormation':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationAsyncClient(credentials)
                         else client = new AmazonCloudFormationAsyncClient()
@@ -309,7 +315,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "cloudformation.${region}.amazonaws.com"
                     break
-                case 'cloudFront':
+                 case 'cloudFront':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontAsyncClient(credentials)
                         else client = new AmazonCloudFrontAsyncClient()
@@ -319,7 +325,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "cloudfront.amazonaws.com"
                     break
-                case 'cloudSearch':
+                 case 'cloudSearch':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchAsyncClient(credentials)
                         else client = new AmazonCloudSearchAsyncClient()
@@ -329,7 +335,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "cloudsearch.${region}.amazonaws.com"
                     break
-                case 'cloudWatch':
+                 case 'cloudWatch':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchAsyncClient(credentials)
                         else client = new AmazonCloudWatchAsyncClient()
@@ -339,7 +345,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "monitoring.${region}.amazonaws.com"
                     break
-                case 'dynamoDB':
+                 case 'dynamoDB':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBAsyncClient(credentials)
                         else client = new AmazonDynamoDBAsyncClient()
@@ -349,7 +355,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "dynamodb.${region}.amazonaws.com"
                     break
-                case 'ec2':
+                 case 'ec2':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2AsyncClient(credentials)
                         else client = new AmazonEC2AsyncClient()
@@ -359,7 +365,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "ec2.${region}.amazonaws.com"
                     break
-                case 'elasticBeanstalk':
+                 case 'elasticBeanstalk':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkAsyncClient(credentials)
                         else client = new AWSElasticBeanstalkAsyncClient()
@@ -369,7 +375,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "elasticbeanstalk.${region}.amazonaws.com"
                     break
-                case 'elastiCache':
+                 case 'elastiCache':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheAsyncClient(credentials)
                         else client = new AmazonElastiCacheAsyncClient()
@@ -379,7 +385,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "elasticache.${region}.amazonaws.com"
                     break
-                case 'elasticLoadBalancing':
+                 case 'elasticLoadBalancing':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingAsyncClient(credentials)
                         else client = new AmazonElasticLoadBalancingAsyncClient()
@@ -389,7 +395,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "elasticloadbalancing.${region}.amazonaws.com"
                     break
-                case 'elasticMapReduce':
+                 case 'elasticMapReduce':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceAsyncClient(credentials)
                         else client = new AmazonElasticMapReduceAsyncClient()
@@ -399,7 +405,17 @@ class AmazonWebService {
                     }
                     client.endpoint = "elasticmapreduce.${region}.amazonaws.com"
                     break
-                case 'iam':
+                 case 'glacier':
+                     if (async) {
+                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonGlacierAsyncClient(credentials)
+                         else client = new AmazonGlacierAsyncClient()
+                     } else {
+                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonGlacierClient(credentials)
+                         else client = new AmazonGlacierClient()
+                     }
+                     client.endpoint = "glacier.${region}.amazonaws.com"
+                     break
+                 case 'iam':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementAsyncClient(credentials)
                         else client = new AmazonIdentityManagementAsyncClient()
@@ -409,7 +425,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "iam.amazonaws.com"
                     break
-                case 'importExport':
+                 case 'importExport':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportAsyncClient(credentials)
                         else client = new AmazonImportExportAsyncClient()
@@ -419,7 +435,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "importexport.amazonaws.com"
                     break
-                case 'rds':
+                 case 'rds':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSAsyncClient(credentials)
                         else client = new AmazonRDSAsyncClient()
@@ -429,7 +445,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "rds.${region}.amazonaws.com"
                     break
-                case 'route53':
+                 case 'route53':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53AsyncClient(credentials)
                         else client = new AmazonRoute53AsyncClient()
@@ -439,7 +455,7 @@ class AmazonWebService {
                     }
                     client.endpoint = "route53.amazonaws.com"
                     break
-                case 's3':
+                 case 's3':
                     if (async) throw new Exception("Sorry, there is no async client for AmazonS3")
                     if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonS3Client(credentials)
                     else client = new AmazonS3Client()
@@ -449,7 +465,7 @@ class AmazonWebService {
                         client.endpoint = "s3-${region}.amazonaws.com"
                     }
                     break
-                case 'sdb':
+                 case 'sdb':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBAsyncClient(credentials)
                         else client = new AmazonSimpleDBAsyncClient()
@@ -463,7 +479,7 @@ class AmazonWebService {
                         client.endpoint = "sdb.${region}.amazonaws.com"
                     }
                     break
-                case 'ses':
+                 case 'ses':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceAsyncClient(credentials)
                         else client = new AmazonSimpleEmailServiceAsyncClient()
