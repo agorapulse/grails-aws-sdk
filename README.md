@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.3.12'
+				runtime ':aws-sdk:1.3.21'
 		}
 }
 ```
