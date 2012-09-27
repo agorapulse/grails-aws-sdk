@@ -31,4 +31,4 @@ amazonWebService.rds.deleteDBInstance(new DeleteDBInstanceRequest('mydbserver').
 
 h3. Java doc
 
-To know available methods for RDS client, check "AmazonRDSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html .
+To know available methods for RDS client, check "AmazonRDSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html
