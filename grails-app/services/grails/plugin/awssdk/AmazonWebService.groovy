@@ -203,7 +203,7 @@ class AmazonWebService {
         getServiceClient('ses', region) as AmazonSimpleEmailServiceClient
     }
 
-   AmazonSNSAsyncClient getSnsAsync(String region = '') {
+    AmazonSNSAsyncClient getSnsAsync(String region = '') {
         getServiceClient('sns', region, true) as AmazonSNSAsyncClient
     }
 
@@ -242,8 +242,10 @@ class AmazonWebService {
     }
 
     private BasicAWSCredentials buildCredentials(defaultConfig, serviceConfig) {
-        Map config = [accessKey: defaultConfig.accessKey ?: '',
-                      secretKey: defaultConfig.secretKey ?: '']
+        Map config = [
+                accessKey: defaultConfig.accessKey ?: '',
+                secretKey: defaultConfig.secretKey ?: ''
+        ]
         if (serviceConfig) {
             if (serviceConfig.accessKey) config.accessKey = serviceConfig.accessKey
             if (serviceConfig.secretKey) config.secretKey = serviceConfig.secretKey
@@ -252,13 +254,14 @@ class AmazonWebService {
     }
 
     private ClientConfiguration buildClientConfiguration(defaultConfig, serviceConfig) {
-        Map config = [connectionTimeout: defaultConfig.connectionTimeout ?: 0,
-                      maxConnections: defaultConfig.maxConnections ?: 0,
-                      maxErrorRetry: defaultConfig.maxErrorRetry ?: 0,
-                      protocol : defaultConfig.protocol ?: '',
-
-                      socketTimeout: defaultConfig.socketTimeout ?: 0,
-                      userAgent: defaultConfig.userAgent ?: '']
+        Map config = [
+                connectionTimeout: defaultConfig.connectionTimeout ?: 0,
+                maxConnections: defaultConfig.maxConnections ?: 0,
+                maxErrorRetry: defaultConfig.maxErrorRetry ?: 0,
+                protocol: defaultConfig.protocol ?: '',
+                socketTimeout: defaultConfig.socketTimeout ?: 0,
+                userAgent: defaultConfig.userAgent ?: ''
+        ]
         if (serviceConfig) {
             if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
             if (serviceConfig.maxConnections) config.maxConnections = serviceConfig.maxConnections
@@ -273,7 +276,7 @@ class AmazonWebService {
         if (config.maxConnections) clientConfiguration.maxConnections = config.maxConnections
         if (config.maxErrorRetry) clientConfiguration.maxErrorRetry = config.maxErrorRetry
         if (config.protocol) {
-            if (config.protocol.toUpperCase() == 'HTTP' ) clientConfiguration.protocol = Protocol.HTTP
+            if (config.protocol.toUpperCase() == 'HTTP') clientConfiguration.protocol = Protocol.HTTP
             else clientConfiguration.protocol = Protocol.HTTPS
         }
         if (config.socketTimeout) clientConfiguration.socketTimeout = config.socketTimeout
@@ -281,7 +284,7 @@ class AmazonWebService {
         clientConfiguration
     }
 
-    private AmazonWebServiceClient getServiceClient(String service, String region = '', Boolean async = false){
+    private AmazonWebServiceClient getServiceClient(String service, String region = '', Boolean async = false) {
         if (!region) {
             if (awsConfig[service]?.region) region = awsConfig[service].region
             else if (awsConfig?.region) region = awsConfig.region
@@ -290,22 +293,25 @@ class AmazonWebService {
 
         if (async && !asyncClients[service]) asyncClients[service] = [:]
         else if (!async && !clients[service]) clients[service] = [:]
+
         if ((async && !asyncClients[service].hasProperty(region))
-            || (!async && !clients[service].hasProperty(region))) {
+                || (!async && !clients[service].hasProperty(region))) {
             AmazonWebServiceClient client
             BasicAWSCredentials credentials = buildCredentials(awsConfig, awsConfig[service])
-             switch(service) {
-                 case 'autoScaling':
-                   if (async) {
+            ClientConfiguration configuration = buildClientConfiguration(awsConfig, awsConfig[service])
+            switch (service) {
+                case 'autoScaling':
+                    if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingAsyncClient(credentials)
                         else client = new AmazonAutoScalingAsyncClient()
                     } else {
-                       if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingClient(credentials)
-                       else client = new AmazonAutoScalingClient()
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonAutoScalingClient(credentials)
+                        else client = new AmazonAutoScalingClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "autoscaling.${region}.amazonaws.com"
                     break
-                 case 'cloudFormation':
+                case 'cloudFormation':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationAsyncClient(credentials)
                         else client = new AmazonCloudFormationAsyncClient()
@@ -313,19 +319,21 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFormationClient(credentials)
                         else client = new AmazonCloudFormationClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "cloudformation.${region}.amazonaws.com"
                     break
-                 case 'cloudFront':
+                case 'cloudFront':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontAsyncClient(credentials)
                         else client = new AmazonCloudFrontAsyncClient()
                     } else {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudFrontClient(credentials)
-                        else  client = new AmazonCloudFrontClient()
+                        else client = new AmazonCloudFrontClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "cloudfront.amazonaws.com"
                     break
-                 case 'cloudSearch':
+                case 'cloudSearch':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchAsyncClient(credentials)
                         else client = new AmazonCloudSearchAsyncClient()
@@ -333,9 +341,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudSearchClient(credentials)
                         else client = new AmazonCloudSearchClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "cloudsearch.${region}.amazonaws.com"
                     break
-                 case 'cloudWatch':
+                case 'cloudWatch':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchAsyncClient(credentials)
                         else client = new AmazonCloudWatchAsyncClient()
@@ -343,9 +352,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonCloudWatchClient(credentials)
                         else client = new AmazonCloudWatchClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "monitoring.${region}.amazonaws.com"
                     break
-                 case 'dynamoDB':
+                case 'dynamoDB':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBAsyncClient(credentials)
                         else client = new AmazonDynamoDBAsyncClient()
@@ -353,9 +363,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonDynamoDBClient(credentials)
                         else client = new AmazonDynamoDBClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "dynamodb.${region}.amazonaws.com"
                     break
-                 case 'ec2':
+                case 'ec2':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2AsyncClient(credentials)
                         else client = new AmazonEC2AsyncClient()
@@ -363,9 +374,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonEC2Client(credentials)
                         else client = new AmazonEC2Client()
                     }
+                    client.configuration = configuration
                     client.endpoint = "ec2.${region}.amazonaws.com"
                     break
-                 case 'elasticBeanstalk':
+                case 'elasticBeanstalk':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkAsyncClient(credentials)
                         else client = new AWSElasticBeanstalkAsyncClient()
@@ -373,9 +385,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSElasticBeanstalkClient(credentials)
                         else client = new AWSElasticBeanstalkClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "elasticbeanstalk.${region}.amazonaws.com"
                     break
-                 case 'elastiCache':
+                case 'elastiCache':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheAsyncClient(credentials)
                         else client = new AmazonElastiCacheAsyncClient()
@@ -383,9 +396,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElastiCacheClient(credentials)
                         else client = new AmazonElastiCacheClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "elasticache.${region}.amazonaws.com"
                     break
-                 case 'elasticLoadBalancing':
+                case 'elasticLoadBalancing':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingAsyncClient(credentials)
                         else client = new AmazonElasticLoadBalancingAsyncClient()
@@ -393,9 +407,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticLoadBalancingClient(credentials)
                         else client = new AmazonElasticLoadBalancingClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "elasticloadbalancing.${region}.amazonaws.com"
                     break
-                 case 'elasticMapReduce':
+                case 'elasticMapReduce':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceAsyncClient(credentials)
                         else client = new AmazonElasticMapReduceAsyncClient()
@@ -403,19 +418,21 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticMapReduceClient(credentials)
                         else client = new AmazonElasticMapReduceClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "elasticmapreduce.${region}.amazonaws.com"
                     break
-                 case 'glacier':
-                     if (async) {
-                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonGlacierAsyncClient(credentials)
-                         else client = new AmazonGlacierAsyncClient()
-                     } else {
-                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonGlacierClient(credentials)
-                         else client = new AmazonGlacierClient()
-                     }
-                     client.endpoint = "glacier.${region}.amazonaws.com"
-                     break
-                 case 'iam':
+                case 'glacier':
+                    if (async) {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonGlacierAsyncClient(credentials)
+                        else client = new AmazonGlacierAsyncClient()
+                    } else {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonGlacierClient(credentials)
+                        else client = new AmazonGlacierClient()
+                    }
+                    client.configuration = configuration
+                    client.endpoint = "glacier.${region}.amazonaws.com"
+                    break
+                case 'iam':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementAsyncClient(credentials)
                         else client = new AmazonIdentityManagementAsyncClient()
@@ -423,9 +440,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonIdentityManagementClient(credentials)
                         else client = new AmazonIdentityManagementClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "iam.amazonaws.com"
                     break
-                 case 'importExport':
+                case 'importExport':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportAsyncClient(credentials)
                         else client = new AmazonImportExportAsyncClient()
@@ -433,9 +451,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonImportExportClient(credentials)
                         else client = new AmazonImportExportClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "importexport.amazonaws.com"
                     break
-                 case 'rds':
+                case 'rds':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSAsyncClient(credentials)
                         else client = new AmazonRDSAsyncClient()
@@ -443,9 +462,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSClient(credentials)
                         else client = new AmazonRDSClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "rds.${region}.amazonaws.com"
                     break
-                 case 'route53':
+                case 'route53':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53AsyncClient(credentials)
                         else client = new AmazonRoute53AsyncClient()
@@ -453,19 +473,21 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRoute53Client(credentials)
                         else client = new AmazonRoute53Client()
                     }
+                    client.configuration = configuration
                     client.endpoint = "route53.amazonaws.com"
                     break
-                 case 's3':
+                case 's3':
                     if (async) throw new Exception("Sorry, there is no async client for AmazonS3")
                     if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonS3Client(credentials)
                     else client = new AmazonS3Client()
+                    client.configuration = configuration
                     if (region == 'us' || region == defaultRegion) {
                         client.endpoint = "s3.amazonaws.com"
                     } else {
                         client.endpoint = "s3-${region}.amazonaws.com"
                     }
                     break
-                 case 'sdb':
+                case 'sdb':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBAsyncClient(credentials)
                         else client = new AmazonSimpleDBAsyncClient()
@@ -473,13 +495,14 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleDBClient(credentials)
                         else client = new AmazonSimpleDBClient()
                     }
+                    client.configuration = configuration
                     if (region == 'us-east-1') {
                         client.endpoint = "sdb.amazonaws.com"
                     } else {
                         client.endpoint = "sdb.${region}.amazonaws.com"
                     }
                     break
-                 case 'ses':
+                case 'ses':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceAsyncClient(credentials)
                         else client = new AmazonSimpleEmailServiceAsyncClient()
@@ -487,6 +510,7 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleEmailServiceClient(credentials)
                         else client = new AmazonSimpleEmailServiceClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "email.${region}.amazonaws.com"
                     break
                 case 'sns':
@@ -497,6 +521,7 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSNSClient(credentials)
                         else client = new AmazonSNSClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "sns.${region}.amazonaws.com"
                     break
                 case 'sqs':
@@ -507,6 +532,7 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSQSClient(credentials)
                         else client = new AmazonSQSClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "sqs.${region}.amazonaws.com"
                     break
                 case 'storageGateway':
@@ -517,6 +543,7 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSStorageGatewayClient(credentials)
                         else client = new AWSStorageGatewayClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "storagegateway.${region}.amazonaws.com"
                     break
                 case 'swf':
@@ -527,11 +554,10 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonSimpleWorkflowClient(credentials)
                         else client = new AmazonSimpleWorkflowClient()
                     }
+                    client.configuration = configuration
                     client.endpoint = "swf.${region}.amazonaws.com"
                     break
-
             }
-            client.configuration = buildClientConfiguration(awsConfig, awsConfig[service])
             if (async) {
                 asyncClients[service][region] = client
             } else {

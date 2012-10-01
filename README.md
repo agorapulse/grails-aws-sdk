@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.3.21'
+				runtime ':aws-sdk:1.3.21.1'
 		}
 }
 ```
@@ -90,6 +90,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2012-10-01 **V1.3.21.1** : Bug fix - HTTP protocol from config not taken into account
 * 2012-09-27 **V1.3.21** : AWS SDK for Java updated to V1.3.21.1 and Amazon Glacier added
 * 2012-07-04 **V1.3.12** : AWS SDK for Java updated to V1.3.12
 * 2012-07-02 **V1.3.11** : initial release
