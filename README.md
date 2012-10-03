@@ -27,7 +27,11 @@ grails.project.dependency.resolution = {
 				//your repositories
 		}
 		dependencies {
-				//your regular dependencies
+				// Workaround to resolve dependency issue with aws-java-sdk and http-builder (dependent on httpcore:4.0)
+                build 'org.apache.httpcomponents:httpcore:4.1'
+                build 'org.apache.httpcomponents:httpclient:4.1'
+                runtime 'org.apache.httpcomponents:httpcore:4.1'
+                runtime 'org.apache.httpcomponents:httpclient:4.1'
 		}
 		plugins {
 				//here go your plugin dependencies
