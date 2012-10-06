@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Grails Plugin 1.3.21.1</title>
+        <title>AWS SDK Grails Plugin 1.3.22</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Grails Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.3.21.1</p>
+                            <p><strong>Version:</strong> 1.3.22</p>
                             
                         </div>
 
@@ -126,11 +126,12 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Latest releases</h3>
 <ul class="star">
-<li>2012-09-27 <strong class="bold">V1.3.21</strong> : AWS SDK for Java updated to V1.3.21.1 and Amazon Glacier added</li>
+<li>2012-10-06 <strong class="bold">V1.3.22</strong> : AWS SDK for Java updated to V1.3.22 + S3 transfer manager support added (for async upload/download and multiple files upload/download)</li>
+<li>2012-09-27 <strong class="bold">V1.3.21</strong> : AWS SDK for Java updated to V1.3.21.1 + Amazon Glacier support added</li>
 <li>2012-07-04 <strong class="bold">V1.3.12</strong> : AWS SDK for Java updated to V1.3.12</li>
 <li>2012-07-02 <strong class="bold">V1.3.11</strong> : initial release</li>
 </ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/benorama/grails-aws-sdk/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
-<h3>Alpha status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>alpha release<strong class="bold"></strong>.<p class="paragraph"/>
+<h3>Beta status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>beta release<strong class="bold"></strong>.<p class="paragraph"/>
 <h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another great <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 <ol>
 <li>to have a direct access to <strong class="bold">ALL</strong> <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> features, including <strong class="bold">ALL</strong> AWS services with custom client configuration,</li>
@@ -156,7 +157,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.3.21.1'
+				runtime ':aws&#45;sdk:1.3.22'
 		&#125;
 &#125;</pre></div>
 
@@ -293,11 +294,35 @@ Create a bucket.<p class="paragraph"/><div class="code"><pre><span class="java&#
 amazonWebService.s3.createBucket('some&#45;grails&#45;bucket')</pre></div><p class="paragraph"/>List buckets.<p class="paragraph"/><div class="code"><pre>List buckets = amazonWebService.s3.listBuckets()
 buckets.each &#123; Bucket bucket &#45;&#62;
     println <span class="java&#45;quote">"bucketName: $&#123;bucket.name&#125;, creationDate: $&#123;bucket.creationDate&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Upload a file with public read permissions.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('some&#45;grails&#45;bucket')
+&#125;</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('some&#45;grails&#45;bucket')
 objectListing.objectSummaries.each &#123; S3ObjectSummary summary &#45;&#62;
     println <span class="java&#45;quote">"key: $&#123;summary.key&#125;, lastModified: $&#123;summary.lastModified&#125;, size: $&#123;summary.size&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('some&#45;grails&#45;bucket', 'somePath/someKey.jpg')</pre></div><p class="paragraph"/><h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html" target="blank">AmazonS3Client Java doc</a>
-
+&#125;</pre></div><p class="paragraph"/>Upload a file with public read permissions.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))</pre></div><p class="paragraph"/>Download a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.getObject(<span class="java&#45;keyword">new</span> GetObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg'), <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg'))</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('some&#45;grails&#45;bucket', 'somePath/someKey.jpg')</pre></div><p class="paragraph"/><h3>Transfer manager</h3><p class="paragraph"/>TransferManager provides a simple API for uploading content to Amazon S3, and makes extensive use of Amazon S3 multipart uploads to achieve enhanced throughput, performance and reliability.<p class="paragraph"/>Upload asynchronously a file with public read permissions.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.s3.transfer.&#42;<p class="paragraph"/>Upload upload = amazonWebService.transferManager.upload(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/photo.jpg')))<p class="paragraph"/><span class="java&#45;keyword">while</span> (!upload.done) &#123;
+     println <span class="java&#45;quote">"Transfer: $upload.description"</span>
+     println <span class="java&#45;quote">"  &#45; State: $upload.state"</span>
+     println <span class="java&#45;quote">"  &#45; Progress: $upload.progress.bytesTransfered"</span>
+     // Do work <span class="java&#45;keyword">while</span> we wait <span class="java&#45;keyword">for</span> our upload to complete&#8230;
+     <span class="java&#45;object">Thread</span>.sleep(500)
+&#125;</pre></div><p class="paragraph"/>Upload asynchronously multiple files from a directory.<p class="paragraph"/><div class="code"><pre>MultipleFileUpload upload = amazonWebService.transferManager.uploadDirectory('some&#45;grails&#45;bucket', 'some&#45;virtual&#45;directory', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/SomeDirectory'), <span class="java&#45;keyword">false</span>)<p class="paragraph"/><span class="java&#45;keyword">while</span> (!upload.done) &#123;
+     println <span class="java&#45;quote">"Transfer: $upload.description"</span>
+     println <span class="java&#45;quote">"  &#45; State: $upload.state"</span>
+     println <span class="java&#45;quote">"  &#45; Progress: $upload.progress.bytesTransfered"</span>
+     // Do work <span class="java&#45;keyword">while</span> we wait <span class="java&#45;keyword">for</span> our upload to complete&#8230;
+     <span class="java&#45;object">Thread</span>.sleep(500)
+&#125;</pre></div><p class="paragraph"/>Download asynchronously a file.<p class="paragraph"/><div class="code"><pre>Download download = amazonWebService.transferManager.download(<span class="java&#45;keyword">new</span> GetObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg'),  <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg'))<p class="paragraph"/><span class="java&#45;keyword">while</span> (!download.done) &#123;
+     println <span class="java&#45;quote">"Transfer: $download.description"</span>
+     println <span class="java&#45;quote">"  &#45; State: $download.state"</span>
+     println <span class="java&#45;quote">"  &#45; Progress: $download.progress.bytesTransfered"</span>
+     // Do work <span class="java&#45;keyword">while</span> we wait <span class="java&#45;keyword">for</span> our upload to complete&#8230;
+     <span class="java&#45;object">Thread</span>.sleep(500)
+&#125;</pre></div><p class="paragraph"/>Download asynchronously multiple files.<p class="paragraph"/><div class="code"><pre>MultipleFileDownload download = amazonWebService.transferManager.downloadDirectory('some&#45;grails&#45;bucket', 'some&#45;virtual&#45;directory',  <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads'))<p class="paragraph"/><span class="java&#45;keyword">while</span> (!download.done) &#123;
+     println <span class="java&#45;quote">"Transfer: $download.description"</span>
+     println <span class="java&#45;quote">"  &#45; State: $download.state"</span>
+     println <span class="java&#45;quote">"  &#45; Progress: $download.progress.bytesTransfered"</span>
+     // Do work <span class="java&#45;keyword">while</span> we wait <span class="java&#45;keyword">for</span> our upload to complete&#8230;
+     <span class="java&#45;object">Thread</span>.sleep(500)
+&#125;</pre></div><p class="paragraph"/>Note: you might want to increase S3 connection timeout config parameter for large uploads/downloads.<p class="paragraph"/>
+<h3>Java doc</h3><p class="paragraph"/>To know available methods for S3 client, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html" target="blank">AmazonS3Client Java doc</a><p class="paragraph"/>To know available methods for S3 transfer manager, check <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/services/s3/transfer/TransferManager.html" target="blank">TransferManager Java doc</a><p class="paragraph"/>
 
 
 <h2 id="ses">4.4 SES example</h2>
