@@ -16,12 +16,6 @@ buckets.each { Bucket bucket ->
 }
 {code}
 
-Upload a file with public read permissions.
-
-{code}
-amazonWebService.s3.putObject(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Downloads/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))
-{code}
-
 List bucket files.
 
 {code}
@@ -31,12 +25,92 @@ objectListing.objectSummaries.each { S3ObjectSummary summary ->
 }
 {code}
 
+Upload a file with public read permissions.
+
+{code}
+amazonWebService.s3.putObject(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))
+{code}
+
+Download a file.
+
+{code}
+amazonWebService.s3.getObject(new GetObjectRequest('some-grails-bucket', 'somePath/someKey.jpg'), new File('/Users/ben/Downloads/photo.jpg'))
+{code}
+
 Delete a file.
 
 {code}
 amazonWebService.s3.deleteObject('some-grails-bucket', 'somePath/someKey.jpg')
 {code}
 
+h3. Transfer manager
+
+TransferManager provides a simple API for uploading content to Amazon S3, and makes extensive use of Amazon S3 multipart uploads to achieve enhanced throughput, performance and reliability.
+
+Upload asynchronously a file with public read permissions.
+
+{code}
+import com.amazonaws.services.s3.transfer.*
+
+Upload upload = amazonWebService.transferManager.upload(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg')))
+
+while (!upload.done) {
+     println "Transfer: $upload.description"
+     println "  - State: $upload.state"
+     println "  - Progress: $upload.progress.bytesTransfered"
+     // Do work while we wait for our upload to complete...
+     Thread.sleep(500)
+}
+{code}
+
+Upload asynchronously multiple files from a directory.
+
+{code}
+MultipleFileUpload upload = amazonWebService.transferManager.uploadDirectory('some-grails-bucket', 'some-virtual-directory', new File('/Users/ben/Desktop/SomeDirectory'), false)
+
+while (!upload.done) {
+     println "Transfer: $upload.description"
+     println "  - State: $upload.state"
+     println "  - Progress: $upload.progress.bytesTransfered"
+     // Do work while we wait for our upload to complete...
+     Thread.sleep(500)
+}
+{code}
+
+Download asynchronously a file.
+
+{code}
+Download download = amazonWebService.transferManager.download(new GetObjectRequest('some-grails-bucket', 'somePath/someKey.jpg'),  new File('/Users/ben/Downloads/photo.jpg'))
+
+while (!download.done) {
+     println "Transfer: $download.description"
+     println "  - State: $download.state"
+     println "  - Progress: $download.progress.bytesTransfered"
+     // Do work while we wait for our upload to complete...
+     Thread.sleep(500)
+}
+{code}
+
+Download asynchronously multiple files.
+
+{code}
+MultipleFileDownload download = amazonWebService.transferManager.downloadDirectory('some-grails-bucket', 'some-virtual-directory',  new File('/Users/ben/Downloads'))
+
+while (!download.done) {
+     println "Transfer: $download.description"
+     println "  - State: $download.state"
+     println "  - Progress: $download.progress.bytesTransfered"
+     // Do work while we wait for our upload to complete...
+     Thread.sleep(500)
+}
+{code}
+
+Note: you might want to increase S3 connection timeout config parameter for large uploads/downloads.
+
+
 h3. Java doc
 
 To know available methods for S3 client, check "AmazonS3Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html
+
+To know available methods for S3 transfer manager, check "TransferManager Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/services/s3/transfer/TransferManager.html
+

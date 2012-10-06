@@ -37,6 +37,8 @@ import com.amazonaws.services.rds.AmazonRDSClient
 import com.amazonaws.services.route53.AmazonRoute53AsyncClient
 import com.amazonaws.services.route53.AmazonRoute53Client
 import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.transfer.TransferManager
+import com.amazonaws.services.s3.transfer.internal.TransferManagerUtils
 import com.amazonaws.services.simpledb.AmazonSimpleDBAsyncClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsyncClient
@@ -50,6 +52,8 @@ import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 
+import java.util.concurrent.ThreadPoolExecutor
+
 class AmazonWebService {
 
     String defaultRegion = 'us-east-1'
@@ -58,6 +62,7 @@ class AmazonWebService {
 
     private Map asyncClients = [:]
     private Map clients = [:]
+    private Map transferManagers = [:]
 
     AmazonAutoScalingAsyncClient getAutoScalingAsync(region = '') {
         getServiceClient('autoScaling', region, true) as AmazonAutoScalingAsyncClient
@@ -233,6 +238,20 @@ class AmazonWebService {
 
     AmazonSimpleWorkflowClient getSwf(String region = '') {
         getServiceClient('swf', region) as AmazonSimpleWorkflowClient
+    }
+
+    TransferManager getTransferManager(String region = '') {
+        if (!region) {
+            if (awsConfig['s3']?.region) region = awsConfig['s3'].region
+            else if (awsConfig?.region) region = awsConfig.region
+            else region = defaultRegion
+        }
+
+        if (!transferManagers[region]) {
+            ThreadPoolExecutor executorService = TransferManagerUtils.createDefaultExecutorService()
+            transferManagers[region] = new TransferManager(getS3(region), executorService)
+        }
+        transferManagers[region]
     }
 
     // PRIVATE

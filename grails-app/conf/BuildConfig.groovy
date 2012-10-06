@@ -11,7 +11,7 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile 'com.amazonaws:aws-java-sdk:1.3.21.1'
+        compile 'com.amazonaws:aws-java-sdk:1.3.22'
     }
 
     plugins {
