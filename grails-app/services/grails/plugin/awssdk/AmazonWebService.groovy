@@ -38,7 +38,6 @@ import com.amazonaws.services.route53.AmazonRoute53AsyncClient
 import com.amazonaws.services.route53.AmazonRoute53Client
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.transfer.TransferManager
-import com.amazonaws.services.s3.transfer.internal.TransferManagerUtils
 import com.amazonaws.services.simpledb.AmazonSimpleDBAsyncClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsyncClient
@@ -51,8 +50,6 @@ import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
-
-import java.util.concurrent.ThreadPoolExecutor
 
 class AmazonWebService {
 
@@ -248,8 +245,7 @@ class AmazonWebService {
         }
 
         if (!transferManagers[region]) {
-            ThreadPoolExecutor executorService = TransferManagerUtils.createDefaultExecutorService()
-            transferManagers[region] = new TransferManager(getS3(region), executorService)
+            transferManagers[region] = new TransferManager(getS3(region))
         }
         transferManagers[region]
     }
