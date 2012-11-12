@@ -1,14 +1,10 @@
 class AwsSdkGrailsPlugin {
 
-    def version = "1.3.22"
+    def version = "1.3.24"
     def grailsVersion = "2.0 > *"
-    def dependsOn = [:]
     def loadAfter = ['services', 'controllers']
-    def pluginExcludes = [
-        "grails-app/views/error.gsp"
-    ]
 
-    def title = "AWS SDK Grails Plugin"
+    def title = "AWS SDK Plugin"
     def author = "Benoit Hediard"
     def authorEmail = "ben@benorama.com"
     def description = '''The AWS SDK Plugin allows your Grails application to use the Amazon Web Services infrastructure services.
@@ -20,5 +16,5 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
     def organization = [ name: "AgoraPulse", url: "http://www.agorapulse.com/" ]
     def issueManagement = [ system: "github", url: "https://github.com/benorama/grails-aws-sdk/issues" ]
     def scm = [  url: "https://github.com/benorama/grails-aws-sdk" ]
-
+    
 }

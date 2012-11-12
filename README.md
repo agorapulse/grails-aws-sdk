@@ -35,7 +35,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.3.22'
+				runtime ':aws-sdk:1.3.24'
 		}
 }
 ```
@@ -94,6 +94,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2012-11-12 **V1.3.24** : AWS SDK for Java updated to V1.3.24 (adds support for long polling in SQS)
 * 2012-10-06 **V1.3.22** : AWS SDK for Java updated to V1.3.22 + S3 transfer manager support added (for async upload/download and multiple files upload/download)
 * 2012-09-27 **V1.3.21** : AWS SDK for Java updated to V1.3.21.1 + Amazon Glacier support added
 * 2012-07-04 **V1.3.12** : AWS SDK for Java updated to V1.3.12
@@ -102,11 +103,6 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/benorama/grails-aws-sdk/issues) section on GitHub.
-
-
-# Alpha status
-
-This is an **alpha release**.
 
 
 # Other Grails AWS Plugin

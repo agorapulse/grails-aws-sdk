@@ -1,29 +1,19 @@
 # GRAILS files
-/web-app/WEB-INF/classes
-/web-app/WEB-INF/lib
-/web-app/WEB-INF/grails-app
-/web-app/WEB-INF/spring
-/test/classes
-/test/reports
-/staging
+/web-app/WEB-INF
 /target
 /target-eclipse
 
 # IDE files
-.classpath
-.project
 .settings
 /*.launch
 /*.tmproj
 
-stacktrace.log
+*.log
 
-grails-facebook-sdk-*.zip
+*.zip
 .idea/
 *.iml
 /out
-.DS_Store
-web-app/WEB-INF/tld/c.tld
-web-app/WEB-INF/tld/fmt.tld
-grails-aws-sdk-*.zip
 plugin.xml
+
+.DS_Store
