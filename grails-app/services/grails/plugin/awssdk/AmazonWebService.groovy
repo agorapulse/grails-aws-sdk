@@ -53,7 +53,7 @@ import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 
 class AmazonWebService {
 
-    String defaultRegion = 'us-east-1'
+    static final String DEFAULT_REGION = 'us-east-1'
 
     def grailsApplication
 
@@ -241,7 +241,7 @@ class AmazonWebService {
         if (!region) {
             if (awsConfig['s3']?.region) region = awsConfig['s3'].region
             else if (awsConfig?.region) region = awsConfig.region
-            else region = defaultRegion
+            else region = DEFAULT_REGION
         }
 
         if (!transferManagers[region]) {
@@ -303,7 +303,7 @@ class AmazonWebService {
         if (!region) {
             if (awsConfig[service]?.region) region = awsConfig[service].region
             else if (awsConfig?.region) region = awsConfig.region
-            else region = defaultRegion
+            else region = DEFAULT_REGION
         }
 
         if (async && !asyncClients[service]) asyncClients[service] = [:]
@@ -496,7 +496,7 @@ class AmazonWebService {
                     if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonS3Client(credentials)
                     else client = new AmazonS3Client()
                     client.configuration = configuration
-                    if (region == 'us' || region == defaultRegion) {
+                    if (region == 'us' || region == DEFAULT_REGION) {
                         client.endpoint = "s3.amazonaws.com"
                     } else {
                         client.endpoint = "s3-${region}.amazonaws.com"
