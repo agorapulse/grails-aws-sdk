@@ -2,6 +2,7 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.ListObjectsRequest
 import com.amazonaws.services.s3.model.ObjectListing
+import grails.util.Metadata
 import groovy.io.FileType
 
 includeTargets << grailsScript("_GrailsInit")
@@ -45,6 +46,12 @@ target(loadConfig: "Load S3 resources config") {
     pluginsPrefix = argsMap['plugins-prefix'] ?: cdnConfig.pluginsPrefix ?: "${prefix}plugins/"
     if (!pluginsPrefix.endsWith('/')) pluginsPrefix = "$pluginsPrefix/"
     if (pluginsPrefix.startsWith('/')) pluginsPrefix = pluginsPrefix.replaceFirst('/', '')
+
+    if (isPluginProject) {
+        def pluginName = new Metadata().getApplicationName()
+        def pluginVersion = appCtx.getBean('pluginManager').getGrailsPlugin(pluginName).version
+        prefix = "$pluginsPrefix$pluginName-$pluginVersion/"
+    }
 }
 
 target(loadModulesResources: "Load modules resources") {
@@ -65,7 +72,7 @@ target(loadWebAppResources: "Load web-app resources") {
     webAppResources = [:]
     def excludeRegex = /(?i)WEB-INF|META-INF|.DS_STORE|.svn/
     new File("${basedir}/web-app").eachFileRecurse (FileType.FILES) { File file ->
-        def relativePath = file.path.replace("${basedir}/web-app", "")
+        def relativePath = file.path.replace("${basedir}/web-app", '')
         if (!relativePath.find(excludeRegex)) {
             webAppResources[relativePath] = file
         }
