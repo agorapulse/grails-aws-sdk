@@ -65,9 +65,7 @@ target(main: "Upload static resources to an AWS S3 bucket") {
         println "Expiration date set to $expirationDate"
     }
 
-    loadConfig() // Load config, prefix and pluginsPrefix
     loadS3Client() // Load s3
-
     loadResourceKeys() // Load appResourceKeys and pluginsResourceKeys
 
     int uploadCount = 0
