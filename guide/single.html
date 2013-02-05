@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.3.26</title>
+        <title>AWS SDK Plugin 1.3.30</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.3.26</p>
+                            <p><strong>Version:</strong> 1.3.30</p>
                             
                         </div>
 
@@ -108,6 +108,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Amazon DynamoDB</li>
 <li>Amazon Elastic Compute Cloud (EC2)</li>
 <li>Amazon Elastic MapReduce</li>
+<li>Amazon Elastic Transcoder</li>
 <li>Amazon ElastiCache</li>
 <li>Amazon Glacier</li>
 <li>Amazon Relational Database Service (RDS)</li>
@@ -126,6 +127,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Latest releases</h3>
 <ul class="star">
+<li>2013-02-05 <strong class="bold">V1.3.30</strong> : AWS SDK for Java updated to V1.3.30 + Amazon Elastic Transcoder support added</li>
 <li>2012-12-20 <strong class="bold">V1.3.26</strong> : AWS SDK for Java updated to V1.3.26 + S3 Resources scripts (to use with CDN Resources plugin)</li>
 <li>2012-11-12 <strong class="bold">V1.3.24</strong> : AWS SDK for Java updated to V1.3.24 (adds support for long polling in SQS)</li>
 <li>2012-10-06 <strong class="bold">V1.3.22</strong> : AWS SDK for Java updated to V1.3.22 + S3 transfer manager support added (for async upload/download and multiple files upload/download)</li>
@@ -159,7 +161,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.3.26'
+				runtime ':aws&#45;sdk:1.3.30'
 		&#125;
 &#125;</pre></div>
 
@@ -218,6 +220,7 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             elasticBeanstalk &#123;&#125;
             elasticLoadBalancing &#123;&#125;
             elasticMapReduce &#123;&#125;
+            elasticTranscoder &#123;&#125;
             elastiCache &#123;&#125;
             glacier &#123;&#125;
             iam &#123;&#125;
@@ -247,6 +250,7 @@ amazonWebService.ec2
 amazonWebService.elasticBeanstalk
 amazonWebService.elasticLoadBalancing
 amazonWebService.elasticMapreduce
+amazonWebService.elasticTranscoder
 amazonWebService.elastiCache
 amazonWebService.glacier
 amazonWebService.iam
@@ -374,6 +378,7 @@ For other services, check the Java doc :
 <li><code>amazonWebService.elasticBeanstalk</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticbeanstalk/AWSElasticBeanstalkClient.html" target="blank">AWSElasticBeanstalkClient Java doc</a></li>
 <li><code>amazonWebService.elasticLoadBalancing</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticloadbalancing/AmazonElasticLoadBalancingClient.html" target="blank">AmazonElasticLoadBalancingClient Java doc</a></li>
 <li><code>amazonWebService.elasticMapReduce</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticmapreduce/AmazonElasticMapReduceClient.html" target="blank">AmazonElasticMapReduceClient Java doc</a></li>
+<li><code>amazonWebService.elasticTranscoder</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elastictranscoder/AmazonElasticTranscoderClient.html" target="blank">AmazonElasticTranscoderClient Java doc</a></li>
 <li><code>amazonWebService.glacier</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/glacier/AmazonGlacierClient.html" target="blank">AmazonGlacierClient Java doc</a></li>
 <li><code>amazonWebService.iam</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html" target="blank">AmazonIdentityManagementClient Java doc</a></li>
 <li><code>amazonWebService.importExport</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html" target="blank">AmazonImportExportClient Java doc</a></li>
