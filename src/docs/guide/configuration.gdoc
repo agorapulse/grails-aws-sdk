@@ -89,6 +89,7 @@ grails {
             elasticBeanstalk {}
             elasticLoadBalancing {}
             elasticMapReduce {}
+            elasticTranscoder {}
             elastiCache {}
             glacier {}
             iam {}

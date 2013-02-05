@@ -15,7 +15,7 @@ grails.project.dependency.resolution = {
         build 'org.apache.httpcomponents:httpclient:4.1'
         runtime 'org.apache.httpcomponents:httpcore:4.1'
         runtime 'org.apache.httpcomponents:httpclient:4.1'
-        compile 'com.amazonaws:aws-java-sdk:1.3.26'
+        compile 'com.amazonaws:aws-java-sdk:1.3.30'
     }
     plugins {
         build(':release:2.2.0', ':rest-client-builder:1.0.3') {
