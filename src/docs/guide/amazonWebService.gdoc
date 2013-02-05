@@ -24,6 +24,7 @@ amazonWebService.ec2
 amazonWebService.elasticBeanstalk
 amazonWebService.elasticLoadBalancing
 amazonWebService.elasticMapreduce
+amazonWebService.elasticTranscoder
 amazonWebService.elastiCache
 amazonWebService.glacier
 amazonWebService.iam
