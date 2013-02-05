@@ -26,6 +26,8 @@ import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingAsy
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceAsyncClient
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient
+import com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderAsyncClient
+import com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClient
 import com.amazonaws.services.glacier.AmazonGlacierAsyncClient
 import com.amazonaws.services.glacier.AmazonGlacierClient
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementAsyncClient
@@ -147,6 +149,10 @@ class AmazonWebService {
 
     AmazonElasticMapReduceClient getElasticMapReduce(region = '') {
         getServiceClient('elasticMapReduce', region) as AmazonElasticMapReduceClient
+    }
+
+    AmazonElasticTranscoderClient getElasticTranscoder(region = '') {
+        getServiceClient('elasticTranscoder', region) as AmazonElasticTranscoderClient
     }
 
     AmazonGlacierClient getGlacier(region = '') {
@@ -435,6 +441,17 @@ class AmazonWebService {
                     }
                     client.configuration = configuration
                     client.endpoint = "elasticmapreduce.${region}.amazonaws.com"
+                    break
+                case 'elasticTranscoder':
+                    if (async) {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticTranscoderAsyncClient(credentials)
+                        else client = new AmazonElasticTranscoderAsyncClient()
+                    } else {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonElasticTranscoderClient(credentials)
+                        else client = new AmazonElasticTranscoderClient()
+                    }
+                    client.configuration = configuration
+                    client.endpoint = "elastictranscoder.${region}.amazonaws.com"
                     break
                 case 'glacier':
                     if (async) {
