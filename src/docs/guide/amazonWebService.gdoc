@@ -29,7 +29,9 @@ amazonWebService.elastiCache
 amazonWebService.glacier
 amazonWebService.iam
 amazonWebService.importExport
+amazonWebService.opsWorks
 amazonWebService.rds
+amazonWebService.redshift
 amazonWebService.route53
 amazonWebService.s3
 amazonWebService.ses

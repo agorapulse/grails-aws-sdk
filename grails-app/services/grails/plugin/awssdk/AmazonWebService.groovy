@@ -34,8 +34,12 @@ import com.amazonaws.services.identitymanagement.AmazonIdentityManagementAsyncCl
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient
 import com.amazonaws.services.importexport.AmazonImportExportAsyncClient
 import com.amazonaws.services.importexport.AmazonImportExportClient
+import com.amazonaws.services.opsworks.AWSOpsWorksAsyncClient
+import com.amazonaws.services.opsworks.AWSOpsWorksClient
 import com.amazonaws.services.rds.AmazonRDSAsyncClient
 import com.amazonaws.services.rds.AmazonRDSClient
+import com.amazonaws.services.redshift.AmazonRedshiftAsyncClient
+import com.amazonaws.services.redshift.AmazonRedshiftClient
 import com.amazonaws.services.route53.AmazonRoute53AsyncClient
 import com.amazonaws.services.route53.AmazonRoute53Client
 import com.amazonaws.services.s3.AmazonS3Client
@@ -163,7 +167,7 @@ class AmazonWebService {
         getServiceClient('iam', '', true) as AmazonIdentityManagementAsyncClient
     }
 
-    AmazonIdentityManagementClient getIam(region = '') {
+    AmazonIdentityManagementClient getIam() {
         getServiceClient('iam') as AmazonIdentityManagementClient
     }
 
@@ -171,8 +175,16 @@ class AmazonWebService {
         getServiceClient('importExport', '', true) as AmazonImportExportAsyncClient
     }
 
-    AmazonImportExportClient getImportExport(region = '') {
+    AmazonImportExportClient getImportExport() {
         getServiceClient('importExport') as AmazonImportExportClient
+    }
+
+    AWSOpsWorksAsyncClient getOpsWorksAsync() {
+        getServiceClient('opsWorks', '', true) as AWSOpsWorksAsyncClient
+    }
+
+    AWSOpsWorksClient getOpsWorks() {
+        getServiceClient('opsWorks', '') as AWSOpsWorksClient
     }
 
     AmazonRDSAsyncClient getRdsAsync(region = '') {
@@ -181,6 +193,14 @@ class AmazonWebService {
 
     AmazonRDSClient getRds(region = '') {
         getServiceClient('rds', region) as AmazonRDSClient
+    }
+
+    AmazonRedshiftAsyncClient getRedshiftAsync() {
+        getServiceClient('redshift', '', true) as AmazonRedshiftAsyncClient
+    }
+
+    AmazonRedshiftClient getRedshift() {
+        getServiceClient('redshift') as AmazonRedshiftClient
     }
 
     AmazonRoute53AsyncClient getRoute53Async() {
@@ -486,6 +506,17 @@ class AmazonWebService {
                     client.configuration = configuration
                     client.endpoint = "importexport.amazonaws.com"
                     break
+                case 'opsWorks':
+                    if (async) {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSOpsWorksAsyncClient(credentials)
+                        else client = new AWSOpsWorksAsyncClient()
+                    } else {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AWSOpsWorksClient(credentials)
+                        else client = new AWSOpsWorksClient()
+                    }
+                    client.configuration = configuration
+                    client.endpoint = "opsworks.us-east-1.amazonaws.com"
+                    break
                 case 'rds':
                     if (async) {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRDSAsyncClient(credentials)
@@ -496,6 +527,17 @@ class AmazonWebService {
                     }
                     client.configuration = configuration
                     client.endpoint = "rds.${region}.amazonaws.com"
+                    break
+                case 'redshift':
+                    if (async) {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRedshiftAsyncClient(credentials)
+                        else client = new AmazonRedshiftAsyncClient()
+                    } else {
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRedshiftAsyncClient(credentials)
+                        else client = new AmazonRedshiftClient()
+                    }
+                    client.configuration = configuration
+                    client.endpoint = "redshift.us-east-1.amazonaws.com"
                     break
                 case 'route53':
                     if (async) {
