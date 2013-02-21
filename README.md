@@ -78,7 +78,6 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * Amazon Elastic Transcoder
 * Amazon ElastiCache
 * Amazon Glacier
-* Amazon OpsWorks
 * Amazon Relational Database Service (RDS)
 * Amazon Redshift
 * Amazon Route 53
@@ -92,6 +91,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * AWS Elastic Beanstalk
 * AWS Identity & Access Management (IAM)
 * AWS Import/Export
+* AWS OpsWorks
 * AWS Storage Gateway
 * Elastic Load Balancing
 
