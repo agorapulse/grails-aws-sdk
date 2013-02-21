@@ -155,8 +155,16 @@ class AmazonWebService {
         getServiceClient('elasticMapReduce', region) as AmazonElasticMapReduceClient
     }
 
+    AmazonElasticTranscoderClient getElasticTranscoderAsync(region = '') {
+        getServiceClient('elasticTranscoder', region, true) as AmazonElasticTranscoderAsyncClient
+    }
+
     AmazonElasticTranscoderClient getElasticTranscoder(region = '') {
         getServiceClient('elasticTranscoder', region) as AmazonElasticTranscoderClient
+    }
+
+    AmazonGlacierClient getGlacierAsync(region = '') {
+        getServiceClient('glacier', region, true) as AmazonGlacierAsyncClient
     }
 
     AmazonGlacierClient getGlacier(region = '') {
@@ -533,7 +541,7 @@ class AmazonWebService {
                         if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRedshiftAsyncClient(credentials)
                         else client = new AmazonRedshiftAsyncClient()
                     } else {
-                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRedshiftAsyncClient(credentials)
+                        if (credentials.AWSAccessKeyId && credentials.AWSSecretKey) client = new AmazonRedshiftClient(credentials)
                         else client = new AmazonRedshiftClient()
                     }
                     client.configuration = configuration
