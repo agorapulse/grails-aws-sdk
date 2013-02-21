@@ -15,7 +15,9 @@ For other services, check the Java doc :
 * @amazonWebService.glacier@ - "AmazonGlacierClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/glacier/AmazonGlacierClient.html
 * @amazonWebService.iam@ - "AmazonIdentityManagementClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html
 * @amazonWebService.importExport@ - "AmazonImportExportClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html
+* @amazonWebService.opsWorks@ - "AWSOpsWorksClient Java doc":http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html
 * @amazonWebService.rds@ - "AmazonRDSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html
+* @amazonWebService.redshift@ - "AmazonRedshiftClient Java doc":http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/redshift/AmazonRedshiftClient.html
 * @amazonWebService.s3@ - "AmazonS3Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html
 * @amazonWebService.sdb@ - "AmazonSimpleDBClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpledb/AmazonSimpleDBClient.html
 * @amazonWebService.ses@ - "AmazonSimpleEmailServiceClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/simpleemail/AmazonSimpleEmailServiceClient.html

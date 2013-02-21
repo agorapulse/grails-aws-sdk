@@ -35,7 +35,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.3.30'
+				runtime ':aws-sdk:1.3.32'
 		}
 }
 ```
@@ -78,7 +78,9 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * Amazon Elastic Transcoder
 * Amazon ElastiCache
 * Amazon Glacier
+* Amazon OpsWorks
 * Amazon Relational Database Service (RDS)
+* Amazon Redshift
 * Amazon Route 53
 * Amazon Simple Storage Service (S3)
 * Amazon Simple Email Service (SES)
@@ -95,6 +97,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2013-02-21 **V1.3.32** : AWS SDK for Java updated to V1.3.32 + Amazon OpsWorks and Redshift support added + bug fix
 * 2013-02-05 **V1.3.30** : AWS SDK for Java updated to V1.3.30 + Amazon Elastic Transcoder support added
 * 2012-12-20 **V1.3.26** : AWS SDK for Java updated to V1.3.26 + S3 Resources scripts (to use with CDN Resources plugin)
 * 2012-11-12 **V1.3.24** : AWS SDK for Java updated to V1.3.24 (adds support for long polling in SQS)

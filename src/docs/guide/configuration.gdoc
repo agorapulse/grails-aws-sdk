@@ -94,7 +94,9 @@ grails {
             glacier {}
             iam {}
             importExport {}
+            opsWorks {}
             rds {}
+            redshift {}
             route53 {}
             s3 {}
             sdb {}
