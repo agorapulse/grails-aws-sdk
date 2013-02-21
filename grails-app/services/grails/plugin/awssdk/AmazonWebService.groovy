@@ -204,7 +204,7 @@ class AmazonWebService {
     }
 
     AmazonSimpleEmailServiceAsyncClient getSesAsync(String region = '') {
-        getServiceClient('ses', region) as AmazonSimpleEmailServiceAsyncClient
+        getServiceClient('ses', region, true) as AmazonSimpleEmailServiceAsyncClient
     }
 
     AmazonSimpleEmailServiceClient getSes(String region = '') {
