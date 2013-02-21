@@ -86,8 +86,8 @@ class AmazonWebServiceTests {
     AmazonWebService getServiceWithoutCredentials() {
         def amazonWebService = new AmazonWebService()
         
-        grailsApplication.config.grails.plugin.awssdk.accessKey = "abcdefghi"
-        grailsApplication.config.grails.plugin.awssdk.secretKey = "123456789"
+        grailsApplication.config.grails.plugin.awssdk.accessKey = null
+        grailsApplication.config.grails.plugin.awssdk.secretKey = null
         
         amazonWebService.grailsApplication = grailsApplication
         
