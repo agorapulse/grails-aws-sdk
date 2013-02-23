@@ -71,348 +71,602 @@ class AmazonWebServiceTests {
 
     void tearDown() {
     }
-    
+
     AmazonWebService getServiceWithCredentials() {
         def amazonWebService = new AmazonWebService()
-        
+
         grailsApplication.config.grails.plugin.awssdk.accessKey = "abcdefghi"
         grailsApplication.config.grails.plugin.awssdk.secretKey = "123456789"
-        
+
         amazonWebService.grailsApplication = grailsApplication
-        
+
         amazonWebService
     }
-    
+
     AmazonWebService getServiceWithoutCredentials() {
         def amazonWebService = new AmazonWebService()
-        
-        grailsApplication.config.grails.plugin.awssdk.accessKey = null
-        grailsApplication.config.grails.plugin.awssdk.secretKey = null
-        
+
         amazonWebService.grailsApplication = grailsApplication
-        
+
         amazonWebService
     }
 
-    void testAutoScalingClient() {
+    void testAutoScalingClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getAutoScalingAsync().class == AmazonAutoScalingAsyncClient
+        assert amazonWebService.getAutoScalingAsync('eu-west-1').class == AmazonAutoScalingAsyncClient
         assert amazonWebService.getAutoScaling().class == AmazonAutoScalingClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getAutoScaling('eu-west-1').class == AmazonAutoScalingClient
+    }
+
+    void testAutoScalingClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getAutoScalingAsync().class == AmazonAutoScalingAsyncClient
+        assert amazonWebService.getAutoScalingAsync('eu-west-1').class == AmazonAutoScalingAsyncClient
         assert amazonWebService.getAutoScaling().class == AmazonAutoScalingClient
+        assert amazonWebService.getAutoScaling('eu-west-1').class == AmazonAutoScalingClient
     }
-    
-    void testCloudFormationClient() {
+
+    void testCloudFormationClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getCloudFormationAsync().class == AmazonCloudFormationAsyncClient
+        assert amazonWebService.getCloudFormationAsync('eu-west-1').class == AmazonCloudFormationAsyncClient
         assert amazonWebService.getCloudFormation().class == AmazonCloudFormationClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getCloudFormation('eu-west-1').class == AmazonCloudFormationClient
+    }
+
+    void testCloudFormationClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getCloudFormationAsync().class == AmazonCloudFormationAsyncClient
+        assert amazonWebService.getCloudFormationAsync('eu-west-1').class == AmazonCloudFormationAsyncClient
         assert amazonWebService.getCloudFormation().class == AmazonCloudFormationClient
+        assert amazonWebService.getCloudFormation('eu-west-1').class == AmazonCloudFormationClient
     }
-    
-    void testCloudFrontClient() {
+
+    void testCloudFrontClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getCloudFrontAsync().class == AmazonCloudFrontAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getCloudFrontAsync('eu-west-1')
+        }
         assert amazonWebService.getCloudFront().class == AmazonCloudFrontClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        shouldFail(MissingMethodException) {
+            amazonWebService.getCloudFront('eu-west-1')
+        }
+    }
+
+    void testCloudFrontClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getCloudFrontAsync().class == AmazonCloudFrontAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getCloudFrontAsync('eu-west-1')
+        }
         assert amazonWebService.getCloudFront().class == AmazonCloudFrontClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getCloudFront('eu-west-1')
+        }
     }
-    
-    void testCloudSearchClient() {
+
+    void testCloudSearchClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getCloudSearchAsync().class == AmazonCloudSearchAsyncClient
+        assert amazonWebService.getCloudSearchAsync('eu-west-1').class == AmazonCloudSearchAsyncClient
         assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
+    }
+
+    void testCloudSearchClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getCloudSearchAsync().class == AmazonCloudSearchAsyncClient
+        assert amazonWebService.getCloudSearchAsync('eu-west-1').class == AmazonCloudSearchAsyncClient
         assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
     }
-    
-    void testCloudWatchClient() {
+
+    void testCloudWatchClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getCloudWatchAsync().class == AmazonCloudWatchAsyncClient
+        assert amazonWebService.getCloudWatchAsync('eu-west-1').class == AmazonCloudWatchAsyncClient
         assert amazonWebService.getCloudWatch().class == AmazonCloudWatchClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getCloudWatch('eu-west-1').class == AmazonCloudWatchClient
+    }
+
+    void testCloudWatchClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getCloudWatchAsync().class == AmazonCloudWatchAsyncClient
+        assert amazonWebService.getCloudWatchAsync('eu-west-1').class == AmazonCloudWatchAsyncClient
         assert amazonWebService.getCloudWatch().class == AmazonCloudWatchClient
+        assert amazonWebService.getCloudWatch('eu-west-1').class == AmazonCloudWatchClient
     }
-    
-    void testDynamoDBClient() {
+
+    void testDynamoDBClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getDynamoDBAsync().class == AmazonDynamoDBAsyncClient
+        assert amazonWebService.getDynamoDBAsync('eu-west-1').class == AmazonDynamoDBAsyncClient
         assert amazonWebService.getDynamoDB().class == AmazonDynamoDBClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        assert amazonWebService.getDynamoDBAsync().class == AmazonDynamoDBAsyncClient
-        assert amazonWebService.getDynamoDB().class == AmazonDynamoDBClient
+        assert amazonWebService.getDynamoDB('eu-west-1').class == AmazonDynamoDBClient
     }
-    
-    void testEc2Client() {
+
+    void testDynamoDBClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getDynamoDBAsync().class == AmazonDynamoDBAsyncClient
+        assert amazonWebService.getDynamoDBAsync('eu-west-1').class == AmazonDynamoDBAsyncClient
+        assert amazonWebService.getDynamoDB().class == AmazonDynamoDBClient
+        assert amazonWebService.getDynamoDB('eu-west-1').class == AmazonDynamoDBClient
+    }
+
+    void testEc2ClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getEc2Async().class == AmazonEC2AsyncClient
+        assert amazonWebService.getEc2Async('eu-west-1').class == AmazonEC2AsyncClient
         assert amazonWebService.getEc2().class == AmazonEC2Client
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        assert amazonWebService.getEc2Async().class == AmazonEC2AsyncClient
-        assert amazonWebService.getEc2().class == AmazonEC2Client
+        assert amazonWebService.getEc2('eu-west-1').class == AmazonEC2Client
     }
-    
-    void testElasticBeanstalkClient() {
+
+    void testEc2ClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getEc2Async().class == AmazonEC2AsyncClient
+        assert amazonWebService.getEc2Async('eu-west-1').class == AmazonEC2AsyncClient
+        assert amazonWebService.getEc2().class == AmazonEC2Client
+        assert amazonWebService.getEc2('eu-west-1').class == AmazonEC2Client
+    }
+
+    void testElasticBeanstalkClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getElasticBeanstalkAsync().class == AWSElasticBeanstalkAsyncClient
+        assert amazonWebService.getElasticBeanstalkAsync('eu-west-1').class == AWSElasticBeanstalkAsyncClient
         assert amazonWebService.getElasticBeanstalk().class == AWSElasticBeanstalkClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getElasticBeanstalk('eu-west-1').class == AWSElasticBeanstalkClient
+    }
+
+    void testElasticBeanstalkClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getElasticBeanstalkAsync().class == AWSElasticBeanstalkAsyncClient
+        assert amazonWebService.getElasticBeanstalkAsync('eu-west-1').class == AWSElasticBeanstalkAsyncClient
         assert amazonWebService.getElasticBeanstalk().class == AWSElasticBeanstalkClient
+        assert amazonWebService.getElasticBeanstalk('eu-west-1').class == AWSElasticBeanstalkClient
     }
-    
-    void testElastiCacheClient() {
+
+    void testElastiCacheClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getElastiCacheAsync().class == AmazonElastiCacheAsyncClient
+        assert amazonWebService.getElastiCacheAsync('eu-west-1').class == AmazonElastiCacheAsyncClient
         assert amazonWebService.getElastiCache().class == AmazonElastiCacheClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getElastiCache('eu-west-1').class == AmazonElastiCacheClient
+    }
+
+    void testElastiCacheClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getElastiCacheAsync().class == AmazonElastiCacheAsyncClient
+        assert amazonWebService.getElastiCacheAsync('eu-west-1').class == AmazonElastiCacheAsyncClient
         assert amazonWebService.getElastiCache().class == AmazonElastiCacheClient
+        assert amazonWebService.getElastiCache('eu-west-1').class == AmazonElastiCacheClient
     }
-    
-    void testElbClient() {
+
+    void testElasticLoadBalancingClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
-        assert amazonWebService.getElbAsync().class == AmazonElasticLoadBalancingAsyncClient
-        assert amazonWebService.getElb().class == AmazonElasticLoadBalancingClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        assert amazonWebService.getElbAsync().class == AmazonElasticLoadBalancingAsyncClient
-        assert amazonWebService.getElb().class == AmazonElasticLoadBalancingClient
+        assert amazonWebService.getElasticLoadBalancingAsync().class == AmazonElasticLoadBalancingAsyncClient
+        assert amazonWebService.getElasticLoadBalancingAsync('eu-west-1').class == AmazonElasticLoadBalancingAsyncClient
+        assert amazonWebService.getElasticLoadBalancing().class == AmazonElasticLoadBalancingClient
+        assert amazonWebService.getElasticLoadBalancing('eu-west-1').class == AmazonElasticLoadBalancingClient
     }
-    
-    void testElasticMapReduceClient() {
+
+    void testElasticLoadBalancingClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getElasticLoadBalancingAsync().class == AmazonElasticLoadBalancingAsyncClient
+        assert amazonWebService.getElasticLoadBalancingAsync('eu-west-1').class == AmazonElasticLoadBalancingAsyncClient
+        assert amazonWebService.getElasticLoadBalancing().class == AmazonElasticLoadBalancingClient
+        assert amazonWebService.getElasticLoadBalancing('eu-west-1').class == AmazonElasticLoadBalancingClient
+    }
+
+    void testElasticMapReduceClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getElasticMapReduceAsync().class == AmazonElasticMapReduceAsyncClient
+        assert amazonWebService.getElasticMapReduceAsync('eu-west-1').class == AmazonElasticMapReduceAsyncClient
         assert amazonWebService.getElasticMapReduce().class == AmazonElasticMapReduceClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getElasticMapReduce('eu-west-1').class == AmazonElasticMapReduceClient
+    }
+
+    void testElasticMapReduceClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getElasticMapReduceAsync().class == AmazonElasticMapReduceAsyncClient
+        assert amazonWebService.getElasticMapReduceAsync('eu-west-1').class == AmazonElasticMapReduceAsyncClient
         assert amazonWebService.getElasticMapReduce().class == AmazonElasticMapReduceClient
+        assert amazonWebService.getElasticMapReduce('eu-west-1').class == AmazonElasticMapReduceClient
     }
-    
-    void testElasticTranscoderClient() {
+
+    void testElasticTranscoderClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getElasticTranscoderAsync().class == AmazonElasticTranscoderAsyncClient
+        assert amazonWebService.getElasticTranscoderAsync('eu-west-1').class == AmazonElasticTranscoderAsyncClient
         assert amazonWebService.getElasticTranscoder().class == AmazonElasticTranscoderClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getElasticTranscoder('eu-west-1').class == AmazonElasticTranscoderClient
+    }
+
+    void testElasticTranscoderClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getElasticTranscoderAsync().class == AmazonElasticTranscoderAsyncClient
+        assert amazonWebService.getElasticTranscoderAsync('eu-west-1').class == AmazonElasticTranscoderAsyncClient
         assert amazonWebService.getElasticTranscoder().class == AmazonElasticTranscoderClient
+        assert amazonWebService.getElasticTranscoder('eu-west-1').class == AmazonElasticTranscoderClient
     }
-    
-    void testGlacierClient() {
+
+    void testGlacierClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getGlacierAsync().class == AmazonGlacierAsyncClient
+        assert amazonWebService.getGlacierAsync('eu-west-1').class == AmazonGlacierAsyncClient
         assert amazonWebService.getGlacier().class == AmazonGlacierClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getGlacier('eu-west-1').class == AmazonGlacierClient
+    }
+
+    void testGlacierClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getGlacierAsync().class == AmazonGlacierAsyncClient
+        assert amazonWebService.getGlacierAsync('eu-west-1').class == AmazonGlacierAsyncClient
         assert amazonWebService.getGlacier().class == AmazonGlacierClient
+        assert amazonWebService.getGlacier('eu-west-1').class == AmazonGlacierClient
     }
-    
-    void testIamClient() {
+
+    void testIamClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getIamAsync().class == AmazonIdentityManagementAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getIamAsync('eu-west-1')
+        }
         assert amazonWebService.getIam().class == AmazonIdentityManagementClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        shouldFail(MissingMethodException) {
+            amazonWebService.getIam('eu-west-1')
+        }
+    }
+
+    void testIamClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getIamAsync().class == AmazonIdentityManagementAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getIamAsync('eu-west-1')
+        }
         assert amazonWebService.getIam().class == AmazonIdentityManagementClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getIam('eu-west-1')
+        }
     }
-    
-    void testImportExportClient() {
+
+    void testImportExportClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getImportExportAsync().class == AmazonImportExportAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getImportExportAsync('eu-west-1')
+        }
         assert amazonWebService.getImportExport().class == AmazonImportExportClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        shouldFail(MissingMethodException) {
+            amazonWebService.getImportExport('eu-west-1')
+        }
+    }
+
+    void testImportExportClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getImportExportAsync().class == AmazonImportExportAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getImportExportAsync('eu-west-1')
+        }
         assert amazonWebService.getImportExport().class == AmazonImportExportClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getImportExport('eu-west-1')
+        }
     }
-    
-    void testOpsWorksAsync() {
+
+    void testOpsWorksAsyncWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getOpsWorksAsync().class == AWSOpsWorksAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getOpsWorksAsync('eu-west-1')
+        }
         assert amazonWebService.getOpsWorks().class == AWSOpsWorksClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        assert amazonWebService.getOpsWorksAsync().class == AWSOpsWorksAsyncClient
-        assert amazonWebService.getOpsWorks().class == AWSOpsWorksClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getOpsWorks('eu-west-1')
+        }
     }
-    
-    void testRdsClient() {
+
+    void testOpsWorksAsyncWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getOpsWorksAsync().class == AWSOpsWorksAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getOpsWorksAsync('eu-west-1')
+        }
+        assert amazonWebService.getOpsWorks().class == AWSOpsWorksClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getOpsWorks('eu-west-1')
+        }
+    }
+
+    void testRdsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getRdsAsync().class == AmazonRDSAsyncClient
+        assert amazonWebService.getRdsAsync('eu-west-1').class == AmazonRDSAsyncClient
         assert amazonWebService.getRds().class == AmazonRDSClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getRds('eu-west-1').class == AmazonRDSClient
+    }
+
+    void testRdsClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getRdsAsync().class == AmazonRDSAsyncClient
+        assert amazonWebService.getRdsAsync('eu-west-1').class == AmazonRDSAsyncClient
         assert amazonWebService.getRds().class == AmazonRDSClient
+        assert amazonWebService.getRds('eu-west-1').class == AmazonRDSClient
     }
-    
-    void testRedshiftClient() {
+
+    void testRedshiftClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
-        
+
         assert amazonWebService.getRedshiftAsync().class == AmazonRedshiftAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRedshiftAsync('eu-west-1')
+        }
         assert amazonWebService.getRedshift().class == AmazonRedshiftClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        assert amazonWebService.getRedshiftAsync().class == AmazonRedshiftAsyncClient
-        assert amazonWebService.getRedshift().class == AmazonRedshiftClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRedshift('eu-west-1')
+        }
     }
-    
-    void testRoute53Client() {
+
+    void testRedshiftClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getRedshiftAsync().class == AmazonRedshiftAsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRedshiftAsync('eu-west-1')
+        }
+        assert amazonWebService.getRedshift().class == AmazonRedshiftClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRedshift('eu-west-1')
+        }
+    }
+
+    void testRoute53ClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getRoute53Async().class == AmazonRoute53AsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRoute53Async('eu-west-1')
+        }
         assert amazonWebService.getRoute53().class == AmazonRoute53Client
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRoute53('eu-west-1')
+        }
+    }
+
+    void testRoute53ClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getRoute53Async().class == AmazonRoute53AsyncClient
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRoute53Async('eu-west-1')
+        }
         assert amazonWebService.getRoute53().class == AmazonRoute53Client
+        shouldFail(MissingMethodException) {
+            amazonWebService.getRoute53('eu-west-1')
+        }
     }
-    
-    void testS3Client() {
+
+    void testS3ClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
-        shouldFail(Exception) {
+        shouldFail(MissingMethodException) {
             amazonWebService.getS3Async()
         }
-        assert amazonWebService.getS3().class == AmazonS3Client
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        shouldFail(Exception) {
-            amazonWebService.getS3Async()
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3Async('eu-west-1')
         }
         assert amazonWebService.getS3().class == AmazonS3Client
+        assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
     }
-    
-    void testSdbClient() {
+
+    void testS3ClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3Async()
+        }
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3Async('eu-west-1')
+        }
+        assert amazonWebService.getS3().class == AmazonS3Client
+        assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
+    }
+
+    void testSdbClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getSdbAsync().class == AmazonSimpleDBAsyncClient
+        assert amazonWebService.getSdbAsync('eu-west-1').class == AmazonSimpleDBAsyncClient
         assert amazonWebService.getSdb().class == AmazonSimpleDBClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getSdb('eu-west-1').class == AmazonSimpleDBClient
+    }
+
+    void testSdbClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getSdbAsync().class == AmazonSimpleDBAsyncClient
+        assert amazonWebService.getSdbAsync('eu-west-1').class == AmazonSimpleDBAsyncClient
         assert amazonWebService.getSdb().class == AmazonSimpleDBClient
+        assert amazonWebService.getSdb('eu-west-1').class == AmazonSimpleDBClient
     }
-    
-    void testSesClient() {
+
+    void testSesClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getSesAsync().class == AmazonSimpleEmailServiceAsyncClient
+        assert amazonWebService.getSesAsync('eu-west-1').class == AmazonSimpleEmailServiceAsyncClient
         assert amazonWebService.getSes().class == AmazonSimpleEmailServiceClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getSes('eu-west-1').class == AmazonSimpleEmailServiceClient
+    }
+
+    void testSesClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getSesAsync().class == AmazonSimpleEmailServiceAsyncClient
+        assert amazonWebService.getSesAsync('eu-west-1').class == AmazonSimpleEmailServiceAsyncClient
         assert amazonWebService.getSes().class == AmazonSimpleEmailServiceClient
+        assert amazonWebService.getSes('eu-west-1').class == AmazonSimpleEmailServiceClient
     }
-    
-    void testSnsClient() {
+
+    void testSnsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getSnsAsync().class == AmazonSNSAsyncClient
+        assert amazonWebService.getSnsAsync('eu-west-1').class == AmazonSNSAsyncClient
         assert amazonWebService.getSns().class == AmazonSNSClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getSns('eu-west-1').class == AmazonSNSClient
+    }
+
+    void testSnsClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getSnsAsync().class == AmazonSNSAsyncClient
+        assert amazonWebService.getSnsAsync('eu-west-1').class == AmazonSNSAsyncClient
         assert amazonWebService.getSns().class == AmazonSNSClient
+        assert amazonWebService.getSns('eu-west-1').class == AmazonSNSClient
     }
-    
-    void testSqsClient() {
+
+    void testSqsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getSqsAsync().class == AmazonSQSAsyncClient
+        assert amazonWebService.getSqsAsync('eu-west-1').class == AmazonSQSAsyncClient
         assert amazonWebService.getSqs().class == AmazonSQSClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
+        assert amazonWebService.getSqs('eu-west-1').class == AmazonSQSClient
+    }
+
+    void testSqsClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
         assert amazonWebService.getSqsAsync().class == AmazonSQSAsyncClient
+        assert amazonWebService.getSqsAsync('eu-west-1').class == AmazonSQSAsyncClient
         assert amazonWebService.getSqs().class == AmazonSQSClient
+        assert amazonWebService.getSqs('eu-west-1').class == AmazonSQSClient
     }
-    
-    void testStorageGatewayClient() {
+
+    void testStorageGatewayClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getStorageGatewayAsync().class == AWSStorageGatewayAsyncClient
+        assert amazonWebService.getStorageGatewayAsync('eu-west-1').class == AWSStorageGatewayAsyncClient
         assert amazonWebService.getStorageGateway().class == AWSStorageGatewayClient
-        
-        amazonWebService = getServiceWithoutCredentials()
+        assert amazonWebService.getStorageGateway('eu-west-1').class == AWSStorageGatewayClient
+    }
+
+    void testStorageGatewayClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
         
         assert amazonWebService.getStorageGatewayAsync().class == AWSStorageGatewayAsyncClient
+        assert amazonWebService.getStorageGatewayAsync('eu-west-1').class == AWSStorageGatewayAsyncClient
         assert amazonWebService.getStorageGateway().class == AWSStorageGatewayClient
+        assert amazonWebService.getStorageGateway('eu-west-1').class == AWSStorageGatewayClient
     }
-    
-    void testSwfClient() {
+
+    void testSwfClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getSwfAsync().class == AmazonSimpleWorkflowAsyncClient
+        assert amazonWebService.getSwfAsync('eu-west-1').class == AmazonSimpleWorkflowAsyncClient
         assert amazonWebService.getSwf().class == AmazonSimpleWorkflowClient
-        
-        amazonWebService = getServiceWithoutCredentials()
-        
-        assert amazonWebService.getSwfAsync().class == AmazonSimpleWorkflowAsyncClient
-        assert amazonWebService.getSwf().class == AmazonSimpleWorkflowClient
+        assert amazonWebService.getSwf('eu-west-1').class == AmazonSimpleWorkflowClient
     }
-    
+
+    void testSwfClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getSwfAsync().class == AmazonSimpleWorkflowAsyncClient
+        assert amazonWebService.getSwfAsync('eu-west-1').class == AmazonSimpleWorkflowAsyncClient
+        assert amazonWebService.getSwf().class == AmazonSimpleWorkflowClient
+        assert amazonWebService.getSwf('eu-west-1').class == AmazonSimpleWorkflowClient
+    }
+
     void testTransferManager() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getTransferManager().class == TransferManager
+        assert amazonWebService.getTransferManager('eu-west-1').class == TransferManager
+    }
+
+    void testAsyncClientCache() {
+        def amazonWebService = getServiceWithCredentials()
+
+        def service1
+        def service2
+        def otherService
+        def otherServiceType
+        def otherRegion1
+        def otherRegion2
+
+        // check if the cache returns the same object if requested twice, 
+        // also make sure other calls and regions don't corrupt the cache
+        service1 = amazonWebService.getSesAsync()
+        otherRegion1 = amazonWebService.getSesAsync('eu-west-1')
+        otherService = amazonWebService.getSwfAsync()
+        otherServiceType = amazonWebService.getSes()
+        service2 = amazonWebService.getSesAsync()
+        otherRegion2 = amazonWebService.getSesAsync('eu-west-1')
+        assert service1 == service2
+        assert otherRegion1 == otherRegion2
+        assert service1 != otherService
+        assert service1 != otherServiceType
+        assert service1 != otherRegion1
+    }
+
+    void testSyncClientCache() {
+        def amazonWebService = getServiceWithCredentials()
+
+        def service1
+        def service2
+        def otherService
+        def otherServiceType
+        def otherRegion1
+        def otherRegion2
+
+        service1 = amazonWebService.getSes()
+        otherRegion1 = amazonWebService.getSes('eu-west-1')
+        otherService = amazonWebService.getSwf()
+        otherServiceType = amazonWebService.getSesAsync()
+        service2 = amazonWebService.getSes()
+        otherRegion2 = amazonWebService.getSes('eu-west-1')
+        assert service1 == service2
+        assert otherRegion1 == otherRegion2
+        assert service1 != otherService
+        assert service1 != otherServiceType
+        assert service1 != otherRegion1
     }
 }
