@@ -1,6 +1,8 @@
 AWS SDK Grails Plugin
 =====================
 
+[![Build Status](https://travis-ci.org/benorama/grails-aws-sdk.png)](https://travis-ci.org/benorama/grails-aws-sdk)
+
 # Introduction
 
 The AWS SDK Plugin allows your [Grails](http://grails.org) application to use the [Amazon Web Services](http://aws.amazon.com/) infrastructure services.
