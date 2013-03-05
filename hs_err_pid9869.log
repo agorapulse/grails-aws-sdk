@@ -1,0 +1,1472 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x000000010999f049, pid=9869, tid=5891
+#
+# JRE version: 7.0_11-b21
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.6-b04 mixed mode bsd-amd64 compressed oops)
+# Problematic frame:
+# j  org.codehaus.groovy.grails.plugins.log4j.Log4jConfig.initialize(Lgroovy/util/ConfigObject;)V+39
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f95cd004800):  JavaThread "main" [_thread_in_Java, id=5891, stack(0x000000010975b000,0x000000010985b000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x0000000023ae1b17
+
+Registers:
+RAX=0x000000013ce16c40, RBX=0x000000000000006a, RCX=0x0000000000000001, RDX=0x0000000023ae1b0f
+RSP=0x0000000109847ca0, RBP=0x0000000109847ce0, RSI=0x0000000000000007, RDI=0x00007f95cd004800
+R8 =0x0000000109847818, R9 =0x000000013e3123b0, R10=0x0000000000000000, R11=0x0000000109be9898
+R12=0x0000000000000000, R13=0x000000013e31454f, R14=0x0000000109847d00, R15=0x00007f95cd004800
+RIP=0x000000010999f049, EFLAGS=0x0000000000010246, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x0000000109847ca0)
+0x0000000109847ca0:   0000000109847ca0 000000013e31454f
+0x0000000109847cb0:   0000000109847d00 000000013e31a208
+0x0000000109847cc0:   0000000000000000 000000013e3145d8
+0x0000000109847cd0:   0000000000000000 0000000109847d00
+0x0000000109847ce0:   0000000109847d48 0000000109987158
+0x0000000109847cf0:   000000010d941f48 0000000023ae1b0f
+0x0000000109847d00:   000000011eb1ab58 0000000109847d08
+0x0000000109847d10:   000000013e3114d9 0000000109847d60
+0x0000000109847d20:   000000013e3117e0 0000000000000000
+0x0000000109847d30:   000000013e311500 0000000109847d00
+0x0000000109847d40:   0000000109847d58 0000000109847da8
+0x0000000109847d50:   0000000109987158 000000011eb1ab58
+0x0000000109847d60:   000000010d56f3f8 0000000109847d68
+0x0000000109847d70:   000000013e311c13 0000000109847dc8
+0x0000000109847d80:   000000013e312290 0000000000000000
+0x0000000109847d90:   000000013e311c28 0000000109847d58
+0x0000000109847da0:   0000000109847db8 0000000109847e10
+0x0000000109847db0:   00000001099879e1 000000010d56f408
+0x0000000109847dc0:   000000010d56f3f8 000000010d5a5a38
+0x0000000109847dd0:   0000000109847dd0 000000013d281268
+0x0000000109847de0:   0000000109847e30 000000013d282390
+0x0000000109847df0:   0000000000000000 000000013d2812a0
+0x0000000109847e00:   0000000109847db8 0000000109847e20
+0x0000000109847e10:   0000000109847e78 0000000109987333
+0x0000000109847e20:   000000010d56f408 000000010d56f3f8
+0x0000000109847e30:   000000011e7891e8 0000000109847e38
+0x0000000109847e40:   000000013d28443b 0000000109847e98
+0x0000000109847e50:   000000013d2874e0 0000000000000000
+0x0000000109847e60:   000000013d284470 0000000109847e20
+0x0000000109847e70:   0000000109847e88 0000000109847ee0
+0x0000000109847e80:   0000000109987333 000000010d56f408
+0x0000000109847e90:   000000010d56f3f8 000000011e7891e8 
+
+Instructions: (pc=0x000000010999f049)
+0x000000010999f029:   87 18 02 00 00 49 ba 00 00 00 00 00 00 00 00 4d
+0x000000010999f039:   89 97 18 02 00 00 4c 8b 6d c8 4c 8b 75 d0 c3 5a
+0x000000010999f049:   8b 52 08 48 c1 e2 03 eb 0c 8b 50 08 48 c1 e2 03
+0x000000010999f059:   48 8b 44 d9 40 48 8b 4d e0 48 85 c9 0f 84 8a 00 
+
+Register to memory mapping:
+
+RAX=0x000000013ce16c40 is an oop
+{instance class} 
+ - klass: {other class}
+RBX=0x000000000000006a is an unknown value
+RCX=0x0000000000000001 is an unknown value
+RDX=0x0000000023ae1b0f is an unknown value
+RSP=0x0000000109847ca0 is pointing into the stack for thread: 0x00007f95cd004800
+RBP=0x0000000109847ce0 is pointing into the stack for thread: 0x00007f95cd004800
+RSI=0x0000000000000007 is an unknown value
+RDI=0x00007f95cd004800 is a thread
+R8 =0x0000000109847818 is pointing into the stack for thread: 0x00007f95cd004800
+R9 =0x000000013e3123b0 is an oop
+{constant pool} 
+ - klass: {other class}
+ - holder: 0x000000013e319d40
+ - cache: 0x000000013e31a208
+ -   1 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig'
+ -   2 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig' {0x13e319d40}
+ -   3 :  : 'java/lang/Object'
+ -   4 :  : 'java/lang/Object' {0x13ca62db0}
+ -   5 :  : 'groovy/lang/GroovyObject'
+ -   6 :  : 'groovy/lang/GroovyObject'
+ -   7 :  : 'Log4jConfig.groovy'
+ -   8 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_configure_closure1'
+ -   9 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_configure_closure1'
+ -  10 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_configure_closure2'
+ -  11 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_configure_closure2'
+ -  12 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_setLogLevelForAppenderToPackageMap_closure3'
+ -  13 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_setLogLevelForAppenderToPackageMap_closure3'
+ -  14 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_off_closure4'
+ -  15 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_off_closure4'
+ -  16 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_fatal_closure5'
+ -  17 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_fatal_closure5'
+ -  18 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_error_closure6'
+ -  19 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_error_closure6'
+ -  20 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_warn_closure7'
+ -  21 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_warn_closure7'
+ -  22 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_info_closure8'
+ -  23 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_info_closure8'
+ -  24 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_debug_closure9'
+ -  25 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_debug_closure9'
+ -  26 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_trace_closure10'
+ -  27 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_trace_closure10'
+ -  28 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_all_closure11'
+ -  29 :  : 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig$_all_closure11'
+ -  30 :  : 'DEFAULT_PATTERN_LAYOUT'
+ -  31 :  : 'Lorg/apache/log4j/PatternLayout;'
+ -  32 :  : 'LAYOUTS'
+ -  33 :  : 'Ljava/lang/Object;'
+ -  34 :  : 'APPENDERS'
+ -  35 :  : 'appenders'
+ -  36 :  : 'Ljava/util/Map;'
+ -  37 :  : 'config'
+ -  38 :  : 'Lgroovy/util/ConfigObject;'
+ -  39 :  : '$staticClassInfo'
+ -  40 :  : 'Lorg/codehaus/groovy/reflection/ClassInfo;'
+ -  41 :  : '__$stMC'
+ -  42 :  : 'Z'
+ -  43 :  : 'metaClass'
+ -  44 :  : 'Lgroovy/lang/MetaClass;'
+ -  45 :  : '$staticClassInfo$'
+ -  46 :  : '__timeStamp'
+ -  47 :  : 'J'
+ -  48 :  : '__timeStamp__239_neverHappen1356008103916'
+ -  49 :  : '$callSiteArray'
+ -  50 :  : 'Ljava/lang/ref/SoftReference;'
+ -  51 :  : '<init>'
+ -  52 :  : '(Lgroovy/util/ConfigObject;)V'
+ -  53 :  : '()V'
+ -  54 :  : name_index=51 signature_index=53
+ -  55 :  : klass_index=4 name_and_type_index=54
+ -  56 :  : '$getCallSiteArray'
+ -  57 :  : '()[Lorg/codehaus/groovy/runtime/callsite/CallSite;'
+ -  58 :  : name_index=56 signature_index=57
+ -  59 :  : klass_index=2 name_and_type_index=58
+ -  60 :  : 'org/codehaus/groovy/runtime/ScriptBytecodeAdapter'
+ -  61 :  : 'org/codehaus/groovy/runtime/ScriptBytecodeAdapter' {0x13d28fd08}
+ -  62 :  : 'createMap'
+ -  63 :  : '([Ljava/lang/Object;)Ljava/util/Map;'
+ -  64 :  : name_index=62 signature_index=63
+ -  65 :  : klass_index=61 name_and_type_index=64
+ -  66 :  : name_index=35 signature_index=36
+ -  67 :  : klass_index=2 name_and_type_index=66
+ -  68 :  : '$getStaticMetaClass'
+ -  69 :  : '()Lgroovy/lang/MetaClass;'
+ -  70 :  : name_index=68 signature_index=69
+ -  71 :  : klass_index=2 name_and_type_index=70
+ -  72 :  : name_index=43 signature_index=44
+ -  73 :  : klass_index=2 name_and_type_index=72
+ -  74 :  : 'groovy/util/ConfigObject'
+ -  75 :  : 'groovy/util/ConfigObject' {0x13d29d1e8}
+ -  76 :  : 'castToType'
+ -  77 :  : '(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;'
+ -  78 :  : name_index=76 signature_index=77
+ -  79 :  : klass_index=61 name_and_type_index=78
+ -  80 :  : name_index=37 signature_index=38
+ -  81 :  : klass_index=2 name_and_type_index=80
+ -  82 :  : 'this'
+ -  83 :  : 'Lorg/codehaus/groovy/grails/plugins/log4j/Log4jConfig;'
+ -  84 :  : 'initialize'
+ -  85 :  : 'Lgroovy/transform/TypeChecked$TypeCheckingInfo;'
+ -  86 :  : 'inferredType'
+ -  87 :  : 'AAlDbGFzc05vZGUAAAFWAP////8='
+ -  88 :  : 'version'
+ -  89 :  : 1
+ -  90 :  : 'org/apache/log4j/LogManager'
+ -  91 :  : 'org/apache/log4j/LogManager' {0x13db64328}
+ -  92 :  : 'resetConfiguration'
+ -  93 :  : name_index=92 signature_index=53
+ -  94 :  : klass_index=91 name_and_type_index=93
+ -  95 :  : 'log4j'
+ -  96 :  : "log4j" {0x11d70d878}
+ -  97 :  : 'java/util/LinkedHashMap'
+ -  98 :  : 'java/util/LinkedHashMap' {0x13cbf01b0}
+ -  99 :  : 'get'
+ - 100 :  : '(Ljava/lang/Object;)Ljava/lang/Object;'
+ - 101 :  : name_index=99 signature_index=100
+ - 102 :  : klass_index=98 name_and_type_index=101
+ - 103 :  : name_index=51 signature_index=52
+ - 104 :  : klass_index=2 name_and_type_index=103
+ - 105 :  : 'groovy/lang/Closure'
+ - 106 :  : 'groovy/lang/Closure' {0x13ce16c40}
+ - 107 :  : 'configure'
+ - 108 :  : '(Lgroovy/lang/Closure;)Ljava/lang/Object;'
+ - 109 :  : name_index=107 signature_index=108
+ - 110 :  : klass_index=2 name_and_type_index=109
+ - 111 :  : 'java/util/Map'
+ - 112 :  : 'java/util/Map'
+ - 113 :  : '(Ljava/util/Map;)Ljava/lang/Object;'
+ - 114 :  : name_index=107 signature_index=113
+ - 115 :  : klass_index=2 name_and_type_index=114
+ - 116 :  : 'java/util/Collection'
+ - 117 :  : 'java/util/Collection'
+ - 118 :  : '(Ljava/util/Collection;)Ljava/lang/Object;'
+ - 119 :  : name_index=107 signature_index=118
+ - 120 :  : klass_index=2 name_and_type_index=119
+ - 121 :  : '()Ljava/lang/Object;'
+ - 122 :  : name_index=107 signature_index=121
+ - 123 :  : klass_index=2 name_and_type_index=122
+ - 124 :  : 'o'
+ - 125 :  : 'log4jConfig'
+ - 126 :  : 'propertyMissing'
+ - 127 :  : '(Ljava/lang/String;)Ljava/lang/Object;'
+ - 128 :  : 0
+ - 129 :  : name_index=32 signature_index=33
+ - 130 :  : klass_index=2 name_and_type_index=129
+ - 131 :  : 'org/codehaus/groovy/runtime/callsite/CallSite'
+ - 132 :  : 'org/codehaus/groovy/runtime/callsite/CallSite' {0x13d0ba7f8}
+ - 133 :  : 'call'
+ - 134 :  : '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 135 :  : name_index=133 signature_index=134
+ - 136 :  : klass_index=132 name_and_type_index=135
+ - 137 :  : 'org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation'
+ - 138 :  : 'org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation'
+ - 139 :  : 'booleanUnbox'
+ - 140 :  : '(Ljava/lang/Object;)Z'
+ - 141 :  : name_index=139 signature_index=140
+ - 142 :  : klass_index=138 name_and_type_index=141
+ - 143 :  : 2
+ - 144 :  : name_index=133 signature_index=100
+ - 145 :  : klass_index=132 name_and_type_index=144
+ - 146 :  : 3
+ - 147 :  : 'org/apache/log4j/helpers/LogLog'
+ - 148 :  : 'org/apache/log4j/helpers/LogLog'
+ - 149 :  : 'org/codehaus/groovy/runtime/GStringImpl'
+ - 150 :  : 'org/codehaus/groovy/runtime/GStringImpl'
+ - 151 :  : 'java/lang/String'
+ - 152 :  : 'java/lang/String' {0x13ca6b700}
+ - 153 :  : 'Property missing when configuring log4j: '
+ - 154 :  : "Property missing when configuring log4j: " {0x10d9fc9b0}
+ - 155 :  : ''
+ - 156 :  : "" {0x11ca618a0}
+ - 157 :  : '([Ljava/lang/Object;[Ljava/lang/String;)V'
+ - 158 :  : name_index=51 signature_index=157
+ - 159 :  : klass_index=150 name_and_type_index=158
+ - 160 :  : 4
+ - 161 :  : 'groovy/lang/MissingPropertyException'
+ - 162 :  : 'groovy/lang/MissingPropertyException'
+ - 163 :  : 'callConstructor'
+ - 164 :  : name_index=163 signature_index=134
+ - 165 :  : klass_index=132 name_and_type_index=164
+ - 166 :  : 'java/lang/Throwable'
+ - 167 :  : 'java/lang/Throwable'
+ - 168 :  : 'name'
+ - 169 :  : 'Ljava/lang/String;'
+ - 170 :  : 'methodMissing'
+ - 171 :  : '(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 172 :  : 'org/codehaus/groovy/runtime/BytecodeInterface8'
+ - 173 :  : 'org/codehaus/groovy/runtime/BytecodeInterface8'
+ - 174 :  : 'isOrigZ'
+ - 175 :  : '()Z'
+ - 176 :  : name_index=174 signature_index=175
+ - 177 :  : klass_index=173 name_and_type_index=176
+ - 178 :  : name_index=41 signature_index=42
+ - 179 :  : klass_index=2 name_and_type_index=178
+ - 180 :  : 'disabledStandardMetaClass'
+ - 181 :  : name_index=180 signature_index=175
+ - 182 :  : klass_index=173 name_and_type_index=181
+ - 183 :  : 5
+ - 184 :  : name_index=34 signature_index=33
+ - 185 :  : klass_index=2 name_and_type_index=184
+ - 186 :  : 6
+ - 187 :  : 'java/lang/Integer'
+ - 188 :  : 'java/lang/Integer'
+ - 189 :  : 'valueOf'
+ - 190 :  : '(I)Ljava/lang/Integer;'
+ - 191 :  : name_index=189 signature_index=190
+ - 192 :  : klass_index=188 name_and_type_index=191
+ - 193 :  : 7
+ - 194 :  : 8
+ - 195 :  : 'callGetProperty'
+ - 196 :  : name_index=195 signature_index=100
+ - 197 :  : klass_index=132 name_and_type_index=196
+ - 198 :  : name_index=30 signature_index=31
+ - 199 :  : klass_index=2 name_and_type_index=198
+ - 200 :  : 'layout'
+ - 201 :  : "layout" {0x11da3b308}
+ - 202 :  : 'setProperty'
+ - 203 :  : '(Ljava/lang/Object;Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;)V'
+ - 204 :  : name_index=202 signature_index=203
+ - 205 :  : klass_index=61 name_and_type_index=204
+ - 206 :  : 9
+ - 207 :  : 10
+ - 208 :  : 11
+ - 209 :  : 'org/apache/commons/beanutils/BeanUtils'
+ - 210 :  : 'org/apache/commons/beanutils/BeanUtils'
+ - 211 :  : '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 212 :  : name_index=133 signature_index=211
+ - 213 :  : klass_index=132 name_and_type_index=212
+ - 214 :  : 12
+ - 215 :  : 13
+ - 216 :  : 'Appender of type '
+ - 217 :  : "Appender of type " {0x10d9fca30}
+ - 218 :  : ' doesn't define a name attribute, and hence is ignored.'
+ - 219 :  : " doesn't define a name attribute, and hence is ignored." {0x10d9fca80}
+ - 220 :  : 14
+ - 221 :  : 15
+ - 222 :  : 16
+ - 223 :  : 17
+ - 224 :  : 18
+ - 225 :  : 19
+ - 226 :  : 20
+ - 227 :  : 21
+ - 228 :  : 22
+ - 229 :  : 23
+ - 230 :  : 24
+ - 231 :  : 25
+ - 232 :  : 26
+ - 233 :  : 27
+ - 234 :  : 28
+ - 235 :  : 29
+ - 236 :  : 30
+ - 237 :  : 31
+ - 238 :  : 32
+ - 239 :  : 33
+ - 240 :  : 34
+ - 241 :  : 35
+ - 242 :  : 36
+ - 243 :  : 37
+ - 244 :  : 'callCurrent'
+ - 245 :  : '(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 246 :  : name_index=244 signature_index=245
+ - 247 :  : klass_index=132 name_and_type_index=246
+ - 248 :  : 38
+ - 249 :  : 39
+ - 250 :  : '(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 251 :  : name_index=244 signature_index=250
+ - 252 :  : klass_index=132 name_and_type_index=251
+ - 253 :  : 40
+ - 254 :  : 'Method missing when configuring log4j: '
+ - 255 :  : "Method missing when configuring log4j: " {0x10d9fcb18}
+ - 256 :  : 'args'
+ - 257 :  : 'constructorArgs'
+ - 258 :  : 'appender'
+ - 259 :  : 'isCustomEnvironmentMethod'
+ - 260 :  : '(Ljava/lang/String;Ljava/lang/Object;)Z'
+ - 261 :  : 41
+ - 262 :  : 'grails/util/Environment'
+ - 263 :  : 'grails/util/Environment'
+ - 264 :  : 42
+ - 265 :  : 'compareEqual'
+ - 266 :  : '(Ljava/lang/Object;Ljava/lang/Object;)Z'
+ - 267 :  : name_index=265 signature_index=266
+ - 268 :  : klass_index=61 name_and_type_index=267
+ - 269 :  : 43
+ - 270 :  : 44
+ - 271 :  : 45
+ - 272 :  : 46
+ - 273 :  : 47
+ - 274 :  : 48
+ - 275 :  : 49
+ - 276 :  : 50
+ - 277 :  : 51
+ - 278 :  : '(Ljava/lang/Object;Ljava/lang/Object;)V'
+ - 279 :  : name_index=51 signature_index=278
+ - 280 :  : klass_index=9 name_and_type_index=279
+ - 281 :  : 'environments'
+ - 282 :  : 'AAlDbGFzc05vZGUAABJMamF2YS9sYW5nL09iamVjdDsBAAAAAQEAAAlDbGFzc05vZGUAAANMVjsB/////wD/////'
+ - 283 :  : 'org/codehaus/groovy/grails/plugins/log4j/EnvironmentsLog4JConfig'
+ - 284 :  : 'org/codehaus/groovy/grails/plugins/log4j/EnvironmentsLog4JConfig'
+ - 285 :  : '(Lorg/codehaus/groovy/grails/plugins/log4j/Log4jConfig;)V'
+ - 286 :  : name_index=51 signature_index=285
+ - 287 :  : klass_index=284 name_and_type_index=286
+ - 288 :  : 'setDelegate'
+ - 289 :  : '(Ljava/lang/Object;)V'
+ - 290 :  : name_index=288 signature_index=289
+ - 291 :  : klass_index=106 name_and_type_index=290
+ - 292 :  : 'DELEGATE_FIRST'
+ - 293 :  : 'I'
+ - 294 :  : name_index=292 signature_index=293
+ - 295 :  : klass_index=106 name_and_type_index=294
+ - 296 :  : 'setResolveStrategy'
+ - 297 :  : '(I)V'
+ - 298 :  : name_index=296 signature_index=297
+ - 299 :  : klass_index=106 name_and_type_index=298
+ - 300 :  : name_index=133 signature_index=121
+ - 301 :  : klass_index=106 name_and_type_index=300
+ - 302 :  : 'callable'
+ - 303 :  : 'Lgroovy/lang/Closure;'
+ - 304 :  : 'invokeCallable'
+ - 305 :  : 52
+ - 306 :  : 53
+ - 307 :  : 'callables'
+ - 308 :  : 'groovy/lang/Reference'
+ - 309 :  : 'groovy/lang/Reference'
+ - 310 :  : name_index=51 signature_index=289
+ - 311 :  : klass_index=309 name_and_type_index=310
+ - 312 :  : 54
+ - 313 :  : '(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V'
+ - 314 :  : name_index=51 signature_index=313
+ - 315 :  : klass_index=11 name_and_type_index=314
+ - 316 :  : 'Lgroovy/lang/Reference;'
+ - 317 :  : 'Ljava/util/Collection;'
+ - 318 :  : 'java/lang/Exception'
+ - 319 :  : 'java/lang/Exception'
+ - 320 :  : 55
+ - 321 :  : 'org/apache/log4j/Logger'
+ - 322 :  : 'org/apache/log4j/Logger'
+ - 323 :  : 56
+ - 324 :  : '(Lgroovy/lang/GroovyObject;)Ljava/lang/Object;'
+ - 325 :  : name_index=244 signature_index=324
+ - 326 :  : klass_index=132 name_and_type_index=325
+ - 327 :  : 'createConsoleAppender'
+ - 328 :  : name_index=327 signature_index=121
+ - 329 :  : klass_index=2 name_and_type_index=328
+ - 330 :  : 57
+ - 331 :  : 58
+ - 332 :  : 'org/apache/log4j/Level'
+ - 333 :  : 'org/apache/log4j/Level'
+ - 334 :  : 59
+ - 335 :  : 'stdout'
+ - 336 :  : "stdout" {0x10d9fcb90}
+ - 337 :  : 60
+ - 338 :  : 'org.springframework'
+ - 339 :  : "org.springframework" {0x11d70cae0}
+ - 340 :  : 'org.hibernate'
+ - 341 :  : "org.hibernate" {0x11da3b818}
+ - 342 :  : 'delegate'
+ - 343 :  : "delegate" {0x11cb56598}
+ - 344 :  : 'setGroovyObjectProperty'
+ - 345 :  : '(Ljava/lang/Object;Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;)V'
+ - 346 :  : name_index=344 signature_index=345
+ - 347 :  : klass_index=61 name_and_type_index=346
+ - 348 :  : 61
+ - 349 :  : 'resolveStrategy'
+ - 350 :  : "resolveStrategy" {0x11cb56f10}
+ - 351 :  : 62
+ - 352 :  : 63
+ - 353 :  : 64
+ - 354 :  : 65
+ - 355 :  : 66
+ - 356 :  : 67
+ - 357 :  : 'StackTrace'
+ - 358 :  : "StackTrace" {0x10d9fcbc8}
+ - 359 :  : 'java/lang/Boolean'
+ - 360 :  : 'java/lang/Boolean'
+ - 361 :  : '(Z)Ljava/lang/Boolean;'
+ - 362 :  : name_index=189 signature_index=361
+ - 363 :  : klass_index=360 name_and_type_index=362
+ - 364 :  : 'additivity'
+ - 365 :  : "additivity" {0x10d612ee8}
+ - 366 :  : 68
+ - 367 :  : 'createFullstackTraceAppender'
+ - 368 :  : name_index=367 signature_index=121
+ - 369 :  : klass_index=2 name_and_type_index=368
+ - 370 :  : 69
+ - 371 :  : 70
+ - 372 :  : 71
+ - 373 :  : 72
+ - 374 :  : 73
+ - 375 :  : 'WARNING: Exception occured configuring log4j logging: '
+ - 376 :  : "WARNING: Exception occured configuring log4j logging: " {0x10d9fcc08}
+ - 377 :  : 'root'
+ - 378 :  : 'Lorg/apache/log4j/Logger;'
+ - 379 :  : 'consoleAppender'
+ - 380 :  : 'logger'
+ - 381 :  : 'fileAppender'
+ - 382 :  : 'e'
+ - 383 :  : 'Ljava/lang/Exception;'
+ - 384 :  : 'ABlMb3dlc3RVcHBlckJvdW5kQ2xhc3NOb2RlAFBDb21tb25Bc3NpZ25PZiRvcmcuYXBhY2hlLmxvZzRqLldyaXRlckFwcGVuZGVyJG9yZy5hcGFjaGUubG9nNGouQXBwZW5kZXJTa2VsZXRvbgAJQ2xhc3NOb2RlAAAjTG9yZy9hcGFjaGUvbG9nNGovQXBwZW5kZXJTa2VsZXRvbjsA/////wAAAAA='
+ - 385 :  : 'isWarDeployed'
+ - 386 :  : name_index=385 signature_index=175
+ - 387 :  : klass_index=263 name_and_type_index=386
+ - 388 :  : 'org/apache/log4j/ConsoleAppender'
+ - 389 :  : 'org/apache/log4j/ConsoleAppender' {0x13e332bc8}
+ - 390 :  : klass_index=389 name_and_type_index=54
+ - 391 :  : 'org/codehaus/groovy/grails/plugins/log4j/appenders/GrailsConsoleAppender'
+ - 392 :  : 'org/codehaus/groovy/grails/plugins/log4j/appenders/GrailsConsoleAppender'
+ - 393 :  : klass_index=392 name_and_type_index=103
+ - 394 :  : 'org/apache/log4j/AppenderSkeleton'
+ - 395 :  : 'org/apache/log4j/AppenderSkeleton'
+ - 396 :  : 'setLayout'
+ - 397 :  : '(Lorg/apache/log4j/Layout;)V'
+ - 398 :  : name_index=396 signature_index=397
+ - 399 :  : klass_index=395 name_and_type_index=398
+ - 400 :  : 'setName'
+ - 401 :  : '(Ljava/lang/String;)V'
+ - 402 :  : name_index=400 signature_index=401
+ - 403 :  : klass_index=395 name_and_type_index=402
+ - 404 :  : 'activateOptions'
+ - 405 :  : name_index=404 signature_index=53
+ - 406 :  : klass_index=395 name_and_type_index=405
+ - 407 :  : 'console'
+ - 408 :  : "console" {0x11cfd4d20}
+ - 409 :  : 'Lorg/apache/log4j/AppenderSkeleton;'
+ - 410 :  : 74
+ - 411 :  : 75
+ - 412 :  : 76
+ - 413 :  : 'org/apache/log4j/FileAppender'
+ - 414 :  : 'org/apache/log4j/FileAppender' {0x13e334c10}
+ - 415 :  : "name" {0x11cfd6f10}
+ - 416 :  : 'stacktraceLog'
+ - 417 :  : "stacktraceLog" {0x10d9fcca0}
+ - 418 :  : 77
+ - 419 :  : 'grails/util/BuildSettingsHolder'
+ - 420 :  : 'grails/util/BuildSettingsHolder'
+ - 421 :  : 'grails/util/BuildSettings'
+ - 422 :  : 'grails/util/BuildSettings'
+ - 423 :  : 78
+ - 424 :  : 'callSafe'
+ - 425 :  : name_index=424 signature_index=100
+ - 426 :  : klass_index=132 name_and_type_index=425
+ - 427 :  : 79
+ - 428 :  : 80
+ - 429 :  : '/stacktrace.log'
+ - 430 :  : "/stacktrace.log" {0x10d9fcce8}
+ - 431 :  : 'stacktrace.log'
+ - 432 :  : "stacktrace.log" {0x10d9fcd30}
+ - 433 :  : 'file'
+ - 434 :  : "file" {0x11ca618b8}
+ - 435 :  : 81
+ - 436 :  : 'stacktrace'
+ - 437 :  : "stacktrace" {0x11ca621b8}
+ - 438 :  : 'settings'
+ - 439 :  : 'Lgrails/util/BuildSettings;'
+ - 440 :  : 'targetDir'
+ - 441 :  : '(Lgroovy/lang/Closure;)Lorg/apache/log4j/Logger;'
+ - 442 :  : 'AAlDbGFzc05vZGUAABlMb3JnL2FwYWNoZS9sb2c0ai9Mb2dnZXI7AP////8='
+ - 443 :  : 'getRootLogger'
+ - 444 :  : '()Lorg/apache/log4j/Logger;'
+ - 445 :  : name_index=443 signature_index=444
+ - 446 :  : klass_index=322 name_and_type_index=445
+ - 447 :  : 'org/codehaus/groovy/grails/plugins/log4j/RootLog4jConfig'
+ - 448 :  : 'org/codehaus/groovy/grails/plugins/log4j/RootLog4jConfig'
+ - 449 :  : klass_index=448 name_and_type_index=279
+ - 450 :  : 'c'
+ - 451 :  : '(Ljava/util/Map;Lorg/apache/log4j/Appender;)Ljava/lang/Object;'
+ - 452 :  : 82
+ - 453 :  : 83
+ - 454 :  : 84
+ - 455 :  : 85
+ - 456 :  : 86
+ - 457 :  : 87
+ - 458 :  : 88
+ - 459 :  : 89
+ - 460 :  : 90
+ - 461 :  : 91
+ - 462 :  : 'instance'
+ - 463 :  : 'Lorg/apache/log4j/Appender;'
+ - 464 :  : 'appenderName'
+ - 465 :  : '(Lorg/apache/log4j/Appender;)Ljava/lang/Object;'
+ - 466 :  : 92
+ - 467 :  : 93
+ - 468 :  : 94
+ - 469 :  : 95
+ - 470 :  : 96
+ - 471 :  : 'Appender ['
+ - 472 :  : "Appender [" {0x10d9fcd78}
+ - 473 :  : '] is null or does not define a name.'
+ - 474 :  : "] is null or does not define a name." {0x10d9fcdb8}
+ - 475 :  : 97
+ - 476 :  : 98
+ - 477 :  : 99
+ - 478 :  : 100
+ - 479 :  : 101
+ - 480 :  : 'off'
+ - 481 :  : 102
+ - 482 :  : 103
+ - 483 :  : 'appenderAndPackages'
+ - 484 :  : 'fatal'
+ - 485 :  : 104
+ - 486 :  : 105
+ - 487 :  : 'error'
+ - 488 :  : 106
+ - 489 :  : 107
+ - 490 :  : 'warn'
+ - 491 :  : 108
+ - 492 :  : 109
+ - 493 :  : 'info'
+ - 494 :  : 110
+ - 495 :  : 111
+ - 496 :  : 'debug'
+ - 497 :  : 112
+ - 498 :  : 113
+ - 499 :  : 'trace'
+ - 500 :  : 114
+ - 501 :  : 115
+ - 502 :  : 'all'
+ - 503 :  : 116
+ - 504 :  : 117
+ - 505 :  : 'setLogLevelForAppenderToPackageMap'
+ - 506 :  : '(Ljava/lang/Object;Lorg/apache/log4j/Level;)Ljava/lang/Object;'
+ - 507 :  : 118
+ - 508 :  : 'compareNotEqual'
+ - 509 :  : name_index=508 signature_index=266
+ - 510 :  : klass_index=61 name_and_type_index=509
+ - 511 :  : 119
+ - 512 :  : 'set'
+ - 513 :  : name_index=512 signature_index=289
+ - 514 :  : klass_index=309 name_and_type_index=513
+ - 515 :  : 120
+ - 516 :  : 121
+ - 517 :  : 122
+ - 518 :  : '(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;Lgroovy/lang/Reference;)V'
+ - 519 :  : name_index=51 signature_index=518
+ - 520 :  : klass_index=13 name_and_type_index=519
+ - 521 :  : name_index=424 signature_index=134
+ - 522 :  : klass_index=132 name_and_type_index=521
+ - 523 :  : 'level'
+ - 524 :  : 'Lorg/apache/log4j/Level;'
+ - 525 :  : 'eachLogger'
+ - 526 :  : '(Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;'
+ - 527 :  : 'groovy/lang/GString'
+ - 528 :  : 'groovy/lang/GString'
+ - 529 :  : 123
+ - 530 :  : 124
+ - 531 :  : 125
+ - 532 :  : 'java/util/Iterator'
+ - 533 :  : 'java/util/Iterator'
+ - 534 :  : 'hasNext'
+ - 535 :  : name_index=534 signature_index=175
+ - 536 :  : klass_index=533 name_and_type_index=535
+ - 537 :  : 'next'
+ - 538 :  : name_index=537 signature_index=121
+ - 539 :  : klass_index=533 name_and_type_index=538
+ - 540 :  : 126
+ - 541 :  : 127
+ - 542 :  : 128
+ - 543 :  : 129
+ - 544 :  : 130
+ - 545 :  : 131
+ - 546 :  : 132
+ - 547 :  : 133
+ - 548 :  : 134
+ - 549 :  : 'packages'
+ - 550 :  : 'p'
+ - 551 :  : '([Ljava/lang/Object;)Ljava/lang/Object;'
+ - 552 :  : 135
+ - 553 :  : klass_index=15 name_and_type_index=279
+ - 554 :  : '[Ljava/lang/Object;'
+ - 555 :  : 136
+ - 556 :  : klass_index=17 name_and_type_index=279
+ - 557 :  : 137
+ - 558 :  : klass_index=19 name_and_type_index=279
+ - 559 :  : 138
+ - 560 :  : klass_index=21 name_and_type_index=279
+ - 561 :  : 139
+ - 562 :  : klass_index=23 name_and_type_index=279
+ - 563 :  : 140
+ - 564 :  : klass_index=25 name_and_type_index=279
+ - 565 :  : 141
+ - 566 :  : klass_index=27 name_and_type_index=279
+ - 567 :  : 142
+ - 568 :  : klass_index=29 name_and_type_index=279
+ - 569 :  : 'removeAppender'
+ - 570 :  : 143
+ - 571 :  : 144
+ - 572 :  : 'getClass'
+ - 573 :  : '()Ljava/lang/Class;'
+ - 574 :  : name_index=572 signature_index=573
+ - 575 :  : klass_index=4 name_and_type_index=574
+ - 576 :  : 'initMetaClass'
+ - 577 :  : '(Ljava/lang/Object;)Lgroovy/lang/MetaClass;'
+ - 578 :  : name_index=576 signature_index=577
+ - 579 :  : klass_index=61 name_and_type_index=578
+ - 580 :  : name_index=39 signature_index=40
+ - 581 :  : klass_index=2 name_and_type_index=580
+ - 582 :  : 'org/codehaus/groovy/reflection/ClassInfo'
+ - 583 :  : 'org/codehaus/groovy/reflection/ClassInfo' {0x13ceaf268}
+ - 584 :  : 'getClassInfo'
+ - 585 :  : '(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;'
+ - 586 :  : name_index=584 signature_index=585
+ - 587 :  : klass_index=583 name_and_type_index=586
+ - 588 :  : 'getMetaClass'
+ - 589 :  : name_index=588 signature_index=69
+ - 590 :  : klass_index=583 name_and_type_index=589
+ - 591 :  : 'this$dist$invoke$1'
+ - 592 :  : 'despreadList'
+ - 593 :  : '([Ljava/lang/Object;[Ljava/lang/Object;[I)[Ljava/lang/Object;'
+ - 594 :  : name_index=592 signature_index=593
+ - 595 :  : klass_index=61 name_and_type_index=594
+ - 596 :  : 'invokeMethodOnCurrentN'
+ - 597 :  : '(Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;'
+ - 598 :  : name_index=596 signature_index=597
+ - 599 :  : klass_index=61 name_and_type_index=598
+ - 600 :  : 'this$dist$set$1'
+ - 601 :  : '(Ljava/lang/String;Ljava/lang/Object;)V'
+ - 602 :  : 'setGroovyObjectField'
+ - 603 :  : name_index=602 signature_index=345
+ - 604 :  : klass_index=61 name_and_type_index=603
+ - 605 :  : 'value'
+ - 606 :  : 'this$dist$get$1'
+ - 607 :  : 'getGroovyObjectField'
+ - 608 :  : '(Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;)Ljava/lang/Object;'
+ - 609 :  : name_index=607 signature_index=608
+ - 610 :  : klass_index=61 name_and_type_index=609
+ - 611 :  : 'setMetaClass'
+ - 612 :  : '(Lgroovy/lang/MetaClass;)V'
+ - 613 :  : 'invokeMethod'
+ - 614 :  : klass_index=2 name_and_type_index=589
+ - 615 :  : 'groovy/lang/MetaClass'
+ - 616 :  : 'groovy/lang/MetaClass'
+ - 617 :  : '(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 618 :  : name_index=613 signature_index=617
+ - 619 :  : klass_index=616 name_and_type_index=618
+ - 620 :  : 'getProperty'
+ - 621 :  : '(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;'
+ - 622 :  : name_index=620 signature_index=621
+ - 623 :  : klass_index=616 name_and_type_index=622
+ - 624 :  : '(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V'
+ - 625 :  : name_index=202 signature_index=624
+ - 626 :  : klass_index=616 name_and_type_index=625
+ - 627 :  : '__$swapInit'
+ - 628 :  : name_index=49 signature_index=50
+ - 629 :  : klass_index=2 name_and_type_index=628
+ - 630 :  : '<clinit>'
+ - 631 :  : name_index=627 signature_index=53
+ - 632 :  : klass_index=2 name_and_type_index=631
+ - 633 :  : name_index=48 signature_index=47
+ - 634 :  : klass_index=2 name_and_type_index=633
+ - 635 :  : 1356008103916
+ - 637 :  : name_index=46 signature_index=47
+ - 638 :  : klass_index=2 name_and_type_index=637
+ - 639 :  : 145
+ - 640 :  : 'org/apache/log4j/PatternLayout'
+ - 641 :  : 'org/apache/log4j/PatternLayout' {0x13e31c830}
+ - 642 :  : 'conversionPattern'
+ - 643 :  : "conversionPattern" {0x10d637358}
+ - 644 :  : '%d [%t] %-5p %c{2} %x - %m%n'
+ - 645 :  : "%d [%t] %-5p %c{2} %x - %m%n" {0x10d6373a8}
+ - 646 :  : 'xml'
+ - 647 :  : "xml" {0x11d2347d8}
+ - 648 :  : 'org/apache/log4j/xml/XMLLayout'
+ - 649 :  : 'org/apache/log4j/xml/XMLLayout' {0x13e32a498}
+ - 650 :  : 'html'
+ - 651 :  : "html" {0x11d2341d8}
+ - 652 :  : 'org/apache/log4j/HTMLLayout'
+ - 653 :  : 'org/apache/log4j/HTMLLayout' {0x13e32c558}
+ - 654 :  : 'simple'
+ - 655 :  : "simple" {0x10d8886e0}
+ - 656 :  : 'org/apache/log4j/SimpleLayout'
+ - 657 :  : 'org/apache/log4j/SimpleLayout' {0x13e32cee0}
+ - 658 :  : 'pattern'
+ - 659 :  : "pattern" {0x11d5c3a18}
+ - 660 :  : 'jdbc'
+ - 661 :  : "jdbc" {0x10d8986d0}
+ - 662 :  : 'org/apache/log4j/jdbc/JDBCAppender'
+ - 663 :  : 'org/apache/log4j/jdbc/JDBCAppender' {0x13e32f518}
+ - 664 :  : 'null'
+ - 665 :  : "null" {0x11ca60400}
+ - 666 :  : 'org/apache/log4j/varia/NullAppender'
+ - 667 :  : 'org/apache/log4j/varia/NullAppender' {0x13db81228}
+ - 668 :  : 'rollingFile'
+ - 669 :  : "rollingFile" {0x10d911b98}
+ - 670 :  : 'org/apache/log4j/RollingFileAppender'
+ - 671 :  : 'org/apache/log4j/RollingFileAppender' {0x13e336770}
+ - 672 :  : 'getDEFAULT_PATTERN_LAYOUT'
+ - 673 :  : '()Lorg/apache/log4j/PatternLayout;'
+ - 674 :  : 'getLAYOUTS'
+ - 675 :  : 'getAPPENDERS'
+ - 676 :  : 'this$2$isCustomEnvironmentMethod'
+ - 677 :  : name_index=259 signature_index=260
+ - 678 :  : klass_index=2 name_and_type_index=677
+ - 679 :  : 'this$2$createConsoleAppender'
+ - 680 :  : 'this$2$createFullstackTraceAppender'
+ - 681 :  : 'this$2$setLogLevelForAppenderToPackageMap'
+ - 682 :  : name_index=505 signature_index=506
+ - 683 :  : klass_index=2 name_and_type_index=682
+ - 684 :  : 'super$1$wait'
+ - 685 :  : 'wait'
+ - 686 :  : name_index=685 signature_index=53
+ - 687 :  : klass_index=4 name_and_type_index=686
+ - 688 :  : 'super$1$toString'
+ - 689 :  : '()Ljava/lang/String;'
+ - 690 :  : 'toString'
+ - 691 :  : name_index=690 signature_index=689
+ - 692 :  : klass_index=4 name_and_type_index=691
+ - 693 :  : '(J)V'
+ - 694 :  : name_index=685 signature_index=693
+ - 695 :  : klass_index=4 name_and_type_index=694
+ - 696 :  : '(JI)V'
+ - 697 :  : name_index=685 signature_index=696
+ - 698 :  : klass_index=4 name_and_type_index=697
+ - 699 :  : 'super$1$notify'
+ - 700 :  : 'notify'
+ - 701 :  : name_index=700 signature_index=53
+ - 702 :  : klass_index=4 name_and_type_index=701
+ - 703 :  : 'super$1$notifyAll'
+ - 704 :  : 'notifyAll'
+ - 705 :  : name_index=704 signature_index=53
+ - 706 :  : klass_index=4 name_and_type_index=705
+ - 707 :  : 'super$1$getClass'
+ - 708 :  : 'super$1$clone'
+ - 709 :  : 'clone'
+ - 710 :  : name_index=709 signature_index=121
+ - 711 :  : klass_index=4 name_and_type_index=710
+ - 712 :  : 'super$1$equals'
+ - 713 :  : 'equals'
+ - 714 :  : name_index=713 signature_index=140
+ - 715 :  : klass_index=4 name_and_type_index=714
+ - 716 :  : 'super$1$hashCode'
+ - 717 :  : '()I'
+ - 718 :  : 'hashCode'
+ - 719 :  : name_index=718 signature_index=717
+ - 720 :  : klass_index=4 name_and_type_index=719
+ - 721 :  : 'super$1$finalize'
+ - 722 :  : 'finalize'
+ - 723 :  : name_index=722 signature_index=53
+ - 724 :  : klass_index=4 name_and_type_index=723
+ - 725 :  : '$createCallSiteArray_1'
+ - 726 :  : '([Ljava/lang/String;)V'
+ - 727 :  : 'containsKey'
+ - 728 :  : "containsKey" {0x11cfd7d50}
+ - 729 :  : 'newInstance'
+ - 730 :  : "newInstance" {0x11ca69820}
+ - 731 :  : 'getAt'
+ - 732 :  : "getAt" {0x11cb5bd10}
+ - 733 :  : "error" {0x11d468288}
+ - 734 :  : '<$constructor$>'
+ - 735 :  : "<$constructor$>" {0x11cfd7240}
+ - 736 :  : 'populate'
+ - 737 :  : "populate" {0x11cfd4a68}
+ - 738 :  : 'putAt'
+ - 739 :  : "putAt" {0x11cb5b7e8}
+ - 740 :  : "activateOptions" {0x10d612c08}
+ - 741 :  : "isCustomEnvironmentMethod" {0x10d612c50}
+ - 742 :  : "invokeCallable" {0x10d612cb0}
+ - 743 :  : 'current'
+ - 744 :  : "current" {0x11cfd44e0}
+ - 745 :  : 'CUSTOM'
+ - 746 :  : "CUSTOM" {0x11cb5c778}
+ - 747 :  : "configure" {0x11d70d020}
+ - 748 :  : 'values'
+ - 749 :  : "values" {0x11ca678d0}
+ - 750 :  : "getRootLogger" {0x10d612cf8}
+ - 751 :  : "createConsoleAppender" {0x10d612d40}
+ - 752 :  : 'setLevel'
+ - 753 :  : "setLevel" {0x11eb1b690}
+ - 754 :  : 'ERROR'
+ - 755 :  : "ERROR" {0x11d5c2b30}
+ - 756 :  : "DELEGATE_FIRST" {0x11cb59b80}
+ - 757 :  : "call" {0x11ca68308}
+ - 758 :  : 'hasMoreElements'
+ - 759 :  : "hasMoreElements" {0x11dc0e060}
+ - 760 :  : 'allAppenders'
+ - 761 :  : "allAppenders" {0x10d612d98}
+ - 762 :  : 'addAppender'
+ - 763 :  : "addAppender" {0x10d612dd8}
+ - 764 :  : 'getLogger'
+ - 765 :  : "getLogger" {0x11d468120}
+ - 766 :  : "createFullstackTraceAppender" {0x10d612e18}
+ - 767 :  : 'message'
+ - 768 :  : "message" {0x11d5c39e8}
+ - 769 :  : 'getSettings'
+ - 770 :  : "getSettings" {0x11d5c4570}
+ - 771 :  : 'getProjectTargetDir'
+ - 772 :  : "getProjectTargetDir" {0x11cfd7000}
+ - 773 :  : 'mkdirs'
+ - 774 :  : "mkdirs" {0x11d0dcdb0}
+ - 775 :  : 'absolutePath'
+ - 776 :  : "absolutePath" {0x11d70d8a8}
+ - 777 :  : "next" {0x11ca67eb8}
+ - 778 :  : 'iterator'
+ - 779 :  : "iterator" {0x11cb5c1d8}
+ - 780 :  : "setLogLevelForAppenderToPackageMap" {0x10d612e78}
+ - 781 :  : 'OFF'
+ - 782 :  : "OFF" {0x11ca65398}
+ - 783 :  : 'FATAL'
+ - 784 :  : "FATAL" {0x11da3a6d8}
+ - 785 :  : 'WARN'
+ - 786 :  : "WARN" {0x11da3abb8}
+ - 787 :  : 'INFO'
+ - 788 :  : "INFO" {0x11ca689c8}
+ - 789 :  : 'DEBUG'
+ - 790 :  : "DEBUG" {0x11da3a6c0}
+ - 791 :  : 'TRACE'
+ - 792 :  : "TRACE" {0x11da3c088}
+ - 793 :  : 'ALL'
+ - 794 :  : "ALL" {0x11ca64198}
+ - 795 :  : 'remove'
+ - 796 :  : "remove" {0x11cb55c50}
+ - 797 :  : 'each'
+ - 798 :  : "each" {0x11ca66370}
+ - 799 :  : "toString" {0x11ca61d08}
+ - 800 :  : "eachLogger" {0x10d612f28}
+ - 801 :  : "removeAppender" {0x10d612f68}
+ - 802 :  : '$createCallSiteArray'
+ - 803 :  : '()Lorg/codehaus/groovy/runtime/callsite/CallSiteArray;'
+ - 804 :  : 146
+ - 805 :  : name_index=725 signature_index=726
+ - 806 :  : klass_index=2 name_and_type_index=805
+ - 807 :  : 'org/codehaus/groovy/runtime/callsite/CallSiteArray'
+ - 808 :  : 'org/codehaus/groovy/runtime/callsite/CallSiteArray' {0x13d282120}
+ - 809 :  : '(Ljava/lang/Class;[Ljava/lang/String;)V'
+ - 810 :  : name_index=51 signature_index=809
+ - 811 :  : klass_index=808 name_and_type_index=810
+ - 812 :  : 'java/lang/ref/SoftReference'
+ - 813 :  : 'java/lang/ref/SoftReference' {0x13ca8fc98}
+ - 814 :  : name_index=99 signature_index=121
+ - 815 :  : klass_index=813 name_and_type_index=814
+ - 816 :  : name_index=802 signature_index=803
+ - 817 :  : klass_index=2 name_and_type_index=816
+ - 818 :  : klass_index=813 name_and_type_index=310
+ - 819 :  : 'array'
+ - 820 :  : '[Lorg/codehaus/groovy/runtime/callsite/CallSite;'
+ - 821 :  : name_index=819 signature_index=820
+ - 822 :  : klass_index=808 name_and_type_index=821
+ - 823 :  : 'class$'
+ - 824 :  : '(Ljava/lang/String;)Ljava/lang/Class;'
+ - 825 :  : 'java/lang/ClassNotFoundException'
+ - 826 :  : 'java/lang/ClassNotFoundException'
+ - 827 :  : 'java/lang/Class'
+ - 828 :  : 'java/lang/Class'
+ - 829 :  : 'forName'
+ - 830 :  : name_index=829 signature_index=824
+ - 831 :  : klass_index=828 name_and_type_index=830
+ - 832 :  : 'java/lang/NoClassDefFoundError'
+ - 833 :  : 'java/lang/NoClassDefFoundError'
+ - 834 :  : 'getMessage'
+ - 835 :  : name_index=834 signature_index=689
+ - 836 :  : klass_index=826 name_and_type_index=835
+ - 837 :  : name_index=51 signature_index=401
+ - 838 :  : klass_index=833 name_and_type_index=837
+ - 839 :  : 'Code'
+ - 840 :  : 'LocalVariableTable'
+ - 841 :  : 'LineNumberTable'
+ - 842 :  : 'RuntimeVisibleAnnotations'
+ - 843 :  : 'SourceFile'
+ - 844 :  : 'InnerClasses'
+
+R10=0x0000000000000000 is an unknown value
+R11=0x0000000109be9710 [CodeBlob (0x0000000109be9710)]
+Framesize: 10
+R12=0x0000000000000000 is an unknown value
+R13=0x000000013e31454f is an oop
+{constMethod} 
+ - klass: {other class}
+ - method:       0x000000013e3145d8 {method} 'initialize' '(Lgroovy/util/ConfigObject;)V' in 'org/codehaus/groovy/grails/plugins/log4j/Log4jConfig'
+ - exceptions:   0x000000013ca61d50
+bci_from(0x13e31454f) = 39; print_codes():
+R14=0x0000000109847d00 is pointing into the stack for thread: 0x00007f95cd004800
+R15=0x00007f95cd004800 is a thread
+
+
+Stack: [0x000000010975b000,0x000000010985b000],  sp=0x0000000109847ca0,  free space=947k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+j  org.codehaus.groovy.grails.plugins.log4j.Log4jConfig.initialize(Lgroovy/util/ConfigObject;)V+39
+j  org.codehaus.groovy.grails.plugins.logging.LoggingInitializer.initialize(Lgroovy/util/ConfigObject;)V+1
+j  org.codehaus.groovy.grails.plugins.logging.LoggingInitializer$initialize.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+19
+j  org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(Lorg/codehaus/groovy/runtime/callsite/CallSite;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+8
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+3
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.codehaus.groovy.grails.project.packaging.GrailsProjectPackager.startLogging(Lgroovy/util/ConfigObject;)V+72
+j  org.codehaus.groovy.grails.project.packaging.GrailsProjectPackager.packageApplication()Lgroovy/util/ConfigObject;+439
+j  org.codehaus.groovy.grails.project.packaging.GrailsProjectPackager$packageApplication.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+13
+j  org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(Lorg/codehaus/groovy/runtime/callsite/CallSite;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+8
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+3
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(Ljava/lang/Object;)Ljava/lang/Object;+5
+j  _GrailsPackage_groovy$_run_closure2.doCall(Ljava/lang/Object;)Ljava/lang/Object;+116
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x28855f]
+V  [libjvm.dylib+0x28832c]
+V  [libjvm.dylib+0x3f54ca]
+V  [libjvm.dylib+0x3f5922]
+V  [libjvm.dylib+0x2bc987]
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+1972
+j  org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+9
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+1076
+j  groovy.lang.ExpandoMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+44
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;+10
+j  groovy.lang.DelegatingMetaClass.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;+7
+j  org.codehaus.gant.GantMetaClass.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;+111
+j  org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+18
+j  org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(Lorg/codehaus/groovy/runtime/callsite/CallSite;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+8
+j  org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+91
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(Ljava/lang/Object;)Ljava/lang/Object;+22
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x28855f]
+V  [libjvm.dylib+0x28832c]
+V  [libjvm.dylib+0x3f54ca]
+V  [libjvm.dylib+0x3f5922]
+V  [libjvm.dylib+0x2bc987]
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+1972
+j  org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSite.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+19
+j  org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(Lgroovy/lang/GroovyObject;[Ljava/lang/Object;)Ljava/lang/Object;+12
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall()Ljava/lang/Object;+16
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x28855f]
+V  [libjvm.dylib+0x28832c]
+V  [libjvm.dylib+0x3f54ca]
+V  [libjvm.dylib+0x3f5922]
+V  [libjvm.dylib+0x2bc987]
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+1972
+j  org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.call(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+12
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(Ljava/lang/Object;)Ljava/lang/Object;+5
+j  org.codehaus.gant.GantBinding.withTargetEvent(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;+157
+j  org.codehaus.gant.GantBinding.this$4$withTargetEvent(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;+4
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x28855f]
+V  [libjvm.dylib+0x28832c]
+V  [libjvm.dylib+0x3f54ca]
+V  [libjvm.dylib+0x3f5922]
+V  [libjvm.dylib+0x2bc987]
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+1972
+j  org.codehaus.groovy.reflection.CachedMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  groovy.lang.MetaMethod.doMethodInvoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+9
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+1076
+j  groovy.lang.ExpandoMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+44
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;+10
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+799
+j  groovy.lang.ExpandoMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+44
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;+10
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;+56
+j  groovy.lang.GroovyObjectSupport.invokeMethod(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;+7
+j  groovy.lang.MetaClassImpl.invokeMethodOnGroovyObject(Ljava/lang/String;[Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+10
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+893
+j  groovy.lang.ExpandoMetaClass.invokeMethod(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;ZZ)Ljava/lang/Object;+44
+j  groovy.lang.MetaClassImpl.invokeMethod(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;+10
+j  org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(Lgroovy/lang/GroovyObject;[Ljava/lang/Object;)Ljava/lang/Object;+18
+j  org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+9
+j  org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(Ljava/lang/Object;)Ljava/lang/Object;+157
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x28855f]
+V  [libjvm.dylib+0x28832c]
+V  [libjvm.dylib+0x3f54ca]
+V  [libjvm.dylib+0x3f5922]
+...<more frames>...
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f95d274c000 JavaThread "pool-2-thread-4" [_thread_blocked, id=22531, stack(0x00000001507d1000,0x00000001508d1000)]
+  0x00007f95cf959000 JavaThread "pool-2-thread-3" [_thread_blocked, id=22275, stack(0x000000014fe66000,0x000000014ff66000)]
+  0x00007f95d2425000 JavaThread "pool-2-thread-2" [_thread_blocked, id=22019, stack(0x00000001506ce000,0x00000001507ce000)]
+  0x00007f95d09d7800 JavaThread "pool-2-thread-1" [_thread_blocked, id=21763, stack(0x00000001505cb000,0x00000001506cb000)]
+  0x00007f95ceff0000 JavaThread "pool-1-thread-5" [_thread_blocked, id=21251, stack(0x000000014f7e5000,0x000000014f8e5000)]
+  0x00007f95cfa8a800 JavaThread "pool-1-thread-4" [_thread_blocked, id=15627, stack(0x000000014f6e2000,0x000000014f7e2000)]
+  0x00007f95d0be7000 JavaThread "pool-1-thread-3" [_thread_blocked, id=14347, stack(0x000000014f5df000,0x000000014f6df000)]
+  0x00007f95cfdf3000 JavaThread "pool-1-thread-2" [_thread_blocked, id=15123, stack(0x000000014f4dc000,0x000000014f5dc000)]
+  0x00007f95cd2e6000 JavaThread "pool-1-thread-1" [_thread_blocked, id=17167, stack(0x000000014f3d9000,0x000000014f4d9000)]
+  0x00007f95d301d800 JavaThread "FileSystemWatcher: files=#2 cl=org.codehaus.groovy.grails.cli.support.GrailsRootLoader@556292a4" daemon [_thread_blocked, id=20231, stack(0x000000014e2e5000,0x000000014e3e5000)]
+  0x00007f95cc7f5800 JavaThread "process reaper" daemon [_thread_blocked, id=19971, stack(0x000000014db3e000,0x000000014db66000)]
+  0x00007f95ce018000 JavaThread "Service Thread" daemon [_thread_blocked, id=19459, stack(0x000000014d8cf000,0x000000014d9cf000)]
+  0x00007f95ce015000 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=19203, stack(0x000000014d7cc000,0x000000014d8cc000)]
+  0x00007f95ce014800 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=18947, stack(0x000000014d6c9000,0x000000014d7c9000)]
+  0x00007f95ce003800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=18691, stack(0x000000014d509000,0x000000014d609000)]
+  0x00007f95cd053000 JavaThread "Finalizer" daemon [_thread_blocked, id=14083, stack(0x000000014d244000,0x000000014d344000)]
+  0x00007f95ce002000 JavaThread "Reference Handler" daemon [_thread_blocked, id=13827, stack(0x000000014d141000,0x000000014d241000)]
+=>0x00007f95cd004800 JavaThread "main" [_thread_in_Java, id=5891, stack(0x000000010975b000,0x000000010985b000)]
+
+Other Threads:
+  0x00007f95cd052800 VMThread [stack: 0x000000014d03e000,0x000000014d13e000] [id=13571]
+  0x00007f95cd08e800 WatcherThread [stack: 0x000000014d9d2000,0x000000014dad2000] [id=19715]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 19648K, used 16612K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K,  91% used [0x000000010ca60000, 0x000000010da06f60, 0x000000010db70000)
+  from space 2176K,  26% used [0x000000010dd90000, 0x000000010de221d8, 0x000000010dfb0000)
+  to   space 2176K,   0% used [0x000000010db70000, 0x000000010db70000, 0x000000010dd90000)
+ tenured generation   total 43712K, used 34817K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  79% used [0x000000011ca60000, 0x000000011ec60728, 0x000000011ec60800, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 25437K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  77% used [0x000000013ca60000, 0x000000013e337538, 0x000000013e337600, 0x000000013ea60000)
+No shared spaces configured.
+
+Card table byte_map: [0x000000014ca60000,0x000000014cc61000] byte_map_base: 0x000000014c1fad00
+
+Polling page: 0x000000010989a000
+
+Code Cache  [0x0000000109981000, 0x0000000109df1000, 0x000000010c981000)
+ total_blobs=1212 nmethods=662 adapters=501 free_code_cache=44786Kb largest_free_block=45717824
+
+Compilation events (10 events):
+Event: 26.929 Thread 0x00007f95ce015000 nmethod 712 0x0000000109a35850 code [0x0000000109a359c0, 0x0000000109a35df8]
+Event: 26.930 Thread 0x00007f95ce015000  713             java.util.HashMap$Values::iterator (8 bytes)
+Event: 26.935 Thread 0x00007f95ce015000 nmethod 713 0x0000000109b49210 code [0x0000000109b49380, 0x0000000109b49618]
+Event: 26.935 Thread 0x00007f95ce015000  714             org.springframework.asm.Type::a (251 bytes)
+Event: 26.964 Thread 0x00007f95ce015000 nmethod 714 0x0000000109a05a10 code [0x0000000109a05cc0, 0x0000000109a06178]
+Event: 26.965 Thread 0x00007f95ce015000  715             sl.org.objectweb.asm.MethodAdapter::visitTypeInsn (12 bytes)
+Event: 26.998 Thread 0x00007f95ce015000 nmethod 715 0x0000000109b36c90 code [0x0000000109b36e20, 0x0000000109b37188]
+Event: 26.999 Thread 0x00007f95ce015000  716             java.lang.Character::toUpperCaseEx (30 bytes)
+Event: 27.000 Thread 0x00007f95ce015000 nmethod 716 0x0000000109b87fd0 code [0x0000000109b88120, 0x0000000109b88298]
+Event: 27.000 Thread 0x00007f95ce015000  717             java.beans.Introspector::getTargetEventInfo (1041 bytes)
+
+GC Heap History (10 events):
+Event: 24.082 GC heap before
+{Heap before GC invocations=32 (full 0):
+ def new generation   total 19648K, used 19279K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K, 100% used [0x000000010ca60000, 0x000000010db70000, 0x000000010db70000)
+  from space 2176K,  83% used [0x000000010db70000, 0x000000010dd33f38, 0x000000010dd90000)
+  to   space 2176K,   0% used [0x000000010dd90000, 0x000000010dd90000, 0x000000010dfb0000)
+ tenured generation   total 43712K, used 31945K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  73% used [0x000000011ca60000, 0x000000011e9924f0, 0x000000011e992600, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 23786K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  72% used [0x000000013ca60000, 0x000000013e19ab28, 0x000000013e19ac00, 0x000000013ea60000)
+No shared spaces configured.
+Event: 24.095 GC heap after
+Heap after GC invocations=33 (full 0):
+ def new generation   total 19648K, used 834K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K,   0% used [0x000000010ca60000, 0x000000010ca60000, 0x000000010db70000)
+  from space 2176K,  38% used [0x000000010dd90000, 0x000000010de60830, 0x000000010dfb0000)
+  to   space 2176K,   0% used [0x000000010db70000, 0x000000010db70000, 0x000000010dd90000)
+ tenured generation   total 43712K, used 33234K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  76% used [0x000000011ca60000, 0x000000011ead4bc8, 0x000000011ead4c00, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 23786K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  72% used [0x000000013ca60000, 0x000000013e19ab28, 0x000000013e19ac00, 0x000000013ea60000)
+No shared spaces configured.
+}
+Event: 24.445 GC heap before
+{Heap before GC invocations=33 (full 0):
+ def new generation   total 19648K, used 18306K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K, 100% used [0x000000010ca60000, 0x000000010db70000, 0x000000010db70000)
+  from space 2176K,  38% used [0x000000010dd90000, 0x000000010de60830, 0x000000010dfb0000)
+  to   space 2176K,   0% used [0x000000010db70000, 0x000000010db70000, 0x000000010dd90000)
+ tenured generation   total 43712K, used 33234K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  76% used [0x000000011ca60000, 0x000000011ead4bc8, 0x000000011ead4c00, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 24413K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  74% used [0x000000013ca60000, 0x000000013e237570, 0x000000013e237600, 0x000000013ea60000)
+No shared spaces configured.
+Event: 24.452 GC heap after
+Heap after GC invocations=34 (full 0):
+ def new generation   total 19648K, used 1250K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K,   0% used [0x000000010ca60000, 0x000000010ca60000, 0x000000010db70000)
+  from space 2176K,  57% used [0x000000010db70000, 0x000000010dca88b8, 0x000000010dd90000)
+  to   space 2176K,   0% used [0x000000010dd90000, 0x000000010dd90000, 0x000000010dfb0000)
+ tenured generation   total 43712K, used 33234K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  76% used [0x000000011ca60000, 0x000000011ead4bc8, 0x000000011ead4c00, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 24413K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  74% used [0x000000013ca60000, 0x000000013e237570, 0x000000013e237600, 0x000000013ea60000)
+No shared spaces configured.
+}
+Event: 24.886 GC heap before
+{Heap before GC invocations=34 (full 0):
+ def new generation   total 19648K, used 18722K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K, 100% used [0x000000010ca60000, 0x000000010db70000, 0x000000010db70000)
+  from space 2176K,  57% used [0x000000010db70000, 0x000000010dca88b8, 0x000000010dd90000)
+  to   space 2176K,   0% used [0x000000010dd90000, 0x000000010dd90000, 0x000000010dfb0000)
+ tenured generation   total 43712K, used 33234K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  76% used [0x000000011ca60000, 0x000000011ead4bc8, 0x000000011ead4c00, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 24769K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  75% used [0x000000013ca60000, 0x000000013e2904e0, 0x000000013e290600, 0x000000013ea60000)
+No shared spaces configured.
+Event: 24.895 GC heap after
+Heap after GC invocations=35 (full 0):
+ def new generation   total 19648K, used 1182K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K,   0% used [0x000000010ca60000, 0x000000010ca60000, 0x000000010db70000)
+  from space 2176K,  54% used [0x000000010dd90000, 0x000000010deb7810, 0x000000010dfb0000)
+  to   space 2176K,   0% used [0x000000010db70000, 0x000000010db70000, 0x000000010dd90000)
+ tenured generation   total 43712K, used 33514K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  76% used [0x000000011ca60000, 0x000000011eb1aab0, 0x000000011eb1ac00, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 24769K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  75% used [0x000000013ca60000, 0x000000013e2904e0, 0x000000013e290600, 0x000000013ea60000)
+No shared spaces configured.
+}
+Event: 25.526 GC heap before
+{Heap before GC invocations=35 (full 0):
+ def new generation   total 19648K, used 18654K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K, 100% used [0x000000010ca60000, 0x000000010db70000, 0x000000010db70000)
+  from space 2176K,  54% used [0x000000010dd90000, 0x000000010deb7810, 0x000000010dfb0000)
+  to   space 2176K,   0% used [0x000000010db70000, 0x000000010db70000, 0x000000010dd90000)
+ tenured generation   total 43712K, used 33514K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  76% used [0x000000011ca60000, 0x000000011eb1aab0, 0x000000011eb1ac00, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 24898K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  75% used [0x000000013ca60000, 0x000000013e2b0990, 0x000000013e2b0a00, 0x000000013ea60000)
+No shared spaces configured.
+Event: 25.541 GC heap after
+Heap after GC invocations=36 (full 0):
+ def new generation   total 19648K, used 1146K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K,   0% used [0x000000010ca60000, 0x000000010ca60000, 0x000000010db70000)
+  from space 2176K,  52% used [0x000000010db70000, 0x000000010dc8ebc0, 0x000000010dd90000)
+  to   space 2176K,   0% used [0x000000010dd90000, 0x000000010dd90000, 0x000000010dfb0000)
+ tenured generation   total 43712K, used 33964K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  77% used [0x000000011ca60000, 0x000000011eb8b2a8, 0x000000011eb8b400, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 24898K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  75% used [0x000000013ca60000, 0x000000013e2b0990, 0x000000013e2b0a00, 0x000000013ea60000)
+No shared spaces configured.
+}
+Event: 26.237 GC heap before
+{Heap before GC invocations=36 (full 0):
+ def new generation   total 19648K, used 18618K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K, 100% used [0x000000010ca60000, 0x000000010db70000, 0x000000010db70000)
+  from space 2176K,  52% used [0x000000010db70000, 0x000000010dc8ebc0, 0x000000010dd90000)
+  to   space 2176K,   0% used [0x000000010dd90000, 0x000000010dd90000, 0x000000010dfb0000)
+ tenured generation   total 43712K, used 33964K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  77% used [0x000000011ca60000, 0x000000011eb8b2a8, 0x000000011eb8b400, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 25116K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  76% used [0x000000013ca60000, 0x000000013e2e72b0, 0x000000013e2e7400, 0x000000013ea60000)
+No shared spaces configured.
+Event: 26.248 GC heap after
+Heap after GC invocations=37 (full 0):
+ def new generation   total 19648K, used 584K [0x000000010ca60000, 0x000000010dfb0000, 0x000000011ca60000)
+  eden space 17472K,   0% used [0x000000010ca60000, 0x000000010ca60000, 0x000000010db70000)
+  from space 2176K,  26% used [0x000000010dd90000, 0x000000010de221d8, 0x000000010dfb0000)
+  to   space 2176K,   0% used [0x000000010db70000, 0x000000010db70000, 0x000000010dd90000)
+ tenured generation   total 43712K, used 34817K [0x000000011ca60000, 0x000000011f510000, 0x000000013ca60000)
+   the space 43712K,  79% used [0x000000011ca60000, 0x000000011ec60728, 0x000000011ec60800, 0x000000011f510000)
+ compacting perm gen  total 32768K, used 25116K [0x000000013ca60000, 0x000000013ea60000, 0x000000014ca60000)
+   the space 32768K,  76% used [0x000000013ca60000, 0x000000013e2e72b0, 0x000000013e2e7400, 0x000000013ea60000)
+No shared spaces configured.
+}
+
+Deoptimization events (10 events):
+Event: 26.112 Thread 0x00007f95ceff0000 Uncommon trap -34 fr.pc 0x0000000109c39858
+Event: 26.112 Thread 0x00007f95ceff0000 Uncommon trap -34 fr.pc 0x0000000109cdcf70
+Event: 26.112 Thread 0x00007f95ceff0000 Uncommon trap -34 fr.pc 0x0000000109c39858
+Event: 26.112 Thread 0x00007f95ceff0000 Uncommon trap -34 fr.pc 0x0000000109cdcf70
+Event: 26.112 Thread 0x00007f95ceff0000 Uncommon trap -34 fr.pc 0x0000000109c39858
+Event: 26.113 Thread 0x00007f95ceff0000 Uncommon trap -34 fr.pc 0x0000000109cdcf70
+Event: 26.161 Thread 0x00007f95d0be7000 Uncommon trap -83 fr.pc 0x0000000109a376ec
+Event: 26.197 Thread 0x00007f95cd004800 Uncommon trap -83 fr.pc 0x0000000109ccc6e8
+Event: 26.197 Thread 0x00007f95cd004800 Uncommon trap -83 fr.pc 0x0000000109ccf14c
+Event: 27.437 Thread 0x00007f95cd004800 Uncommon trap -122 fr.pc 0x0000000109cae72c
+
+Internal exceptions (10 events):
+Event: 27.440 Thread 0x00007f95cd004800 Threw 0x000000010d9b24b8 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.440 Thread 0x00007f95cd004800 Threw 0x000000010d9b3180 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/classfile/systemDic
+Event: 27.441 Thread 0x00007f95cd004800 Threw 0x000000010d9c6cb0 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.441 Thread 0x00007f95cd004800 Threw 0x000000010d9ca538 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.441 Thread 0x00007f95cd004800 Threw 0x000000010d9cce30 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.441 Thread 0x00007f95cd004800 Threw 0x000000010d9e13c0 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.442 Thread 0x00007f95cd004800 Threw 0x000000010d9e4c08 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.442 Thread 0x00007f95cd004800 Threw 0x000000010d9e7500 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.442 Thread 0x00007f95cd004800 Threw 0x000000010d9eeb70 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/prims/jvm.cpp:1166
+Event: 27.442 Thread 0x00007f95cd004800 Threw 0x000000010d9ef840 at /HUDSON/workspace/jdk7u11-2-build-macosx-amd64-product/jdk7u11/hotspot/src/share/vm/classfile/systemDic
+
+Events (10 events):
+Event: 27.439 loading class 0x00007f95d39228b0
+Event: 27.439 loading class 0x00007f95d39228b0 done
+Event: 27.440 loading class 0x00007f95d39228b0
+Event: 27.440 loading class 0x00007f95d39228b0 done
+Event: 27.441 loading class 0x00007f95d392bfd0
+Event: 27.441 loading class 0x00007f95d392bfd0 done
+Event: 27.441 loading class 0x00007f95d392bfd0
+Event: 27.441 loading class 0x00007f95d392bfd0 done
+Event: 27.442 loading class 0x00007f95d392bfd0
+Event: 27.442 loading class 0x00007f95d392bfd0 done
+
+
+Dynamic libraries:
+0x0000000008b04000 	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x0000000008b04000 	/System/Library/Frameworks/Security.framework/Versions/A/Security
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x0000000008b04000 	/usr/lib/libz.1.dylib
+0x0000000008b04000 	/usr/lib/libSystem.B.dylib
+0x0000000008b04000 	/usr/lib/libobjc.A.dylib
+0x0000000008b04000 	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x0000000008b04000 	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x0000000008b04000 	/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x0000000008b04000 	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x0000000008b04000 	/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
+0x0000000008b04000 	/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x0000000008b04000 	/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
+0x0000000008b04000 	/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore
+0x0000000008b04000 	/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x0000000008b04000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x0000000008b04000 	/usr/lib/libauto.dylib
+0x0000000008b04000 	/usr/lib/libicucore.A.dylib
+0x0000000008b04000 	/usr/lib/libxml2.2.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI
+0x0000000008b04000 	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x0000000008b04000 	/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x0000000008b04000 	/usr/lib/liblangid.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport
+0x0000000008b04000 	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x0000000008b04000 	/usr/lib/libDiagnosticMessagesClient.dylib
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x0000000008b04000 	/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis
+0x0000000008b04000 	/System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x0000000008b04000 	/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x0000000008b04000 	/System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup
+0x0000000008b04000 	/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x0000000008b04000 	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x0000000008b04000 	/usr/lib/libCRFSuite.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
+0x0000000008b04000 	/usr/lib/libc++.1.dylib
+0x0000000008b04000 	/usr/lib/libc++abi.dylib
+0x0000000008b04000 	/usr/lib/system/libcache.dylib
+0x0000000008b04000 	/usr/lib/system/libcommonCrypto.dylib
+0x0000000008b04000 	/usr/lib/system/libcompiler_rt.dylib
+0x0000000008b04000 	/usr/lib/system/libcopyfile.dylib
+0x0000000008b04000 	/usr/lib/system/libdispatch.dylib
+0x0000000008b04000 	/usr/lib/system/libdnsinfo.dylib
+0x0000000008b04000 	/usr/lib/system/libdyld.dylib
+0x0000000008b04000 	/usr/lib/system/libkeymgr.dylib
+0x0000000008b04000 	/usr/lib/system/liblaunch.dylib
+0x0000000008b04000 	/usr/lib/system/libmacho.dylib
+0x0000000008b04000 	/usr/lib/system/libquarantine.dylib
+0x0000000008b04000 	/usr/lib/system/libremovefile.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_blocks.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_c.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_dnssd.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_info.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_kernel.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_m.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_network.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_notify.dylib
+0x0000000008b04000 	/usr/lib/system/libsystem_sandbox.dylib
+0x0000000008b04000 	/usr/lib/system/libunc.dylib
+0x0000000008b04000 	/usr/lib/system/libunwind.dylib
+0x0000000008b04000 	/usr/lib/system/libxpc.dylib
+0x0000000008b04000 	/usr/lib/system/libcorecrypto.dylib
+0x0000000008b04000 	/usr/lib/libstdc++.6.dylib
+0x0000000008b04000 	/usr/lib/libbsm.0.dylib
+0x0000000008b04000 	/usr/lib/libsqlite3.dylib
+0x0000000008b04000 	/usr/lib/libxar.1.dylib
+0x0000000008b04000 	/usr/lib/libpam.2.dylib
+0x0000000008b04000 	/usr/lib/libOpenScriptingUtil.dylib
+0x0000000008b04000 	/usr/lib/libbz2.1.0.dylib
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x0000000008b04000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+0x0000000008b04000 	/System/Library/Frameworks/NetFS.framework/Versions/A/NetFS
+0x0000000008b04000 	/usr/lib/system/libkxld.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth
+0x0000000008b04000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+0x0000000008b04000 	/usr/lib/libxslt.1.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/FamilyControls.framework/Versions/A/FamilyControls
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x0000000008b04000 	/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontParser.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x0000000008b04000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x0000000008b04000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x0000000008b04000 	/usr/lib/libcups.2.dylib
+0x0000000008b04000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+0x0000000008b04000 	/System/Library/Frameworks/GSS.framework/Versions/A/GSS
+0x0000000008b04000 	/usr/lib/libresolv.9.dylib
+0x0000000008b04000 	/usr/lib/libiconv.2.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal
+0x0000000008b04000 	/System/Library/PrivateFrameworks/TrustEvaluationAgent.framework/Versions/A/TrustEvaluationAgent
+0x0000000008b04000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory
+0x0000000008b04000 	/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
+0x0000000008b04000 	/System/Library/PrivateFrameworks/Bom.framework/Versions/A/Bom
+0x0000000008b04000 	/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+0x0000000008b04000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/Frameworks/CoreImage.framework/Versions/A/CoreImage
+0x0000000008b04000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/Frameworks/ScalableUserInterface.framework/Versions/A/ScalableUserInterface
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib
+0x0000000008b04000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
+0x0000000008b04000 	/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport
+0x0000000008b04000 	/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL
+0x0000000008b04000 	/System/Library/PrivateFrameworks/FaceCoreLight.framework/Versions/A/FaceCoreLight
+0x0000000008b04000 	/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
+0x0000000008b04000 	/System/Library/PrivateFrameworks/Ubiquity.framework/Versions/A/Ubiquity
+0x0000000008b04000 	/System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement
+0x0000000008b04000 	/System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary
+0x0000000008b04000 	/System/Library/Frameworks/vecLib.framework/Versions/A/vecLib
+0x0000000008b04000 	/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x0000000008b04000 	/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore
+0x0000000008b04000 	/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication
+0x0000000008b04000 	/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication
+0x0000000008b04000 	/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols
+0x0000000108cb3000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/server/libjvm.dylib
+0x000000010985d000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/libverify.dylib
+0x000000010986a000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/libjava.dylib
+0x000000010989b000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/libinstrument.dylib
+0x0000000109978000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/libzip.dylib
+0x000000014d346000 	/System/Library/Frameworks/JavaVM.framework/Frameworks/JavaRuntimeSupport.framework/JavaRuntimeSupport
+0x000000014d35e000 	/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation
+0x000000010ca41000 	/System/Library/Frameworks/JavaVM.framework/Versions/A/JavaVM
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon
+0x000000014d373000 	/System/Library/PrivateFrameworks/JavaLaunching.framework/Versions/A/JavaLaunching
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print
+0x0000000008b04000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI
+0x000000014dafa000 	/private/var/folders/4f/23x8pd4j6b59tvv8mq890dnh0000gn/T/jna2296820912175614364.tmp
+0x000000014dad4000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/libnio.dylib
+0x000000014dcfb000 	/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/jre/lib/./libnet.dylib
+
+VM Arguments:
+jvm_args: -Xmx768M -Xms64M -XX:PermSize=32m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 -javaagent:/Users/ben/.gvm/grails/2.2.1/lib/org.springsource.springloaded/springloaded-core/jars/springloaded-core-1.1.1.jar -Xverify:none -Dspringloaded="profile=grails" -Dgrails.home=/Users/ben/.gvm/grails/2.2.1 -Dtools.jar=/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/lib/tools.jar 
+java_command: org.codehaus.groovy.grails.cli.support.GrailsStarter --main org.codehaus.groovy.grails.cli.GrailsScriptRunner --conf /Users/ben/.gvm/grails/2.2.1/conf/groovy-starter.conf --classpath 
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home
+PATH=/Users/ben/.gvm/groovy/current/bin:/Users/ben/.gvm/grails/current/bin:/Users/ben/.gvm/griffon/current/bin:/Users/ben/.gvm/gradle/current/bin:/Users/ben/.gvm/vertx/current/bin:/Users/ben/.gvm/bin:/Users/ben/.gvm/ext:/Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/bin:/Library/AWS/IAMCli-1.4.0/bin:/Library/AWS/ElasticLoadBalancing-1.0.15.1/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ben/.rvm/bin
+SHELL=/bin/bash
+
+Signal Handlers:
+SIGSEGV: [libjvm.dylib+0x4a363d], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGBUS: [libjvm.dylib+0x4a363d], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGFPE: [libjvm.dylib+0x3b3051], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGPIPE: [libjvm.dylib+0x3b3051], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGXFSZ: [libjvm.dylib+0x3b3051], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGILL: [libjvm.dylib+0x3b3051], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGUSR1: SIG_DFL, sa_mask[0]=0x63807efb, sa_flags=0x00000000
+SIGUSR2: [libjvm.dylib+0x3b2bea], sa_mask[0]=0x00000000, sa_flags=0x00000042
+SIGHUP: [libjvm.dylib+0x3b0e4b], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGINT: [libjvm.dylib+0x3b0e4b], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGTERM: [libjvm.dylib+0x3b0e4b], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+SIGQUIT: [libjvm.dylib+0x3b0e4b], sa_mask[0]=0xfffefeff, sa_flags=0x00000042
+
+
+---------------  S Y S T E M  ---------------
+
+OS:Bsduname:Darwin 12.2.0 Darwin Kernel Version 12.2.0: Sat Aug 25 00:48:52 PDT 2012; root:xnu-2050.18.24~1/RELEASE_X86_64 x86_64
+rlimit: STACK 8192k, CORE 0k, NPROC 709, NOFILE 10240, AS infinity
+load average:5.17 3.39 2.57
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 37 stepping 5, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht, tsc, tscinvbit
+
+Memory: 4k page, physical 988940k(247235k free)
+
+/proc/meminfo:
+
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (23.6-b04) for bsd-amd64 JRE (1.7.0_11-b21), built on Jan 13 2013 01:04:28 by "java_re" with gcc 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2336.11.00)
+
+time: Tue Mar  5 16:11:11 2013
+elapsed time: 27 seconds
+
