@@ -46,6 +46,7 @@ AWS clients supported by "AWS SDK for Java":http://aws.amazon.com/sdkforjava/ :
 
 h3. Latest releases
 
+* 2013-03-05 *V1.3.33* : AWS SDK for Java updated to V1.3.33 + Unit tests added + refactor/bug fixes (thanks to Martin Gotink)
 * 2013-02-21 *V1.3.32* : AWS SDK for Java updated to V1.3.32 + Amazon OpsWorks and Redshift support added + bug fix
 * 2013-02-05 *V1.3.30* : AWS SDK for Java updated to V1.3.30 + Amazon Elastic Transcoder support added
 * 2012-12-20 *V1.3.26* : AWS SDK for Java updated to V1.3.26 + S3 Resources scripts (to use with CDN Resources plugin)
