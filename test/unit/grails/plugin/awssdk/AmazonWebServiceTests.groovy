@@ -98,6 +98,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getAutoScalingAsync('eu-west-1').class == AmazonAutoScalingAsyncClient
         assert amazonWebService.getAutoScaling().class == AmazonAutoScalingClient
         assert amazonWebService.getAutoScaling('eu-west-1').class == AmazonAutoScalingClient
+        assert amazonWebService.getAutoScaling('eu-west-1').endpoint.toString() == 'https://autoscaling.eu-west-1.amazonaws.com'
     }
 
     void testAutoScalingClientWithoutCredentials() {
@@ -107,6 +108,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getAutoScalingAsync('eu-west-1').class == AmazonAutoScalingAsyncClient
         assert amazonWebService.getAutoScaling().class == AmazonAutoScalingClient
         assert amazonWebService.getAutoScaling('eu-west-1').class == AmazonAutoScalingClient
+        assert amazonWebService.getAutoScaling('eu-west-1').endpoint.toString() == 'https://autoscaling.eu-west-1.amazonaws.com'
     }
 
     void testCloudFormationClientWithCredentials() {
@@ -116,6 +118,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudFormationAsync('eu-west-1').class == AmazonCloudFormationAsyncClient
         assert amazonWebService.getCloudFormation().class == AmazonCloudFormationClient
         assert amazonWebService.getCloudFormation('eu-west-1').class == AmazonCloudFormationClient
+        assert amazonWebService.getCloudFormation('eu-west-1').endpoint.toString() == 'https://cloudformation.eu-west-1.amazonaws.com'
     }
 
     void testCloudFormationClientWithoutCredentials() {
@@ -125,16 +128,19 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudFormationAsync('eu-west-1').class == AmazonCloudFormationAsyncClient
         assert amazonWebService.getCloudFormation().class == AmazonCloudFormationClient
         assert amazonWebService.getCloudFormation('eu-west-1').class == AmazonCloudFormationClient
+        assert amazonWebService.getCloudFormation('eu-west-1').endpoint.toString() == 'https://cloudformation.eu-west-1.amazonaws.com'
     }
 
     void testCloudFrontClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
         assert amazonWebService.getCloudFrontAsync().class == AmazonCloudFrontAsyncClient
+        assert amazonWebService.getCloudFrontAsync().endpoint.toString() == 'https://cloudfront.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getCloudFrontAsync('eu-west-1')
         }
         assert amazonWebService.getCloudFront().class == AmazonCloudFrontClient
+        assert amazonWebService.getCloudFront().endpoint.toString() == 'https://cloudfront.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getCloudFront('eu-west-1')
         }
@@ -144,10 +150,12 @@ class AmazonWebServiceTests {
         def amazonWebService = getServiceWithoutCredentials()
 
         assert amazonWebService.getCloudFrontAsync().class == AmazonCloudFrontAsyncClient
+        assert amazonWebService.getCloudFrontAsync().endpoint.toString() == 'https://cloudfront.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getCloudFrontAsync('eu-west-1')
         }
         assert amazonWebService.getCloudFront().class == AmazonCloudFrontClient
+        assert amazonWebService.getCloudFront().endpoint.toString() == 'https://cloudfront.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getCloudFront('eu-west-1')
         }
@@ -160,6 +168,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudSearchAsync('eu-west-1').class == AmazonCloudSearchAsyncClient
         assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
         assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').endpoint.toString() == 'https://cloudsearch.eu-west-1.amazonaws.com'
     }
 
     void testCloudSearchClientWithoutCredentials() {
@@ -169,6 +178,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudSearchAsync('eu-west-1').class == AmazonCloudSearchAsyncClient
         assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
         assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').endpoint.toString() == 'https://cloudsearch.eu-west-1.amazonaws.com'
     }
 
     void testCloudWatchClientWithCredentials() {
@@ -178,6 +188,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudWatchAsync('eu-west-1').class == AmazonCloudWatchAsyncClient
         assert amazonWebService.getCloudWatch().class == AmazonCloudWatchClient
         assert amazonWebService.getCloudWatch('eu-west-1').class == AmazonCloudWatchClient
+        assert amazonWebService.getCloudWatch('eu-west-1').endpoint.toString() == 'https://monitoring.eu-west-1.amazonaws.com'
     }
 
     void testCloudWatchClientWithoutCredentials() {
@@ -187,6 +198,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudWatchAsync('eu-west-1').class == AmazonCloudWatchAsyncClient
         assert amazonWebService.getCloudWatch().class == AmazonCloudWatchClient
         assert amazonWebService.getCloudWatch('eu-west-1').class == AmazonCloudWatchClient
+        assert amazonWebService.getCloudWatch('eu-west-1').endpoint.toString() == 'https://monitoring.eu-west-1.amazonaws.com'
     }
 
     void testDynamoDBClientWithCredentials() {
@@ -196,6 +208,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getDynamoDBAsync('eu-west-1').class == AmazonDynamoDBAsyncClient
         assert amazonWebService.getDynamoDB().class == AmazonDynamoDBClient
         assert amazonWebService.getDynamoDB('eu-west-1').class == AmazonDynamoDBClient
+        assert amazonWebService.getDynamoDB('eu-west-1').endpoint.toString() == 'https://dynamodb.eu-west-1.amazonaws.com'
     }
 
     void testDynamoDBClientWithoutCredentials() {
@@ -205,6 +218,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getDynamoDBAsync('eu-west-1').class == AmazonDynamoDBAsyncClient
         assert amazonWebService.getDynamoDB().class == AmazonDynamoDBClient
         assert amazonWebService.getDynamoDB('eu-west-1').class == AmazonDynamoDBClient
+        assert amazonWebService.getDynamoDB('eu-west-1').endpoint.toString() == 'https://dynamodb.eu-west-1.amazonaws.com'
     }
 
     void testEc2ClientWithCredentials() {
@@ -214,6 +228,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getEc2Async('eu-west-1').class == AmazonEC2AsyncClient
         assert amazonWebService.getEc2().class == AmazonEC2Client
         assert amazonWebService.getEc2('eu-west-1').class == AmazonEC2Client
+        assert amazonWebService.getEc2('eu-west-1').endpoint.toString() == 'https://ec2.eu-west-1.amazonaws.com'
     }
 
     void testEc2ClientWithoutCredentials() {
@@ -223,6 +238,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getEc2Async('eu-west-1').class == AmazonEC2AsyncClient
         assert amazonWebService.getEc2().class == AmazonEC2Client
         assert amazonWebService.getEc2('eu-west-1').class == AmazonEC2Client
+        assert amazonWebService.getEc2('eu-west-1').endpoint.toString() == 'https://ec2.eu-west-1.amazonaws.com'
     }
 
     void testElasticBeanstalkClientWithCredentials() {
@@ -232,6 +248,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticBeanstalkAsync('eu-west-1').class == AWSElasticBeanstalkAsyncClient
         assert amazonWebService.getElasticBeanstalk().class == AWSElasticBeanstalkClient
         assert amazonWebService.getElasticBeanstalk('eu-west-1').class == AWSElasticBeanstalkClient
+        assert amazonWebService.getElasticBeanstalk('eu-west-1').endpoint.toString() == 'https://elasticbeanstalk.eu-west-1.amazonaws.com'
     }
 
     void testElasticBeanstalkClientWithoutCredentials() {
@@ -241,6 +258,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticBeanstalkAsync('eu-west-1').class == AWSElasticBeanstalkAsyncClient
         assert amazonWebService.getElasticBeanstalk().class == AWSElasticBeanstalkClient
         assert amazonWebService.getElasticBeanstalk('eu-west-1').class == AWSElasticBeanstalkClient
+        assert amazonWebService.getElasticBeanstalk('eu-west-1').endpoint.toString() == 'https://elasticbeanstalk.eu-west-1.amazonaws.com'
     }
 
     void testElastiCacheClientWithCredentials() {
@@ -250,6 +268,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElastiCacheAsync('eu-west-1').class == AmazonElastiCacheAsyncClient
         assert amazonWebService.getElastiCache().class == AmazonElastiCacheClient
         assert amazonWebService.getElastiCache('eu-west-1').class == AmazonElastiCacheClient
+        assert amazonWebService.getElastiCache('eu-west-1').endpoint.toString() == 'https://elasticache.eu-west-1.amazonaws.com'
     }
 
     void testElastiCacheClientWithoutCredentials() {
@@ -259,6 +278,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElastiCacheAsync('eu-west-1').class == AmazonElastiCacheAsyncClient
         assert amazonWebService.getElastiCache().class == AmazonElastiCacheClient
         assert amazonWebService.getElastiCache('eu-west-1').class == AmazonElastiCacheClient
+        assert amazonWebService.getElastiCache('eu-west-1').endpoint.toString() == 'https://elasticache.eu-west-1.amazonaws.com'
     }
 
     void testElasticLoadBalancingClientWithCredentials() {
@@ -268,6 +288,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticLoadBalancingAsync('eu-west-1').class == AmazonElasticLoadBalancingAsyncClient
         assert amazonWebService.getElasticLoadBalancing().class == AmazonElasticLoadBalancingClient
         assert amazonWebService.getElasticLoadBalancing('eu-west-1').class == AmazonElasticLoadBalancingClient
+        assert amazonWebService.getElasticLoadBalancing('eu-west-1').endpoint.toString() == 'https://elasticloadbalancing.eu-west-1.amazonaws.com'
     }
 
     void testElasticLoadBalancingClientWithoutCredentials() {
@@ -277,6 +298,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticLoadBalancingAsync('eu-west-1').class == AmazonElasticLoadBalancingAsyncClient
         assert amazonWebService.getElasticLoadBalancing().class == AmazonElasticLoadBalancingClient
         assert amazonWebService.getElasticLoadBalancing('eu-west-1').class == AmazonElasticLoadBalancingClient
+        assert amazonWebService.getElasticLoadBalancing('eu-west-1').endpoint.toString() == 'https://elasticloadbalancing.eu-west-1.amazonaws.com'
     }
 
     void testElasticMapReduceClientWithCredentials() {
@@ -286,6 +308,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticMapReduceAsync('eu-west-1').class == AmazonElasticMapReduceAsyncClient
         assert amazonWebService.getElasticMapReduce().class == AmazonElasticMapReduceClient
         assert amazonWebService.getElasticMapReduce('eu-west-1').class == AmazonElasticMapReduceClient
+        assert amazonWebService.getElasticMapReduce('eu-west-1').endpoint.toString() == 'https://elasticmapreduce.eu-west-1.amazonaws.com'
     }
 
     void testElasticMapReduceClientWithoutCredentials() {
@@ -295,6 +318,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticMapReduceAsync('eu-west-1').class == AmazonElasticMapReduceAsyncClient
         assert amazonWebService.getElasticMapReduce().class == AmazonElasticMapReduceClient
         assert amazonWebService.getElasticMapReduce('eu-west-1').class == AmazonElasticMapReduceClient
+        assert amazonWebService.getElasticMapReduce('eu-west-1').endpoint.toString() == 'https://elasticmapreduce.eu-west-1.amazonaws.com'
     }
 
     void testElasticTranscoderClientWithCredentials() {
@@ -304,6 +328,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticTranscoderAsync('eu-west-1').class == AmazonElasticTranscoderAsyncClient
         assert amazonWebService.getElasticTranscoder().class == AmazonElasticTranscoderClient
         assert amazonWebService.getElasticTranscoder('eu-west-1').class == AmazonElasticTranscoderClient
+        assert amazonWebService.getElasticTranscoder('eu-west-1').endpoint.toString() == 'https://elastictranscoder.eu-west-1.amazonaws.com'
     }
 
     void testElasticTranscoderClientWithoutCredentials() {
@@ -313,6 +338,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticTranscoderAsync('eu-west-1').class == AmazonElasticTranscoderAsyncClient
         assert amazonWebService.getElasticTranscoder().class == AmazonElasticTranscoderClient
         assert amazonWebService.getElasticTranscoder('eu-west-1').class == AmazonElasticTranscoderClient
+        assert amazonWebService.getElasticTranscoder('eu-west-1').endpoint.toString() == 'https://elastictranscoder.eu-west-1.amazonaws.com'
     }
 
     void testGlacierClientWithCredentials() {
@@ -322,6 +348,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getGlacierAsync('eu-west-1').class == AmazonGlacierAsyncClient
         assert amazonWebService.getGlacier().class == AmazonGlacierClient
         assert amazonWebService.getGlacier('eu-west-1').class == AmazonGlacierClient
+        assert amazonWebService.getGlacier('eu-west-1').endpoint.toString() == 'https://glacier.eu-west-1.amazonaws.com'
     }
 
     void testGlacierClientWithoutCredentials() {
@@ -331,6 +358,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getGlacierAsync('eu-west-1').class == AmazonGlacierAsyncClient
         assert amazonWebService.getGlacier().class == AmazonGlacierClient
         assert amazonWebService.getGlacier('eu-west-1').class == AmazonGlacierClient
+        assert amazonWebService.getGlacier('eu-west-1').endpoint.toString() == 'https://glacier.eu-west-1.amazonaws.com'
     }
 
     void testIamClientWithCredentials() {
@@ -341,6 +369,7 @@ class AmazonWebServiceTests {
             amazonWebService.getIamAsync('eu-west-1')
         }
         assert amazonWebService.getIam().class == AmazonIdentityManagementClient
+        assert amazonWebService.getIam().endpoint.toString() == 'https://iam.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getIam('eu-west-1')
         }
@@ -354,6 +383,7 @@ class AmazonWebServiceTests {
             amazonWebService.getIamAsync('eu-west-1')
         }
         assert amazonWebService.getIam().class == AmazonIdentityManagementClient
+        assert amazonWebService.getIam().endpoint.toString() == 'https://iam.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getIam('eu-west-1')
         }
@@ -367,6 +397,7 @@ class AmazonWebServiceTests {
             amazonWebService.getImportExportAsync('eu-west-1')
         }
         assert amazonWebService.getImportExport().class == AmazonImportExportClient
+        assert amazonWebService.getImportExport().endpoint.toString() == 'https://importexport.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getImportExport('eu-west-1')
         }
@@ -380,6 +411,7 @@ class AmazonWebServiceTests {
             amazonWebService.getImportExportAsync('eu-west-1')
         }
         assert amazonWebService.getImportExport().class == AmazonImportExportClient
+        assert amazonWebService.getImportExport().endpoint.toString() == 'https://importexport.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getImportExport('eu-west-1')
         }
@@ -393,6 +425,7 @@ class AmazonWebServiceTests {
             amazonWebService.getOpsWorksAsync('eu-west-1')
         }
         assert amazonWebService.getOpsWorks().class == AWSOpsWorksClient
+        assert amazonWebService.getOpsWorks().endpoint.toString() == 'https://opsworks.us-east-1.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getOpsWorks('eu-west-1')
         }
@@ -406,6 +439,7 @@ class AmazonWebServiceTests {
             amazonWebService.getOpsWorksAsync('eu-west-1')
         }
         assert amazonWebService.getOpsWorks().class == AWSOpsWorksClient
+        assert amazonWebService.getOpsWorks().endpoint.toString() == 'https://opsworks.us-east-1.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getOpsWorks('eu-west-1')
         }
@@ -418,6 +452,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getRdsAsync('eu-west-1').class == AmazonRDSAsyncClient
         assert amazonWebService.getRds().class == AmazonRDSClient
         assert amazonWebService.getRds('eu-west-1').class == AmazonRDSClient
+        assert amazonWebService.getRds('eu-west-1').endpoint.toString() == 'https://rds.eu-west-1.amazonaws.com'
     }
 
     void testRdsClientWithoutCredentials() {
@@ -427,6 +462,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getRdsAsync('eu-west-1').class == AmazonRDSAsyncClient
         assert amazonWebService.getRds().class == AmazonRDSClient
         assert amazonWebService.getRds('eu-west-1').class == AmazonRDSClient
+        assert amazonWebService.getRds('eu-west-1').endpoint.toString() == 'https://rds.eu-west-1.amazonaws.com'
     }
 
     void testRedshiftClientWithCredentials() {
@@ -437,6 +473,7 @@ class AmazonWebServiceTests {
             amazonWebService.getRedshiftAsync('eu-west-1')
         }
         assert amazonWebService.getRedshift().class == AmazonRedshiftClient
+        assert amazonWebService.getRedshift().endpoint.toString() == 'https://redshift.us-east-1.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getRedshift('eu-west-1')
         }
@@ -450,6 +487,7 @@ class AmazonWebServiceTests {
             amazonWebService.getRedshiftAsync('eu-west-1')
         }
         assert amazonWebService.getRedshift().class == AmazonRedshiftClient
+        assert amazonWebService.getRedshift().endpoint.toString() == 'https://redshift.us-east-1.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getRedshift('eu-west-1')
         }
@@ -463,6 +501,7 @@ class AmazonWebServiceTests {
             amazonWebService.getRoute53Async('eu-west-1')
         }
         assert amazonWebService.getRoute53().class == AmazonRoute53Client
+        assert amazonWebService.getRoute53().endpoint.toString() == 'https://route53.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getRoute53('eu-west-1')
         }
@@ -476,6 +515,7 @@ class AmazonWebServiceTests {
             amazonWebService.getRoute53Async('eu-west-1')
         }
         assert amazonWebService.getRoute53().class == AmazonRoute53Client
+        assert amazonWebService.getRoute53().endpoint.toString() == 'https://route53.amazonaws.com'
         shouldFail(MissingMethodException) {
             amazonWebService.getRoute53('eu-west-1')
         }
@@ -491,7 +531,9 @@ class AmazonWebServiceTests {
             amazonWebService.getS3Async('eu-west-1')
         }
         assert amazonWebService.getS3().class == AmazonS3Client
+        assert amazonWebService.getS3().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
+        assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
     }
 
     void testS3ClientWithoutCredentials() {
@@ -504,7 +546,9 @@ class AmazonWebServiceTests {
             amazonWebService.getS3Async('eu-west-1')
         }
         assert amazonWebService.getS3().class == AmazonS3Client
+        assert amazonWebService.getS3().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
+        assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
     }
 
     void testSdbClientWithCredentials() {
@@ -514,6 +558,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSdbAsync('eu-west-1').class == AmazonSimpleDBAsyncClient
         assert amazonWebService.getSdb().class == AmazonSimpleDBClient
         assert amazonWebService.getSdb('eu-west-1').class == AmazonSimpleDBClient
+        assert amazonWebService.getSdb('eu-west-1').endpoint.toString() == 'https://sdb.eu-west-1.amazonaws.com'
     }
 
     void testSdbClientWithoutCredentials() {
@@ -523,6 +568,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSdbAsync('eu-west-1').class == AmazonSimpleDBAsyncClient
         assert amazonWebService.getSdb().class == AmazonSimpleDBClient
         assert amazonWebService.getSdb('eu-west-1').class == AmazonSimpleDBClient
+        assert amazonWebService.getSdb('eu-west-1').endpoint.toString() == 'https://sdb.eu-west-1.amazonaws.com'
     }
 
     void testSesClientWithCredentials() {
@@ -532,6 +578,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSesAsync('eu-west-1').class == AmazonSimpleEmailServiceAsyncClient
         assert amazonWebService.getSes().class == AmazonSimpleEmailServiceClient
         assert amazonWebService.getSes('eu-west-1').class == AmazonSimpleEmailServiceClient
+        assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.us-east-1.amazonaws.com'
     }
 
     void testSesClientWithoutCredentials() {
@@ -541,6 +588,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSesAsync('eu-west-1').class == AmazonSimpleEmailServiceAsyncClient
         assert amazonWebService.getSes().class == AmazonSimpleEmailServiceClient
         assert amazonWebService.getSes('eu-west-1').class == AmazonSimpleEmailServiceClient
+        assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.us-east-1.amazonaws.com'
     }
 
     void testSnsClientWithCredentials() {
@@ -550,6 +598,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSnsAsync('eu-west-1').class == AmazonSNSAsyncClient
         assert amazonWebService.getSns().class == AmazonSNSClient
         assert amazonWebService.getSns('eu-west-1').class == AmazonSNSClient
+        assert amazonWebService.getSns('eu-west-1').endpoint.toString() == 'https://sns.eu-west-1.amazonaws.com'
     }
 
     void testSnsClientWithoutCredentials() {
@@ -559,6 +608,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSnsAsync('eu-west-1').class == AmazonSNSAsyncClient
         assert amazonWebService.getSns().class == AmazonSNSClient
         assert amazonWebService.getSns('eu-west-1').class == AmazonSNSClient
+        assert amazonWebService.getSns('eu-west-1').endpoint.toString() == 'https://sns.eu-west-1.amazonaws.com'
     }
 
     void testSqsClientWithCredentials() {
@@ -568,6 +618,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSqsAsync('eu-west-1').class == AmazonSQSAsyncClient
         assert amazonWebService.getSqs().class == AmazonSQSClient
         assert amazonWebService.getSqs('eu-west-1').class == AmazonSQSClient
+        assert amazonWebService.getSqs('eu-west-1').endpoint.toString() == 'https://sqs.eu-west-1.amazonaws.com'
     }
 
     void testSqsClientWithoutCredentials() {
@@ -577,6 +628,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSqsAsync('eu-west-1').class == AmazonSQSAsyncClient
         assert amazonWebService.getSqs().class == AmazonSQSClient
         assert amazonWebService.getSqs('eu-west-1').class == AmazonSQSClient
+        assert amazonWebService.getSqs('eu-west-1').endpoint.toString() == 'https://sqs.eu-west-1.amazonaws.com'
     }
 
     void testStorageGatewayClientWithCredentials() {
@@ -586,6 +638,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getStorageGatewayAsync('eu-west-1').class == AWSStorageGatewayAsyncClient
         assert amazonWebService.getStorageGateway().class == AWSStorageGatewayClient
         assert amazonWebService.getStorageGateway('eu-west-1').class == AWSStorageGatewayClient
+        assert amazonWebService.getStorageGateway('eu-west-1').endpoint.toString() == 'https://storagegateway.eu-west-1.amazonaws.com'
     }
 
     void testStorageGatewayClientWithoutCredentials() {
@@ -595,6 +648,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getStorageGatewayAsync('eu-west-1').class == AWSStorageGatewayAsyncClient
         assert amazonWebService.getStorageGateway().class == AWSStorageGatewayClient
         assert amazonWebService.getStorageGateway('eu-west-1').class == AWSStorageGatewayClient
+        assert amazonWebService.getStorageGateway('eu-west-1').endpoint.toString() == 'https://storagegateway.eu-west-1.amazonaws.com'
     }
 
     void testSwfClientWithCredentials() {
@@ -604,6 +658,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSwfAsync('eu-west-1').class == AmazonSimpleWorkflowAsyncClient
         assert amazonWebService.getSwf().class == AmazonSimpleWorkflowClient
         assert amazonWebService.getSwf('eu-west-1').class == AmazonSimpleWorkflowClient
+        assert amazonWebService.getSwf('eu-west-1').endpoint.toString() == 'https://swf.eu-west-1.amazonaws.com'
     }
 
     void testSwfClientWithoutCredentials() {
@@ -613,6 +668,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSwfAsync('eu-west-1').class == AmazonSimpleWorkflowAsyncClient
         assert amazonWebService.getSwf().class == AmazonSimpleWorkflowClient
         assert amazonWebService.getSwf('eu-west-1').class == AmazonSimpleWorkflowClient
+        assert amazonWebService.getSwf('eu-west-1').endpoint.toString() == 'https://swf.eu-west-1.amazonaws.com'
     }
 
     void testTransferManager() {
@@ -634,12 +690,12 @@ class AmazonWebServiceTests {
 
         // check if the cache returns the same object if requested twice, 
         // also make sure other calls and regions don't corrupt the cache
-        service1 = amazonWebService.getSesAsync()
-        otherRegion1 = amazonWebService.getSesAsync('eu-west-1')
+        service1 = amazonWebService.getEc2Async()
+        otherRegion1 = amazonWebService.getEc2Async('eu-west-1')
         otherService = amazonWebService.getSwfAsync()
         otherServiceType = amazonWebService.getSes()
-        service2 = amazonWebService.getSesAsync()
-        otherRegion2 = amazonWebService.getSesAsync('eu-west-1')
+        service2 = amazonWebService.getEc2Async()
+        otherRegion2 = amazonWebService.getEc2Async('eu-west-1')
         assert service1 == service2
         assert otherRegion1 == otherRegion2
         assert service1 != otherService
@@ -657,12 +713,12 @@ class AmazonWebServiceTests {
         def otherRegion1
         def otherRegion2
 
-        service1 = amazonWebService.getSes()
-        otherRegion1 = amazonWebService.getSes('eu-west-1')
+        service1 = amazonWebService.getEc2()
+        otherRegion1 = amazonWebService.getEc2('eu-west-1')
         otherService = amazonWebService.getSwf()
         otherServiceType = amazonWebService.getSesAsync()
-        service2 = amazonWebService.getSes()
-        otherRegion2 = amazonWebService.getSes('eu-west-1')
+        service2 = amazonWebService.getEc2()
+        otherRegion2 = amazonWebService.getEc2('eu-west-1')
         assert service1 == service2
         assert otherRegion1 == otherRegion2
         assert service1 != otherService
