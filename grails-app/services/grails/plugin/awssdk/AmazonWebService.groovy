@@ -5,6 +5,9 @@ import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
+import com.amazonaws.regions.Region
+import com.amazonaws.regions.RegionUtils
+import com.amazonaws.regions.ServiceAbbreviations
 import com.amazonaws.services.autoscaling.AmazonAutoScalingAsyncClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
@@ -69,48 +72,48 @@ class AmazonWebService {
     private Map transferManagers = [:]
 
     private static final services = [
-        "autoScaling":              [endpoint: "autoscaling.%s.amazonaws.com", className: "com.amazonaws.services.autoscaling.AmazonAutoScalingClient"],
-        "cloudFormation":           [endpoint: "cloudformation.%s.amazonaws.com", className: "com.amazonaws.services.cloudformation.AmazonCloudFormationClient"],
-        "cloudFront":               [endpoint: "cloudfront.amazonaws.com", className: "com.amazonaws.services.cloudfront.AmazonCloudFrontClient"],
-        "cloudSearch":              [endpoint: "cloudsearch.%s.amazonaws.com", className: "com.amazonaws.services.cloudsearch.AmazonCloudSearchClient"],
-        "cloudWatch":               [endpoint: "monitoring.%s.amazonaws.com", className: "com.amazonaws.services.cloudwatch.AmazonCloudWatchClient"],
-        "dynamoDB":                 [endpoint: "dynamodb.%s.amazonaws.com", className: "com.amazonaws.services.dynamodb.AmazonDynamoDBClient"],
-        "ec2":                      [endpoint: "ec2.%s.amazonaws.com", className: "com.amazonaws.services.ec2.AmazonEC2Client"],
-        "elasticBeanstalk":         [endpoint: "elasticbeanstalk.%s.amazonaws.com", className: "com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalkClient"],
-        "elastiCache":              [endpoint: "elasticache.%s.amazonaws.com", className: "com.amazonaws.services.elasticache.AmazonElastiCacheClient"],
-        "elasticLoadBalancing":     [endpoint: "elasticloadbalancing.%s.amazonaws.com", className: "com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient"],
-        "elasticMapReduce":         [endpoint: "elasticmapreduce.%s.amazonaws.com", className: "com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient"],
-        "elasticTranscoder":        [endpoint: "elastictranscoder.%s.amazonaws.com", className: "com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClient"],
-        "glacier":                  [endpoint: "glacier.%s.amazonaws.com", className: "com.amazonaws.services.glacier.AmazonGlacierClient"],
-        "iam":                      [endpoint: "iam.amazonaws.com", className: "com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient"],
-        "importExport":             [endpoint: "importexport.amazonaws.com", className: "com.amazonaws.services.importexport.AmazonImportExportClient"],
-        "opsWorks":                 [endpoint: "opsworks.us-east-1.amazonaws.com", className: "com.amazonaws.services.opsworks.AWSOpsWorksClient"],
-        "rds":                      [endpoint: "rds.%s.amazonaws.com", className: "com.amazonaws.services.rds.AmazonRDSClient"],
-        "redshift":                 [endpoint: "redshift.us-east-1.amazonaws.com", className: "com.amazonaws.services.redshift.AmazonRedshiftClient"],
-        "route53":                  [endpoint: "route53.amazonaws.com", className: "com.amazonaws.services.route53.AmazonRoute53Client"],
-        "s3":                       [endpoint: "s3-%s.amazonaws.com", className: "com.amazonaws.services.s3.AmazonS3Client"],
-        "sdb":                      [endpoint: "sdb.%s.amazonaws.com", className: "com.amazonaws.services.simpledb.AmazonSimpleDBClient"],
-        "ses":                      [endpoint: "email.%s.amazonaws.com", className: "com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient"],
-        "swf":                      [endpoint: "swf.%s.amazonaws.com", className: "com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflowClient"],
-        "sns":                      [endpoint: "sns.%s.amazonaws.com", className: "com.amazonaws.services.sns.AmazonSNSClient"],
-        "sqs":                      [endpoint: "sqs.%s.amazonaws.com", className: "com.amazonaws.services.sqs.AmazonSQSClient"],
-        "storageGateway":           [endpoint: "storagegateway.%s.amazonaws.com", className: "com.amazonaws.services.storagegateway.AWSStorageGatewayClient"]
+        'autoScaling':              [className: 'com.amazonaws.services.autoscaling.AmazonAutoScalingClient'],
+        'cloudFormation':           [className: 'com.amazonaws.services.cloudformation.AmazonCloudFormationClient'],
+        'cloudFront':               [className: 'com.amazonaws.services.cloudfront.AmazonCloudFrontClient'],
+        'cloudSearch':              [className: 'com.amazonaws.services.cloudsearch.AmazonCloudSearchClient'],
+        'cloudWatch':               [className: 'com.amazonaws.services.cloudwatch.AmazonCloudWatchClient'],
+        'dynamoDB':                 [className: 'com.amazonaws.services.dynamodb.AmazonDynamoDBClient'],
+        'ec2':                      [className: 'com.amazonaws.services.ec2.AmazonEC2Client'],
+        'elasticBeanstalk':         [className: 'com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalkClient'],
+        'elastiCache':              [className: 'com.amazonaws.services.elasticache.AmazonElastiCacheClient'],
+        'elasticLoadBalancing':     [className: 'com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient'],
+        'elasticMapReduce':         [className: 'com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient'],
+        'elasticTranscoder':        [className: 'com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClient'],
+        'glacier':                  [className: 'com.amazonaws.services.glacier.AmazonGlacierClient'],
+        'iam':                      [className: 'com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient'],
+        'importExport':             [className: 'com.amazonaws.services.importexport.AmazonImportExportClient'],
+        'opsWorks':                 [className: 'com.amazonaws.services.opsworks.AWSOpsWorksClient'],
+        'rds':                      [className: 'com.amazonaws.services.rds.AmazonRDSClient'],
+        'redshift':                 [className: 'com.amazonaws.services.redshift.AmazonRedshiftClient'],
+        'route53':                  [className: 'com.amazonaws.services.route53.AmazonRoute53Client'],
+        's3':                       [className: 'com.amazonaws.services.s3.AmazonS3Client'],
+        'sdb':                      [className: 'com.amazonaws.services.simpledb.AmazonSimpleDBClient'],
+        'ses':                      [className: 'com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient'],
+        'swf':                      [className: 'com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflowClient'],
+        'sns':                      [className: 'com.amazonaws.services.sns.AmazonSNSClient'],
+        'sqs':                      [className: 'com.amazonaws.services.sqs.AmazonSQSClient'],
+        'storageGateway':           [className: 'com.amazonaws.services.storagegateway.AWSStorageGatewayClient']
     ]
 
-    AmazonAutoScalingAsyncClient getAutoScalingAsync(region = '') {
-        getServiceClient('autoScaling', region, true) as AmazonAutoScalingAsyncClient
+    AmazonAutoScalingAsyncClient getAutoScalingAsync(regionName = '') {
+        getServiceClient('autoScaling', regionName, true) as AmazonAutoScalingAsyncClient
     }
 
-    AmazonAutoScalingClient getAutoScaling(region = '') {
-        getServiceClient('autoScaling', region) as AmazonAutoScalingClient
+    AmazonAutoScalingClient getAutoScaling(regionName = '') {
+        getServiceClient('autoScaling', regionName) as AmazonAutoScalingClient
     }
 
-    AmazonCloudFormationAsyncClient getCloudFormationAsync(region = '') {
-        getServiceClient('cloudFormation', region, true) as AmazonCloudFormationAsyncClient
+    AmazonCloudFormationAsyncClient getCloudFormationAsync(regionName = '') {
+        getServiceClient('cloudFormation', regionName, true) as AmazonCloudFormationAsyncClient
     }
 
-    AmazonCloudFormationClient getCloudFormation(region = '') {
-        getServiceClient('cloudFormation', region) as AmazonCloudFormationClient
+    AmazonCloudFormationClient getCloudFormation(regionName = '') {
+        getServiceClient('cloudFormation', regionName) as AmazonCloudFormationClient
     }
 
     AmazonCloudFrontAsyncClient getCloudFrontAsync() {
@@ -121,84 +124,84 @@ class AmazonWebService {
         getServiceClient('cloudFront') as AmazonCloudFrontClient
     }
 
-    AmazonCloudSearchAsyncClient getCloudSearchAsync(region = '') {
-        getServiceClient('cloudSearch', region, true) as AmazonCloudSearchAsyncClient
+    AmazonCloudSearchAsyncClient getCloudSearchAsync(regionName = '') {
+        getServiceClient('cloudSearch', regionName, true) as AmazonCloudSearchAsyncClient
     }
 
-    AmazonCloudSearchClient getCloudSearch(region = '') {
-        getServiceClient('cloudSearch', region) as AmazonCloudSearchClient
+    AmazonCloudSearchClient getCloudSearch(regionName = '') {
+        getServiceClient('cloudSearch', regionName) as AmazonCloudSearchClient
     }
 
-    AmazonCloudWatchAsyncClient getCloudWatchAsync(region = '') {
-        getServiceClient('cloudWatch', region, true) as AmazonCloudWatchAsyncClient
+    AmazonCloudWatchAsyncClient getCloudWatchAsync(regionName = '') {
+        getServiceClient('cloudWatch', regionName, true) as AmazonCloudWatchAsyncClient
     }
 
-    AmazonCloudWatchClient getCloudWatch(region = '') {
-        getServiceClient('cloudWatch', region) as AmazonCloudWatchClient
+    AmazonCloudWatchClient getCloudWatch(regionName = '') {
+        getServiceClient('cloudWatch', regionName) as AmazonCloudWatchClient
     }
 
-    AmazonDynamoDBAsyncClient getDynamoDBAsync(region = '') {
-        getServiceClient('dynamoDB', region, true) as AmazonDynamoDBAsyncClient
+    AmazonDynamoDBAsyncClient getDynamoDBAsync(regionName = '') {
+        getServiceClient('dynamoDB', regionName, true) as AmazonDynamoDBAsyncClient
     }
 
-    AmazonDynamoDBClient getDynamoDB(region = '') {
-        getServiceClient('dynamoDB', region) as AmazonDynamoDBClient
+    AmazonDynamoDBClient getDynamoDB(regionName = '') {
+        getServiceClient('dynamoDB', regionName) as AmazonDynamoDBClient
     }
 
-    AmazonEC2AsyncClient getEc2Async(region = '') {
-        getServiceClient('ec2', region, true) as AmazonEC2AsyncClient
+    AmazonEC2AsyncClient getEc2Async(regionName = '') {
+        getServiceClient('ec2', regionName, true) as AmazonEC2AsyncClient
     }
 
-    AmazonEC2Client getEc2(region = '') {
-        getServiceClient('ec2', region) as AmazonEC2Client
+    AmazonEC2Client getEc2(regionName = '') {
+        getServiceClient('ec2', regionName) as AmazonEC2Client
     }
 
-    AWSElasticBeanstalkAsyncClient getElasticBeanstalkAsync(region = '') {
-        getServiceClient('elasticBeanstalk', region, true) as AWSElasticBeanstalkAsyncClient
+    AWSElasticBeanstalkAsyncClient getElasticBeanstalkAsync(regionName = '') {
+        getServiceClient('elasticBeanstalk', regionName, true) as AWSElasticBeanstalkAsyncClient
     }
 
-    AWSElasticBeanstalkClient getElasticBeanstalk(region = '') {
-        getServiceClient('elasticBeanstalk', region) as AWSElasticBeanstalkClient
+    AWSElasticBeanstalkClient getElasticBeanstalk(regionName = '') {
+        getServiceClient('elasticBeanstalk', regionName) as AWSElasticBeanstalkClient
     }
 
-    AmazonElastiCacheAsyncClient getElastiCacheAsync(region = '') {
-        getServiceClient('elastiCache', region, true) as AmazonElastiCacheAsyncClient
+    AmazonElastiCacheAsyncClient getElastiCacheAsync(regionName = '') {
+        getServiceClient('elastiCache', regionName, true) as AmazonElastiCacheAsyncClient
     }
 
-    AmazonElastiCacheClient getElastiCache(region = '') {
-        getServiceClient('elastiCache', region) as AmazonElastiCacheClient
+    AmazonElastiCacheClient getElastiCache(regionName = '') {
+        getServiceClient('elastiCache', regionName) as AmazonElastiCacheClient
     }
 
-    AmazonElasticLoadBalancingAsyncClient getElasticLoadBalancingAsync(region = '') {
-        getServiceClient('elasticLoadBalancing', region, true) as AmazonElasticLoadBalancingAsyncClient
+    AmazonElasticLoadBalancingAsyncClient getElasticLoadBalancingAsync(regionName = '') {
+        getServiceClient('elasticLoadBalancing', regionName, true) as AmazonElasticLoadBalancingAsyncClient
     }
 
-    AmazonElasticLoadBalancingClient getElasticLoadBalancing(region = '') {
-        getServiceClient('elasticLoadBalancing', region) as AmazonElasticLoadBalancingClient
+    AmazonElasticLoadBalancingClient getElasticLoadBalancing(regionName = '') {
+        getServiceClient('elasticLoadBalancing', regionName) as AmazonElasticLoadBalancingClient
     }
 
-    AmazonElasticMapReduceAsyncClient getElasticMapReduceAsync(region = '') {
-        getServiceClient('elasticMapReduce', region, true) as AmazonElasticMapReduceAsyncClient
+    AmazonElasticMapReduceAsyncClient getElasticMapReduceAsync(regionName = '') {
+        getServiceClient('elasticMapReduce', regionName, true) as AmazonElasticMapReduceAsyncClient
     }
 
     AmazonElasticMapReduceClient getElasticMapReduce(region = '') {
         getServiceClient('elasticMapReduce', region) as AmazonElasticMapReduceClient
     }
 
-    AmazonElasticTranscoderClient getElasticTranscoderAsync(region = '') {
-        getServiceClient('elasticTranscoder', region, true) as AmazonElasticTranscoderAsyncClient
+    AmazonElasticTranscoderClient getElasticTranscoderAsync(regionName = '') {
+        getServiceClient('elasticTranscoder', regionName, true) as AmazonElasticTranscoderAsyncClient
     }
 
-    AmazonElasticTranscoderClient getElasticTranscoder(region = '') {
-        getServiceClient('elasticTranscoder', region) as AmazonElasticTranscoderClient
+    AmazonElasticTranscoderClient getElasticTranscoder(regionName = '') {
+        getServiceClient('elasticTranscoder', regionName) as AmazonElasticTranscoderClient
     }
 
-    AmazonGlacierClient getGlacierAsync(region = '') {
-        getServiceClient('glacier', region, true) as AmazonGlacierAsyncClient
+    AmazonGlacierClient getGlacierAsync(regionName = '') {
+        getServiceClient('glacier', regionName, true) as AmazonGlacierAsyncClient
     }
 
-    AmazonGlacierClient getGlacier(region = '') {
-        getServiceClient('glacier', region) as AmazonGlacierClient
+    AmazonGlacierClient getGlacier(regionName = '') {
+        getServiceClient('glacier', regionName) as AmazonGlacierClient
     }
 
     AmazonIdentityManagementAsyncClient getIamAsync() {
@@ -225,12 +228,12 @@ class AmazonWebService {
         getServiceClient('opsWorks', '') as AWSOpsWorksClient
     }
 
-    AmazonRDSAsyncClient getRdsAsync(region = '') {
-        getServiceClient('rds', region, true) as AmazonRDSAsyncClient
+    AmazonRDSAsyncClient getRdsAsync(regionName = '') {
+        getServiceClient('rds', regionName, true) as AmazonRDSAsyncClient
     }
 
-    AmazonRDSClient getRds(region = '') {
-        getServiceClient('rds', region) as AmazonRDSClient
+    AmazonRDSClient getRds(regionName = '') {
+        getServiceClient('rds', regionName) as AmazonRDSClient
     }
 
     AmazonRedshiftAsyncClient getRedshiftAsync() {
@@ -249,69 +252,69 @@ class AmazonWebService {
         getServiceClient('route53') as AmazonRoute53Client
     }
 
-    AmazonS3Client getS3(String region = '') {
-        getServiceClient('s3', region) as AmazonS3Client
+    AmazonS3Client getS3(String regionName = '') {
+        getServiceClient('s3', regionName) as AmazonS3Client
     }
 
-    AmazonSimpleDBAsyncClient getSdbAsync(String region = '') {
-        getServiceClient('sdb', region, true) as AmazonSimpleDBAsyncClient
+    AmazonSimpleDBAsyncClient getSdbAsync(String regionName = '') {
+        getServiceClient('sdb', regionName, true) as AmazonSimpleDBAsyncClient
     }
 
-    AmazonSimpleDBClient getSdb(String region = '') {
-        getServiceClient('sdb', region) as AmazonSimpleDBClient
+    AmazonSimpleDBClient getSdb(String regionName = '') {
+        getServiceClient('sdb', regionName) as AmazonSimpleDBClient
     }
 
-    AmazonSimpleEmailServiceAsyncClient getSesAsync(String region = '') {
-        getServiceClient('ses', region, true) as AmazonSimpleEmailServiceAsyncClient
+    AmazonSimpleEmailServiceAsyncClient getSesAsync(String regionName = '') {
+        getServiceClient('ses', regionName, true) as AmazonSimpleEmailServiceAsyncClient
     }
 
-    AmazonSimpleEmailServiceClient getSes(String region = '') {
-        getServiceClient('ses', region) as AmazonSimpleEmailServiceClient
+    AmazonSimpleEmailServiceClient getSes(String regionName = '') {
+        getServiceClient('ses', regionName) as AmazonSimpleEmailServiceClient
     }
 
-    AmazonSNSAsyncClient getSnsAsync(String region = '') {
-        getServiceClient('sns', region, true) as AmazonSNSAsyncClient
+    AmazonSNSAsyncClient getSnsAsync(String regionName = '') {
+        getServiceClient('sns', regionName, true) as AmazonSNSAsyncClient
     }
 
-    AmazonSNSClient getSns(String region = '') {
-        getServiceClient('sns', region) as AmazonSNSClient
+    AmazonSNSClient getSns(String regionName = '') {
+        getServiceClient('sns', regionName) as AmazonSNSClient
     }
 
-    AmazonSQSAsyncClient getSqsAsync(String region = '') {
-        getServiceClient('sqs', region, true) as AmazonSQSAsyncClient
+    AmazonSQSAsyncClient getSqsAsync(String regionName = '') {
+        getServiceClient('sqs', regionName, true) as AmazonSQSAsyncClient
     }
 
-    AmazonSQSClient getSqs(String region = '') {
-        getServiceClient('sqs', region) as AmazonSQSClient
+    AmazonSQSClient getSqs(String regionName = '') {
+        getServiceClient('sqs', regionName) as AmazonSQSClient
     }
 
-    AWSStorageGatewayAsyncClient getStorageGatewayAsync(String region = '') {
-        getServiceClient('storageGateway', region, true) as AWSStorageGatewayAsyncClient
+    AWSStorageGatewayAsyncClient getStorageGatewayAsync(String regionName = '') {
+        getServiceClient('storageGateway', regionName, true) as AWSStorageGatewayAsyncClient
     }
 
-    AWSStorageGatewayClient getStorageGateway(String region = '') {
-        getServiceClient('storageGateway', region) as AWSStorageGatewayClient
+    AWSStorageGatewayClient getStorageGateway(String regionName = '') {
+        getServiceClient('storageGateway', regionName) as AWSStorageGatewayClient
     }
 
-    AmazonSimpleWorkflowAsyncClient getSwfAsync(String region = '') {
-        getServiceClient('swf', region, true) as AmazonSimpleWorkflowAsyncClient
+    AmazonSimpleWorkflowAsyncClient getSwfAsync(String regionName = '') {
+        getServiceClient('swf', regionName, true) as AmazonSimpleWorkflowAsyncClient
     }
 
-    AmazonSimpleWorkflowClient getSwf(String region = '') {
-        getServiceClient('swf', region) as AmazonSimpleWorkflowClient
+    AmazonSimpleWorkflowClient getSwf(String regionName = '') {
+        getServiceClient('swf', regionName) as AmazonSimpleWorkflowClient
     }
 
-    TransferManager getTransferManager(String region = '') {
-        if (!region) {
-            if (awsConfig['s3']?.region) region = awsConfig['s3'].region
-            else if (awsConfig?.region) region = awsConfig.region
-            else region = DEFAULT_REGION
+    TransferManager getTransferManager(String regionName = '') {
+        if (!regionName) {
+            if (awsConfig['s3']?.region) regionName = awsConfig['s3'].region
+            else if (awsConfig?.region) regionName = awsConfig.region
+            else regionName = DEFAULT_REGION
         }
 
-        if (!transferManagers[region]) {
-            transferManagers[region] = new TransferManager(getS3(region))
+        if (!transferManagers[regionName]) {
+            transferManagers[regionName] = new TransferManager(getS3(regionName))
         }
-        transferManagers[region]
+        transferManagers[regionName]
     }
 
     // PRIVATE
@@ -370,54 +373,60 @@ class AmazonWebService {
         clientConfiguration
     }
 
-    private AmazonWebServiceClient getServiceClient(String service, String region = '', Boolean async = false) {
+    private AmazonWebServiceClient getServiceClient(String service, String regionName = '', Boolean async = false) {
         def serviceConfig = services[service]
         def className = serviceConfig.className
-        def endpoint = serviceConfig.endpoint
 
         if (async) {
            className = className.replaceAll(/Client$/, 'AsyncClient')
         }
 
-        if (!region) {
-            if (awsConfig[service]?.region) region = awsConfig[service].region
-            else if (awsConfig?.region) region = awsConfig.region
-            else region = DEFAULT_REGION
+        if (!regionName) {
+            if (awsConfig[service]?.region) regionName = awsConfig[service].region
+            else if (awsConfig?.region) regionName = awsConfig.region
+            else regionName = DEFAULT_REGION
+        }
+
+        Region region = RegionUtils.getRegion(regionName)
+        if (!region || !region.isServiceSupported(getServiceAbbreviation(service))) {
+            if (!region) log.warn "Region ${regionName} not found"
+            else if (!region.isServiceSupported(getServiceAbbreviation(service))) log.warn "Service ${service} is not supported in region ${regionName}"
+            log.warn "Using default region ${DEFAULT_REGION}"
+            regionName = DEFAULT_REGION
+            region = RegionUtils.getRegion(regionName)
         }
 
         def clientsCache = async ? asyncClients : clients
         if (!clientsCache[service]) clientsCache[service] = [:]
 
-        if (!clientsCache[service].containsKey(region)) {
+        if (!clientsCache[service].containsKey(regionName)) {
             AmazonWebServiceClient client
             def credentials = buildCredentials(awsConfig, awsConfig[service])
 
             ClientConfiguration configuration = buildClientConfiguration(awsConfig, awsConfig[service])
 
             client = Class.forName(className).newInstance(credentials)
-            client.endpoint = getClientEndpoint(service, endpoint, region)
             client.configuration = configuration
+            client.region = region
 
-            clientsCache[service][region] = client
+            clientsCache[service][regionName] = client
         } else {
-            clientsCache[service][region]
+            clientsCache[service][regionName]
         }
     }
 
-    private String getClientEndpoint(service, endpoint, region) {
+    // Service abbreviation exceptions (name is different for CloudWatch and SES)
+    private String getServiceAbbreviation(String service) {
         switch(service) {
-            case 's3':
-                if (region == 'us' || region == DEFAULT_REGION) {
-                    endpoint = "s3.amazonaws.com"
-                }
+            case 'cloudWatch':
+                ServiceAbbreviations.CloudWatch // 'monitoring'
                 break
-            case ["SdbAsync", "sdb"]:
-                if (region == 'us-east-1') {
-                    endpoint = "sdb.amazonaws.com"
-                }
+            case 'ses':
+                ServiceAbbreviations.Email // 'email'
                 break
+            default:
+                service.toLowerCase()
         }
-        
-        String.format(endpoint, region)
     }
+
 }
