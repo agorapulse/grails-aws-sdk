@@ -406,12 +406,12 @@ class AmazonWebService {
 
     private String getClientEndpoint(service, endpoint, region) {
         switch(service) {
-            case 'S3':
+            case 's3':
                 if (region == 'us' || region == DEFAULT_REGION) {
                     endpoint = "s3.amazonaws.com"
                 }
                 break
-            case ["SdbAsync", "Sdb"]:
+            case ["SdbAsync", "sdb"]:
                 if (region == 'us-east-1') {
                     endpoint = "sdb.amazonaws.com"
                 }
