@@ -28,7 +28,7 @@ objectListing.objectSummaries.each { S3ObjectSummary summary ->
 Upload a file with public read permissions.
 
 {code}
-amazonWebService.s3.putObject(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg').withCannedAcl(CannedAccessControlList.PublicRead)))
+amazonWebService.s3.putObject(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))
 {code}
 
 Download a file.
