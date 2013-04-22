@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.4.1</title>
+        <title>AWS SDK Plugin 1.4.2</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.4.1</p>
+                            <p><strong>Version:</strong> 1.4.2</p>
                             
                         </div>
 
@@ -129,6 +129,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Latest releases</h3>
 <ul class="star">
+<li>2013-04-22 <strong class="bold">V1.4.2</strong> : AWS SDK for Java updated to V1.4.2 (DynamoDB adds support for local secondary indexes)</li>
 <li>2013-03-19 <strong class="bold">V1.4.1</strong> : AWS SDK for Java updated to V1.4.1 + Better endpoints management with new region utils</li>
 <li>2013-03-05 <strong class="bold">V1.3.33</strong> : AWS SDK for Java updated to V1.3.33 + Unit tests added + refactor/bug fixes (thanks to Martin Gotink)</li>
 <li>2013-02-21 <strong class="bold">V1.3.32</strong> : AWS SDK for Java updated to V1.3.32 + Amazon OpsWorks and Redshift support added + bug fix</li>
@@ -166,7 +167,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.4.1'
+				runtime ':aws&#45;sdk:1.4.2'
 		&#125;
 &#125;</pre></div>
 
@@ -312,7 +313,7 @@ buckets.each &#123; Bucket bucket &#45;&#62;
 &#125;</pre></div><p class="paragraph"/>List bucket files.<p class="paragraph"/><div class="code"><pre>ObjectListing objectListing = amazonWebService.s3.listObjects('some&#45;grails&#45;bucket')
 objectListing.objectSummaries.each &#123; S3ObjectSummary summary &#45;&#62;
     println <span class="java&#45;quote">"key: $&#123;summary.key&#125;, lastModified: $&#123;summary.lastModified&#125;, size: $&#123;summary.size&#125;"</span>
-&#125;</pre></div><p class="paragraph"/>Upload a file with public read permissions.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/photo.jpg').withCannedAcl(CannedAccessControlList.PublicRead)))</pre></div><p class="paragraph"/>Download a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.getObject(<span class="java&#45;keyword">new</span> GetObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg'), <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg'))</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('some&#45;grails&#45;bucket', 'somePath/someKey.jpg')</pre></div><p class="paragraph"/><h3>Transfer manager</h3><p class="paragraph"/>TransferManager provides a simple API for uploading content to Amazon S3, and makes extensive use of Amazon S3 multipart uploads to achieve enhanced throughput, performance and reliability.<p class="paragraph"/>Upload asynchronously a file with public read permissions.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.s3.transfer.&#42;<p class="paragraph"/>Upload upload = amazonWebService.transferManager.upload(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/photo.jpg')))<p class="paragraph"/><span class="java&#45;keyword">while</span> (!upload.done) &#123;
+&#125;</pre></div><p class="paragraph"/>Upload a file with public read permissions.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.putObject(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead))</pre></div><p class="paragraph"/>Download a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.getObject(<span class="java&#45;keyword">new</span> GetObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg'), <span class="java&#45;keyword">new</span> File('/Users/ben/Downloads/photo.jpg'))</pre></div><p class="paragraph"/>Delete a file.<p class="paragraph"/><div class="code"><pre>amazonWebService.s3.deleteObject('some&#45;grails&#45;bucket', 'somePath/someKey.jpg')</pre></div><p class="paragraph"/><h3>Transfer manager</h3><p class="paragraph"/>TransferManager provides a simple API for uploading content to Amazon S3, and makes extensive use of Amazon S3 multipart uploads to achieve enhanced throughput, performance and reliability.<p class="paragraph"/>Upload asynchronously a file with public read permissions.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.s3.transfer.&#42;<p class="paragraph"/>Upload upload = amazonWebService.transferManager.upload(<span class="java&#45;keyword">new</span> PutObjectRequest('some&#45;grails&#45;bucket', 'somePath/someKey.jpg', <span class="java&#45;keyword">new</span> File('/Users/ben/Desktop/photo.jpg')))<p class="paragraph"/><span class="java&#45;keyword">while</span> (!upload.done) &#123;
      println <span class="java&#45;quote">"Transfer: $upload.description"</span>
      println <span class="java&#45;quote">"  &#45; State: $upload.state"</span>
      println <span class="java&#45;quote">"  &#45; Progress: $upload.progress.bytesTransfered"</span>
