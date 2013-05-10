@@ -58,6 +58,8 @@ import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceAsyncClient
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient
 
 /**
  * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
@@ -649,6 +651,26 @@ class AmazonWebServiceTests {
         assert amazonWebService.getStorageGateway().class == AWSStorageGatewayClient
         assert amazonWebService.getStorageGateway('eu-west-1').class == AWSStorageGatewayClient
         assert amazonWebService.getStorageGateway('eu-west-1').endpoint.toString() == 'https://storagegateway.eu-west-1.amazonaws.com'
+    }
+
+    void testStsClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getStsAsync().class == AWSSecurityTokenServiceAsyncClient
+        assert amazonWebService.getStsAsync('eu-west-1').class == AWSSecurityTokenServiceAsyncClient
+        assert amazonWebService.getSts().class == AWSSecurityTokenServiceClient
+        assert amazonWebService.getSts('eu-west-1').class == AWSSecurityTokenServiceClient
+        assert amazonWebService.getSts('eu-west-1').endpoint.toString() == 'https://sts.amazonaws.com'
+    }
+
+    void testStsClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getStsAsync().class == AWSSecurityTokenServiceAsyncClient
+        assert amazonWebService.getStsAsync('eu-west-1').class == AWSSecurityTokenServiceAsyncClient
+        assert amazonWebService.getSts().class == AWSSecurityTokenServiceClient
+        assert amazonWebService.getSts('eu-west-1').class == AWSSecurityTokenServiceClient
+        assert amazonWebService.getSts('eu-west-1').endpoint.toString() == 'https://sts.amazonaws.com'
     }
 
     void testSwfClientWithCredentials() {
