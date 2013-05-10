@@ -48,6 +48,8 @@ import com.amazonaws.services.route53.AmazonRoute53AsyncClient
 import com.amazonaws.services.route53.AmazonRoute53Client
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.transfer.TransferManager
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceAsyncClient
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBAsyncClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsyncClient
@@ -93,6 +95,7 @@ class AmazonWebService {
         'route53':                  [className: 'com.amazonaws.services.route53.AmazonRoute53Client'],
         's3':                       [className: 'com.amazonaws.services.s3.AmazonS3Client'],
         'sdb':                      [className: 'com.amazonaws.services.simpledb.AmazonSimpleDBClient'],
+        'sts':                      [className: 'com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient'],
         'ses':                      [className: 'com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient'],
         'swf':                      [className: 'com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflowClient'],
         'sns':                      [className: 'com.amazonaws.services.sns.AmazonSNSClient'],
@@ -254,6 +257,14 @@ class AmazonWebService {
 
     AmazonS3Client getS3(String regionName = '') {
         getServiceClient('s3', regionName) as AmazonS3Client
+    }
+
+    AWSSecurityTokenServiceClient getSts(String regionName = '') {
+        getServiceClient('sts', regionName) as AWSSecurityTokenServiceClient
+    }
+
+    AWSSecurityTokenServiceAsyncClient getStsAsync(String regionName = '') {
+        getServiceClient('sts', regionName, true) as AWSSecurityTokenServiceAsyncClient
     }
 
     AmazonSimpleDBAsyncClient getSdbAsync(String regionName = '') {
