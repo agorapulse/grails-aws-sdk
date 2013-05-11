@@ -64,6 +64,8 @@ import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 class AmazonWebService {
 
     static final String DEFAULT_REGION = 'us-east-1'
+    
+    static transactional = false
 
     def grailsApplication
 
