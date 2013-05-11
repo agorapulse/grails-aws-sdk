@@ -103,6 +103,7 @@ grails {
             sns {}
             sqs {}
             storagegateway {}
+            sts {}
             swf {}
         }
     }

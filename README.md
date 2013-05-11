@@ -37,7 +37,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.4.2'
+				runtime ':aws-sdk:1.4.3'
 		}
 }
 ```
@@ -94,11 +94,13 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * AWS Identity & Access Management (IAM)
 * AWS Import/Export
 * AWS OpsWorks
+* AWS Security Token Service
 * AWS Storage Gateway
 * Elastic Load Balancing
 
 # Latest releases
 
+* 2013-05-11 **V1.4.3** : AWS SDK for Java updated to V1.4.3 + Security Token Service support added and bug fixes (thanks to pull requests by craigforster and jako512)
 * 2013-04-22 **V1.4.2** : AWS SDK for Java updated to V1.4.2 (DynamoDB adds support for local secondary indexes)
 * 2013-03-19 **V1.4.1** : AWS SDK for Java updated to V1.4.1 + Better endpoints management with new region utils
 * 2013-03-05 **V1.3.33** : AWS SDK for Java updated to V1.3.33 + Unit tests added + refactor/bug fixes (thanks to Martin Gotink)
