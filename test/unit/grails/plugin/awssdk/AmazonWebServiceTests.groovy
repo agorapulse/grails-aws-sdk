@@ -16,8 +16,8 @@ import com.amazonaws.services.cloudsearch.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
-import com.amazonaws.services.dynamodb.AmazonDynamoDBAsyncClient
-import com.amazonaws.services.dynamodb.AmazonDynamoDBClient
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.ec2.AmazonEC2AsyncClient
 import com.amazonaws.services.ec2.AmazonEC2Client
 import com.amazonaws.services.elasticache.AmazonElastiCacheAsyncClient
