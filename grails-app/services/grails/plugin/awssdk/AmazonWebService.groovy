@@ -18,8 +18,8 @@ import com.amazonaws.services.cloudsearch.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
-import com.amazonaws.services.dynamodb.AmazonDynamoDBAsyncClient
-import com.amazonaws.services.dynamodb.AmazonDynamoDBClient
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.ec2.AmazonEC2AsyncClient
 import com.amazonaws.services.ec2.AmazonEC2Client
 import com.amazonaws.services.elasticache.AmazonElastiCacheAsyncClient
@@ -81,7 +81,7 @@ class AmazonWebService {
         'cloudFront':               [className: 'com.amazonaws.services.cloudfront.AmazonCloudFrontClient'],
         'cloudSearch':              [className: 'com.amazonaws.services.cloudsearch.AmazonCloudSearchClient'],
         'cloudWatch':               [className: 'com.amazonaws.services.cloudwatch.AmazonCloudWatchClient'],
-        'dynamoDB':                 [className: 'com.amazonaws.services.dynamodb.AmazonDynamoDBClient'],
+        'dynamoDB':                 [className: 'com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient'],
         'ec2':                      [className: 'com.amazonaws.services.ec2.AmazonEC2Client'],
         'elasticBeanstalk':         [className: 'com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalkClient'],
         'elastiCache':              [className: 'com.amazonaws.services.elasticache.AmazonElastiCacheClient'],
