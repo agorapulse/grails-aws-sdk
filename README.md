@@ -58,9 +58,9 @@ grails.plugin.awssdk.secretKey = {SECRET_KEY}
 
 Project documentation is located here:
 
-* [Reference Documentation (Page per chapter)](http://benorama.github.io/grails-aws-sdk/guide)
-* [Reference Documentation (Single page)](http://benorama.github.io/grails-aws-sdk/guide/single.html)
-* [Groovy API docs](http://benorama.github.io/grails-aws-sdk/gapi/)
+* [Reference Documentation (Page per chapter)](http://agorapulse.github.io/grails-aws-sdk/guide)
+* [Reference Documentation (Single page)](http://agorapulse.github.io/grails-aws-sdk/guide/single.html)
+* [Groovy API docs](http://agorapulse.github.io/grails-aws-sdk/gapi/)
 
 AWS SDK for Java documentation is located here:
 
@@ -119,7 +119,7 @@ If you are using DynamoDB, please update your calls to the API.
 
 # Bugs
 
-To report any bug, please use the project [Issues](http://github.com/benorama/grails-aws-sdk/issues) section on GitHub.
+To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-aws-sdk/issues) section on GitHub.
 
 
 # Other Grails AWS Plugin
