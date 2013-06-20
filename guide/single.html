@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.4.5</title>
+        <title>AWS SDK Plugin 1.4.7</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.4.5</p>
+                            <p><strong>Version:</strong> 1.4.7</p>
                             
                         </div>
 
@@ -133,6 +133,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
+<li>2013-06-20 <strong class="bold">V1.4.7</strong> : AWS SDK for Java updated to V1.4.7</li>
 <li>2013-06-06 <strong class="bold">V1.4.5</strong> : AWS SDK for Java updated to V1.4.5 + DynamoDB V2 support by default</li>
 <li>2013-05-11 <strong class="bold">V1.4.3</strong> : AWS SDK for Java updated to V1.4.3 + Security Token Service support added and bug fixes (thanks to pull requests by craigforster and jako512)</li>
 <li>2013-04-22 <strong class="bold">V1.4.2</strong> : AWS SDK for Java updated to V1.4.2 (DynamoDB adds support for local secondary indexes)</li>
@@ -146,7 +147,7 @@ If you are using DynamoDB, please update your calls to the API.
 <li>2012-09-27 <strong class="bold">V1.3.21</strong> : AWS SDK for Java updated to V1.3.21.1 + Amazon Glacier support added</li>
 <li>2012-07-04 <strong class="bold">V1.3.12</strong> : AWS SDK for Java updated to V1.3.12</li>
 <li>2012-07-02 <strong class="bold">V1.3.11</strong> : initial release</li>
-</ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/benorama/grails-aws-sdk/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
+</ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/agorapulse/grails-aws-sdk/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
 <h3>Beta status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>beta release<strong class="bold"></strong>.<p class="paragraph"/>
 <h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another great <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 <ol>
@@ -173,7 +174,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.4.5'
+				runtime ':aws&#45;sdk:1.4.7'
 		&#125;
 &#125;</pre></div>
 
