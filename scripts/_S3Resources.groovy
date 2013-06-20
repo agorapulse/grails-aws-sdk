@@ -61,19 +61,18 @@ target(loadModulesResources: "Load modules resources") {
     def grailsResourceProcessor = appCtx.getBean('grailsResourceProcessor')
     grailsResourceProcessor.modulesByName.each { name, module ->
         module.resources.each { meta ->
-            if (meta.attributes['processed.by.cdn']) {
-                modulesResources[meta.actualUrl] = meta.processedFile
-            }
+            modulesResources[meta.actualUrl] = meta.processedFile
         }
     }
 }
 
 target(loadWebAppResources: "Load web-app resources") {
     webAppResources = [:]
-    def excludeRegex = /(?i)WEB-INF|META-INF|.DS_STORE|.svn/
+    def includeRegex = /.*/
+    def excludeRegex = /(?i)WEB-INF|META-INF|CNAME|LICENSE|node_modules|Gemfile|Makefile|Rakefile|.DS_Store|Spec\.js|\.coffee|\.ico|\.gitignore|\.html|\.json|\.less|\.md|\.npmignore|\.php|\.sh|\.scss|\.svn|\.yml|\/doc\/|\/docs\/|\/test\/|\/tests\//
     new File("${basedir}/web-app").eachFileRecurse (FileType.FILES) { File file ->
         def relativePath = file.path.replace("${basedir}/web-app", '')
-        if (!relativePath.find(excludeRegex)) {
+        if (relativePath.find(includeRegex) && !relativePath.find(excludeRegex)) {
             webAppResources[relativePath] = file
         }
     }
