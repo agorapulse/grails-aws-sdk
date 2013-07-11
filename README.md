@@ -103,6 +103,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 **WARNING**: Breaking change, since V1.4.5, new **DynamoDB** API Version 2012-08-10 are used (package *com.amazonaws.services.dynamodbv2* instead of *com.amazonaws.services.dynamodb* ).
 If you are using DynamoDB, please update your calls to the API.
 
+* 2013-07-11 **V1.5.0** : AWS SDK for Java updated to V1.5.0
 * 2013-06-20 **V1.4.7** : AWS SDK for Java updated to V1.4.7
 * 2013-06-06 **V1.4.5** : AWS SDK for Java updated to V1.4.5 + DynamoDB V2 support by default
 * 2013-05-11 **V1.4.3** : AWS SDK for Java updated to V1.4.3 + Security Token Service support added and bug fixes (thanks to pull requests by craigforster and jako512)
