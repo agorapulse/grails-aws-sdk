@@ -75,36 +75,6 @@ class AmazonWebService {
     private Map clients = [:]
     private Map transferManagers = [:]
 
-    private static final services = [
-        'autoScaling':              [className: 'com.amazonaws.services.autoscaling.AmazonAutoScalingClient'],
-        'cloudFormation':           [className: 'com.amazonaws.services.cloudformation.AmazonCloudFormationClient'],
-        'cloudFront':               [className: 'com.amazonaws.services.cloudfront.AmazonCloudFrontClient'],
-        'cloudSearch':              [className: 'com.amazonaws.services.cloudsearch.AmazonCloudSearchClient'],
-        'cloudWatch':               [className: 'com.amazonaws.services.cloudwatch.AmazonCloudWatchClient'],
-        'dynamoDB':                 [className: 'com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient'],
-        'ec2':                      [className: 'com.amazonaws.services.ec2.AmazonEC2Client'],
-        'elasticBeanstalk':         [className: 'com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalkClient'],
-        'elastiCache':              [className: 'com.amazonaws.services.elasticache.AmazonElastiCacheClient'],
-        'elasticLoadBalancing':     [className: 'com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient'],
-        'elasticMapReduce':         [className: 'com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient'],
-        'elasticTranscoder':        [className: 'com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClient'],
-        'glacier':                  [className: 'com.amazonaws.services.glacier.AmazonGlacierClient'],
-        'iam':                      [className: 'com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient'],
-        'importExport':             [className: 'com.amazonaws.services.importexport.AmazonImportExportClient'],
-        'opsWorks':                 [className: 'com.amazonaws.services.opsworks.AWSOpsWorksClient'],
-        'rds':                      [className: 'com.amazonaws.services.rds.AmazonRDSClient'],
-        'redshift':                 [className: 'com.amazonaws.services.redshift.AmazonRedshiftClient'],
-        'route53':                  [className: 'com.amazonaws.services.route53.AmazonRoute53Client'],
-        's3':                       [className: 'com.amazonaws.services.s3.AmazonS3Client'],
-        'sdb':                      [className: 'com.amazonaws.services.simpledb.AmazonSimpleDBClient'],
-        'sts':                      [className: 'com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient'],
-        'ses':                      [className: 'com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient'],
-        'swf':                      [className: 'com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflowClient'],
-        'sns':                      [className: 'com.amazonaws.services.sns.AmazonSNSClient'],
-        'sqs':                      [className: 'com.amazonaws.services.sqs.AmazonSQSClient'],
-        'storageGateway':           [className: 'com.amazonaws.services.storagegateway.AWSStorageGatewayClient']
-    ]
-
     AmazonAutoScalingAsyncClient getAutoScalingAsync(regionName = '') {
         getServiceClient('autoScaling', regionName, true) as AmazonAutoScalingAsyncClient
     }
@@ -387,13 +357,6 @@ class AmazonWebService {
     }
 
     private AmazonWebServiceClient getServiceClient(String service, String regionName = '', Boolean async = false) {
-        def serviceConfig = services[service]
-        def className = serviceConfig.className
-
-        if (async) {
-           className = className.replaceAll(/Client$/, 'AsyncClient')
-        }
-
         if (!regionName) {
             if (awsConfig[service]?.region) regionName = awsConfig[service].region
             else if (awsConfig?.region) regionName = awsConfig.region
@@ -418,7 +381,93 @@ class AmazonWebService {
 
             ClientConfiguration configuration = buildClientConfiguration(awsConfig, awsConfig[service])
 
-            client = Class.forName(className).newInstance(credentials)
+            switch (service) {
+                case 'autoScaling':
+                    client = async ? new AmazonAutoScalingAsyncClient(credentials) : new AmazonAutoScalingClient(credentials)
+                    break
+                case 'cloudFormation':
+                    client = async ? new AmazonCloudFormationAsyncClient(credentials) : new AmazonCloudFormationClient(credentials)
+                    break
+                case 'cloudFront':
+                    client = async ? new AmazonCloudFrontAsyncClient(credentials) : new AmazonCloudFrontClient(credentials)
+                    break
+                case 'cloudSearch':
+                    client = async ? new AmazonCloudSearchAsyncClient(credentials) : new AmazonCloudSearchClient(credentials)
+                    break
+                case 'cloudWatch':
+                    client = async ? new AmazonCloudWatchAsyncClient(credentials) : new AmazonCloudWatchClient(credentials)
+                    break
+                case 'dynamoDB':
+                    client = async ? new AmazonDynamoDBAsyncClient(credentials) : new AmazonDynamoDBClient(credentials)
+                    break
+                case 'ec2':
+                    client = async ? new AmazonEC2AsyncClient(credentials) : new AmazonEC2Client(credentials)
+                    break
+                case 'elasticBeanstalk':
+                    client = async ? new AWSElasticBeanstalkAsyncClient(credentials) : new AWSElasticBeanstalkClient(credentials)
+                    break
+                case 'elastiCache':
+                    client = async ? new AmazonElastiCacheAsyncClient(credentials) : new AmazonElastiCacheClient(credentials)
+                    break
+                case 'elasticLoadBalancing':
+                    client = async ? new AmazonElasticLoadBalancingAsyncClient(credentials) : new AmazonElasticLoadBalancingClient(credentials)
+                    break
+                case 'elasticMapReduce':
+                    client = async ? new AmazonElasticMapReduceAsyncClient(credentials) : new AmazonElasticMapReduceClient(credentials)
+                    break
+                case 'elasticTranscoder':
+                    client = async ? new AmazonElasticTranscoderAsyncClient(credentials) : new AmazonElasticTranscoderClient(credentials)
+                    break
+                case 'glacier':
+                    client = async ? new AmazonGlacierAsyncClient(credentials) : new AmazonGlacierClient(credentials)
+                    break
+                case 'iam':
+                    client = async ? new AmazonIdentityManagementAsyncClient(credentials) : new AmazonIdentityManagementClient(credentials)
+                    break
+                case 'importExport':
+                    client = async ? new AmazonImportExportAsyncClient(credentials) : new AmazonImportExportClient(credentials)
+                    break
+                case 'opsWorks':
+                    client = async ? new AWSOpsWorksAsyncClient(credentials) : new AWSOpsWorksClient(credentials)
+                    break
+                case 'rds':
+                    client = async ? new AmazonRDSAsyncClient(credentials) : new AmazonRDSClient(credentials)
+                    break
+                case 'redshift':
+                    client = async ? new AmazonRedshiftAsyncClient(credentials) : new AmazonRedshiftClient(credentials)
+                    break
+                case 'route53':
+                    client = async ? new AmazonRoute53AsyncClient(credentials) : new AmazonRoute53Client(credentials)
+                    break
+                case 's3':
+                    if (async) throw new Exception("Sorry, there is no async client for AmazonS3")
+                    client = new AmazonS3Client(credentials)
+                    break
+                case 'sdb':
+                    client = async ? new AmazonSimpleDBAsyncClient(credentials) : new AmazonSimpleDBClient(credentials)
+                    break
+                case 'ses':
+                    client = async ? new AmazonSimpleEmailServiceAsyncClient(credentials) : new AmazonSimpleEmailServiceClient(credentials)
+                    break
+                case 'sns':
+                    client = async ? new AmazonSNSAsyncClient(credentials) : new AmazonSNSClient(credentials)
+                    break
+                case 'sqs':
+                    client = async ? new AmazonSQSAsyncClient(credentials) : new AmazonSQSClient(credentials)
+                    break
+                case 'sts':
+                    client = async ? new AWSSecurityTokenServiceAsyncClient(credentials) : new AWSSecurityTokenServiceClient(credentials)
+                    break
+                case 'storageGateway':
+                    client = async ? new AWSStorageGatewayAsyncClient(credentials) : new AWSStorageGatewayClient(credentials)
+                    break
+                case 'swf':
+                    client = async ? new AmazonSimpleWorkflowAsyncClient(credentials) : new AmazonSimpleWorkflowClient(credentials)
+                    break
+                default:
+                    throw new Exception("Sorry, no client found for service ${service}")
+            }
+
             client.configuration = configuration
             client.region = region
 
