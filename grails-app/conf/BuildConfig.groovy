@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
         compile 'com.amazonaws:aws-java-sdk:1.5.6'
     }
     plugins {
-        build(':release:2.2.1', ':rest-client-builder:1.0.3') {
+        build(':release:3.0.0', ':rest-client-builder:1.0.3') {
             export = false
         }
     }
