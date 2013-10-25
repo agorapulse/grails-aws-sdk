@@ -47,6 +47,8 @@ import com.amazonaws.services.redshift.AmazonRedshiftClient
 import com.amazonaws.services.route53.AmazonRoute53AsyncClient
 import com.amazonaws.services.route53.AmazonRoute53Client
 import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.AmazonS3EncryptionClient
+import com.amazonaws.services.s3.model.EncryptionMaterials
 import com.amazonaws.services.s3.transfer.TransferManager
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceAsyncClient
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient
@@ -231,6 +233,10 @@ class AmazonWebService {
         getServiceClient('s3', regionName) as AmazonS3Client
     }
 
+    AmazonS3EncryptionClient getS3Encryption(String regionName = '') {
+        getServiceClient('s3Encryption', regionName) as AmazonS3EncryptionClient
+    }
+
     AWSSecurityTokenServiceClient getSts(String regionName = '') {
         getServiceClient('sts', regionName) as AWSSecurityTokenServiceClient
     }
@@ -364,9 +370,13 @@ class AmazonWebService {
         }
 
         Region region = RegionUtils.getRegion(regionName)
-        if (!region || !region.isServiceSupported(getServiceAbbreviation(service))) {
-            if (!region) log.warn "Region ${regionName} not found"
-            else if (!region.isServiceSupported(getServiceAbbreviation(service))) log.warn "Service ${service} is not supported in region ${regionName}"
+        String serviceName = getServiceAbbreviation(service)
+        if (!region || !region.isServiceSupported(serviceName)) {
+            if (!region) {
+                log.warn "Region ${regionName} not found"
+            } else if (!region.isServiceSupported(serviceName)) {
+                log.warn "Service ${service} is not supported in region ${regionName}"
+            }
             log.warn "Using default region ${DEFAULT_REGION}"
             regionName = DEFAULT_REGION
             region = RegionUtils.getRegion(regionName)
@@ -443,6 +453,11 @@ class AmazonWebService {
                     if (async) throw new Exception("Sorry, there is no async client for AmazonS3")
                     client = new AmazonS3Client(credentials)
                     break
+                case 's3Encryption':
+                    if (async) throw new Exception("Sorry, there is no async client for AmazonS3EncryptionClient")
+                    if (!awsConfig.encryptionMaterials) throw new Exception("Sorry, please provide entryptionMaterials in AWS config")
+                    client = new AmazonS3EncryptionClient(credentials, awsConfig.encryptionMaterials as EncryptionMaterials)
+                    break
                 case 'sdb':
                     client = async ? new AmazonSimpleDBAsyncClient(credentials) : new AmazonSimpleDBClient(credentials)
                     break
@@ -481,10 +496,13 @@ class AmazonWebService {
     private String getServiceAbbreviation(String service) {
         switch(service) {
             case 'cloudWatch':
-                ServiceAbbreviations.CloudWatch // 'monitoring'
+                ServiceAbbreviations.CloudWatch
                 break
             case 'ses':
-                ServiceAbbreviations.Email // 'email'
+                ServiceAbbreviations.Email
+                break
+            case 's3Encryption':
+                ServiceAbbreviations.S3
                 break
             default:
                 service.toLowerCase()

@@ -1,5 +1,12 @@
 package grails.plugin.awssdk
 
+import com.amazonaws.services.s3.AmazonS3EncryptionClient
+import com.amazonaws.services.s3.model.EncryptionMaterials
+
+import java.security.KeyPair
+import java.security.KeyPairGenerator
+import java.security.SecureRandom
+
 import static org.junit.Assert.*
 
 import grails.test.mixin.*
@@ -81,6 +88,19 @@ class AmazonWebServiceTests {
         grailsApplication.config.grails.plugin.awssdk.secretKey = "123456789"
 
         amazonWebService.grailsApplication = grailsApplication
+
+        amazonWebService
+    }
+
+    AmazonWebService getServiceWithCredentialsAndEncryptionMaterials() {
+        def amazonWebService = serviceWithCredentials
+
+        KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA")
+        keyGenerator.initialize(1024, new SecureRandom())
+        KeyPair myKeyPair = keyGenerator.generateKeyPair()
+        EncryptionMaterials encryptionMaterials = new EncryptionMaterials(myKeyPair)
+
+        amazonWebService.grailsApplication.config.grails.plugin.awssdk.encryptionMaterials = encryptionMaterials
 
         amazonWebService
     }
@@ -551,6 +571,36 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
         assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
+    }
+
+    void testS3EncryptionClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentialsAndEncryptionMaterials()
+
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3EncryptionAsync()
+        }
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3EncryptionAsync('eu-west-1')
+        }
+        assert amazonWebService.getS3Encryption().class == AmazonS3EncryptionClient
+        assert amazonWebService.getS3Encryption().endpoint.toString() == 'https://s3.amazonaws.com'
+        assert amazonWebService.getS3Encryption('eu-west-1').class == AmazonS3EncryptionClient
+        assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
+    }
+
+    void testS3EncryptionClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3EncryptionAsync()
+        }
+        shouldFail(MissingMethodException) {
+            amazonWebService.getS3EncryptionAsync('eu-west-1')
+        }
+        assert amazonWebService.getS3Encryption().class == AmazonS3EncryptionClient
+        assert amazonWebService.getS3Encryption().endpoint.toString() == 'https://s3.amazonaws.com'
+        assert amazonWebService.getS3Encryption('eu-west-1').class == AmazonS3EncryptionClient
+        assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
     }
 
     void testSdbClientWithCredentials() {
