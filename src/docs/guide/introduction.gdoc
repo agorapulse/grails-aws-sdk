@@ -52,6 +52,7 @@ h3. Latest releases
 If you are using DynamoDB, please update your calls to the API.
 {warning}
 
+* 2013-10-25 *V1.6.3* : AWS SDK for Java updated to V1.6.3 + AmazonS3EncryptionClient added
 * 2013-10-03 *V1.6.0* : AWS SDK for Java updated to V1.6.0
 * 2013-09-11 *V1.5.6* : AWS SDK for Java updated to V1.5.6 + Grails 2.3.0 support
 * 2013-08-27 *V1.5.5* : AWS SDK for Java updated to V1.5.5

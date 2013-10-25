@@ -34,6 +34,7 @@ amazonWebService.rds
 amazonWebService.redshift
 amazonWebService.route53
 amazonWebService.s3
+amazonWebService.s3Encryption
 amazonWebService.ses
 amazonWebService.sdb
 amazonWebService.sns

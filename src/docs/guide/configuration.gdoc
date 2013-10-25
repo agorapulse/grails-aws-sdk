@@ -99,6 +99,7 @@ grails {
             redshift {}
             route53 {}
             s3 {}
+            s3Encryption {}
             sdb {}
             sns {}
             sqs {}
