@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.5.5</title>
+        <title>AWS SDK Plugin 1.6.4</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.5.5</p>
+                            <p><strong>Version:</strong> 1.6.4</p>
                             
                         </div>
 
@@ -133,7 +133,11 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
-<li>2013-07-11 <strong class="bold">V1.5.0</strong> : AWS SDK for Java updated to V1.5.5</li>
+<li>2013-11-07 <strong class="bold">V1.6.4</strong> : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)</li>
+<li>2013-10-25 <strong class="bold">V1.6.3</strong> : AWS SDK for Java updated to V1.6.3 + AmazonS3EncryptionClient added</li>
+<li>2013-10-03 <strong class="bold">V1.6.0</strong> : AWS SDK for Java updated to V1.6.0</li>
+<li>2013-09-11 <strong class="bold">V1.5.6</strong> : AWS SDK for Java updated to V1.5.6 + Grails 2.3.0 support</li>
+<li>2013-08-27 <strong class="bold">V1.5.5</strong> : AWS SDK for Java updated to V1.5.5</li>
 <li>2013-07-11 <strong class="bold">V1.5.0</strong> : AWS SDK for Java updated to V1.5.0</li>
 <li>2013-06-20 <strong class="bold">V1.4.7</strong> : AWS SDK for Java updated to V1.4.7</li>
 <li>2013-06-06 <strong class="bold">V1.4.5</strong> : AWS SDK for Java updated to V1.4.5 + DynamoDB V2 support by default</li>
@@ -150,7 +154,6 @@ If you are using DynamoDB, please update your calls to the API.
 <li>2012-07-04 <strong class="bold">V1.3.12</strong> : AWS SDK for Java updated to V1.3.12</li>
 <li>2012-07-02 <strong class="bold">V1.3.11</strong> : initial release</li>
 </ul><p class="paragraph"/><h3>Bugs</h3><p class="paragraph"/>To report any bug, please use the project <a href="http://github.com/agorapulse/grails-aws-sdk/issues" target="blank">Issues</a> section on GitHub.<p class="paragraph"/>
-<h3>Beta status</h3><p class="paragraph"/>This is an <strong class="bold"></strong>beta release<strong class="bold"></strong>.<p class="paragraph"/>
 <h3>Other AWS Grails plugin</h3><p class="paragraph"/>FYI, there is another great <a href="http://grails.org/plugin/aws" target="blank">AWS Grails plugin</a> with a different approach: its aim is to provide an easy "groovy" access to SES (through a groovy DSL) and S3 (through methods injection), based on JetS3 java lib. If you just need basic SES or S3 features, you might give it a try.<p class="paragraph"/>We decided to write our own AWS plugin because it did not meet our requirements as we wanted:
 <ol>
 <li>to have a direct access to <strong class="bold">ALL</strong> <a href="http://aws.amazon.com/sdkforjava/" target="blank">AWS SDK for Java</a> features, including <strong class="bold">ALL</strong> AWS services with custom client configuration,</li>
@@ -176,7 +179,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.5.5'
+				runtime ':aws&#45;sdk:1.6.4'
 		&#125;
 &#125;</pre></div>
 
@@ -208,6 +211,13 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             socketTimeout = &#123;SOCKET_TIMEOUT&#125;
             // HTTP user agent header to send with all requests.
             userAgent = &#123;USER_AGENT&#125;
+            // Proxy settings
+            proxyDomain = &#123;PROXY_DOMAIN&#125;
+            proxyHost = &#123;PROXY_HOST&#125;
+            proxyPassword = &#123;PROXY_PASSWORD&#125;
+            proxyPort = &#123;PROXY_PORT&#125;
+            proxyUsername = &#123;PROXY_USERNAME&#125;
+            proxyWorkstation = &#123;PROXY_WORKSTATION&#125;
         &#125;
     &#125;
 &#125;</pre></div><p class="paragraph"/>If required, you can also override default client configuration for each service.<p class="paragraph"/>For example this will define specific properties for SQS and SES.<p class="paragraph"/><div class="code"><pre>grails &#123;
@@ -246,6 +256,7 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             redshift &#123;&#125;
             route53 &#123;&#125;
             s3 &#123;&#125;
+            s3Encryption &#123;&#125;
             sdb &#123;&#125;
             sns &#123;&#125;
             sqs &#123;&#125;
@@ -279,6 +290,7 @@ amazonWebService.rds
 amazonWebService.redshift
 amazonWebService.route53
 amazonWebService.s3
+amazonWebService.s3Encryption
 amazonWebService.ses
 amazonWebService.sdb
 amazonWebService.sns
