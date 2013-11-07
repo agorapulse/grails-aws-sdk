@@ -53,6 +53,13 @@ grails {
             socketTimeout = {SOCKET_TIMEOUT}
             // HTTP user agent header to send with all requests.
             userAgent = {USER_AGENT}
+            // Proxy settings
+            proxyDomain = {PROXY_DOMAIN}
+            proxyHost = {PROXY_HOST}
+            proxyPassword = {PROXY_PASSWORD}
+            proxyPort = {PROXY_PORT}
+            proxyUsername = {PROXY_USERNAME}
+            proxyWorkstation = {PROXY_WORKSTATION}
         }
     }
 }
