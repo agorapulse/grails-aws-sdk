@@ -338,7 +338,13 @@ class AmazonWebService {
                 maxErrorRetry: defaultConfig.maxErrorRetry ?: 0,
                 protocol: defaultConfig.protocol ?: '',
                 socketTimeout: defaultConfig.socketTimeout ?: 0,
-                userAgent: defaultConfig.userAgent ?: ''
+                userAgent: defaultConfig.userAgent ?: '',
+				proxyDomain: defaultConfig.proxyDomain ?: '',
+				proxyHost: defaultConfig.proxyHost ?: '',
+				proxyPassword: defaultConfig.proxyPassword ?: '',
+				proxyPort: defaultConfig.proxyPort ?: 0,
+				proxyUsername: defaultConfig.proxyUsername ?: '',
+				proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
         ]
         if (serviceConfig) {
             if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
@@ -346,7 +352,13 @@ class AmazonWebService {
             if (serviceConfig.maxErrorRetry) config.maxErrorRetry = serviceConfig.maxErrorRetry
             if (serviceConfig.protocol) config.protocol = serviceConfig.protocol
             if (serviceConfig.socketTimeout) config.socketTimeout = serviceConfig.socketTimeout
-            if (serviceConfig.userAgent) config.connectionTimeout = serviceConfig.userAgent
+            if (serviceConfig.userAgent) config.userAgent = serviceConfig.userAgent
+            if (serviceConfig.proxyDomain) config.proxyDomain = serviceConfig.proxyDomain
+            if (serviceConfig.proxyHost) config.proxyHost = serviceConfig.proxyHost
+            if (serviceConfig.proxyPassword) config.proxyPassword = serviceConfig.proxyPassword
+            if (serviceConfig.proxyPort) config.proxyPort = serviceConfig.proxyPort
+            if (serviceConfig.proxyUsername) config.proxyUsername = serviceConfig.proxyUsername
+            if (serviceConfig.proxyWorkstation) config.proxyWorkstation = serviceConfig.proxyWorkstation
         }
 
         ClientConfiguration clientConfiguration = new ClientConfiguration()
@@ -359,6 +371,12 @@ class AmazonWebService {
         }
         if (config.socketTimeout) clientConfiguration.socketTimeout = config.socketTimeout
         if (config.userAgent) clientConfiguration.userAgent = config.userAgent
+        if (config.proxyDomain) clientConfiguration.proxyDomain = config.proxyDomain
+        if (config.proxyHost) clientConfiguration.proxyHost = config.proxyHost
+        if (config.proxyPassword) clientConfiguration.proxyPassword = config.proxyPassword
+        if (config.proxyPort) clientConfiguration.proxyPort = config.proxyPort
+        if (config.proxyUsername) clientConfiguration.proxyUsername = config.proxyUsername
+        if (config.proxyWorkstation) clientConfiguration.proxyWorkstation = config.proxyWorkstation
         clientConfiguration
     }
 
