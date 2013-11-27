@@ -52,6 +52,7 @@ h3. Latest releases
 If you are using DynamoDB, please update your calls to the API.
 {warning}
 
+* 2013-11-27 *V1.6.7* : AWS SDK for Java updated to V1.6.7
 * 2013-11-07 *V1.6.4* : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)
 * 2013-10-25 *V1.6.3* : AWS SDK for Java updated to V1.6.3 + AmazonS3EncryptionClient added
 * 2013-10-03 *V1.6.0* : AWS SDK for Java updated to V1.6.0
