@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.6.4</title>
+        <title>AWS SDK Plugin 1.6.7</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.6.4</p>
+                            <p><strong>Version:</strong> 1.6.7</p>
                             
                         </div>
 
@@ -133,6 +133,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
+<li>2013-11-27 <strong class="bold">V1.6.7</strong> : AWS SDK for Java updated to V1.6.7</li>
 <li>2013-11-07 <strong class="bold">V1.6.4</strong> : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)</li>
 <li>2013-10-25 <strong class="bold">V1.6.3</strong> : AWS SDK for Java updated to V1.6.3 + AmazonS3EncryptionClient added</li>
 <li>2013-10-03 <strong class="bold">V1.6.0</strong> : AWS SDK for Java updated to V1.6.0</li>
@@ -179,7 +180,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.6.4'
+				runtime ':aws&#45;sdk:1.6.7'
 		&#125;
 &#125;</pre></div>
 
@@ -388,7 +389,7 @@ println <span class="java&#45;quote">"max24HourSend: $&#123;quota.max24HourSend&
 
 
 <h2 id="sqs">4.5 SQS example</h2>
-Create a queue.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.sqs.model.&#42;<p class="paragraph"/><span class="java&#45;object">String</span> queueUrl = amazonWebService.sqs.createQueue(<span class="java&#45;keyword">new</span> CreateQueueRequest('someQueue'))</pre></div><p class="paragraph"/>Send a message<p class="paragraph"/><div class="code"><pre>amazonWebService.sqs.sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, 'Some message...'))</pre></div><p class="paragraph"/>Receive and delete messages<p class="paragraph"/><div class="code"><pre>List messages = amazonWebService.sqs.receiveMessage(<span class="java&#45;keyword">new</span> ReceiveMessageRequest(queueUrl)).messages
+Create a queue.<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.sqs.model.&#42;<p class="paragraph"/><span class="java&#45;object">String</span> queueUrl = amazonWebService.sqs.createQueue(<span class="java&#45;keyword">new</span> CreateQueueRequest('someQueue')).queueUrl</pre></div><p class="paragraph"/>Send a message<p class="paragraph"/><div class="code"><pre>amazonWebService.sqs.sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, 'Some message...'))</pre></div><p class="paragraph"/>Receive and delete messages<p class="paragraph"/><div class="code"><pre>List messages = amazonWebService.sqs.receiveMessage(<span class="java&#45;keyword">new</span> ReceiveMessageRequest(queueUrl)).messages
 messages.each &#123; Message message &#45;&#62;
     println <span class="java&#45;quote">"id: $&#123;message.messageId&#125;, body: $&#123;message.body&#125;"</span>
     amazonWebService.sqs.deleteMessage(<span class="java&#45;keyword">new</span> DeleteMessageRequest(queueUrl, message.receiptHandle))
