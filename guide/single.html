@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.6.7</title>
+        <title>AWS SDK Plugin 1.6.9</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -61,7 +61,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.6.7</p>
+                            <p><strong>Version:</strong> 1.6.9</p>
                             
                         </div>
 
@@ -133,6 +133,7 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
+<li>2013-12-17 <strong class="bold">V1.6.9</strong> : AWS SDK for Java updated to V1.6.9 + Amazon CloudTrail and Amazon Kinesis support added</li>
 <li>2013-11-27 <strong class="bold">V1.6.7</strong> : AWS SDK for Java updated to V1.6.7</li>
 <li>2013-11-07 <strong class="bold">V1.6.4</strong> : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)</li>
 <li>2013-10-25 <strong class="bold">V1.6.3</strong> : AWS SDK for Java updated to V1.6.3 + AmazonS3EncryptionClient added</li>
@@ -180,7 +181,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.6.7'
+				runtime ':aws&#45;sdk:1.6.9'
 		&#125;
 &#125;</pre></div>
 
@@ -241,6 +242,7 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             cloudFormation &#123;&#125;
             cloudFront &#123;&#125;
             cloudSearch &#123;&#125;
+            cloudTrail &#123;&#125;
             cloudWatch &#123;&#125;
             dynamoDB &#123;&#125;
             ec2 &#123;&#125;
@@ -252,6 +254,7 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             glacier &#123;&#125;
             iam &#123;&#125;
             importExport &#123;&#125;
+            kinesis &#123;&#125;
             opsWorks &#123;&#125;
             rds &#123;&#125;
             redshift &#123;&#125;
@@ -275,6 +278,7 @@ amazonWebService.autoScaling
 amazonWebService.cloudFormation
 amazonWebService.cloudFront
 amazonWebService.cloudSearch
+amazonWebService.cloudTrail
 amazonWebService.cloudWatch
 amazonWebService.dynamoDB
 amazonWebService.ec2
@@ -286,6 +290,7 @@ amazonWebService.elastiCache
 amazonWebService.glacier
 amazonWebService.iam
 amazonWebService.importExport
+amazonWebService.kinesis
 amazonWebService.opsWorks
 amazonWebService.rds
 amazonWebService.redshift
@@ -405,6 +410,7 @@ For other services, check the Java doc :
 <li><code>amazonWebService.cloudFormation</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudformation/AmazonCloudFormationClient.html" target="blank">AmazonCloudFormationClient Java doc</a></li>
 <li><code>amazonWebService.cloudFront</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudfront/AmazonCloudFrontClient.html" target="blank">AmazonCloudFrontClient Java doc</a></li>
 <li><code>amazonWebService.cloudSearch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudSearchClient.html" target="blank">AmazonCloudSearchClient Java doc</a></li>
+<li><code>amazonWebService.cloudTrailh</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudTrailClient.html" target="blank">AmazonCloudTrailClient Java doc</a></li>
 <li><code>amazonWebService.cloudWatch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudwatch/AmazonCloudWatchClient.html" target="blank">AmazonCloudWatchClient Java doc</a></li>
 <li><code>amazonWebService.dynamoDB</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/dynamodb/AmazonDynamoDBClient.html" target="blank">AmazonDynamoDBClient Java doc</a></li>
 <li><code>amazonWebService.ec2</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html" target="blank">AmazonEC2Client Java doc</a></li>
@@ -416,6 +422,7 @@ For other services, check the Java doc :
 <li><code>amazonWebService.glacier</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/glacier/AmazonGlacierClient.html" target="blank">AmazonGlacierClient Java doc</a></li>
 <li><code>amazonWebService.iam</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html" target="blank">AmazonIdentityManagementClient Java doc</a></li>
 <li><code>amazonWebService.importExport</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html" target="blank">AmazonImportExportClient Java doc</a></li>
+<li><code>amazonWebService.kinesis</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/kinesis/AmazonKinesisClient.html" target="blank">AmazonKinesisClient Java doc</a></li>
 <li><code>amazonWebService.opsWorks</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html" target="blank">AWSOpsWorksClient Java doc</a></li>
 <li><code>amazonWebService.rds</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html" target="blank">AmazonRDSClient Java doc</a></li>
 <li><code>amazonWebService.redshift</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/redshift/AmazonRedshiftClient.html" target="blank">AmazonRedshiftClient Java doc</a></li>
