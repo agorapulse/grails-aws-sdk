@@ -18,6 +18,7 @@ amazonWebService.autoScaling
 amazonWebService.cloudFormation
 amazonWebService.cloudFront
 amazonWebService.cloudSearch
+amazonWebService.cloudTrail
 amazonWebService.cloudWatch
 amazonWebService.dynamoDB
 amazonWebService.ec2
@@ -29,6 +30,7 @@ amazonWebService.elastiCache
 amazonWebService.glacier
 amazonWebService.iam
 amazonWebService.importExport
+amazonWebService.kinesis
 amazonWebService.opsWorks
 amazonWebService.rds
 amazonWebService.redshift

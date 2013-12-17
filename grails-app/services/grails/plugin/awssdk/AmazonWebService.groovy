@@ -16,6 +16,8 @@ import com.amazonaws.services.cloudfront.AmazonCloudFrontAsyncClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClient
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient
+import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
+import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
@@ -38,6 +40,8 @@ import com.amazonaws.services.identitymanagement.AmazonIdentityManagementAsyncCl
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient
 import com.amazonaws.services.importexport.AmazonImportExportAsyncClient
 import com.amazonaws.services.importexport.AmazonImportExportClient
+import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
+import com.amazonaws.services.kinesis.AmazonKinesisClient
 import com.amazonaws.services.opsworks.AWSOpsWorksAsyncClient
 import com.amazonaws.services.opsworks.AWSOpsWorksClient
 import com.amazonaws.services.rds.AmazonRDSAsyncClient
@@ -107,6 +111,14 @@ class AmazonWebService {
 
     AmazonCloudSearchClient getCloudSearch(regionName = '') {
         getServiceClient('cloudSearch', regionName) as AmazonCloudSearchClient
+    }
+
+    AWSCloudTrailAsyncClient getCloudTrailAsync(regionName = '') {
+        getServiceClient('cloudTrail', regionName, true) as AWSCloudTrailAsyncClient
+    }
+
+    AWSCloudTrailClient getCloudTrail(regionName = '') {
+        getServiceClient('cloudTrail', regionName) as AWSCloudTrailClient
     }
 
     AmazonCloudWatchAsyncClient getCloudWatchAsync(regionName = '') {
@@ -195,6 +207,14 @@ class AmazonWebService {
 
     AmazonImportExportClient getImportExport() {
         getServiceClient('importExport') as AmazonImportExportClient
+    }
+
+    AmazonKinesisAsyncClient getKinesisAsync(regionName = '') {
+        getServiceClient('kinesis', regionName, true) as AmazonKinesisAsyncClient
+    }
+
+    AmazonKinesisClient getKinesis(regionName = '') {
+        getServiceClient('kinesis', regionName) as AmazonKinesisClient
     }
 
     AWSOpsWorksAsyncClient getOpsWorksAsync() {
@@ -422,6 +442,9 @@ class AmazonWebService {
                 case 'cloudSearch':
                     client = async ? new AmazonCloudSearchAsyncClient(credentials) : new AmazonCloudSearchClient(credentials)
                     break
+                case 'cloudTrail':
+                    client = async ? new AWSCloudTrailAsyncClient(credentials) : new AWSCloudTrailClient(credentials)
+                    break
                 case 'cloudWatch':
                     client = async ? new AmazonCloudWatchAsyncClient(credentials) : new AmazonCloudWatchClient(credentials)
                     break
@@ -454,6 +477,9 @@ class AmazonWebService {
                     break
                 case 'importExport':
                     client = async ? new AmazonImportExportAsyncClient(credentials) : new AmazonImportExportClient(credentials)
+                    break
+                case 'kinesis':
+                    client = async ? new AmazonKinesisAsyncClient(credentials) : new AmazonKinesisClient(credentials)
                     break
                 case 'opsWorks':
                     client = async ? new AWSOpsWorksAsyncClient(credentials) : new AWSOpsWorksClient(credentials)

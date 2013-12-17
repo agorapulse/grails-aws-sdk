@@ -4,6 +4,7 @@ For other services, check the Java doc :
 * @amazonWebService.cloudFormation@ - "AmazonCloudFormationClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudformation/AmazonCloudFormationClient.html
 * @amazonWebService.cloudFront@ - "AmazonCloudFrontClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudfront/AmazonCloudFrontClient.html
 * @amazonWebService.cloudSearch@ - "AmazonCloudSearchClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudSearchClient.html
+* @amazonWebService.cloudTrailh@ - "AmazonCloudTrailClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudTrailClient.html
 * @amazonWebService.cloudWatch@ - "AmazonCloudWatchClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudwatch/AmazonCloudWatchClient.html
 * @amazonWebService.dynamoDB@ - "AmazonDynamoDBClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/dynamodb/AmazonDynamoDBClient.html
 * @amazonWebService.ec2@ - "AmazonEC2Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html
@@ -15,6 +16,7 @@ For other services, check the Java doc :
 * @amazonWebService.glacier@ - "AmazonGlacierClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/glacier/AmazonGlacierClient.html
 * @amazonWebService.iam@ - "AmazonIdentityManagementClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html
 * @amazonWebService.importExport@ - "AmazonImportExportClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html
+* @amazonWebService.kinesis@ - "AmazonKinesisClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/kinesis/AmazonKinesisClient.html
 * @amazonWebService.opsWorks@ - "AWSOpsWorksClient Java doc":http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html
 * @amazonWebService.rds@ - "AmazonRDSClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html
 * @amazonWebService.redshift@ - "AmazonRedshiftClient Java doc":http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/redshift/AmazonRedshiftClient.html

@@ -90,6 +90,7 @@ grails {
             cloudFormation {}
             cloudFront {}
             cloudSearch {}
+            cloudTrail {}
             cloudWatch {}
             dynamoDB {}
             ec2 {}
@@ -101,6 +102,7 @@ grails {
             glacier {}
             iam {}
             importExport {}
+            kinesis {}
             opsWorks {}
             rds {}
             redshift {}

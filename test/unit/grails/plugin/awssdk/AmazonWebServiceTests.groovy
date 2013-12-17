@@ -1,5 +1,9 @@
 package grails.plugin.awssdk
 
+import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
+import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
+import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
+import com.amazonaws.services.kinesis.AmazonKinesisClient
 import com.amazonaws.services.s3.AmazonS3EncryptionClient
 import com.amazonaws.services.s3.model.EncryptionMaterials
 
@@ -201,6 +205,36 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
         assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
         assert amazonWebService.getCloudSearch('eu-west-1').endpoint.toString() == 'https://cloudsearch.eu-west-1.amazonaws.com'
+    }
+
+    void testCloudTrailClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getCloudTrailAsync().class == AWSCloudTrailAsyncClient
+        assert amazonWebService.getCloudTrailAsync().endpoint.toString() == 'https://cloudtrail.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+           amazonWebService.getCloudTrailAsync('eu-west-1')
+        }*/
+        assert amazonWebService.getCloudTrail().class == AWSCloudTrailClient
+        assert amazonWebService.getCloudTrail().endpoint.toString() == 'https://cloudtrail.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getCloudTrail('eu-west-1')
+        }*/
+    }
+
+    void testCloudTrailClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getCloudTrailAsync().class == AWSCloudTrailAsyncClient
+        assert amazonWebService.getCloudTrailAsync().endpoint.toString() == 'https://cloudtrail.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getCloudTrailAsync('eu-west-1')
+        }*/
+        assert amazonWebService.getCloudTrail().class == AWSCloudTrailClient
+        assert amazonWebService.getCloudTrail().endpoint.toString() == 'https://cloudtrail.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getCloudTrail('eu-west-1')
+        }*/
     }
 
     void testCloudWatchClientWithCredentials() {
@@ -437,6 +471,36 @@ class AmazonWebServiceTests {
         shouldFail(MissingMethodException) {
             amazonWebService.getImportExport('eu-west-1')
         }
+    }
+
+    void testKinesisAsyncWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getKinesisAsync().class == AmazonKinesisAsyncClient
+        assert amazonWebService.getKinesisAsync().endpoint.toString() == 'https://kinesis.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getKinesisAsync('eu-west-1')
+        }*/
+        assert amazonWebService.getKinesis().class == AmazonKinesisClient
+        assert amazonWebService.getKinesis().endpoint.toString() == 'https://kinesis.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getKinesis('eu-west-1')
+        }*/
+    }
+
+    void testKinesisAsyncWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getKinesisAsync().class == AmazonKinesisAsyncClient
+        assert amazonWebService.getKinesisAsync().endpoint.toString() == 'https://kinesis.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getKinesisAsync('eu-west-1')
+        }*/
+        assert amazonWebService.getKinesis().class == AmazonKinesisClient
+        assert amazonWebService.getKinesis().endpoint.toString() == 'https://kinesis.us-east-1.amazonaws.com'
+        /*shouldFail(MissingMethodException) {
+            amazonWebService.getKinesis('eu-west-1')
+        }*/
     }
 
     void testOpsWorksAsyncWithCredentials() {
