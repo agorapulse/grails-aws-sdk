@@ -104,6 +104,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 **WARNING**: Breaking change, since V1.4.5, new **DynamoDB** API Version 2012-08-10 are used (package *com.amazonaws.services.dynamodbv2* instead of *com.amazonaws.services.dynamodb* ).
 If you are using DynamoDB, please update your calls to the API.
 
+* 2013-01-07 **V1.6.11** : AWS SDK for Java updated to V1.6.11
 * 2013-12-17 **V1.6.9** : AWS SDK for Java updated to V1.6.9 + Amazon Kinesis support added
 * 2013-11-27 **V1.6.7** : AWS SDK for Java updated to V1.6.7
 * 2013-11-07 **V1.6.4** : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)
