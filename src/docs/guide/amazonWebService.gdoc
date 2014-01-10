@@ -21,6 +21,7 @@ amazonWebService.cloudSearch
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
 amazonWebService.dynamoDB
+amazonWebService.dynamoDBMapper
 amazonWebService.ec2
 amazonWebService.elasticBeanstalk
 amazonWebService.elasticLoadBalancing
@@ -43,6 +44,7 @@ amazonWebService.sns
 amazonWebService.sqs
 amazonWebService.storageGateway
 amazonWebService.swf
+amazonWebService.transferManager
 {code}
 
 It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html with default region endpoint (defined in our @Config.groovy@).

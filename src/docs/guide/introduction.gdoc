@@ -52,6 +52,7 @@ h3. Latest releases
 If you are using DynamoDB, please update your calls to the API.
 {warning}
 
+* 2013-01-11 *V1.6.12* : AWS SDK for Java updated to V1.6.12 + DynamoDB mapper support added
 * 2013-01-07 *V1.6.11* : AWS SDK for Java updated to V1.6.11
 * 2013-12-17 *V1.6.9* : AWS SDK for Java updated to V1.6.9 + Amazon CloudTrail and Amazon Kinesis support added
 * 2013-11-27 *V1.6.7* : AWS SDK for Java updated to V1.6.7
