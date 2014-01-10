@@ -22,6 +22,7 @@ import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.ec2.AmazonEC2AsyncClient
 import com.amazonaws.services.ec2.AmazonEC2Client
 import com.amazonaws.services.elasticache.AmazonElastiCacheAsyncClient
@@ -78,6 +79,7 @@ class AmazonWebService {
     def grailsApplication
 
     private Map asyncClients = [:]
+    private Map dynamoDBMappers = [:]
     private Map clients = [:]
     private Map transferManagers = [:]
 
@@ -311,6 +313,21 @@ class AmazonWebService {
 
     AmazonSimpleWorkflowClient getSwf(String regionName = '') {
         getServiceClient('swf', regionName) as AmazonSimpleWorkflowClient
+    }
+
+    // Utils
+
+    DynamoDBMapper getDynamoDBMapper(String regionName = '') {
+        if (!regionName) {
+            if (awsConfig['dynamodb']?.region) regionName = awsConfig['dynamodb'].region
+            else if (awsConfig?.region) regionName = awsConfig.region
+            else regionName = DEFAULT_REGION
+        }
+
+        if (!dynamoDBMappers[regionName]) {
+            dynamoDBMappers[regionName] = new DynamoDBMapper(getDynamoDB(regionName))
+        }
+        dynamoDBMappers[regionName]
     }
 
     TransferManager getTransferManager(String regionName = '') {

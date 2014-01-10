@@ -2,6 +2,7 @@ package grails.plugin.awssdk
 
 import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
 import com.amazonaws.services.kinesis.AmazonKinesisClient
 import com.amazonaws.services.s3.AmazonS3EncryptionClient
@@ -805,6 +806,13 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSwf().class == AmazonSimpleWorkflowClient
         assert amazonWebService.getSwf('eu-west-1').class == AmazonSimpleWorkflowClient
         assert amazonWebService.getSwf('eu-west-1').endpoint.toString() == 'https://swf.eu-west-1.amazonaws.com'
+    }
+
+    void testDynamoDBMapper() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getDynamoDBMapper().class == DynamoDBMapper
+        assert amazonWebService.getDynamoDBMapper('eu-west-1').class == DynamoDBMapper
     }
 
     void testTransferManager() {
