@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.6.9</title>
+        <title>AWS SDK Plugin 1.7.1</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -46,6 +46,7 @@ function addJsClass(el) {
             </div>
             <p>The AWS SDK Plugin allows your Grails application to use the Amazon Web Services infrastructure services.
 It provides simple wrapper service around the official AWS SDK for Java.
+
 Using the SDK, developers can build solutions for Amazon Simple Storage Service (Amazon S3), Amazon Elastic Compute Cloud (Amazon EC2), Amazon SimpleDB, and more.
 </p>
         </div>
@@ -61,7 +62,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.6.9</p>
+                            <p><strong>Version:</strong> 1.7.1</p>
                             
                         </div>
 
@@ -133,6 +134,9 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
+<li>2013-02-12 <strong class="bold">V1.7.1</strong> : AWS SDK for Java updated to V1.7.1</li>
+<li>2013-01-11 <strong class="bold">V1.6.12</strong> : AWS SDK for Java updated to V1.6.12 + DynamoDB mapper support added</li>
+<li>2013-01-07 <strong class="bold">V1.6.11</strong> : AWS SDK for Java updated to V1.6.11</li>
 <li>2013-12-17 <strong class="bold">V1.6.9</strong> : AWS SDK for Java updated to V1.6.9 + Amazon CloudTrail and Amazon Kinesis support added</li>
 <li>2013-11-27 <strong class="bold">V1.6.7</strong> : AWS SDK for Java updated to V1.6.7</li>
 <li>2013-11-07 <strong class="bold">V1.6.4</strong> : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)</li>
@@ -181,7 +185,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.6.9'
+				runtime ':aws&#45;sdk:1.7.1'
 		&#125;
 &#125;</pre></div>
 
@@ -281,6 +285,7 @@ amazonWebService.cloudSearch
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
 amazonWebService.dynamoDB
+amazonWebService.dynamoDBMapper
 amazonWebService.ec2
 amazonWebService.elasticBeanstalk
 amazonWebService.elasticLoadBalancing
@@ -302,7 +307,8 @@ amazonWebService.sdb
 amazonWebService.sns
 amazonWebService.sqs
 amazonWebService.storageGateway
-amazonWebService.swf</pre></div><p class="paragraph"/>It will return an instance of java client class extending <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html" target="blank">AmazonWebServiceClient</a> with default region endpoint (defined in our <code>Config.groovy</code>).<p class="paragraph"/>You can then call any available client methods.<p class="paragraph"/>To know available methods for each service clients, check the latest version of online <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html." target="blank">AWS SDK Java docs</a><p class="paragraph"/>
+amazonWebService.swf
+amazonWebService.transferManager</pre></div><p class="paragraph"/>It will return an instance of java client class extending <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html" target="blank">AmazonWebServiceClient</a> with default region endpoint (defined in our <code>Config.groovy</code>).<p class="paragraph"/>You can then call any available client methods.<p class="paragraph"/>To know available methods for each service clients, check the latest version of online <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html." target="blank">AWS SDK Java docs</a><p class="paragraph"/>
 <h3>Custom region</h3><p class="paragraph"/>If required, you can pass the region name, to get a client with a different region endpoint.<p class="paragraph"/><div class="code"><pre>// Use SQS <span class="java&#45;keyword">for</span> region 'eu&#45;west&#45;1'
 amazonWebService.getSqs('eu&#45;west&#45;1').sendMessage(<span class="java&#45;keyword">new</span> SendMessageRequest(queueUrl, messageBody))</pre></div><p class="paragraph"/>
 <h3>Async clients</h3><p class="paragraph"/>If required, you can also get asynchronous client (which return Future on each async methods).<p class="paragraph"/><div class="code"><pre>// Get async client
@@ -372,7 +378,7 @@ objectListing.objectSummaries.each &#123; S3ObjectSummary summary &#45;&#62;
 
 <h2 id="ses">4.4 SES example</h2>
 <blockquote class="note">
-SES is currently only available in us-east-1 region, so you might define it in your config if required or use <code>amazonWebService.getSes('us-east-1')</code>.
+SES is currently only available in some region (us-east-1, us-west-2, eu-west-1), so you might define it in your config if required or use <code>amazonWebService.getSes('us-east-1')</code>.
 </blockquote><p class="paragraph"/>Verifies an email address (send a confirmation email).<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.amazonaws.services.simpleemail.model.&#42;<p class="paragraph"/>amazonWebService.ses.verifyEmailIdentity(<span class="java&#45;keyword">new</span> VerifyEmailIdentityRequest().withEmailAddress('notification&#64;mydomain.com'))</pre></div><p class="paragraph"/>List verified address.<p class="paragraph"/><div class="code"><pre>List emailAddresses = amazonWebService.ses.listVerifiedEmailAddresses().verifiedEmailAddresses
 emailAddresses.each &#123;
     println it
