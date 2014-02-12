@@ -695,7 +695,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSesAsync('eu-west-1').class == AmazonSimpleEmailServiceAsyncClient
         assert amazonWebService.getSes().class == AmazonSimpleEmailServiceClient
         assert amazonWebService.getSes('eu-west-1').class == AmazonSimpleEmailServiceClient
-        assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.us-east-1.amazonaws.com'
+        assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.eu-west-1.amazonaws.com'
     }
 
     void testSesClientWithoutCredentials() {
@@ -705,7 +705,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSesAsync('eu-west-1').class == AmazonSimpleEmailServiceAsyncClient
         assert amazonWebService.getSes().class == AmazonSimpleEmailServiceClient
         assert amazonWebService.getSes('eu-west-1').class == AmazonSimpleEmailServiceClient
-        assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.us-east-1.amazonaws.com'
+        assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.eu-west-1.amazonaws.com'
     }
 
     void testSnsClientWithCredentials() {

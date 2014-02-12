@@ -1,5 +1,5 @@
 {note}
-SES is currently only available in us-east-1 region, so you might define it in your config if required or use @amazonWebService.getSes('us-east-1')@.
+SES is currently only available in some region (us-east-1, us-west-2, eu-west-1), so you might define it in your config if required or use @amazonWebService.getSes('us-east-1')@.
 {note}
 
 Verifies an email address (send a confirmation email).
