@@ -1,6 +1,6 @@
 class AwsSdkGrailsPlugin {
 
-    def version = "1.7.4"
+    def version = "1.7.5"
     def grailsVersion = "2.0 > *"
     def loadAfter = ['services', 'controllers']
 

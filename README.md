@@ -104,6 +104,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 **WARNING**: Breaking change, since V1.4.5, new **DynamoDB** API Version 2012-08-10 are used (package *com.amazonaws.services.dynamodbv2* instead of *com.amazonaws.services.dynamodb* ).
 If you are using DynamoDB, please update your calls to the API.
 
+* 2014-04-04 **V1.7.5** : AWS SDK for Java updated to V1.7.5
 * 2014-03-21 **V1.7.4** : AWS SDK for Java updated to V1.7.4
 * 2014-02-12 **V1.7.1** : AWS SDK for Java updated to V1.7.1
 * 2014-01-11 **V1.6.12** : AWS SDK for Java updated to V1.6.12 + DynamoDB mapper support added
