@@ -24,14 +24,23 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // Workaround to resolve dependency issue with aws-java-sdk and http-builder (dependent on httpcore:4.0)
-        build 'org.apache.httpcomponents:httpcore:4.2'
-        build 'org.apache.httpcomponents:httpclient:4.2'
+        build 'org.apache.httpcomponents:httpcore:4.3.2'
+        build 'org.apache.httpcomponents:httpclient:4.3.2'
+        build 'org.apache.httpcomponents:httpmime:4.3.3'
         runtime 'org.apache.httpcomponents:httpcore:4.2'
         runtime 'org.apache.httpcomponents:httpclient:4.2'
-        compile 'com.amazonaws:aws-java-sdk:1.7.7'
+        compile 'com.amazonaws:aws-java-sdk:1.7.11'
     }
     plugins {
-        build(':release:3.0.1', ':rest-client-builder:1.0.3') {
+        build(':release:3.0.1',
+                ':rest-client-builder:1.0.3',
+                ':coveralls:0.1') {
+            export = false
+        }
+        build() {
+            export = false
+        }
+        test(':code-coverage:1.2.7') {
             export = false
         }
     }
