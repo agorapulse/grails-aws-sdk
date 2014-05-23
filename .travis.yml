@@ -3,6 +3,6 @@ jdk:
 - oraclejdk7
 script:
 - ./grailsw refresh-dependencies
-- ./grailsw "test-app unit: -coverage -xml"
+- ./grailsw test-app -coverage -xml
 after_success:
 - ./grailsw coveralls
