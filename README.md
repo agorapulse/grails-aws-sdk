@@ -1,6 +1,7 @@
 AWS SDK Grails Plugin
 =====================
 
+[![Coverage Status](https://coveralls.io/repos/agorapulse/grails-aws-sdk/badge.png)](https://coveralls.io/r/agorapulse/grails-aws-sdk)
 [![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.png)](https://travis-ci.org/agorapulse/grails-aws-sdk)
 
 # Introduction
