@@ -1,8 +1,8 @@
 class AwsSdkGrailsPlugin {
 
-    def version = "1.8.0"
+    def version = "1.8.2"
     def grailsVersion = "2.0 > *"
-    def loadAfter = ['services', 'controllers']
+    //def loadAfter = ['services', 'controllers']
 
     def title = "AWS SDK Plugin"
     def author = "Benoit Hediard"
