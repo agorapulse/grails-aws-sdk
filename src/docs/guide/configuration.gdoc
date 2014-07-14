@@ -92,6 +92,8 @@ grails {
             cloudSearch {}
             cloudTrail {}
             cloudWatch {}
+            cognitoIdentity {}
+            cognitoSync {}
             dynamoDB {}
             ec2 {}
             elasticBeanstalk {}

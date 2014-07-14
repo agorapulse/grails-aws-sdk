@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.8.3'
+				runtime ':aws-sdk:1.8.4'
 		}
 }
 ```
@@ -75,6 +75,8 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * Amazon CloudFront
 * Amazon CloudSearch
 * Amazon CloudWatch
+* Amazon Cognito Identity
+* Amazon Cognito Sync
 * Amazon DynamoDB
 * Amazon Elastic Compute Cloud (EC2)
 * Amazon Elastic MapReduce
@@ -105,6 +107,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 **WARNING**: Breaking change, since V1.4.5, new **DynamoDB** API Version 2012-08-10 are used (package *com.amazonaws.services.dynamodbv2* instead of *com.amazonaws.services.dynamodb* ).
 If you are using DynamoDB, please update your calls to the API.
 
+* 2014-07-14 **V1.8.4** : AWS SDK for Java updated to V1.8.4 + Amazon Cognito Identity and Sync support added
 * 2014-07-03 **V1.8.3** : AWS SDK for Java updated to V1.8.3
 * 2014-06-27 **V1.8.2** : AWS SDK for Java updated to V1.8.2
 * 2014-06-23 **V1.8.0** : AWS SDK for Java updated to V1.8.0

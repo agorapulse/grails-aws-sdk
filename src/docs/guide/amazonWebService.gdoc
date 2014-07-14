@@ -20,6 +20,8 @@ amazonWebService.cloudFront
 amazonWebService.cloudSearch
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
+amazonWebService.cognitoIdentity
+amazonWebService.cognitoSync
 amazonWebService.dynamoDB
 amazonWebService.dynamoDBMapper
 amazonWebService.ec2

@@ -6,6 +6,8 @@ For other services, check the Java doc :
 * @amazonWebService.cloudSearch@ - "AmazonCloudSearchClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudSearchClient.html
 * @amazonWebService.cloudTrailh@ - "AmazonCloudTrailClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudTrailClient.html
 * @amazonWebService.cloudWatch@ - "AmazonCloudWatchClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudwatch/AmazonCloudWatchClient.html
+* @amazonWebService.cognitoIdentity@ - "AmazonCognitoIdentityClient Java doc":http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cognitoidentity/AmazonCognitoIdentityClient.html
+* @amazonWebService.cognitoSync@ - "AmazonCognitoSyncClient Java doc":http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cognitosync/AmazonCognitoSyncClient.html
 * @amazonWebService.dynamoDB@ - "AmazonDynamoDBClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/dynamodb/AmazonDynamoDBClient.html
 * @amazonWebService.ec2@ - "AmazonEC2Client Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html
 * @amazonWebService.elastiCache@ - "AmazonElastiCacheClient Java doc":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticache/AmazonElastiCacheClient.html
