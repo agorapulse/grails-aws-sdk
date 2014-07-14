@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.8.2</title>
+        <title>AWS SDK Plugin 1.8.4</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -62,7 +62,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.8.2</p>
+                            <p><strong>Version:</strong> 1.8.4</p>
                             
                         </div>
 
@@ -106,6 +106,8 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Amazon CloudFront</li>
 <li>Amazon CloudSearch</li>
 <li>Amazon CloudWatch</li>
+<li>Amazon Cognito Identity</li>
+<li>Amazon Cognito Sync</li>
 <li>Amazon DynamoDB</li>
 <li>Amazon Elastic Compute Cloud (EC2)</li>
 <li>Amazon Elastic MapReduce</li>
@@ -134,6 +136,8 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
+<li>2014-07-14 <strong class="bold">V1.8.4</strong> : AWS SDK for Java updated to V1.8.4 + Amazon Cognito Identity and Sync support added</li>
+<li>2014-07-03 <strong class="bold">V1.8.3</strong> : AWS SDK for Java updated to V1.8.3</li>
 <li>2014-06-27 <strong class="bold">V1.8.2</strong> : AWS SDK for Java updated to V1.8.2</li>
 <li>2014-06-23 <strong class="bold">V1.8.0</strong> : AWS SDK for Java updated to V1.8.0</li>
 <li>2014-05-23 <strong class="bold">V1.7.11</strong> : AWS SDK for Java updated to V1.7.11</li>
@@ -191,7 +195,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.8.2'
+				runtime ':aws&#45;sdk:1.8.4'
 		&#125;
 &#125;</pre></div>
 
@@ -254,6 +258,8 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             cloudSearch &#123;&#125;
             cloudTrail &#123;&#125;
             cloudWatch &#123;&#125;
+            cognitoIdentity &#123;&#125;
+            cognitoSync &#123;&#125;
             dynamoDB &#123;&#125;
             ec2 &#123;&#125;
             elasticBeanstalk &#123;&#125;
@@ -290,6 +296,8 @@ amazonWebService.cloudFront
 amazonWebService.cloudSearch
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
+amazonWebService.cognitoIdentity
+amazonWebService.cognitoSync
 amazonWebService.dynamoDB
 amazonWebService.dynamoDBMapper
 amazonWebService.ec2
@@ -424,6 +432,8 @@ For other services, check the Java doc :
 <li><code>amazonWebService.cloudSearch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudSearchClient.html" target="blank">AmazonCloudSearchClient Java doc</a></li>
 <li><code>amazonWebService.cloudTrailh</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudTrailClient.html" target="blank">AmazonCloudTrailClient Java doc</a></li>
 <li><code>amazonWebService.cloudWatch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudwatch/AmazonCloudWatchClient.html" target="blank">AmazonCloudWatchClient Java doc</a></li>
+<li><code>amazonWebService.cognitoIdentity</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cognitoidentity/AmazonCognitoIdentityClient.html" target="blank">AmazonCognitoIdentityClient Java doc</a></li>
+<li><code>amazonWebService.cognitoSync</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cognitosync/AmazonCognitoSyncClient.html" target="blank">AmazonCognitoSyncClient Java doc</a></li>
 <li><code>amazonWebService.dynamoDB</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/dynamodb/AmazonDynamoDBClient.html" target="blank">AmazonDynamoDBClient Java doc</a></li>
 <li><code>amazonWebService.ec2</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html" target="blank">AmazonEC2Client Java doc</a></li>
 <li><code>amazonWebService.elastiCache</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticache/AmazonElastiCacheClient.html" target="blank">AmazonElastiCacheClient Java doc</a></li>
