@@ -1,23 +1,5 @@
 package grails.plugin.awssdk
 
-import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
-import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
-import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
-import com.amazonaws.services.kinesis.AmazonKinesisClient
-import com.amazonaws.services.s3.AmazonS3EncryptionClient
-import com.amazonaws.services.s3.model.EncryptionMaterials
-
-import java.security.KeyPair
-import java.security.KeyPairGenerator
-import java.security.SecureRandom
-
-import static org.junit.Assert.*
-
-import grails.test.mixin.*
-import grails.test.mixin.support.*
-import org.junit.*
-
 import com.amazonaws.services.autoscaling.AmazonAutoScalingAsyncClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
@@ -26,10 +8,17 @@ import com.amazonaws.services.cloudfront.AmazonCloudFrontAsyncClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClient
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient
+import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
+import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
+import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityAsyncClient
+import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClient
+import com.amazonaws.services.cognitosync.AmazonCognitoSyncAsyncClient
+import com.amazonaws.services.cognitosync.AmazonCognitoSyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.ec2.AmazonEC2AsyncClient
 import com.amazonaws.services.ec2.AmazonEC2Client
 import com.amazonaws.services.elasticache.AmazonElastiCacheAsyncClient
@@ -48,6 +37,8 @@ import com.amazonaws.services.identitymanagement.AmazonIdentityManagementAsyncCl
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient
 import com.amazonaws.services.importexport.AmazonImportExportAsyncClient
 import com.amazonaws.services.importexport.AmazonImportExportClient
+import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
+import com.amazonaws.services.kinesis.AmazonKinesisClient
 import com.amazonaws.services.opsworks.AWSOpsWorksAsyncClient
 import com.amazonaws.services.opsworks.AWSOpsWorksClient
 import com.amazonaws.services.rds.AmazonRDSAsyncClient
@@ -57,7 +48,11 @@ import com.amazonaws.services.redshift.AmazonRedshiftClient
 import com.amazonaws.services.route53.AmazonRoute53AsyncClient
 import com.amazonaws.services.route53.AmazonRoute53Client
 import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.AmazonS3EncryptionClient
+import com.amazonaws.services.s3.model.EncryptionMaterials
 import com.amazonaws.services.s3.transfer.TransferManager
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceAsyncClient
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBAsyncClient
 import com.amazonaws.services.simpledb.AmazonSimpleDBClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsyncClient
@@ -70,8 +65,13 @@ import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
-import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceAsyncClient
-import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient
+import grails.test.mixin.TestFor
+import grails.test.mixin.TestMixin
+import grails.test.mixin.support.GrailsUnitTestMixin
+
+import java.security.KeyPair
+import java.security.KeyPairGenerator
+import java.security.SecureRandom
 
 /**
  * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
@@ -256,6 +256,46 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudWatch().class == AmazonCloudWatchClient
         assert amazonWebService.getCloudWatch('eu-west-1').class == AmazonCloudWatchClient
         assert amazonWebService.getCloudWatch('eu-west-1').endpoint.toString() == 'https://monitoring.eu-west-1.amazonaws.com'
+    }
+
+    void testCognitoIdentityClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getCognitoIdentityAsync().class == AmazonCognitoIdentityAsyncClient
+        assert amazonWebService.getCognitoIdentityAsync('eu-west-1').class == AmazonCognitoIdentityAsyncClient
+        assert amazonWebService.getCognitoIdentity().class == AmazonCognitoIdentityClient
+        assert amazonWebService.getCognitoIdentity('eu-west-1').class == AmazonCognitoIdentityClient
+        assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    void testCognitoIdentityClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getCognitoIdentityAsync().class == AmazonCognitoIdentityAsyncClient
+        assert amazonWebService.getCognitoIdentityAsync('eu-west-1').class == AmazonCognitoIdentityAsyncClient
+        assert amazonWebService.getCognitoIdentity().class == AmazonCognitoIdentityClient
+        assert amazonWebService.getCognitoIdentity('eu-west-1').class == AmazonCognitoIdentityClient
+        assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    void testCognitoSyncClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getCognitoSyncAsync().class == AmazonCognitoSyncAsyncClient
+        assert amazonWebService.getCognitoSyncAsync('eu-west-1').class == AmazonCognitoSyncAsyncClient
+        assert amazonWebService.getCognitoSync().class == AmazonCognitoSyncClient
+        assert amazonWebService.getCognitoSync('eu-west-1').class == AmazonCognitoSyncClient
+        assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    void testCognitoSyncClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getCognitoSyncAsync().class == AmazonCognitoSyncAsyncClient
+        assert amazonWebService.getCognitoSyncAsync('eu-west-1').class == AmazonCognitoSyncAsyncClient
+        assert amazonWebService.getCognitoSync().class == AmazonCognitoSyncClient
+        assert amazonWebService.getCognitoSync('eu-west-1').class == AmazonCognitoSyncClient
+        assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.us-east-1.amazonaws.com' // Currently only available in us-east-1
     }
 
     void testDynamoDBClientWithCredentials() {

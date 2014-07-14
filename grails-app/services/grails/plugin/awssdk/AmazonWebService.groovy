@@ -20,6 +20,10 @@ import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
+import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityAsyncClient
+import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClient
+import com.amazonaws.services.cognitosync.AmazonCognitoSyncAsyncClient
+import com.amazonaws.services.cognitosync.AmazonCognitoSyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
@@ -129,6 +133,22 @@ class AmazonWebService {
 
     AmazonCloudWatchClient getCloudWatch(regionName = '') {
         getServiceClient('cloudWatch', regionName) as AmazonCloudWatchClient
+    }
+
+    AmazonCognitoIdentityAsyncClient getCognitoIdentityAsync(regionName = '') {
+        getServiceClient('cognitoIdentity', regionName, true) as AmazonCognitoIdentityAsyncClient
+    }
+
+    AmazonCognitoIdentityClient getCognitoIdentity(regionName = '') {
+        getServiceClient('cognitoIdentity', regionName) as AmazonCognitoIdentityClient
+    }
+
+    AmazonCognitoSyncAsyncClient getCognitoSyncAsync(regionName = '') {
+        getServiceClient('cognitoSync', regionName, true) as AmazonCognitoSyncAsyncClient
+    }
+
+    AmazonCognitoSyncClient getCognitoSync(regionName = '') {
+        getServiceClient('cognitoSync', regionName) as AmazonCognitoSyncClient
     }
 
     AmazonDynamoDBAsyncClient getDynamoDBAsync(regionName = '') {
@@ -449,6 +469,12 @@ class AmazonWebService {
             switch (service) {
                 case 'autoScaling':
                     client = async ? new AmazonAutoScalingAsyncClient(credentials) : new AmazonAutoScalingClient(credentials)
+                    break
+                case 'cognitoIdentity':
+                    client = async ? new AmazonCognitoIdentityAsyncClient(credentials) : new AmazonCognitoIdentityClient(credentials)
+                    break
+                case 'cognitoSync':
+                    client = async ? new AmazonCognitoSyncAsyncClient(credentials) : new AmazonCognitoSyncClient(credentials)
                     break
                 case 'cloudFormation':
                     client = async ? new AmazonCloudFormationAsyncClient(credentials) : new AmazonCloudFormationClient(credentials)
