@@ -54,6 +54,7 @@ h3. Latest releases
 If you are using DynamoDB, please update your calls to the API.
 {warning}
 
+* 2014-08-18 *V1.8.9* : AWS SDK for Java updated to V1.8.9
 * 2014-07-14 *V1.8.4* : AWS SDK for Java updated to V1.8.4 + Amazon Cognito Identity and Sync support added
 * 2014-07-03 *V1.8.3* : AWS SDK for Java updated to V1.8.3
 * 2014-06-27 *V1.8.2* : AWS SDK for Java updated to V1.8.2
