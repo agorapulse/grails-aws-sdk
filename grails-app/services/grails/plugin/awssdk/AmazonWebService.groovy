@@ -71,6 +71,7 @@ import com.amazonaws.services.sns.AmazonSNSAsyncClient
 import com.amazonaws.services.sns.AmazonSNSClient
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.AmazonSQSClient
+import com.amazonaws.services.sqs.buffered.AmazonSQSBufferedAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 
@@ -313,6 +314,11 @@ class AmazonWebService {
 
     AmazonSQSAsyncClient getSqsAsync(String regionName = '') {
         getServiceClient('sqs', regionName, true) as AmazonSQSAsyncClient
+    }
+
+    AmazonSQSBufferedAsyncClient getSqsBufferedAsync(String regionName = '') {
+        AmazonSQSAsyncClient sqsAsyncClient = getSqsAsync(regionName)
+        new AmazonSQSBufferedAsyncClient(sqsAsyncClient)
     }
 
     AmazonSQSClient getSqs(String regionName = '') {

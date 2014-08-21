@@ -44,6 +44,7 @@ amazonWebService.ses
 amazonWebService.sdb
 amazonWebService.sns
 amazonWebService.sqs
+amazonWebService.sqsBufferedAsync
 amazonWebService.storageGateway
 amazonWebService.swf
 amazonWebService.transferManager

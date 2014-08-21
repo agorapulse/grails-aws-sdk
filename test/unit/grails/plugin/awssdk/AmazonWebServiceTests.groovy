@@ -63,6 +63,7 @@ import com.amazonaws.services.sns.AmazonSNSAsyncClient
 import com.amazonaws.services.sns.AmazonSNSClient
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.AmazonSQSClient
+import com.amazonaws.services.sqs.buffered.AmazonSQSBufferedAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 import grails.test.mixin.TestFor
@@ -786,6 +787,20 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSqs().class == AmazonSQSClient
         assert amazonWebService.getSqs('eu-west-1').class == AmazonSQSClient
         assert amazonWebService.getSqs('eu-west-1').endpoint.toString() == 'https://sqs.eu-west-1.amazonaws.com'
+    }
+
+    void testSqsBufferedClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getSqsBufferedAsync().class == AmazonSQSBufferedAsyncClient
+        assert amazonWebService.getSqsBufferedAsync('eu-west-1').class == AmazonSQSBufferedAsyncClient
+    }
+
+    void testSqsBufferedClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getSqsBufferedAsync().class == AmazonSQSBufferedAsyncClient
+        assert amazonWebService.getSqsBufferedAsync('eu-west-1').class == AmazonSQSBufferedAsyncClient
     }
 
     void testStorageGatewayClientWithCredentials() {
