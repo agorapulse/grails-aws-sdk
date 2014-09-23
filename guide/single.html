@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.8.4</title>
+        <title>AWS SDK Plugin 1.8.10.2</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -62,7 +62,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.8.4</p>
+                            <p><strong>Version:</strong> 1.8.10.2</p>
                             
                         </div>
 
@@ -136,6 +136,9 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 If you are using DynamoDB, please update your calls to the API.
 </blockquote>
 <ul class="star">
+<li>2014-09-18 <strong class="bold">V1.8.10.2</strong> : AWS SDK for Java updated to V1.8.10.2 (fix release)</li>
+<li>2014-09-12 <strong class="bold">V1.8.10</strong> : AWS SDK for Java updated to V1.8.10</li>
+<li>2014-08-18 <strong class="bold">V1.8.9</strong> : AWS SDK for Java updated to V1.8.9</li>
 <li>2014-07-14 <strong class="bold">V1.8.4</strong> : AWS SDK for Java updated to V1.8.4 + Amazon Cognito Identity and Sync support added</li>
 <li>2014-07-03 <strong class="bold">V1.8.3</strong> : AWS SDK for Java updated to V1.8.3</li>
 <li>2014-06-27 <strong class="bold">V1.8.2</strong> : AWS SDK for Java updated to V1.8.2</li>
@@ -195,7 +198,7 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.8.4'
+				runtime ':aws&#45;sdk:1.8.10.2'
 		&#125;
 &#125;</pre></div>
 
@@ -320,6 +323,7 @@ amazonWebService.ses
 amazonWebService.sdb
 amazonWebService.sns
 amazonWebService.sqs
+amazonWebService.sqsBufferedAsync
 amazonWebService.storageGateway
 amazonWebService.swf
 amazonWebService.transferManager</pre></div><p class="paragraph"/>It will return an instance of java client class extending <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html" target="blank">AmazonWebServiceClient</a> with default region endpoint (defined in our <code>Config.groovy</code>).<p class="paragraph"/>You can then call any available client methods.<p class="paragraph"/>To know available methods for each service clients, check the latest version of online <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html." target="blank">AWS SDK Java docs</a><p class="paragraph"/>
