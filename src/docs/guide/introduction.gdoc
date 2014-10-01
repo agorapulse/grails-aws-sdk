@@ -54,6 +54,7 @@ h3. Latest releases
 If you are using DynamoDB, please update your calls to the API.
 {warning}
 
+* 2014-10-01 *V1.8.11* : AWS SDK for Java updated to V1.8.11
 * 2014-09-18 *V1.8.10.2* : AWS SDK for Java updated to V1.8.10.2 (fix release)
 * 2014-09-12 *V1.8.10* : AWS SDK for Java updated to V1.8.10
 * 2014-08-18 *V1.8.9* : AWS SDK for Java updated to V1.8.9

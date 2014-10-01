@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.8.10.2'
+				runtime ':aws-sdk:1.8.11••'
 		}
 }
 ```
@@ -107,6 +107,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 **WARNING**: Breaking change, since V1.4.5, new **DynamoDB** API Version 2012-08-10 are used (package *com.amazonaws.services.dynamodbv2* instead of *com.amazonaws.services.dynamodb* ).
 If you are using DynamoDB, please update your calls to the API.
 
+* 2014-10-01 **V1.8.11** : AWS SDK for Java updated to V1.8.11
 * 2014-09-18 **V1.8.10.2** : AWS SDK for Java updated to V1.8.10.2 (fix release)
 * 2014-09-12 **V1.8.10** : AWS SDK for Java updated to V1.8.10
 * 2014-08-18 **V1.8.9** : AWS SDK for Java updated to V1.8.9
