@@ -6,8 +6,8 @@ import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontAsyncClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClient
-import com.amazonaws.services.cloudsearch.AmazonCloudSearchAsyncClient
-import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient
+import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchAsyncClient
+import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
