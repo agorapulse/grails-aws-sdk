@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.9.0'
+				runtime ':aws-sdk:1.9.2'
 		}
 }
 ```
@@ -104,6 +104,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2014-10-24 **V1.9.2** : AWS SDK for Java updated to V1.9.2
 * 2014-10-09 **V1.9.0** : AWS SDK for Java updated to V1.9.0 + CloudSearch V2 support by default
 
 **WARNING**: Breaking change, since V1.9.0, new **CloudSearch** API Version 2013-01-01 are used (package *com.amazonaws.services.cloudsearchv2* instead of *com.amazonaws.services.cloudsearch* ).
