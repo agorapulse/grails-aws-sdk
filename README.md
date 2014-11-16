@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.9.4'
+				runtime ':aws-sdk:1.9.6'
 		}
 }
 ```
@@ -75,8 +75,10 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * Amazon CloudFront
 * Amazon CloudSearch
 * Amazon CloudWatch
+* Amazon CodeDeploy
 * Amazon Cognito Identity
 * Amazon Cognito Sync
+* Amazon Config
 * Amazon DynamoDB
 * Amazon Elastic Compute Cloud (EC2)
 * Amazon Elastic MapReduce
@@ -84,6 +86,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * Amazon ElastiCache
 * Amazon Glacier
 * Amazon Kinesis
+* Amazon Key Management Service (KMS)
 * Amazon Relational Database Service (RDS)
 * Amazon Redshift
 * Amazon Route 53
@@ -104,6 +107,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2014-11-15 **V1.9.6** : AWS SDK for Java updated to V1.9.6 + CodeDeploy, Config and KMS support added
 * 2014-11-12 **V1.9.4** : AWS SDK for Java updated to V1.9.4
 * 2014-10-24 **V1.9.2** : AWS SDK for Java updated to V1.9.2
 * 2014-10-09 **V1.9.0** : AWS SDK for Java updated to V1.9.0 + CloudSearch V2 support by default

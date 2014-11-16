@@ -20,8 +20,10 @@ amazonWebService.cloudFront
 amazonWebService.cloudSearch
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
+amazonWebService.codeDeploy
 amazonWebService.cognitoIdentity
 amazonWebService.cognitoSync
+amazonWebService.config
 amazonWebService.dynamoDB
 amazonWebService.dynamoDBMapper
 amazonWebService.ec2
@@ -34,6 +36,7 @@ amazonWebService.glacier
 amazonWebService.iam
 amazonWebService.importExport
 amazonWebService.kinesis
+amazonWebService.kms
 amazonWebService.opsWorks
 amazonWebService.rds
 amazonWebService.redshift

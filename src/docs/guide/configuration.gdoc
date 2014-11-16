@@ -92,8 +92,10 @@ grails {
             cloudSearch {}
             cloudTrail {}
             cloudWatch {}
+            codeDeploy {}
             cognitoIdentity {}
             cognitoSync {}
+            config {}
             dynamoDB {}
             ec2 {}
             elasticBeanstalk {}
@@ -104,6 +106,7 @@ grails {
             glacier {}
             iam {}
             importExport {}
+            kms {}
             kinesis {}
             opsWorks {}
             rds {}
