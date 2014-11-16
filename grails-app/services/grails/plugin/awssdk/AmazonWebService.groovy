@@ -20,10 +20,14 @@ import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
+import com.amazonaws.services.codedeploy.AmazonCodeDeployAsyncClient
+import com.amazonaws.services.codedeploy.AmazonCodeDeployClient
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityAsyncClient
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClient
 import com.amazonaws.services.cognitosync.AmazonCognitoSyncAsyncClient
 import com.amazonaws.services.cognitosync.AmazonCognitoSyncClient
+import com.amazonaws.services.config.AmazonConfigAsyncClient
+import com.amazonaws.services.config.AmazonConfigClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
@@ -47,6 +51,8 @@ import com.amazonaws.services.importexport.AmazonImportExportAsyncClient
 import com.amazonaws.services.importexport.AmazonImportExportClient
 import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
 import com.amazonaws.services.kinesis.AmazonKinesisClient
+import com.amazonaws.services.kms.AWSKMSAsyncClient
+import com.amazonaws.services.kms.AWSKMSClient
 import com.amazonaws.services.opsworks.AWSOpsWorksAsyncClient
 import com.amazonaws.services.opsworks.AWSOpsWorksClient
 import com.amazonaws.services.rds.AmazonRDSAsyncClient
@@ -96,6 +102,10 @@ class AmazonWebService {
         getServiceClient('autoScaling', regionName) as AmazonAutoScalingClient
     }
 
+    AmazonCodeDeployAsyncClient getCodeDeployAsync(regionName = '') {
+        getServiceClient('codeDeploy', regionName, true) as AmazonCodeDeployAsyncClient
+    }
+
     AmazonCloudFormationAsyncClient getCloudFormationAsync(regionName = '') {
         getServiceClient('cloudFormation', regionName, true) as AmazonCloudFormationAsyncClient
     }
@@ -136,6 +146,10 @@ class AmazonWebService {
         getServiceClient('cloudWatch', regionName) as AmazonCloudWatchClient
     }
 
+    AmazonCodeDeployClient getCodeDeploy(regionName = '') {
+        getServiceClient('codeDeploy', regionName) as AmazonCodeDeployClient
+    }
+
     AmazonCognitoIdentityAsyncClient getCognitoIdentityAsync(regionName = '') {
         getServiceClient('cognitoIdentity', regionName, true) as AmazonCognitoIdentityAsyncClient
     }
@@ -150,6 +164,14 @@ class AmazonWebService {
 
     AmazonCognitoSyncClient getCognitoSync(regionName = '') {
         getServiceClient('cognitoSync', regionName) as AmazonCognitoSyncClient
+    }
+
+    AmazonConfigAsyncClient getConfigAsync(regionName = '') {
+        getServiceClient('config', regionName, true) as AmazonConfigAsyncClient
+    }
+
+    AmazonConfigClient getConfig(regionName = '') {
+        getServiceClient('config', regionName) as AmazonConfigClient
     }
 
     AmazonDynamoDBAsyncClient getDynamoDBAsync(regionName = '') {
@@ -238,6 +260,14 @@ class AmazonWebService {
 
     AmazonKinesisClient getKinesis(regionName = '') {
         getServiceClient('kinesis', regionName) as AmazonKinesisClient
+    }
+
+    AWSKMSAsyncClient getKMSAsync(regionName = '') {
+        getServiceClient('kms', regionName, true) as AWSKMSAsyncClient
+    }
+
+    AWSKMSClient getKMS(regionName = '') {
+        getServiceClient('kms', regionName) as AWSKMSClient
     }
 
     AWSOpsWorksAsyncClient getOpsWorksAsync() {
@@ -497,6 +527,12 @@ class AmazonWebService {
                 case 'cloudWatch':
                     client = async ? new AmazonCloudWatchAsyncClient(credentials) : new AmazonCloudWatchClient(credentials)
                     break
+                case 'codeDeploy':
+                    client = async ? new AmazonCodeDeployAsyncClient(credentials) : new AmazonCodeDeployClient(credentials)
+                    break
+                case 'config':
+                    client = async ? new AmazonConfigAsyncClient(credentials) : new AmazonConfigClient(credentials)
+                    break
                 case 'dynamoDB':
                     client = async ? new AmazonDynamoDBAsyncClient(credentials) : new AmazonDynamoDBClient(credentials)
                     break
@@ -529,6 +565,9 @@ class AmazonWebService {
                     break
                 case 'kinesis':
                     client = async ? new AmazonKinesisAsyncClient(credentials) : new AmazonKinesisClient(credentials)
+                    break
+                case 'kms':
+                    client = async ? new AWSKMSAsyncClient(credentials) : new AWSKMSClient(credentials)
                     break
                 case 'opsWorks':
                     client = async ? new AWSOpsWorksAsyncClient(credentials) : new AWSOpsWorksClient(credentials)

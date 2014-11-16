@@ -12,10 +12,14 @@ import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchAsyncClient
 import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient
+import com.amazonaws.services.codedeploy.AmazonCodeDeployAsyncClient
+import com.amazonaws.services.codedeploy.AmazonCodeDeployClient
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityAsyncClient
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClient
 import com.amazonaws.services.cognitosync.AmazonCognitoSyncAsyncClient
 import com.amazonaws.services.cognitosync.AmazonCognitoSyncClient
+import com.amazonaws.services.config.AmazonConfigAsyncClient
+import com.amazonaws.services.config.AmazonConfigClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
@@ -39,6 +43,8 @@ import com.amazonaws.services.importexport.AmazonImportExportAsyncClient
 import com.amazonaws.services.importexport.AmazonImportExportClient
 import com.amazonaws.services.kinesis.AmazonKinesisAsyncClient
 import com.amazonaws.services.kinesis.AmazonKinesisClient
+import com.amazonaws.services.kms.AWSKMSAsyncClient
+import com.amazonaws.services.kms.AWSKMSClient
 import com.amazonaws.services.opsworks.AWSOpsWorksAsyncClient
 import com.amazonaws.services.opsworks.AWSOpsWorksClient
 import com.amazonaws.services.rds.AmazonRDSAsyncClient
@@ -239,6 +245,9 @@ class AmazonWebServiceTests {
         }*/
     }
 
+    /**
+     * CloudWatch
+     */
     void testCloudWatchClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -259,6 +268,32 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCloudWatch('eu-west-1').endpoint.toString() == 'https://monitoring.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * CodeDeploy
+     */
+    void testCodeDeployClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getCodeDeployAsync().class == AmazonCodeDeployAsyncClient
+        assert amazonWebService.getCodeDeployAsync('eu-west-1').class == AmazonCodeDeployAsyncClient
+        assert amazonWebService.getCodeDeploy().class == AmazonCodeDeployClient
+        assert amazonWebService.getCodeDeploy('eu-west-1').class == AmazonCodeDeployClient
+        assert amazonWebService.getCodeDeploy('eu-west-1').endpoint.toString() == 'https://codedeploy.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    void testCodeDeployClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getCodeDeployAsync().class == AmazonCodeDeployAsyncClient
+        assert amazonWebService.getCodeDeployAsync('eu-west-1').class == AmazonCodeDeployAsyncClient
+        assert amazonWebService.getCodeDeploy().class == AmazonCodeDeployClient
+        assert amazonWebService.getCodeDeploy('eu-west-1').class == AmazonCodeDeployClient
+        assert amazonWebService.getCodeDeploy('eu-west-1').endpoint.toString() == 'https://codedeploy.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    /**
+     * CognitoIdentity
+     */
     void testCognitoIdentityClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -279,6 +314,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.us-east-1.amazonaws.com' // Currently only available in us-east-1
     }
 
+    /**
+     * CognitoSync
+     */
     void testCognitoSyncClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -299,6 +337,32 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.us-east-1.amazonaws.com' // Currently only available in us-east-1
     }
 
+    /**
+     * Config
+     */
+    void testConfigClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getConfigAsync().class == AmazonConfigAsyncClient
+        assert amazonWebService.getConfigAsync('eu-west-1').class == AmazonConfigAsyncClient
+        assert amazonWebService.getConfig().class == AmazonConfigClient
+        assert amazonWebService.getConfig('eu-west-1').class == AmazonConfigClient
+        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    void testConfigClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getConfigAsync().class == AmazonConfigAsyncClient
+        assert amazonWebService.getConfigAsync('eu-west-1').class == AmazonConfigAsyncClient
+        assert amazonWebService.getConfig().class == AmazonConfigClient
+        assert amazonWebService.getConfig('eu-west-1').class == AmazonConfigClient
+        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.us-east-1.amazonaws.com' // Currently only available in us-east-1
+    }
+
+    /**
+     * DynamoDB
+     */
     void testDynamoDBClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -319,6 +383,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getDynamoDB('eu-west-1').endpoint.toString() == 'https://dynamodb.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Ec2
+     */
     void testEc2ClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -339,6 +406,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getEc2('eu-west-1').endpoint.toString() == 'https://ec2.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * ElasticBeanstalk
+     */
     void testElasticBeanstalkClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -359,6 +429,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticBeanstalk('eu-west-1').endpoint.toString() == 'https://elasticbeanstalk.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * ElastiCache
+     */
     void testElastiCacheClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -379,6 +452,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElastiCache('eu-west-1').endpoint.toString() == 'https://elasticache.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * ElasticLoadBalancing
+     */
     void testElasticLoadBalancingClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -399,6 +475,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticLoadBalancing('eu-west-1').endpoint.toString() == 'https://elasticloadbalancing.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * ElasticMapReduce
+     */
     void testElasticMapReduceClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -419,6 +498,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticMapReduce('eu-west-1').endpoint.toString() == 'https://elasticmapreduce.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * ElasticTranscoder
+     */
     void testElasticTranscoderClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -439,6 +521,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getElasticTranscoder('eu-west-1').endpoint.toString() == 'https://elastictranscoder.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Glacier
+     */
     void testGlacierClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -459,6 +544,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getGlacier('eu-west-1').endpoint.toString() == 'https://glacier.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Iam
+     */
     void testIamClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -487,6 +575,9 @@ class AmazonWebServiceTests {
         }
     }
 
+    /**
+     * ImportExport
+     */
     void testImportExportClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -515,6 +606,9 @@ class AmazonWebServiceTests {
         }
     }
 
+    /**
+     * Kinesis
+     */
     void testKinesisAsyncWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -545,6 +639,32 @@ class AmazonWebServiceTests {
         }*/
     }
 
+    /**
+     * KMS
+     */
+    void testKMSClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getKMSAsync().class == AWSKMSAsyncClient
+        assert amazonWebService.getKMSAsync('eu-west-1').class == AWSKMSAsyncClient
+        assert amazonWebService.getKMS().class == AWSKMSClient
+        assert amazonWebService.getKMS('eu-west-1').class == AWSKMSClient
+        assert amazonWebService.getKMS('eu-west-1').endpoint.toString() == 'https://kms.eu-west-1.amazonaws.com'
+    }
+
+    void testKMSClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getKMSAsync().class == AWSKMSAsyncClient
+        assert amazonWebService.getKMSAsync('eu-west-1').class == AWSKMSAsyncClient
+        assert amazonWebService.getKMS().class == AWSKMSClient
+        assert amazonWebService.getKMS('eu-west-1').class == AWSKMSClient
+        assert amazonWebService.getKMS('eu-west-1').endpoint.toString() == 'https://kms.eu-west-1.amazonaws.com'
+    }
+
+    /**
+     * OpsWorks
+     */
     void testOpsWorksAsyncWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -573,6 +693,9 @@ class AmazonWebServiceTests {
         }
     }
 
+    /**
+     * Rds
+     */
     void testRdsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -593,6 +716,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getRds('eu-west-1').endpoint.toString() == 'https://rds.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Redshift
+     */
     void testRedshiftClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -621,6 +747,9 @@ class AmazonWebServiceTests {
         }
     }
 
+    /**
+     * Route53
+     */
     void testRoute53ClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -649,6 +778,9 @@ class AmazonWebServiceTests {
         }
     }
 
+    /**
+     * S3
+     */
     void testS3ClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -679,6 +811,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
     }
 
+    /**
+     * S3Entryption
+     */
     void testS3EncryptionClientWithCredentials() {
         def amazonWebService = getServiceWithCredentialsAndEncryptionMaterials()
 
@@ -709,6 +844,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Sdb
+     */
     void testSdbClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -729,6 +867,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSdb('eu-west-1').endpoint.toString() == 'https://sdb.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Ses
+     */
     void testSesClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -749,6 +890,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSes('eu-west-1').endpoint.toString() == 'https://email.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Sns
+     */
     void testSnsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -769,6 +913,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSns('eu-west-1').endpoint.toString() == 'https://sns.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Sqs
+     */
     void testSqsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -789,6 +936,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSqs('eu-west-1').endpoint.toString() == 'https://sqs.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * SqsBuffered
+     */
     void testSqsBufferedClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -803,6 +953,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSqsBufferedAsync('eu-west-1').class == AmazonSQSBufferedAsyncClient
     }
 
+    /**
+     * StorageGateway
+     */
     void testStorageGatewayClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -823,6 +976,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getStorageGateway('eu-west-1').endpoint.toString() == 'https://storagegateway.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * Sts
+     */
     void testStsClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -843,6 +999,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSts('eu-west-1').endpoint.toString() == 'https://sts.amazonaws.com'
     }
 
+    /**
+     * Swf
+     */
     void testSwfClientWithCredentials() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -863,6 +1022,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getSwf('eu-west-1').endpoint.toString() == 'https://swf.eu-west-1.amazonaws.com'
     }
 
+    /**
+     * DynamoDBMapper
+     */
     void testDynamoDBMapper() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -870,6 +1032,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getDynamoDBMapper('eu-west-1').class == DynamoDBMapper
     }
 
+    /**
+     * TransferManager
+     */
     void testTransferManager() {
         def amazonWebService = getServiceWithCredentials()
 
@@ -877,6 +1042,9 @@ class AmazonWebServiceTests {
         assert amazonWebService.getTransferManager('eu-west-1').class == TransferManager
     }
 
+    /**
+     * Cache
+     */
     void testAsyncClientCache() {
         def amazonWebService = getServiceWithCredentials()
 
