@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AWS SDK Plugin 1.9.0</title>
+        <title>AWS SDK Plugin 1.9.6</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -62,7 +62,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
                         <div class="project">
                             <h1>AWS SDK Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Benoit Hediard</p>
-                            <p><strong>Version:</strong> 1.9.0</p>
+                            <p><strong>Version:</strong> 1.9.6</p>
                             
                         </div>
 
@@ -106,14 +106,18 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Amazon CloudFront</li>
 <li>Amazon CloudSearch</li>
 <li>Amazon CloudWatch</li>
+<li>Amazon CodeDeploy</li>
 <li>Amazon Cognito Identity</li>
 <li>Amazon Cognito Sync</li>
+<li>Amazon Config</li>
 <li>Amazon DynamoDB</li>
 <li>Amazon Elastic Compute Cloud (EC2)</li>
 <li>Amazon Elastic MapReduce</li>
 <li>Amazon Elastic Transcoder</li>
 <li>Amazon ElastiCache</li>
 <li>Amazon Glacier</li>
+<li>Amazon Kinesis</li>
+<li>Amazon Key Management Service (KMS)</li>
 <li>Amazon Relational Database Service (RDS)</li>
 <li>Amazon Redshift</li>
 <li>Amazon Route 53</li>
@@ -133,6 +137,9 @@ The AWS SDK Plugin allows your <a href="http://grails.org" target="blank">Grails
 <li>Elastic Load Balancing</li>
 </ul><p class="paragraph"/><h3>Latest releases</h3>
 <ul class="star">
+<li>2014-11-15 <strong class="bold">V1.9.6</strong> : AWS SDK for Java updated to V1.9.6 + CodeDeploy, Config and KMS support added</li>
+<li>2014-11-12 <strong class="bold">V1.9.4</strong> : AWS SDK for Java updated to V1.9.4</li>
+<li>2014-10-24 <strong class="bold">V1.9.2</strong> : AWS SDK for Java updated to V1.9.2</li>
 <li>2014-10-09 <strong class="bold">V1.9.0</strong> : AWS SDK for Java updated to V1.9.0</li>
 </ul><p class="paragraph"/><blockquote class="warning">
 <strong class="bold">WARNING</strong>: Breaking change, since V1.9.0, new <strong class="bold">CloudSearch</strong> API Version 2013-01-01 are used (package <code>com.amazonaws.services.cloudsearchbv2</code> instead of <code>com.amazonaws.services.cloudsearch</code> ).
@@ -200,14 +207,14 @@ Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as sh
 		&#125;
 		dependencies &#123;
                 // Workaround to resolve dependency issue with aws&#45;java&#45;sdk and http&#45;builder (dependent on httpcore:4.0)
-                build 'org.apache.httpcomponents:httpcore:4.2'
-                build 'org.apache.httpcomponents:httpclient:4.2'
-                runtime 'org.apache.httpcomponents:httpcore:4.2'
-                runtime 'org.apache.httpcomponents:httpclient:4.2'
+                build 'org.apache.httpcomponents:httpcore:4.3.2'
+                build 'org.apache.httpcomponents:httpclient:4.3.2'
+                runtime 'org.apache.httpcomponents:httpcore:4.3.2'
+                runtime 'org.apache.httpcomponents:httpclient:4.3.2'
         &#125;
 		plugins &#123;
 				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.9.0'
+				runtime ':aws&#45;sdk:1.9.6'
 		&#125;
 &#125;</pre></div>
 
@@ -270,8 +277,10 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             cloudSearch &#123;&#125;
             cloudTrail &#123;&#125;
             cloudWatch &#123;&#125;
+            codeDeploy &#123;&#125;
             cognitoIdentity &#123;&#125;
             cognitoSync &#123;&#125;
+            config &#123;&#125;
             dynamoDB &#123;&#125;
             ec2 &#123;&#125;
             elasticBeanstalk &#123;&#125;
@@ -282,6 +291,7 @@ You might override it in your config:<p class="paragraph"/><div class="code"><pr
             glacier &#123;&#125;
             iam &#123;&#125;
             importExport &#123;&#125;
+            kms &#123;&#125;
             kinesis &#123;&#125;
             opsWorks &#123;&#125;
             rds &#123;&#125;
@@ -308,8 +318,10 @@ amazonWebService.cloudFront
 amazonWebService.cloudSearch
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
+amazonWebService.codeDeploy
 amazonWebService.cognitoIdentity
 amazonWebService.cognitoSync
+amazonWebService.config
 amazonWebService.dynamoDB
 amazonWebService.dynamoDBMapper
 amazonWebService.ec2
@@ -322,6 +334,7 @@ amazonWebService.glacier
 amazonWebService.iam
 amazonWebService.importExport
 amazonWebService.kinesis
+amazonWebService.kms
 amazonWebService.opsWorks
 amazonWebService.rds
 amazonWebService.redshift
@@ -445,8 +458,10 @@ For other services, check the Java doc :
 <li><code>amazonWebService.cloudSearch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudSearchClient.html" target="blank">AmazonCloudSearchClient Java doc</a></li>
 <li><code>amazonWebService.cloudTrailh</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudsearch/AmazonCloudTrailClient.html" target="blank">AmazonCloudTrailClient Java doc</a></li>
 <li><code>amazonWebService.cloudWatch</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cloudwatch/AmazonCloudWatchClient.html" target="blank">AmazonCloudWatchClient Java doc</a></li>
+<li><code>amazonWebService.codeDeploy</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/codedeploy/AmazonCodeDeployClient.html" target="blank">AmazonCodeDeployClient Java doc</a></li>
 <li><code>amazonWebService.cognitoIdentity</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cognitoidentity/AmazonCognitoIdentityClient.html" target="blank">AmazonCognitoIdentityClient Java doc</a></li>
 <li><code>amazonWebService.cognitoSync</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/cognitosync/AmazonCognitoSyncClient.html" target="blank">AmazonCognitoSyncClient Java doc</a></li>
+<li><code>amazonWebService.config</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/config/AmazonConfigClient.html" target="blank">AmazonConfigClient Java doc</a></li>
 <li><code>amazonWebService.dynamoDB</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/dynamodb/AmazonDynamoDBClient.html" target="blank">AmazonDynamoDBClient Java doc</a></li>
 <li><code>amazonWebService.ec2</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/ec2/AmazonEC2Client.html" target="blank">AmazonEC2Client Java doc</a></li>
 <li><code>amazonWebService.elastiCache</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/elasticache/AmazonElastiCacheClient.html" target="blank">AmazonElastiCacheClient Java doc</a></li>
@@ -458,6 +473,7 @@ For other services, check the Java doc :
 <li><code>amazonWebService.iam</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/identitymanagement/AmazonIdentityManagementClient.html" target="blank">AmazonIdentityManagementClient Java doc</a></li>
 <li><code>amazonWebService.importExport</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/importexport/AmazonImportExportClient.html" target="blank">AmazonImportExportClient Java doc</a></li>
 <li><code>amazonWebService.kinesis</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/kinesis/AmazonKinesisClient.html" target="blank">AmazonKinesisClient Java doc</a></li>
+<li><code>amazonWebService.kms</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/kms/AWSKMSClient.html" target="blank">AWSKMSClient Java doc</a></li>
 <li><code>amazonWebService.opsWorks</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html" target="blank">AWSOpsWorksClient Java doc</a></li>
 <li><code>amazonWebService.rds</code> - <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDSClient.html" target="blank">AmazonRDSClient Java doc</a></li>
 <li><code>amazonWebService.redshift</code> - <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/redshift/AmazonRedshiftClient.html" target="blank">AmazonRedshiftClient Java doc</a></li>
