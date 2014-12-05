@@ -615,8 +615,8 @@ class AmazonWebService {
                     throw new Exception("Sorry, no client found for service ${service}")
             }
 
-            client.configuration = configuration
-            client.region = region
+            client.setConfiguration(configuration)
+            client.setRegion(region) // Workaround: do not use 'client.region = region', it generates an exception trying to cast Region to Regions (probably calling the wrong setter...)
 
             clientsCache[service][regionName] = client
         } else {
