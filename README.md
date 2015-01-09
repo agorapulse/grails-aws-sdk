@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':aws-sdk:1.9.10'
+				runtime ':aws-sdk:1.9.14'
 		}
 }
 ```
@@ -107,6 +107,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2015-01-09 **V1.9.14** : AWS SDK for Java updated to V1.9.14
 * 2015-01-08 **V1.9.13** : AWS SDK for Java updated to V1.9.13
 * 2014-12-05 **V1.9.10** : AWS SDK for Java updated to V1.9.10
 * 2014-12-05 **V1.9.9.1** : Fix an issue with groovy setter method selection when setting client region
