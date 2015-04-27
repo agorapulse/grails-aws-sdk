@@ -1,6 +1,6 @@
 ---
-grails.plugin.awssdk.accessKey : 'AKIAJ3MRRT4IQ66KQPUQ'
-grails.plugin.awssdk.secretKey : '/jYZHOag5F2wBXIkPKUQw4VyQDzJUEvMXLWWZI81'
+grails.plugin.awssdk.accessKey : 'your key'
+grails.plugin.awssdk.secretKey : 'your secret'
 ---
 grails:
     profile: web-plugin
