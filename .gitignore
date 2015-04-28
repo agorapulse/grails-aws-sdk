@@ -1,6 +1,6 @@
 # GRAILS files
 /web-app/WEB-INF
-/target
+
 /target-eclipse
 
 # IDE files
@@ -18,3 +18,16 @@
 plugin.xml
 .DS_Store
 *.sha1
+
+# "temporary" build files
+/target
+/build
+.gradle
+.nb-gradle
+*.iml
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
