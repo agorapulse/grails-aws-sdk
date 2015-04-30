@@ -5,7 +5,7 @@ grails.plugin.awssdk.secretKey : 'your secret'
 grails:
     profile: web-plugin
     codegen:
-        defaultPackage: aws.sdk
+        defaultPackage: grails.plugin.awssdk
 info:
     app:
         name: '@info.app.name@'
