@@ -1,6 +1,6 @@
 h4. Credentials
 
-Add your AWS credentials parameters to your _grails-app/conf/Config.groovy_:
+Add your AWS credentials parameters to your _grails-app/conf/application.yml_:
 
 {code}
 grails.plugin.awssdk.accessKey = {ACCESS_KEY}

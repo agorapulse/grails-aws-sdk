@@ -16,7 +16,7 @@ plugins {
     id "com.jfrog.bintray" version "1.1"
 }
 
-version "1.9.30"
+version "1.9.33"
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -68,11 +68,25 @@ dependencies {
         compile 'org.apache.httpcomponents:httpclient:4.3.2'
         compile 'org.apache.httpcomponents:httpmime:4.3.3'
         // AWS SDK lib
-        compile 'com.amazonaws:aws-java-sdk:1.9.29'
+        compile 'com.amazonaws:aws-java-sdk:1.9.33'
 		
 		
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
+}
+
+bintray {
+    pkg {
+        userOrg = 'agorapulse'
+        name = "org.grails.plugins:$project.name"
+        desc = "Grails AWS SDK plugin"
+        issueTrackerUrl = "https://github.com/agorapulse/grails-$project.name/issues"
+        vcsUrl = "https://github.com/agorapulse/grails-$project.name"
+        version {
+            attributes = ['grails-plugin': "org.grails.plugins:$project.name"]
+            name = project.version
+        }
+    }
 }

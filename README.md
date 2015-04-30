@@ -20,26 +20,16 @@ The Grails plugin handles :
 
 # Installation
 
-Declare the plugin dependency in the BuildConfig.groovvy file, as shown here:
+Declare the plugin dependency in the _build.gradle_ file, as shown here:
 
 ```groovy
-grails.project.dependency.resolution = {
-		inherits("global") { }
-		log "info"
-		repositories {
-				//your repositories
-		}
-		dependencies {
-				// Workaround to resolve dependency issue with aws-java-sdk and http-builder (dependent on httpcore:4.0)
-                build 'org.apache.httpcomponents:httpcore:4.2'
-                build 'org.apache.httpcomponents:httpclient:4.2'
-                runtime 'org.apache.httpcomponents:httpcore:4.2'
-                runtime 'org.apache.httpcomponents:httpclient:4.2'
-		}
-		plugins {
-				//here go your plugin dependencies
-				runtime ':aws-sdk:1.9.29'
-		}
+repositories {
+    ...
+    maven { url "http://dl.bintray.com/agorapulse/plugins" }
+}
+dependencies {
+    ...
+    compile "org.grails.plugins:aws-sdk:1.9.33"
 }
 ```
 
@@ -48,9 +38,9 @@ grails.project.dependency.resolution = {
 
 Create an AWS account [Amazon Web Services](http://aws.amazon.com/), in order to get your own credentials accessKey and secretKey.
 
-Add your AWS credentials parameters to your _grails-app/conf/Config.groovy_:
+Add your AWS credentials parameters to your _grails-app/conf/application.yml_:
 
-```groovy
+```yml
 grails.plugin.awssdk.accessKey = {ACCESS_KEY}
 grails.plugin.awssdk.secretKey = {SECRET_KEY}
 ```
