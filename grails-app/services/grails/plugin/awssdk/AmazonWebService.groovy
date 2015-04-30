@@ -630,6 +630,11 @@ class AmazonWebService {
             case 'cloudWatch':
                 ServiceAbbreviations.CloudWatch
                 break
+            case 'cognitoIdentity':
+                ServiceAbbreviations.CognitoIdentity
+            case 'cognitoSync':
+                ServiceAbbreviations.CognitoSync
+                break
             case 'ses':
                 ServiceAbbreviations.Email
                 break
