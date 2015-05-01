@@ -301,7 +301,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCognitoIdentityAsync('eu-west-1').class == AmazonCognitoIdentityAsyncClient
         assert amazonWebService.getCognitoIdentity().class == AmazonCognitoIdentityClient
         assert amazonWebService.getCognitoIdentity('eu-west-1').class == AmazonCognitoIdentityClient
-        assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.eu-west-1.amazonaws.com'
     }
 
     void testCognitoIdentityClientWithoutCredentials() {
@@ -311,7 +311,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCognitoIdentityAsync('eu-west-1').class == AmazonCognitoIdentityAsyncClient
         assert amazonWebService.getCognitoIdentity().class == AmazonCognitoIdentityClient
         assert amazonWebService.getCognitoIdentity('eu-west-1').class == AmazonCognitoIdentityClient
-        assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getCognitoIdentity('eu-west-1').endpoint.toString() == 'https://cognito-identity.eu-west-1.amazonaws.com'
     }
 
     /**
@@ -324,7 +324,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCognitoSyncAsync('eu-west-1').class == AmazonCognitoSyncAsyncClient
         assert amazonWebService.getCognitoSync().class == AmazonCognitoSyncClient
         assert amazonWebService.getCognitoSync('eu-west-1').class == AmazonCognitoSyncClient
-        assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.eu-west-1.amazonaws.com'
     }
 
     void testCognitoSyncClientWithoutCredentials() {
@@ -334,7 +334,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCognitoSyncAsync('eu-west-1').class == AmazonCognitoSyncAsyncClient
         assert amazonWebService.getCognitoSync().class == AmazonCognitoSyncClient
         assert amazonWebService.getCognitoSync('eu-west-1').class == AmazonCognitoSyncClient
-        assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getCognitoSync('eu-west-1').endpoint.toString() == 'https://cognito-sync.eu-west-1.amazonaws.com'
     }
 
     /**
