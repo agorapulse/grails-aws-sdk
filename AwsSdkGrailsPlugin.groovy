@@ -15,7 +15,6 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
     def documentation = "http://agorapulse.github.io/grails-aws-sdk/guide/"
     def license = "APACHE"
     def organization = [ name: "AgoraPulse", url: "http://www.agorapulse.com/" ]
-    def issueManagement = [ system: "github", url: "https://github.com/agorapulse/grails-aws-sdk/issues" ]
-    def scm = [  url: "https://github.com/agorapulse/grails-aws-sdk" ]
-    
+    def issueManagement = [ url: "https://github.com/agorapulse/grails-aws-sdk/issues" ]
+    def scm = [ url: "https://github.com/agorapulse/grails-aws-sdk" ]
 }

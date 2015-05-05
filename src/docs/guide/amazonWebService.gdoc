@@ -1,4 +1,4 @@
-Reference @amazonWebService@ from any of your grails artefacts (controllers, domain, services...) to automatically inject it.
+Reference @amazonWebService@ from any of your Grails artefacts (controllers, domain, services...) to automatically inject it.
 
 {code}
 def amazonWebService
@@ -7,7 +7,7 @@ def amazonWebService
 Or get it from @ctx@ if you want to test it in Grails console.
 
 {code}
-def amazonWebService = ctx.getBean('amazonWebService')
+def amazonWebService = ctx.amazonWebService
 {code}
 
 You can then access any services directly from @amazonWebService@.
@@ -53,7 +53,7 @@ amazonWebService.swf
 amazonWebService.transferManager
 {code}
 
-It will return an instance of java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html with default region endpoint (defined in our @Config.groovy@).
+It will return an instance of Java client class extending "AmazonWebServiceClient":http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/AmazonWebServiceClient.html with default region endpoint (defined in our @Config.groovy@).
 
 You can then call any available client methods.
 

@@ -84,7 +84,7 @@ import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 class AmazonWebService {
 
     static final String DEFAULT_REGION = 'us-east-1'
-    
+
     static transactional = false
 
     def grailsApplication
@@ -401,7 +401,7 @@ class AmazonWebService {
 
     // PRIVATE
 
-    private def getAwsConfig() {
+    private getAwsConfig() {
         grailsApplication.config.grails?.plugin?.awssdk
     }
 
@@ -432,12 +432,12 @@ class AmazonWebService {
                 protocol: defaultConfig.protocol ?: '',
                 socketTimeout: defaultConfig.socketTimeout ?: 0,
                 userAgent: defaultConfig.userAgent ?: '',
-				proxyDomain: defaultConfig.proxyDomain ?: '',
-				proxyHost: defaultConfig.proxyHost ?: '',
-				proxyPassword: defaultConfig.proxyPassword ?: '',
-				proxyPort: defaultConfig.proxyPort ?: 0,
-				proxyUsername: defaultConfig.proxyUsername ?: '',
-				proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
+                proxyDomain: defaultConfig.proxyDomain ?: '',
+                proxyHost: defaultConfig.proxyHost ?: '',
+                proxyPassword: defaultConfig.proxyPassword ?: '',
+                proxyPort: defaultConfig.proxyPort ?: 0,
+                proxyUsername: defaultConfig.proxyUsername ?: '',
+                proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
         ]
         if (serviceConfig) {
             if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout

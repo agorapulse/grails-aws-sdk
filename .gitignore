@@ -1,20 +1,17 @@
-# GRAILS files
-/web-app/WEB-INF
+# Grails files
+/grails-aws-sdk-*.zip
+/grails-aws-sdk-*.zip.sha1
+/plugin.xml
 /target
 /target-eclipse
+/web-app
 
 # IDE files
 .classpath
 .idea/
 .project
 .settings
-/*.launch
-/*.tmproj
 
-*.log
-*.zip
 *.iml
 /out
-plugin.xml
 .DS_Store
-*.sha1
