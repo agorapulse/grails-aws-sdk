@@ -24,22 +24,22 @@ Declare the plugin dependency in the BuildConfig.groovvy file, as shown here:
 
 ```groovy
 grails.project.dependency.resolution = {
-		inherits("global") { }
-		log "info"
-		repositories {
-				//your repositories
-		}
-		dependencies {
-				// Workaround to resolve dependency issue with aws-java-sdk and http-builder (dependent on httpcore:4.0)
-                build 'org.apache.httpcomponents:httpcore:4.2'
-                build 'org.apache.httpcomponents:httpclient:4.2'
-                runtime 'org.apache.httpcomponents:httpcore:4.2'
-                runtime 'org.apache.httpcomponents:httpclient:4.2'
-		}
-		plugins {
-				//here go your plugin dependencies
-				runtime ':aws-sdk:1.9.33'
-		}
+    inherits "global"
+    log "info"
+    repositories {
+        // your repositories
+    }
+    dependencies {
+        // Workaround to resolve dependency issue with aws-java-sdk and http-builder (dependent on httpcore:4.0)
+        build 'org.apache.httpcomponents:httpcore:4.2'
+        build 'org.apache.httpcomponents:httpclient:4.2'
+        runtime 'org.apache.httpcomponents:httpcore:4.2'
+        runtime 'org.apache.httpcomponents:httpclient:4.2'
+    }
+    plugins {
+        // here go your plugin dependencies
+        runtime ':aws-sdk:1.9.33'
+    }
 }
 ```
 
@@ -182,4 +182,3 @@ We decided to write our own AWS plugin because it did not meet our requirements:
 2. only [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services,
 3. fast release update with 100% compatibility with [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients,
 4. no need for additional DSL/methods injection, since we found the [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) clients pretty straightforward to use
-

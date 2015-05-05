@@ -72,7 +72,6 @@ import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.sqs.buffered.AmazonSQSBufferedAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
-import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
 
@@ -80,31 +79,21 @@ import java.security.KeyPair
 import java.security.KeyPairGenerator
 import java.security.SecureRandom
 
-/**
- * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
- */
 @TestMixin(GrailsUnitTestMixin)
-@TestFor(AmazonWebService)
 class AmazonWebServiceTests {
 
-    void setUp() {
+    protected ConfigObject getAwsConfig() {
+        grailsApplication.config.grails.plugin.awssdk
     }
 
-    void tearDown() {
+    protected AmazonWebService getServiceWithCredentials() {
+        awsConfig.accessKey = "abcdefghi"
+        awsConfig.secretKey = "123456789"
+
+        new AmazonWebService(grailsApplication: grailsApplication)
     }
 
-    AmazonWebService getServiceWithCredentials() {
-        def amazonWebService = new AmazonWebService()
-
-        grailsApplication.config.grails.plugin.awssdk.accessKey = "abcdefghi"
-        grailsApplication.config.grails.plugin.awssdk.secretKey = "123456789"
-
-        amazonWebService.grailsApplication = grailsApplication
-
-        amazonWebService
-    }
-
-    AmazonWebService getServiceWithCredentialsAndEncryptionMaterials() {
+    protected AmazonWebService getServiceWithCredentialsAndEncryptionMaterials() {
         def amazonWebService = serviceWithCredentials
 
         KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA")
@@ -112,17 +101,13 @@ class AmazonWebServiceTests {
         KeyPair myKeyPair = keyGenerator.generateKeyPair()
         EncryptionMaterials encryptionMaterials = new EncryptionMaterials(myKeyPair)
 
-        amazonWebService.grailsApplication.config.grails.plugin.awssdk.encryptionMaterials = encryptionMaterials
+        awsConfig.encryptionMaterials = encryptionMaterials
 
         amazonWebService
     }
 
-    AmazonWebService getServiceWithoutCredentials() {
-        def amazonWebService = new AmazonWebService()
-
-        amazonWebService.grailsApplication = grailsApplication
-
-        amazonWebService
+    protected AmazonWebService getServiceWithoutCredentials() {
+        new AmazonWebService(grailsApplication: grailsApplication)
     }
 
     void testAutoScalingClientWithCredentials() {
@@ -968,7 +953,7 @@ class AmazonWebServiceTests {
 
     void testStorageGatewayClientWithoutCredentials() {
         def amazonWebService = getServiceWithoutCredentials()
-        
+
         assert amazonWebService.getStorageGatewayAsync().class == AWSStorageGatewayAsyncClient
         assert amazonWebService.getStorageGatewayAsync('eu-west-1').class == AWSStorageGatewayAsyncClient
         assert amazonWebService.getStorageGateway().class == AWSStorageGatewayClient
@@ -1055,7 +1040,7 @@ class AmazonWebServiceTests {
         def otherRegion1
         def otherRegion2
 
-        // check if the cache returns the same object if requested twice, 
+        // check if the cache returns the same object if requested twice,
         // also make sure other calls and regions don't corrupt the cache
         service1 = amazonWebService.getEc2Async()
         otherRegion1 = amazonWebService.getEc2Async('eu-west-1')
