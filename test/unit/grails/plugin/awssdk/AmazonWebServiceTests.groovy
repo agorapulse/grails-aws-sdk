@@ -263,7 +263,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCodeDeployAsync('eu-west-1').class == AmazonCodeDeployAsyncClient
         assert amazonWebService.getCodeDeploy().class == AmazonCodeDeployClient
         assert amazonWebService.getCodeDeploy('eu-west-1').class == AmazonCodeDeployClient
-        assert amazonWebService.getCodeDeploy('eu-west-1').endpoint.toString() == 'https://codedeploy.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getCodeDeploy('eu-west-1').endpoint.toString() == 'https://codedeploy.eu-west-1.amazonaws.com'
     }
 
     void testCodeDeployClientWithoutCredentials() {
@@ -273,7 +273,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getCodeDeployAsync('eu-west-1').class == AmazonCodeDeployAsyncClient
         assert amazonWebService.getCodeDeploy().class == AmazonCodeDeployClient
         assert amazonWebService.getCodeDeploy('eu-west-1').class == AmazonCodeDeployClient
-        assert amazonWebService.getCodeDeploy('eu-west-1').endpoint.toString() == 'https://codedeploy.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getCodeDeploy('eu-west-1').endpoint.toString() == 'https://codedeploy.eu-west-1.amazonaws.com'
     }
 
     /**
