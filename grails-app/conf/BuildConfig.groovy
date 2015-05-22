@@ -19,7 +19,7 @@ grails.project.dependency.resolution = {
         build 'org.apache.httpcomponents:httpclient:4.3.2'
         build 'org.apache.httpcomponents:httpmime:4.3.3'
         // AWS SDK lib
-        compile 'com.amazonaws:aws-java-sdk:1.9.33'
+        compile 'com.amazonaws:aws-java-sdk:1.9.37'
     }
 
     plugins {
