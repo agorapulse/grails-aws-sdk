@@ -18,6 +18,7 @@ amazonWebService.autoScaling
 amazonWebService.cloudFormation
 amazonWebService.cloudFront
 amazonWebService.cloudSearch
+amazonWebService.cloudSearchDomain
 amazonWebService.cloudTrail
 amazonWebService.cloudWatch
 amazonWebService.codeDeploy
