@@ -14,6 +14,8 @@ import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontAsyncClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClient
+import com.amazonaws.services.cloudsearchdomain.AmazonCloudSearchDomainAsyncClient
+import com.amazonaws.services.cloudsearchdomain.AmazonCloudSearchDomainClient
 import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
@@ -128,6 +130,14 @@ class AmazonWebService {
 
     AmazonCloudSearchClient getCloudSearch(regionName = '') {
         getServiceClient('cloudSearch', regionName) as AmazonCloudSearchClient
+    }
+
+    AmazonCloudSearchDomainAsyncClient getCloudSearchDomainAsync(regionName = '') {
+        getServiceClient('cloudSearchDomain', regionName, true) as AmazonCloudSearchDomainAsyncClient
+    }
+
+    AmazonCloudSearchDomainClient getCloudSearchDomain(regionName = '') {
+        getServiceClient('cloudSearchDomain', regionName) as AmazonCloudSearchDomainClient
     }
 
     AWSCloudTrailAsyncClient getCloudTrailAsync(regionName = '') {
@@ -521,6 +531,9 @@ class AmazonWebService {
                 case 'cloudSearch':
                     client = async ? new AmazonCloudSearchAsyncClient(credentials) : new AmazonCloudSearchClient(credentials)
                     break
+                case 'cloudSearchDomain':
+                    client = async ? new AmazonCloudSearchDomainAsyncClient(credentials) : new AmazonCloudSearchDomainClient(credentials)
+                    break
                 case 'cloudTrail':
                     client = async ? new AWSCloudTrailAsyncClient(credentials) : new AWSCloudTrailClient(credentials)
                     break
@@ -627,6 +640,9 @@ class AmazonWebService {
     // Service abbreviation exceptions (name is different for CloudWatch and SES)
     private String getServiceAbbreviation(String service) {
         switch(service) {
+            case 'cloudSearchDomain':
+                ServiceAbbreviations.CloudSearch
+                break
             case 'cloudWatch':
                 ServiceAbbreviations.CloudWatch
                 break

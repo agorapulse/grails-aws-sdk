@@ -6,6 +6,7 @@ import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontAsyncClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClient
+import com.amazonaws.services.cloudsearchdomain.AmazonCloudSearchDomainAsyncClient
 import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
@@ -195,6 +196,26 @@ class AmazonWebServiceTests {
 
         assert amazonWebService.getCloudSearchAsync().class == AmazonCloudSearchAsyncClient
         assert amazonWebService.getCloudSearchAsync('eu-west-1').class == AmazonCloudSearchAsyncClient
+        assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').endpoint.toString() == 'https://cloudsearch.eu-west-1.amazonaws.com'
+    }
+
+    void testCloudSearchDomainClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getCloudSearchDomainAsync().class == AmazonCloudSearchDomainAsyncClient
+        assert amazonWebService.getCloudSearchDomainAsync('eu-west-1').class == AmazonCloudSearchDomainAsyncClient
+        assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
+        assert amazonWebService.getCloudSearch('eu-west-1').endpoint.toString() == 'https://cloudsearch.eu-west-1.amazonaws.com'
+    }
+
+    void testCloudSearchDomainClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getCloudSearchDomainAsync().class == AmazonCloudSearchDomainAsyncClient
+        assert amazonWebService.getCloudSearchDomainAsync('eu-west-1').class == AmazonCloudSearchDomainAsyncClient
         assert amazonWebService.getCloudSearch().class == AmazonCloudSearchClient
         assert amazonWebService.getCloudSearch('eu-west-1').class == AmazonCloudSearchClient
         assert amazonWebService.getCloudSearch('eu-west-1').endpoint.toString() == 'https://cloudsearch.eu-west-1.amazonaws.com'
