@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
     }
     plugins {
         // here go your plugin dependencies
-        runtime ':aws-sdk:1.9.37.1'
+        runtime ':aws-sdk:1.9.40'
     }
 }
 ```
@@ -107,6 +107,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2015-06-05 **V1.9.40** : AWS SDK for Java updated to V1.9.40
 * 2015-05-26 **V1.9.37.1** : cloudSearchDomain client added
 * 2015-05-22 **V1.9.37** : AWS SDK for Java updated to V1.9.37
 * 2015-05-01 **V1.9.33** : AWS SDK for Java updated to V1.9.33 + Cognito services abbreviation (fix #34)
