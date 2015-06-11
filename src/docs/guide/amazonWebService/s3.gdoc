@@ -50,9 +50,11 @@ TransferManager provides a simple API for uploading content to Amazon S3, and ma
 Upload asynchronously a file with public read permissions.
 
 {code}
+import com.amazonaws.services.s3.model.CannedAccessControlList
 import com.amazonaws.services.s3.transfer.*
 
-Upload upload = amazonWebService.transferManager.upload(new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg')))
+PutObjectRequest putObjectRequest = new PutObjectRequest('some-grails-bucket', 'somePath/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg')).withCannedAcl(CannedAccessControlList.PublicRead)
+Upload upload = amazonWebService.transferManager.upload(putObjectRequest)
 
 while (!upload.done) {
      println "Transfer: $upload.description"
