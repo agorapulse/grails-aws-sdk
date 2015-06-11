@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Installation 1.9.6</title>
+    <title>2 Installation 1.9.40</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -78,7 +78,7 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
 
                     <p><strong>Authors:</strong> Benoit Hediard</p>
 
-                    <p><strong>Version:</strong> 1.9.6</p>
+                    <p><strong>Version:</strong> 1.9.40</p>
 
                     
                 </div>
@@ -89,22 +89,22 @@ Using the SDK, developers can build solutions for Amazon Simple Storage Service 
 
 <h1 id="installation">2 Installation</h1>
 Declare the plugin dependency in the <code>BuildConfig.groovy</code> file, as shown here:<p class="paragraph"/><div class="code"><pre>grails.project.dependency.resolution = &#123;
-		inherits(<span class="java&#45;quote">"global"</span>) &#123; &#125;
-		log <span class="java&#45;quote">"info"</span>
-		repositories &#123;
-				//your repositories
-		&#125;
-		dependencies &#123;
-                // Workaround to resolve dependency issue with aws&#45;java&#45;sdk and http&#45;builder (dependent on httpcore:4.0)
-                build 'org.apache.httpcomponents:httpcore:4.3.2'
-                build 'org.apache.httpcomponents:httpclient:4.3.2'
-                runtime 'org.apache.httpcomponents:httpcore:4.3.2'
-                runtime 'org.apache.httpcomponents:httpclient:4.3.2'
-        &#125;
-		plugins &#123;
-				//here go your plugin dependencies
-				runtime ':aws&#45;sdk:1.9.6'
-		&#125;
+    inherits <span class="java&#45;quote">"global"</span>
+    log <span class="java&#45;quote">"info"</span>
+    repositories &#123;
+        // your repositories
+    &#125;
+    dependencies &#123;
+        // Workaround to resolve dependency issue with aws&#45;java&#45;sdk and http&#45;builder (dependent on httpcore:4.0)
+        build 'org.apache.httpcomponents:httpcore:4.3.2'
+        build 'org.apache.httpcomponents:httpclient:4.3.2'
+        runtime 'org.apache.httpcomponents:httpcore:4.3.2'
+        runtime 'org.apache.httpcomponents:httpclient:4.3.2'
+    &#125;
+    plugins &#123;
+        // here go your plugin dependencies
+        runtime ':aws&#45;sdk:1.9.40'
+    &#125;
 &#125;</pre></div>
 
 
