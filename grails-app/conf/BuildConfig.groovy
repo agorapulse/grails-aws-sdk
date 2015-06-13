@@ -14,12 +14,8 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        // Latest httpcore and httpmime for Coveralls plugin
-        build 'org.apache.httpcomponents:httpcore:4.3.2'
-        build 'org.apache.httpcomponents:httpclient:4.3.2'
-        build 'org.apache.httpcomponents:httpmime:4.3.3'
         // AWS SDK lib
-        compile 'com.amazonaws:aws-java-sdk:1.9.40'
+        compile 'com.amazonaws:aws-java-sdk:1.10.0'
     }
 
     plugins {
