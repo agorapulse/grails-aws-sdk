@@ -64,13 +64,9 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
 
     console "org.grails:grails-console"
-	compile 'org.apache.httpcomponents:httpcore:4.3.2'
-        compile 'org.apache.httpcomponents:httpclient:4.3.2'
-        compile 'org.apache.httpcomponents:httpmime:4.3.3'
-        // AWS SDK lib
-        compile 'com.amazonaws:aws-java-sdk:1.9.33'
-		
-		
+
+    // AWS SDK lib
+    compile 'com.amazonaws:aws-java-sdk:1.10.3'
 }
 
 task wrapper(type: Wrapper) {

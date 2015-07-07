@@ -3,10 +3,12 @@ package grails.plugin.awssdk
 import com.amazonaws.AmazonWebServiceClient
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol
+import com.amazonaws.auth.AWSCredentials
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
+import com.amazonaws.regions.Regions
 import com.amazonaws.regions.ServiceAbbreviations
 import com.amazonaws.services.autoscaling.AmazonAutoScalingAsyncClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingClient
@@ -14,6 +16,8 @@ import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontAsyncClient
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClient
+import com.amazonaws.services.cloudsearchdomain.AmazonCloudSearchDomainAsyncClient
+import com.amazonaws.services.cloudsearchdomain.AmazonCloudSearchDomainClient
 import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchAsyncClient
 import com.amazonaws.services.cloudsearchv2.AmazonCloudSearchClient
 import com.amazonaws.services.cloudtrail.AWSCloudTrailAsyncClient
@@ -81,10 +85,14 @@ import com.amazonaws.services.sqs.buffered.AmazonSQSBufferedAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayAsyncClient
 import com.amazonaws.services.storagegateway.AWSStorageGatewayClient
 
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+
 class AmazonWebService {
 
     static final String DEFAULT_REGION = 'us-east-1'
-    
+    static final int DEFAULT_THREAD_POOL_SIZE = 50
+
     static transactional = false
 
     def grailsApplication
@@ -128,6 +136,14 @@ class AmazonWebService {
 
     AmazonCloudSearchClient getCloudSearch(regionName = '') {
         getServiceClient('cloudSearch', regionName) as AmazonCloudSearchClient
+    }
+
+    AmazonCloudSearchDomainAsyncClient getCloudSearchDomainAsync(regionName = '') {
+        getServiceClient('cloudSearchDomain', regionName, true) as AmazonCloudSearchDomainAsyncClient
+    }
+
+    AmazonCloudSearchDomainClient getCloudSearchDomain(regionName = '') {
+        getServiceClient('cloudSearchDomain', regionName) as AmazonCloudSearchDomainClient
     }
 
     AWSCloudTrailAsyncClient getCloudTrailAsync(regionName = '') {
@@ -401,7 +417,7 @@ class AmazonWebService {
 
     // PRIVATE
 
-    private def getAwsConfig() {
+    private getAwsConfig() {
         grailsApplication.config.grails?.plugin?.awssdk
     }
 
@@ -415,9 +431,9 @@ class AmazonWebService {
             if (serviceConfig.secretKey) config.secretKey = serviceConfig.secretKey
         }
 
-        BasicAWSCredentials credentials = new BasicAWSCredentials(config.accessKey, config.secretKey)
+        AWSCredentials credentials = new BasicAWSCredentials(config.accessKey, config.secretKey)
 
-        if(!credentials.AWSAccessKeyId || !credentials.AWSSecretKey) {
+        if (!credentials.AWSAccessKeyId || !credentials.AWSSecretKey) {
             return new DefaultAWSCredentialsProviderChain()
         }
 
@@ -432,12 +448,12 @@ class AmazonWebService {
                 protocol: defaultConfig.protocol ?: '',
                 socketTimeout: defaultConfig.socketTimeout ?: 0,
                 userAgent: defaultConfig.userAgent ?: '',
-				proxyDomain: defaultConfig.proxyDomain ?: '',
-				proxyHost: defaultConfig.proxyHost ?: '',
-				proxyPassword: defaultConfig.proxyPassword ?: '',
-				proxyPort: defaultConfig.proxyPort ?: 0,
-				proxyUsername: defaultConfig.proxyUsername ?: '',
-				proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
+                proxyDomain: defaultConfig.proxyDomain ?: '',
+                proxyHost: defaultConfig.proxyHost ?: '',
+                proxyPassword: defaultConfig.proxyPassword ?: '',
+                proxyPort: defaultConfig.proxyPort ?: 0,
+                proxyUsername: defaultConfig.proxyUsername ?: '',
+                proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
         ]
         if (serviceConfig) {
             if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
@@ -501,89 +517,93 @@ class AmazonWebService {
             def credentials = buildCredentials(awsConfig, awsConfig[service])
 
             ClientConfiguration configuration = buildClientConfiguration(awsConfig, awsConfig[service])
+            ExecutorService executorService = Executors.newFixedThreadPool(DEFAULT_THREAD_POOL_SIZE)
 
             switch (service) {
                 case 'autoScaling':
-                    client = async ? new AmazonAutoScalingAsyncClient(credentials) : new AmazonAutoScalingClient(credentials)
+                    client = async ? new AmazonAutoScalingAsyncClient(credentials, configuration, executorService) : new AmazonAutoScalingClient(credentials, configuration)
                     break
                 case 'cognitoIdentity':
-                    client = async ? new AmazonCognitoIdentityAsyncClient(credentials) : new AmazonCognitoIdentityClient(credentials)
+                    client = async ? new AmazonCognitoIdentityAsyncClient(credentials, configuration, executorService) : new AmazonCognitoIdentityClient(credentials, configuration)
                     break
                 case 'cognitoSync':
-                    client = async ? new AmazonCognitoSyncAsyncClient(credentials) : new AmazonCognitoSyncClient(credentials)
+                    client = async ? new AmazonCognitoSyncAsyncClient(credentials, configuration, executorService) : new AmazonCognitoSyncClient(credentials, configuration)
                     break
                 case 'cloudFormation':
-                    client = async ? new AmazonCloudFormationAsyncClient(credentials) : new AmazonCloudFormationClient(credentials)
+                    client = async ? new AmazonCloudFormationAsyncClient(credentials, configuration, executorService) : new AmazonCloudFormationClient(credentials, configuration)
                     break
                 case 'cloudFront':
-                    client = async ? new AmazonCloudFrontAsyncClient(credentials) : new AmazonCloudFrontClient(credentials)
+                    client = async ? new AmazonCloudFrontAsyncClient(credentials, configuration, executorService) : new AmazonCloudFrontClient(credentials, configuration)
                     break
                 case 'cloudSearch':
-                    client = async ? new AmazonCloudSearchAsyncClient(credentials) : new AmazonCloudSearchClient(credentials)
+                    client = async ? new AmazonCloudSearchAsyncClient(credentials, configuration, executorService) : new AmazonCloudSearchClient(credentials, configuration)
+                    break
+                case 'cloudSearchDomain':
+                    client = async ? new AmazonCloudSearchDomainAsyncClient(credentials, configuration, executorService) : new AmazonCloudSearchDomainClient(credentials, configuration)
                     break
                 case 'cloudTrail':
-                    client = async ? new AWSCloudTrailAsyncClient(credentials) : new AWSCloudTrailClient(credentials)
+                    client = async ? new AWSCloudTrailAsyncClient(credentials, configuration, executorService) : new AWSCloudTrailClient(credentials, configuration)
                     break
                 case 'cloudWatch':
-                    client = async ? new AmazonCloudWatchAsyncClient(credentials) : new AmazonCloudWatchClient(credentials)
+                    client = async ? new AmazonCloudWatchAsyncClient(credentials, configuration, executorService) : new AmazonCloudWatchClient(credentials, configuration)
                     break
                 case 'codeDeploy':
-                    client = async ? new AmazonCodeDeployAsyncClient(credentials) : new AmazonCodeDeployClient(credentials)
+                    client = async ? new AmazonCodeDeployAsyncClient(credentials, configuration, executorService) : new AmazonCodeDeployClient(credentials, configuration)
                     break
                 case 'config':
-                    client = async ? new AmazonConfigAsyncClient(credentials) : new AmazonConfigClient(credentials)
+                    client = async ? new AmazonConfigAsyncClient(credentials, configuration, executorService) : new AmazonConfigClient(credentials, configuration)
                     break
                 case 'dynamoDB':
-                    client = async ? new AmazonDynamoDBAsyncClient(credentials) : new AmazonDynamoDBClient(credentials)
+                    client = async ? new AmazonDynamoDBAsyncClient(credentials, configuration, executorService) : new AmazonDynamoDBClient(credentials, configuration)
                     break
                 case 'ec2':
-                    client = async ? new AmazonEC2AsyncClient(credentials) : new AmazonEC2Client(credentials)
+                    client = async ? new AmazonEC2AsyncClient(credentials, configuration, executorService) : new AmazonEC2Client(credentials, configuration)
                     break
                 case 'elasticBeanstalk':
-                    client = async ? new AWSElasticBeanstalkAsyncClient(credentials) : new AWSElasticBeanstalkClient(credentials)
+                    client = async ? new AWSElasticBeanstalkAsyncClient(credentials, configuration, executorService) : new AWSElasticBeanstalkClient(credentials, configuration)
                     break
                 case 'elastiCache':
-                    client = async ? new AmazonElastiCacheAsyncClient(credentials) : new AmazonElastiCacheClient(credentials)
+                    client = async ? new AmazonElastiCacheAsyncClient(credentials, configuration, executorService) : new AmazonElastiCacheClient(credentials, configuration)
                     break
                 case 'elasticLoadBalancing':
-                    client = async ? new AmazonElasticLoadBalancingAsyncClient(credentials) : new AmazonElasticLoadBalancingClient(credentials)
+                    client = async ? new AmazonElasticLoadBalancingAsyncClient(credentials, configuration, executorService) : new AmazonElasticLoadBalancingClient(credentials, configuration)
                     break
                 case 'elasticMapReduce':
-                    client = async ? new AmazonElasticMapReduceAsyncClient(credentials) : new AmazonElasticMapReduceClient(credentials)
+                    client = async ? new AmazonElasticMapReduceAsyncClient(credentials, configuration, executorService) : new AmazonElasticMapReduceClient(credentials, configuration)
                     break
                 case 'elasticTranscoder':
-                    client = async ? new AmazonElasticTranscoderAsyncClient(credentials) : new AmazonElasticTranscoderClient(credentials)
+                    client = async ? new AmazonElasticTranscoderAsyncClient(credentials, configuration, executorService) : new AmazonElasticTranscoderClient(credentials, configuration)
                     break
                 case 'glacier':
-                    client = async ? new AmazonGlacierAsyncClient(credentials) : new AmazonGlacierClient(credentials)
+                    client = async ? new AmazonGlacierAsyncClient(credentials, configuration, executorService) : new AmazonGlacierClient(credentials, configuration)
                     break
                 case 'iam':
-                    client = async ? new AmazonIdentityManagementAsyncClient(credentials) : new AmazonIdentityManagementClient(credentials)
+                    client = async ? new AmazonIdentityManagementAsyncClient(credentials, configuration, executorService) : new AmazonIdentityManagementClient(credentials, configuration)
                     break
                 case 'importExport':
-                    client = async ? new AmazonImportExportAsyncClient(credentials) : new AmazonImportExportClient(credentials)
+                    client = async ? new AmazonImportExportAsyncClient(credentials, configuration, executorService) : new AmazonImportExportClient(credentials, configuration)
                     break
                 case 'kinesis':
-                    client = async ? new AmazonKinesisAsyncClient(credentials) : new AmazonKinesisClient(credentials)
+                    client = async ? new AmazonKinesisAsyncClient(credentials, configuration, executorService) : new AmazonKinesisClient(credentials, configuration)
                     break
                 case 'kms':
-                    client = async ? new AWSKMSAsyncClient(credentials) : new AWSKMSClient(credentials)
+                    client = async ? new AWSKMSAsyncClient(credentials, configuration, executorService) : new AWSKMSClient(credentials, configuration)
                     break
                 case 'opsWorks':
-                    client = async ? new AWSOpsWorksAsyncClient(credentials) : new AWSOpsWorksClient(credentials)
+                    client = async ? new AWSOpsWorksAsyncClient(credentials, configuration, executorService) : new AWSOpsWorksClient(credentials, configuration)
                     break
                 case 'rds':
-                    client = async ? new AmazonRDSAsyncClient(credentials) : new AmazonRDSClient(credentials)
+                    client = async ? new AmazonRDSAsyncClient(credentials, configuration, executorService) : new AmazonRDSClient(credentials, configuration)
                     break
                 case 'redshift':
-                    client = async ? new AmazonRedshiftAsyncClient(credentials) : new AmazonRedshiftClient(credentials)
+                    client = async ? new AmazonRedshiftAsyncClient(credentials, configuration, executorService) : new AmazonRedshiftClient(credentials, configuration)
                     break
                 case 'route53':
-                    client = async ? new AmazonRoute53AsyncClient(credentials) : new AmazonRoute53Client(credentials)
+                    client = async ? new AmazonRoute53AsyncClient(credentials, configuration, executorService) : new AmazonRoute53Client(credentials, configuration)
                     break
                 case 's3':
                     if (async) throw new Exception("Sorry, there is no async client for AmazonS3")
-                    client = new AmazonS3Client(credentials)
+                    client = new AmazonS3Client(credentials, configuration)
                     break
                 case 's3Encryption':
                     if (async) throw new Exception("Sorry, there is no async client for AmazonS3EncryptionClient")
@@ -591,31 +611,30 @@ class AmazonWebService {
                     client = new AmazonS3EncryptionClient(credentials, awsConfig.encryptionMaterials as EncryptionMaterials)
                     break
                 case 'sdb':
-                    client = async ? new AmazonSimpleDBAsyncClient(credentials) : new AmazonSimpleDBClient(credentials)
+                    client = async ? new AmazonSimpleDBAsyncClient(credentials, configuration, executorService) : new AmazonSimpleDBClient(credentials, configuration)
                     break
                 case 'ses':
-                    client = async ? new AmazonSimpleEmailServiceAsyncClient(credentials) : new AmazonSimpleEmailServiceClient(credentials)
+                    client = async ? new AmazonSimpleEmailServiceAsyncClient(credentials, configuration, executorService) : new AmazonSimpleEmailServiceClient(credentials, configuration)
                     break
                 case 'sns':
-                    client = async ? new AmazonSNSAsyncClient(credentials) : new AmazonSNSClient(credentials)
+                    client = async ? new AmazonSNSAsyncClient(credentials, configuration, executorService) : new AmazonSNSClient(credentials, configuration)
                     break
                 case 'sqs':
-                    client = async ? new AmazonSQSAsyncClient(credentials) : new AmazonSQSClient(credentials)
+                    client = async ? new AmazonSQSAsyncClient(credentials, configuration, executorService) : new AmazonSQSClient(credentials, configuration)
                     break
                 case 'sts':
-                    client = async ? new AWSSecurityTokenServiceAsyncClient(credentials) : new AWSSecurityTokenServiceClient(credentials)
+                    client = async ? new AWSSecurityTokenServiceAsyncClient(credentials, configuration, executorService) : new AWSSecurityTokenServiceClient(credentials, configuration)
                     break
                 case 'storageGateway':
-                    client = async ? new AWSStorageGatewayAsyncClient(credentials) : new AWSStorageGatewayClient(credentials)
+                    client = async ? new AWSStorageGatewayAsyncClient(credentials, configuration, executorService) : new AWSStorageGatewayClient(credentials, configuration)
                     break
                 case 'swf':
-                    client = async ? new AmazonSimpleWorkflowAsyncClient(credentials) : new AmazonSimpleWorkflowClient(credentials)
+                    client = async ? new AmazonSimpleWorkflowAsyncClient(credentials, configuration, executorService) : new AmazonSimpleWorkflowClient(credentials, configuration)
                     break
                 default:
                     throw new Exception("Sorry, no client found for service ${service}")
             }
 
-            client.setConfiguration(configuration)
             client.setRegion(region) // Workaround: do not use 'client.region = region', it generates an exception trying to cast Region to Regions (probably calling the wrong setter...)
 
             clientsCache[service][regionName] = client
@@ -627,11 +646,15 @@ class AmazonWebService {
     // Service abbreviation exceptions (name is different for CloudWatch and SES)
     private String getServiceAbbreviation(String service) {
         switch(service) {
+            case 'cloudSearchDomain':
+                ServiceAbbreviations.CloudSearch
+                break
             case 'cloudWatch':
                 ServiceAbbreviations.CloudWatch
                 break
             case 'cognitoIdentity':
                 ServiceAbbreviations.CognitoIdentity
+                break
             case 'cognitoSync':
                 ServiceAbbreviations.CognitoSync
                 break
