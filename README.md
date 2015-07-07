@@ -29,7 +29,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:aws-sdk:1.9.33"
+    compile "org.grails.plugins:aws-sdk:1.10.3"
 }
 ```
 
@@ -171,4 +171,3 @@ We decided to write our own AWS plugin because it did not meet our requirements:
 2. only [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) with a consistent way to access **ALL** AWS services,
 3. fast release update with 100% compatibility with [AWS SDK for Java](http://aws.amazon.com/sdkforjava/), as it is just a simple lightweight wrapper around the official java clients,
 4. no need for additional DSL/methods injection, since we found the [AWS SDK for Java](http://aws.amazon.com/sdkforjava/) clients pretty straightforward to use
-
