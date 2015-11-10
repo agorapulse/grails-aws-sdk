@@ -1,7 +1,4 @@
 ---
-grails.plugin.awssdk.accessKey : 'your key'
-grails.plugin.awssdk.secretKey : 'your secret'
----
 grails:
     profile: web-plugin
     codegen:
