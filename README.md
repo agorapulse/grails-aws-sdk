@@ -29,7 +29,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:aws-sdk:1.10.26"
+    compile "org.grails.plugins:aws-sdk:1.10.32"
 }
 ```
 
@@ -61,6 +61,7 @@ AWS SDK for Java documentation is located here:
 
 AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
+* Amazon ApiGateway
 * Amazon CloudFormation
 * Amazon CloudFront
 * Amazon CloudSearch
