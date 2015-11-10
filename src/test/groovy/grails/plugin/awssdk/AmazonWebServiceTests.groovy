@@ -1,5 +1,7 @@
 package grails.plugin.awssdk
 
+import com.amazonaws.services.apigateway.AmazonApiGatewayAsyncClient
+import com.amazonaws.services.apigateway.AmazonApiGatewayClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingAsyncClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
@@ -123,6 +125,26 @@ class AmazonWebServiceTests {
         amazonWebService.grailsApplication = grailsApplication
 
         amazonWebService
+    }
+
+    void testApiGatewayClientWithCredentials() {
+        def amazonWebService = getServiceWithCredentials()
+
+        assert amazonWebService.getApiGatewayAsync().class == AmazonApiGatewayAsyncClient
+        assert amazonWebService.getApiGatewayAsync('eu-west-1').class == AmazonApiGatewayAsyncClient
+        assert amazonWebService.getApiGateway().class == AmazonApiGatewayClient
+        assert amazonWebService.getApiGateway('eu-west-1').class == AmazonApiGatewayClient
+        assert amazonWebService.getApiGateway('eu-west-1').endpoint.toString() == 'https://apigateway.us-east-1.amazonaws.com' // Not supported by eu-west-1
+    }
+
+    void testApiGatewayClientWithoutCredentials() {
+        def amazonWebService = getServiceWithoutCredentials()
+
+        assert amazonWebService.getApiGatewayAsync().class == AmazonApiGatewayAsyncClient
+        assert amazonWebService.getApiGatewayAsync('eu-west-1').class == AmazonApiGatewayAsyncClient
+        assert amazonWebService.getApiGateway().class == AmazonApiGatewayClient
+        assert amazonWebService.getApiGateway('eu-west-1').class == AmazonApiGatewayClient
+        assert amazonWebService.getApiGateway('eu-west-1').endpoint.toString() == 'https://apigateway.us-east-1.amazonaws.com' // Not supported by eu-west-1
     }
 
     void testAutoScalingClientWithCredentials() {
@@ -347,7 +369,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getConfigAsync('eu-west-1').class == AmazonConfigAsyncClient
         assert amazonWebService.getConfig().class == AmazonConfigClient
         assert amazonWebService.getConfig('eu-west-1').class == AmazonConfigClient
-        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.eu-west-1.amazonaws.com'
     }
 
     void testConfigClientWithoutCredentials() {
@@ -357,7 +379,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getConfigAsync('eu-west-1').class == AmazonConfigAsyncClient
         assert amazonWebService.getConfig().class == AmazonConfigClient
         assert amazonWebService.getConfig('eu-west-1').class == AmazonConfigClient
-        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.eu-west-1.amazonaws.com'
     }
 
     /**

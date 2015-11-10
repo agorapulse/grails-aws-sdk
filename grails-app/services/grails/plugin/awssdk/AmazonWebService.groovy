@@ -8,8 +8,9 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
-import com.amazonaws.regions.Regions
 import com.amazonaws.regions.ServiceAbbreviations
+import com.amazonaws.services.apigateway.AmazonApiGatewayClient
+import com.amazonaws.services.apigateway.AmazonApiGatewayAsyncClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingAsyncClient
 import com.amazonaws.services.autoscaling.AmazonAutoScalingClient
 import com.amazonaws.services.cloudformation.AmazonCloudFormationAsyncClient
@@ -101,6 +102,14 @@ class AmazonWebService {
     private Map dynamoDBMappers = [:]
     private Map clients = [:]
     private Map transferManagers = [:]
+
+    AmazonApiGatewayAsyncClient getApiGatewayAsync(regionName = '') {
+        getServiceClient('apiGateway', regionName, true) as AmazonApiGatewayAsyncClient
+    }
+
+    AmazonApiGatewayClient getApiGateway(regionName = '') {
+        getServiceClient('apiGateway', regionName) as AmazonApiGatewayClient
+    }
 
     AmazonAutoScalingAsyncClient getAutoScalingAsync(regionName = '') {
         getServiceClient('autoScaling', regionName, true) as AmazonAutoScalingAsyncClient
@@ -520,6 +529,9 @@ class AmazonWebService {
             ExecutorService executorService = Executors.newFixedThreadPool(DEFAULT_THREAD_POOL_SIZE)
 
             switch (service) {
+                case 'apiGateway':
+                    client = async ? new AmazonApiGatewayAsyncClient(credentials, configuration, executorService) : new AmazonApiGatewayClient(credentials, configuration)
+                    break
                 case 'autoScaling':
                     client = async ? new AmazonAutoScalingAsyncClient(credentials, configuration, executorService) : new AmazonAutoScalingClient(credentials, configuration)
                     break
