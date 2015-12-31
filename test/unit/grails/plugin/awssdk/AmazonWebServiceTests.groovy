@@ -353,7 +353,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getConfigAsync('eu-west-1').class == AmazonConfigAsyncClient
         assert amazonWebService.getConfig().class == AmazonConfigClient
         assert amazonWebService.getConfig('eu-west-1').class == AmazonConfigClient
-        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.eu-west-1.amazonaws.com'
     }
 
     void testConfigClientWithoutCredentials() {
@@ -363,7 +363,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getConfigAsync('eu-west-1').class == AmazonConfigAsyncClient
         assert amazonWebService.getConfig().class == AmazonConfigClient
         assert amazonWebService.getConfig('eu-west-1').class == AmazonConfigClient
-        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.us-east-1.amazonaws.com' // Currently only available in us-east-1
+        assert amazonWebService.getConfig('eu-west-1').endpoint.toString() == 'https://config.eu-west-1.amazonaws.com'
     }
 
     /**
