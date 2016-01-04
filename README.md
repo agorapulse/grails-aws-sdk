@@ -29,7 +29,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:aws-sdk:1.10.32"
+    compile "org.grails.plugins:aws-sdk:1.10.44"
 }
 ```
 
@@ -95,67 +95,6 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 * AWS Security Token Service
 * AWS Storage Gateway
 * Elastic Load Balancing
-
-# Latest releases
-
-* 2015-04-08 **V1.9.29** : AWS SDK for Java updated to V1.9.29
-* 2015-02-25 **V1.9.22** : AWS SDK for Java updated to V1.9.22
-* 2015-02-11 **V1.9.18** : AWS SDK for Java updated to V1.9.18
-* 2015-01-27 **V1.9.17** : AWS SDK for Java updated to V1.9.17
-* 2015-01-09 **V1.9.14** : AWS SDK for Java updated to V1.9.14
-* 2015-01-08 **V1.9.13** : AWS SDK for Java updated to V1.9.13
-* 2014-12-05 **V1.9.10** : AWS SDK for Java updated to V1.9.10
-* 2014-12-05 **V1.9.9.1** : Fix an issue with groovy setter method selection when setting client region
-* 2014-12-05 **V1.9.9** : AWS SDK for Java updated to V1.9.9
-* 2014-11-15 **V1.9.6** : AWS SDK for Java updated to V1.9.6 + CodeDeploy, Config and KMS support added
-* 2014-11-12 **V1.9.4** : AWS SDK for Java updated to V1.9.4
-* 2014-10-24 **V1.9.2** : AWS SDK for Java updated to V1.9.2
-* 2014-10-09 **V1.9.0** : AWS SDK for Java updated to V1.9.0 + CloudSearch V2 support by default
-
-**WARNING**: Breaking change, since V1.9.0, new **CloudSearch** API Version 2013-01-01 are used (package *com.amazonaws.services.cloudsearchv2* instead of *com.amazonaws.services.cloudsearch* ).
-If you are using CloudSearch, please update your calls to the API.
-
-* 2014-10-01 **V1.8.11** : AWS SDK for Java updated to V1.8.11
-* 2014-09-18 **V1.8.10.2** : AWS SDK for Java updated to V1.8.10.2 (fix release)
-* 2014-09-12 **V1.8.10** : AWS SDK for Java updated to V1.8.10
-* 2014-08-18 **V1.8.9** : AWS SDK for Java updated to V1.8.9
-* 2014-07-14 **V1.8.4** : AWS SDK for Java updated to V1.8.4 + Amazon Cognito Identity and Sync support added
-* 2014-07-03 **V1.8.3** : AWS SDK for Java updated to V1.8.3
-* 2014-06-27 **V1.8.2** : AWS SDK for Java updated to V1.8.2
-* 2014-06-23 **V1.8.0** : AWS SDK for Java updated to V1.8.0
-* 2014-05-23 **V1.7.11** : AWS SDK for Java updated to V1.7.11
-* 2014-04-28 **V1.7.7** : AWS SDK for Java updated to V1.7.7
-* 2014-04-04 **V1.7.5** : AWS SDK for Java updated to V1.7.5
-* 2014-03-21 **V1.7.4** : AWS SDK for Java updated to V1.7.4
-* 2014-02-12 **V1.7.1** : AWS SDK for Java updated to V1.7.1
-* 2014-01-11 **V1.6.12** : AWS SDK for Java updated to V1.6.12 + DynamoDB mapper support added
-* 2014-01-07 **V1.6.11** : AWS SDK for Java updated to V1.6.11
-* 2013-12-17 **V1.6.9** : AWS SDK for Java updated to V1.6.9 + Amazon Kinesis support added
-* 2013-11-27 **V1.6.7** : AWS SDK for Java updated to V1.6.7
-* 2013-11-07 **V1.6.4** : AWS SDK for Java updated to V1.6.4 + proxy settings added in config (thanks to pull request by Jeff Purser)
-* 2013-10-25 **V1.6.3** : AWS SDK for Java updated to V1.6.3 + AmazonS3EncryptionClient added
-* 2013-10-03 **V1.6.0** : AWS SDK for Java updated to V1.6.0
-* 2013-09-11 **V1.5.6** : AWS SDK for Java updated to V1.5.6 + Grails 2.3.0 support
-* 2013-08-27 **V1.5.5** : AWS SDK for Java updated to V1.5.5
-* 2013-07-11 **V1.5.0** : AWS SDK for Java updated to V1.5.0
-* 2013-06-20 **V1.4.7** : AWS SDK for Java updated to V1.4.7
-* 2013-06-06 **V1.4.5** : AWS SDK for Java updated to V1.4.5 + DynamoDB V2 support by default
-
-**WARNING**: Breaking change, since V1.4.5, new **DynamoDB** API Version 2012-08-10 are used (package *com.amazonaws.services.dynamodbv2* instead of *com.amazonaws.services.dynamodb* ).
-If you are using DynamoDB, please update your calls to the API.
-
-* 2013-05-11 **V1.4.3** : AWS SDK for Java updated to V1.4.3 + Security Token Service support added and bug fixes (thanks to pull requests by craigforster and jako512)
-* 2013-04-22 **V1.4.2** : AWS SDK for Java updated to V1.4.2 (DynamoDB adds support for local secondary indexes)
-* 2013-03-19 **V1.4.1** : AWS SDK for Java updated to V1.4.1 + Better endpoints management with new region utils
-* 2013-03-05 **V1.3.33** : AWS SDK for Java updated to V1.3.33 + Unit tests added + refactor/bug fixes (thanks to Martin Gotink)
-* 2013-02-21 **V1.3.32** : AWS SDK for Java updated to V1.3.32 + Amazon OpsWorks and Redshift support added + bug fix
-* 2013-02-05 **V1.3.30** : AWS SDK for Java updated to V1.3.30 + Amazon Elastic Transcoder support added
-* 2012-12-20 **V1.3.26** : AWS SDK for Java updated to V1.3.26 + S3 Resources scripts (to use with CDN Resources plugin)
-* 2012-11-12 **V1.3.24** : AWS SDK for Java updated to V1.3.24 (adds support for long polling in SQS)
-* 2012-10-06 **V1.3.22** : AWS SDK for Java updated to V1.3.22 + S3 transfer manager support added (for async upload/download and multiple files upload/download)
-* 2012-09-27 **V1.3.21** : AWS SDK for Java updated to V1.3.21.1 + Amazon Glacier support added
-* 2012-07-04 **V1.3.12** : AWS SDK for Java updated to V1.3.12
-* 2012-07-02 **V1.3.11** : initial release
 
 # Bugs
 
