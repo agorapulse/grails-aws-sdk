@@ -58,7 +58,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     // AWS SDK lib
-    compile 'com.amazonaws:aws-java-sdk:1.10.44'
+    compile 'com.amazonaws:aws-java-sdk:1.10.51'
 }
 
 task wrapper(type: Wrapper) {

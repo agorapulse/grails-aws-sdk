@@ -134,7 +134,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getApiGatewayAsync('eu-west-1').class == AmazonApiGatewayAsyncClient
         assert amazonWebService.getApiGateway().class == AmazonApiGatewayClient
         assert amazonWebService.getApiGateway('eu-west-1').class == AmazonApiGatewayClient
-        assert amazonWebService.getApiGateway('eu-west-1').endpoint.toString() == 'https://apigateway.us-east-1.amazonaws.com' // Not supported by eu-west-1
+        assert amazonWebService.getApiGateway('eu-west-1').endpoint.toString() == 'https://apigateway.eu-west-1.amazonaws.com' // Not supported by eu-west-1
     }
 
     void testApiGatewayClientWithoutCredentials() {
@@ -144,7 +144,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getApiGatewayAsync('eu-west-1').class == AmazonApiGatewayAsyncClient
         assert amazonWebService.getApiGateway().class == AmazonApiGatewayClient
         assert amazonWebService.getApiGateway('eu-west-1').class == AmazonApiGatewayClient
-        assert amazonWebService.getApiGateway('eu-west-1').endpoint.toString() == 'https://apigateway.us-east-1.amazonaws.com' // Not supported by eu-west-1
+        assert amazonWebService.getApiGateway('eu-west-1').endpoint.toString() == 'https://apigateway.eu-west-1.amazonaws.com' // Not supported by eu-west-1
     }
 
     void testAutoScalingClientWithCredentials() {
