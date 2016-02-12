@@ -77,3 +77,8 @@ grailsPublish {
     portalUser = ""
     portalPassword = ""
 }
+bintray {
+    pkg {
+        name = "org.grails.plugins:$project.name"
+    }
+}
