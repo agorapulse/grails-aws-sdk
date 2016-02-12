@@ -29,7 +29,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:aws-sdk:1.10.44"
+    compile "org.grails.plugins:aws-sdk:1.10.51"
 }
 ```
 
