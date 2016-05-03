@@ -53,7 +53,7 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
 
     // AWS SDK lib
-    compile 'com.amazonaws:aws-java-sdk:1.10.69'
+    compile 'com.amazonaws:aws-java-sdk:1.10.74'
 }
 
 task wrapper(type: Wrapper) {
