@@ -47,13 +47,10 @@ dependencies {
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
     console "org.grails:grails-console"
-    profile "org.grails.profiles:web-plugin:3.1.5"
+    profile "org.grails.profiles:web-plugin:3.1.6"
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
     testCompile "org.grails:grails-plugin-testing"
-    testCompile "org.grails.plugins:geb"
-    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-    testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     // AWS SDK lib
     compile 'com.amazonaws:aws-java-sdk:1.10.69'
@@ -74,9 +71,4 @@ grailsPublish {
     developers = [benorama:"Benoit Hediard"]
     portalUser = ""
     portalPassword = ""
-}
-bintray {
-    pkg {
-        name = "org.grails.plugins:$project.name"
-    }
 }
