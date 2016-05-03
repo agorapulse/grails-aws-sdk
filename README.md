@@ -4,6 +4,13 @@ AWS SDK Grails Plugin
 [![Coverage Status](https://img.shields.io/coveralls/agorapulse/grails-aws-sdk.svg)](https://coveralls.io/r/agorapulse/grails-aws-sdk?branch=master)
 [![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)
 
+# LEGACY PLUGIN
+
+This plugin has been split into several ones in order to benefit from AWS java SDK modular approach.
+
+See this [article](https://medium.com/@benorama/aws-sdk-plugins-for-grails-3-cc7f910fdc0d#.ce4eh6tne) for more info.
+
+
 # Introduction
 
 The AWS SDK Plugin allows your [Grails](http://grails.org) application to use the [Amazon Web Services](http://aws.amazon.com/) infrastructure services.
