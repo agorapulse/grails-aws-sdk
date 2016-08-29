@@ -17,6 +17,12 @@ The Grails plugin handles :
 * convenient Grails configuration/management of all AWS API clients for each AWS region,
 * easy access to all AWS API java clients through the **amazonWebService** Grails service wrapper.
 
+# Grails 3 AWS Plugins
+
+For Grails 3 AWS Plugins, the plugin has been splitted by services.
+
+Please check this article:
+https://medium.com/@benorama/aws-sdk-plugins-for-grails-3-cc7f910fdc0d#.82945fvd6
 
 # Installation
 
@@ -38,7 +44,7 @@ grails.project.dependency.resolution = {
     }
     plugins {
         // here go your plugin dependencies
-        runtime ':aws-sdk:1.10.44'
+        runtime ':aws-sdk:1.11.11'
     }
 }
 ```
@@ -107,6 +113,7 @@ AWS clients supported by [AWS SDK for Java](http://aws.amazon.com/sdkforjava/):
 
 # Latest releases
 
+* 2016-08-29 **V1.11.11** : AWS SDK for Java updated to V1.11.11
 * 2015-12-31 **V1.10.44** : AWS SDK for Java updated to V1.10.44
 * 2015-08-20 **V1.10.11** : AWS SDK for Java updated to V1.10.11
 * 2015-07-07 **V1.10.3** : AWS SDK for Java updated to V1.10.3
