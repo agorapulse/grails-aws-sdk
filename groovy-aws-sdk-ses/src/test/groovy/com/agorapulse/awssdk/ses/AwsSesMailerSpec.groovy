@@ -39,7 +39,8 @@ class AwsSesMailerSpec extends Specification {
         transactionalEmail.attachments.first().description == 'An example pdf'
 
         when:
-        def f = new File('src/test/groovy/com/agorapulse/awssdk/ses/groovylogo.png')
+         
+        def f = new File(AwsSesMailerSpec.class.getResource("groovylogo.png").getFile())
 
         then:
         f.exists()
@@ -144,7 +145,7 @@ class AwsSesMailerSpec extends Specification {
             awsSesMailer.initClient(accessKey, secretKey, regionName)
 
         when:
-            def f = new File('src/test/groovy/com/agorapulse/awssdk/ses/groovylogo.png')
+            def f = new File(AwsSesMailerSpec.class.getResource("groovylogo.png").getFile())
 
         then:
             f.exists()

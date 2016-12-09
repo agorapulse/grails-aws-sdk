@@ -2,4 +2,7 @@ apply from: "../gradle/groovy.commons.gradle"
 
 dependencies {
     compile "com.amazonaws:aws-java-sdk-ses:$awsJavaSdkVersion"
+
+    // Necessary to support attachments
+    compile 'javax.mail:mail:1.4.4'
 }

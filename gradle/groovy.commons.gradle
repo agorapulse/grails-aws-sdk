@@ -30,9 +30,6 @@ dependencies {
     compile "ch.qos.logback:logback-classic:$logbackVersion"
     compile "ch.qos.logback:logback-core:$logbackVersion"
 
-    // Necessary to support attachments
-    compile 'javax.mail:mail:1.4.4'
-
     testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
 }
 
