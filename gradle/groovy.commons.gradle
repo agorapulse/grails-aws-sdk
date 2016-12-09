@@ -1,0 +1,47 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3"
+  }
+}
+
+group "agorapulse.libs"
+
+apply plugin: "groovy"
+apply plugin: "maven"
+apply plugin: "com.jfrog.bintray"
+
+apply from: "$rootDir/gradle/publishing.gradle"
+apply from: "$rootDir/gradle/credentials.gradle"
+apply from: "$rootDir/gradle/bintray.gradle"
+apply from: "$rootDir/gradle/codenarc.gradle"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
+    compile "ch.qos.logback:logback-core:$logbackVersion"
+
+    // Necessary to support attachments
+    compile 'javax.mail:mail:1.4.4'
+
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+}
+
+test {
+    systemProperties System.properties
+}
+
+task release {
+    description = 'Releases a version of the plugin on Bintray'
+    group = 'Publishing'
+    dependsOn bintrayUpload
+}

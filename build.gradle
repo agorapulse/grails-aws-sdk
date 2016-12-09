@@ -7,68 +7,6 @@ buildscript {
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
-        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "org.grails:grails-gradle-plugin:${grailsVersion}"
     }
-}
-
-version "1.10.74"
-group "org.grails.plugins"
-
-apply plugin:"eclipse"
-apply plugin:"idea"
-apply plugin:"org.grails.grails-plugin"
-apply plugin:"org.grails.grails-plugin-publish"
-apply plugin:"org.grails.grails-gsp"
-
-ext {
-    grailsVersion = project.grailsVersion
-    gradleWrapperVersion = project.gradleWrapperVersion
-}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://repo.grails.org/grails/core" }
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.grails:grails-bom:$grailsVersion"
-    }
-    applyMavenExclusions false
-}
-
-dependencies {
-    compile "org.springframework.boot:spring-boot-starter-logging"
-    compile "org.springframework.boot:spring-boot-autoconfigure"
-    compile "org.grails:grails-core"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-tomcat"
-    compile "org.grails:grails-dependencies"
-    compile "org.grails:grails-web-boot"
-    console "org.grails:grails-console"
-    profile "org.grails.profiles:web-plugin:3.1.6"
-    provided "org.grails:grails-plugin-services"
-    provided "org.grails:grails-plugin-domain-class"
-    testCompile "org.grails:grails-plugin-testing"
-
-    // AWS SDK lib
-    compile 'com.amazonaws:aws-java-sdk:1.10.74'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = gradleWrapperVersion
-}
-
-grailsPublish {
-    userOrg = 'agorapulse'
-    githubSlug = 'agorapulse/grails-aws-sdk'
-    license {
-        name = 'Apache-2.0'
-    }
-    title = "aws-sdk"
-    desc = "Grails AWS SDK plugin"
-    developers = [benorama:"Benoit Hediard"]
-    portalUser = ""
-    portalPassword = ""
 }

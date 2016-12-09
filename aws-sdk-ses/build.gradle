@@ -1,0 +1,32 @@
+apply from: "../gradle/grails.commons.gradle"
+
+dependencies {
+    compile project(":groovy-aws-sdk-ses")
+
+    compile "org.grails:grails-dependencies"
+    compile "org.grails:grails-web-boot"
+    profile "org.grails.profiles:web-plugin"
+    provided "org.springframework.boot:spring-boot-starter-tomcat"
+
+    // Latest AWS SDK for SES
+    compile "com.amazonaws:aws-java-sdk-ses:$awsJavaSdkVersion"
+}
+
+grailsPublish {
+    user = System.getenv("BINTRAY_USER") ?: ''
+    key = System.getenv("BINTRAY_KEY") ?: ''
+    userOrg = 'agorapulse'
+    githubSlug = "agorapulse/grails-$project.name"
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "AWS SDK SES"
+    desc = "Grails AWS SDK SES plugin"
+    developers = [benorama:"Benoit Hediard", sdelamo:"Sergio del Amo"]
+    portalUser = System.getenv("GRAILS_PORTAL_USER") ?: ''
+    portalPassword = System.getenv("GRAILS_PORTAL_PASSWORD") ?: ''
+}
+
+test {
+    systemProperties System.properties
+}

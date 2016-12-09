@@ -1,0 +1,12 @@
+rootProject.name = "aws-sdk"
+
+include (
+        'groovy-aws-sdk-s3',
+        'groovy-aws-sdk-ses',
+        'aws-sdk-dynamodb',
+        'aws-sdk-kinesis',        
+        'aws-sdk-s3',        
+        'aws-sdk-ses',
+        'aws-sdk-sns',
+        'aws-sdk-sqs'
+)

@@ -1,0 +1,17 @@
+---
+grails:
+    profile: plugin
+    codegen:
+        defaultPackage: grails.plugins.awssdk
+    spring:
+        transactionManagement:
+            proxies: false
+info:
+    app:
+        name: '@info.app.name@'
+        version: '@info.app.version@'
+        grailsVersion: '@info.app.grailsVersion@'
+spring:
+    groovy:
+        template:
+            check-template-location: false

@@ -1,0 +1,24 @@
+apply from: "../gradle/grails.commons.gradle"
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy-json', version: '2.4.7'
+
+    // Latest AWS SDK for SQS
+    compile "com.amazonaws:aws-java-sdk-sns:$awsJavaSdkVersion"
+}
+
+grailsPublish {
+    user = System.getenv("BINTRAY_USER") ?: ''
+    key = System.getenv("BINTRAY_KEY") ?: ''
+    userOrg = 'agorapulse'
+    githubSlug = "agorapulse/grails-$project.name"
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "AWS SDK SNS"
+    desc = "Grails AWS SDK SNS plugin"
+    developers = [benorama:"Benoit Hediard", floppy: "Florian Ernoult"]
+    portalUser = System.getenv("GRAILS_PORTAL_USER") ?: ''
+    portalPassword = System.getenv("GRAILS_PORTAL_PASSWORD") ?: ''
+}
+

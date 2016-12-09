@@ -20,8 +20,8 @@ plugin.xml
 *.sha1
 
 # "temporary" build files
-/target
-/build
+target
+build
 .gradle
 .nb-gradle
 *.iml
