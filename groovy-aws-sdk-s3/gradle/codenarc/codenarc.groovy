@@ -15,7 +15,6 @@
  */
 
 ruleset {
-    /*
     // rulesets/basic.xml
     AssertWithinFinallyBlock
     AssignmentInConditional
@@ -62,7 +61,7 @@ ruleset {
     ThrowExceptionFromFinallyBlock
 
     // rulesets/braces.xml
-    ElseBlockBraces(bracesRequiredForElseIf:true)
+    ElseBlockBraces(bracesRequiredForElseIf: true)
     ForStatementBraces
     IfStatementBraces
     WhileStatementBraces
@@ -131,7 +130,7 @@ ruleset {
     StatelessSingleton
     ToStringReturnsNull
 
-//    // rulesets/dry.xml
+    // rulesets/dry.xml
 //    DuplicateListLiteral
 //    DuplicateMapLiteral
 //    DuplicateNumberLiteral
@@ -175,7 +174,7 @@ ruleset {
     ClosureStatementOnOpeningLineOfMultipleLineClosure
     ConsecutiveBlankLines
     FileEndsWithoutNewline
-    // LineLength
+    LineLength
     MissingBlankLineAfterImports
     MissingBlankLineAfterPackage
     SpaceAfterCatch
@@ -205,8 +204,8 @@ ruleset {
     StatelessClass
 
     // rulesets/grails.xml
-    GrailsDomainHasEquals
-    GrailsDomainHasToString
+//    GrailsDomainHasEquals
+//    GrailsDomainHasToString
     GrailsDomainReservedSqlKeywordName
     GrailsDomainWithServiceReference
     GrailsDuplicateConstraint
@@ -267,30 +266,30 @@ ruleset {
     JdbcStatementReference
 
     // rulesets/junit.xml
-    ChainedTest
-    CoupledTestCase
-    JUnitAssertAlwaysFails
-    JUnitAssertAlwaysSucceeds
-    JUnitFailWithoutMessage
-    JUnitLostTest
-    JUnitPublicField
-    JUnitPublicNonTestMethod
-    JUnitPublicProperty
-    JUnitSetUpCallsSuper
-    JUnitStyleAssertions
-    JUnitTearDownCallsSuper
-    JUnitTestMethodWithoutAssert
-    JUnitUnnecessarySetUp
-    JUnitUnnecessaryTearDown
-    JUnitUnnecessaryThrowsException
-    SpockIgnoreRestUsed
-    UnnecessaryFail
-    UseAssertEqualsInsteadOfAssertTrue
-    UseAssertFalseInsteadOfNegation
-    UseAssertNullInsteadOfAssertEquals
-    UseAssertSameInsteadOfAssertTrue
-    UseAssertTrueInsteadOfAssertEquals
-    UseAssertTrueInsteadOfNegation
+//    ChainedTest
+//    CoupledTestCase
+//    JUnitAssertAlwaysFails
+//    JUnitAssertAlwaysSucceeds
+//    JUnitFailWithoutMessage
+//    JUnitLostTest
+//    JUnitPublicField
+//    JUnitPublicNonTestMethod
+//    JUnitPublicProperty
+//    JUnitSetUpCallsSuper
+//    JUnitStyleAssertions
+//    JUnitTearDownCallsSuper
+//    JUnitTestMethodWithoutAssert
+//    JUnitUnnecessarySetUp
+//    JUnitUnnecessaryTearDown
+//    JUnitUnnecessaryThrowsException
+//    SpockIgnoreRestUsed
+//    UnnecessaryFail
+//    UseAssertEqualsInsteadOfAssertTrue
+//    UseAssertFalseInsteadOfNegation
+//    UseAssertNullInsteadOfAssertEquals
+//    UseAssertSameInsteadOfAssertTrue
+//    UseAssertTrueInsteadOfAssertEquals
+//    UseAssertTrueInsteadOfNegation
 
     // rulesets/logging.xml
     LoggerForDifferentClass
@@ -305,11 +304,11 @@ ruleset {
     // rulesets/naming.xml
     AbstractClassName
     ClassName {
-        regex = '^[A-Z][\\$a-zA-Z0-9]*(?<!Test)'
+        regex = '^[A-Z][\\$a-zA-Z0-9]*$'
     }
     ClassNameSameAsFilename
     ConfusingMethodName
-//    FactoryMethodName
+    FactoryMethodName
     FieldName {
         regex = '^_?[a-z][a-zA-Z0-9]*$'
         finalRegex = '^_?[a-z][a-zA-Z0-9]*$'
@@ -360,7 +359,7 @@ ruleset {
     ConsecutiveStringConcatenation
     UnnecessaryBigDecimalInstantiation
     UnnecessaryBigIntegerInstantiation
-    // UnnecessaryBooleanExpression
+    UnnecessaryBooleanExpression
     UnnecessaryBooleanInstantiation
     UnnecessaryCallForLastElement
     UnnecessaryCallToSubstring
@@ -409,5 +408,4 @@ ruleset {
     UnusedPrivateMethod
     UnusedPrivateMethodParameter
     UnusedVariable
-    */
 }

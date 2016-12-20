@@ -1,24 +1,8 @@
-buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-  }
-  dependencies {
-    classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3"
-  }
-}
-
 group "agorapulse.libs"
 
 apply plugin: "groovy"
-apply plugin: "maven"
-apply plugin: "com.jfrog.bintray"
-
-apply from: "$rootDir/gradle/publishing.gradle"
-apply from: "$rootDir/gradle/credentials.gradle"
-apply from: "$rootDir/gradle/bintray.gradle"
-apply from: "$rootDir/gradle/codenarc.gradle"
+apply plugin: "maven-publish"
+project.apply plugin: "codenarc"
 
 repositories {
     jcenter()
@@ -37,8 +21,84 @@ test {
     systemProperties System.properties
 }
 
-task release {
-    description = 'Releases a version of the plugin on Bintray'
-    group = 'Publishing'
-    dependsOn bintrayUpload
+/*
+ * Maven
+ */
+
+// custom tasks for creating source/javadoc jars
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId project.name
+
+            from components.java
+
+            artifact sourcesJar {
+                classifier "sources"
+            }
+
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+
+            pom.withXml {
+                def Node root = asNode()
+                root.appendNode('name', project.name)
+                root.appendNode('description', project.project_description)
+                root.appendNode('url', 'https://github.com/agorapulse/groovy-aws-sdk')
+
+                def issues = root.appendNode( 'issueManagement' )
+                issues.appendNode('system', 'github')
+                issues.appendNode('url', 'https://github.com/agorapulse/groovy-aws-sdk/issues')
+
+                def scm = root.appendNode('scm')
+                scm.appendNode('url', 'https://github.com/agorapulse/groovy-aws-sdk')
+                scm.appendNode('connection', 'scm:git:https://github.com/agorapulse/groovy-aws-sdk.git')
+                scm.appendNode('developerConnection', 'scm:git:https://github.com/agorapulse/groovy-aws-sdk.git')
+
+                def license = root.appendNode('licenses').appendNode('license')
+                license.appendNode('name', 'The Apache Software License, Version 2.0')
+                license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
+                license.appendNode('distribution', 'repo')
+
+                def dev = root.appendNode('developers').appendNode('developer')
+                dev.appendNode('id', 'agorapulse')
+                dev.appendNode('name', 'agorapulse')
+                dev.appendNode('organization', 'agorapulse')
+                dev.appendNode('organizationUrl', 'http://agorapulse.com')
+            }
+        }
+    }
+}
+
+/*
+ * Codenarc
+ */
+
+codenarc {
+    toolVersion = '0.25.2'
+}
+
+codenarc {
+    configFile rootProject.file('gradle/codenarc/codenarc.groovy')
+}
+
+codenarcTest {
+    configFile rootProject.file('gradle/codenarc/codenarcTest.groovy')
 }

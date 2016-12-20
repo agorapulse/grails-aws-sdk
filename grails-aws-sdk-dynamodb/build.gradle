@@ -12,7 +12,7 @@ grailsPublish {
     user = System.getenv("BINTRAY_USER") ?: ''
     key = System.getenv("BINTRAY_KEY") ?: ''
     userOrg = 'agorapulse'
-    githubSlug = "agorapulse/grails-aws-sdk"
+    githubSlug = "agorapulse/grails-$project.name"
     license {
         name = 'Apache-2.0'
     }
