@@ -3,56 +3,41 @@ package grails.plugin.awssdk.ses
 import com.agorapulse.awssdk.ses.AwsSesMailer
 import com.agorapulse.awssdk.ses.TransactionalEmail
 import com.agorapulse.awssdk.ses.UnsupportedAttachmentTypeException
-import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
-import com.amazonaws.regions.RegionUtils
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
-import grails.config.Config
-import grails.core.support.GrailsConfigurationAware
+import grails.core.GrailsApplication
 import grails.plugin.awssdk.AwsClientUtil
 import grails.util.Environment
-import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
+import org.springframework.beans.factory.InitializingBean
 
-@CompileStatic
 @Slf4j
-class AmazonSESService implements GrailsConfigurationAware {
+class AmazonSESService implements InitializingBean {
 
     static String SERVICE_NAME = AmazonSimpleEmailService.ENDPOINT_PREFIX
+
+    GrailsApplication grailsApplication
     String sourceEmail
     String subjectPrefix
     String templatePath
     AwsSesMailer mailer = new AwsSesMailer()
 
-    @Override
-    void setConfiguration(Config co) {
-        final String defaultConfig = 'grails.plugin.awssdk'
-        final String serviceConfig = "${defaultConfig}.ses"
+    void afterPropertiesSet() throws Exception {
+        // Set region
+        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
+        assert region?.isServiceSupported(SERVICE_NAME)
 
-        sourceEmail = co.getProperty('grails.plugin.awssdk.ses.sourceEmail', String)
-        subjectPrefix = co.getProperty('grails.plugin.awssdk.ses.subjectPrefix', String)
-        templatePath = co.getProperty('grails.plugin.awssdk.ses.templatePath', String, '/templates/email')
-
-        String accessKey = AwsClientUtil.stringValueForConfig(co, 'accessKey', serviceConfig, defaultConfig, null)
-        String secretKey = AwsClientUtil.stringValueForConfig(co, 'secretKey', serviceConfig, defaultConfig, null)
-        String regionName = AwsClientUtil.stringValueForConfig(co, 'region', serviceConfig, defaultConfig, AwsClientUtil.DEFAULT_REGION)
-
-        if ( !accessKey || !secretKey || !regionName ) {
-            log.error('you must define at least AWS accessKey, secretKey and region to use this plugin')
-            return
-        }
-
-        Region region = RegionUtils.getRegion(regionName)
-        if ( !region?.isServiceSupported(SERVICE_NAME) ) {
-            log.error("${SERVICE_NAME} is not supported in region $regionName")
-            return
-        }
-
-        def credentials = new BasicAWSCredentials(accessKey, secretKey)
-        def clientConfiguration = AwsClientUtil.clientConfigurationWithConfig(co, defaultConfig, serviceConfig)
-        mailer.client = new AmazonSimpleEmailServiceClient(credentials, clientConfiguration)
+        // Create client
+        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
+        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
+        mailer.client = new AmazonSimpleEmailServiceClient(credentials, configuration)
                 .withRegion(region)
+
+        sourceEmail = serviceConfig?.sourceEmail ?: ''
+        subjectPrefix = serviceConfig?.subjectPrefix ?: ''
+        templatePath = serviceConfig?.templatePath ?: '/templates/email'
     }
 
     private String preffixSubject(String subject) {
@@ -112,4 +97,15 @@ class AmazonSESService implements GrailsConfigurationAware {
         transactionalEmail.subject = preffixSubject(transactionalEmail.subject)
         mailer.sendEmailWithAttachment(transactionalEmail)
     }
+
+    // PRIVATE
+
+    def getConfig() {
+        grailsApplication.config.grails?.plugin?.awssdk ?: grailsApplication.config.grails?.plugins?.awssdk
+    }
+
+    def getServiceConfig() {
+        config[SERVICE_NAME]
+    }
+
 }

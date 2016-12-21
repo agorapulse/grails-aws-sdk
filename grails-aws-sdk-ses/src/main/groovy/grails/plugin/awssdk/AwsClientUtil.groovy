@@ -2,92 +2,107 @@ package grails.plugin.awssdk
 
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol
-import grails.config.Config
-import groovy.transform.CompileStatic
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
+import com.amazonaws.regions.Region
+import com.amazonaws.regions.RegionUtils
 
-@CompileStatic
 class AwsClientUtil {
 
     static final String DEFAULT_REGION = 'us-east-1'
-    public static final String CONNECTION_TIMEOUT = 'connectionTimeout'
-    public static final String MAX_CONNECTIONS = 'maxConnections'
-    public static final String MAX_ERROR_RETRY = 'maxErrorRetry'
-    public static final String PROTOCOL = 'protocol'
-    public static final String SOCKET_TIMEOUT = 'socketTimeout'
-    public static final String USER_AGENT = 'userAgent'
-    public static final String PROXY_DOMAIN = 'proxyDomain'
-    public static final String PROXY_HOST = 'proxyHost'
-    public static final String PROXY_PASSWORD = 'proxyPassword'
-    public static final String PROXY_PORT = 'proxyPort'
-    public static final String PROXY_USERNAME = 'proxyUsername'
-    public static final String PROXY_WORKSTATION = 'proxyWorkstation'
 
-    static int intValueForConfigName(Config co, String configName, final String serviceConfig,  final String defaultConfig, int defaultValue = 0) {
-        def propertykey = "${serviceConfig}.${configName}" as String
-        if ( co.getProperty(propertykey, Integer, null) ) {
-            return co.getProperty(propertykey, Integer, null).intValue()
+    /**
+     *
+     * @param defaultConfig
+     * @param serviceConfig
+     * @return
+     */
+    static ClientConfiguration buildClientConfiguration(defaultConfig, serviceConfig) {
+        Map config = [
+                connectionTimeout: defaultConfig.connectionTimeout ?: 0,
+                maxConnections: defaultConfig.maxConnections ?: 0,
+                maxErrorRetry: defaultConfig.maxErrorRetry ?: 0,
+                protocol: defaultConfig.protocol ?: '',
+                socketTimeout: defaultConfig.socketTimeout ?: 0,
+                userAgent: defaultConfig.userAgent ?: '',
+                proxyDomain: defaultConfig.proxyDomain ?: '',
+                proxyHost: defaultConfig.proxyHost ?: '',
+                proxyPassword: defaultConfig.proxyPassword ?: '',
+                proxyPort: defaultConfig.proxyPort ?: 0,
+                proxyUsername: defaultConfig.proxyUsername ?: '',
+                proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
+        ]
+        if (serviceConfig) {
+            if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
+            if (serviceConfig.maxConnections) config.maxConnections = serviceConfig.maxConnections
+            if (serviceConfig.maxErrorRetry) config.maxErrorRetry = serviceConfig.maxErrorRetry
+            if (serviceConfig.protocol) config.protocol = serviceConfig.protocol
+            if (serviceConfig.socketTimeout) config.socketTimeout = serviceConfig.socketTimeout
+            if (serviceConfig.userAgent) config.userAgent = serviceConfig.userAgent
+            if (serviceConfig.proxyDomain) config.proxyDomain = serviceConfig.proxyDomain
+            if (serviceConfig.proxyHost) config.proxyHost = serviceConfig.proxyHost
+            if (serviceConfig.proxyPassword) config.proxyPassword = serviceConfig.proxyPassword
+            if (serviceConfig.proxyPort) config.proxyPort = serviceConfig.proxyPort
+            if (serviceConfig.proxyUsername) config.proxyUsername = serviceConfig.proxyUsername
+            if (serviceConfig.proxyWorkstation) config.proxyWorkstation = serviceConfig.proxyWorkstation
         }
-        propertykey = "${defaultConfig}.${configName}" as String
-        if (co.getProperty(propertykey, Integer, null) ) {
-            return  co.getProperty(propertykey, Integer, null).intValue()
-        }
-        defaultValue
-    }
-
-    static String stringValueForConfig(Config co,  String configName,  final String serviceConfig, final String defaultConfig, String defaultValue = '') {
-        def propertyKey = "${serviceConfig}.${configName}" as String
-        if ( co.getProperty(propertyKey, String, null) ) {
-            return co.getProperty(propertyKey, String, null)
-        }
-        propertyKey = "${defaultConfig}.${configName}" as String
-        if (co.getProperty(propertyKey, String, null) ) {
-            return co.getProperty(propertyKey, String, null)
-        }
-        defaultValue
-    }
-
-    static ClientConfiguration clientConfigurationWithConfig(Config co, final String defaultConfig, final String serviceConfig) {
-        int connectionTimeout = intValueForConfigName(co, CONNECTION_TIMEOUT, serviceConfig, defaultConfig)
-        int maxConnections = intValueForConfigName(co, MAX_CONNECTIONS, serviceConfig,  defaultConfig)
-        int maxErrorRetry = intValueForConfigName(co, MAX_ERROR_RETRY, serviceConfig, defaultConfig)
-        String protocol = stringValueForConfig(co, PROTOCOL, serviceConfig, defaultConfig)
-        int socketTimeout = intValueForConfigName(co, SOCKET_TIMEOUT, serviceConfig, defaultConfig)
-        String userAgent = stringValueForConfig(co, USER_AGENT, serviceConfig, defaultConfig)
-        String proxyDomain = stringValueForConfig(co, PROXY_DOMAIN, serviceConfig, defaultConfig)
-        String proxyHost = stringValueForConfig(co, PROXY_HOST, serviceConfig, defaultConfig)
-        String proxyPassword = stringValueForConfig(co, PROXY_PASSWORD, serviceConfig, defaultConfig)
-        int proxyPort = intValueForConfigName(co, PROXY_PORT, serviceConfig, defaultConfig)
-        String proxyUsername = stringValueForConfig(co, PROXY_USERNAME, serviceConfig, defaultConfig)
-        String proxyWorkstation = stringValueForConfig(co, PROXY_WORKSTATION, serviceConfig, defaultConfig)
 
         ClientConfiguration clientConfiguration = new ClientConfiguration()
-        if (connectionTimeout){
-            clientConfiguration.connectionTimeout = connectionTimeout
+        if (config.connectionTimeout) clientConfiguration.connectionTimeout = config.connectionTimeout
+        if (config.maxConnections) clientConfiguration.maxConnections = config.maxConnections
+        if (config.maxErrorRetry) clientConfiguration.maxErrorRetry = config.maxErrorRetry
+        if (config.protocol) {
+            if (config.protocol.toUpperCase() == 'HTTP') clientConfiguration.protocol = Protocol.HTTP
+            else clientConfiguration.protocol = Protocol.HTTPS
         }
-        if (maxConnections) {
-            clientConfiguration.maxConnections = maxConnections
-        }
-        if (maxErrorRetry) {
-            clientConfiguration.maxErrorRetry = maxErrorRetry
-        }
-        if (protocol) {
-            if ( protocol.toUpperCase() == 'HTTP') {
-                clientConfiguration.protocol = Protocol.HTTP
-            } else {
-                clientConfiguration.protocol = Protocol.HTTPS
-            }
-        }
-        if (socketTimeout) clientConfiguration.socketTimeout = socketTimeout
-        if (userAgent) clientConfiguration.userAgent = userAgent
-        if (proxyDomain) clientConfiguration.proxyDomain = proxyDomain
-        if (proxyHost) clientConfiguration.proxyHost = proxyHost
-        if (proxyPassword) clientConfiguration.proxyPassword = proxyPassword
-        if (proxyPort) clientConfiguration.proxyPort = proxyPort
-        if (proxyUsername) clientConfiguration.proxyUsername = proxyUsername
-        if (proxyWorkstation) clientConfiguration.proxyWorkstation = proxyWorkstation
+        if (config.socketTimeout) clientConfiguration.socketTimeout = config.socketTimeout
+        if (config.userAgent) clientConfiguration.userAgent = config.userAgent
+        if (config.proxyDomain) clientConfiguration.proxyDomain = config.proxyDomain
+        if (config.proxyHost) clientConfiguration.proxyHost = config.proxyHost
+        if (config.proxyPassword) clientConfiguration.proxyPassword = config.proxyPassword
+        if (config.proxyPort) clientConfiguration.proxyPort = config.proxyPort
+        if (config.proxyUsername) clientConfiguration.proxyUsername = config.proxyUsername
+        if (config.proxyWorkstation) clientConfiguration.proxyWorkstation = config.proxyWorkstation
         clientConfiguration
     }
 
+    /**
+     *
+     * @param defaultConfig
+     * @param serviceConfig
+     * @return
+     */
+    static buildCredentials(defaultConfig, serviceConfig) {
+        Map config = [
+                accessKey: defaultConfig.accessKey ?: '',
+                secretKey: defaultConfig.secretKey ?: ''
+        ]
+        if (serviceConfig) {
+            if (serviceConfig.accessKey) config.accessKey = serviceConfig.accessKey
+            if (serviceConfig.secretKey) config.secretKey = serviceConfig.secretKey
+        }
+
+        if (!config.accessKey || !config.secretKey) {
+            new DefaultAWSCredentialsProviderChain()
+        } else {
+            new BasicAWSCredentials(config.accessKey, config.secretKey)
+        }
+    }
+
+    /**
+     *
+     * @param defaultConfig
+     * @param serviceConfig
+     */
+    static buildRegion(defaultConfig, serviceConfig) {
+        String regionName = DEFAULT_REGION
+        if (serviceConfig?.region) {
+            regionName = serviceConfig.region
+        } else if (defaultConfig?.region) {
+            regionName = defaultConfig.region
+        }
+        RegionUtils.getRegion(regionName)
+    }
 
 
 }
