@@ -72,9 +72,9 @@ abstract class AbstractClientService {
         // Configure a Kinesis client for each stream
         String clientAppName = streamName // Define DynamoDB table for checkpoints (in the future, we might have several app consuming the stream)
         String clientStreamName = streamName
-        if (config?.consumerFilterKey) {
+        if (config?.kinesis?.consumerFilterKey) {
             // Local dev environment with stream prefix
-            clientAppName = "${config?.consumerFilterKey}_${clientAppName}"
+            clientAppName = "${config?.kinesis?.consumerFilterKey}_${clientAppName}"
             List existingStreamNames = listStreamNames()
             if (!(clientStreamName in existingStreamNames)) {
                 createStream(clientStreamName)
