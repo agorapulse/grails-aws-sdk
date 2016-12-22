@@ -343,7 +343,7 @@ class AmazonSNSService implements InitializingBean  {
                 try {
                     setEndpointAttributes(endpointArn, [
                             Token: deviceToken,
-                            Enabled: true
+                            Enabled: 'true'
                     ])
                 } catch (InvalidParameterException ipe) {
                     deleteEndpoint(endpointArn)
