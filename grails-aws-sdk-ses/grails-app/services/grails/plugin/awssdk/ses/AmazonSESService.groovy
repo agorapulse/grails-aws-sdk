@@ -105,7 +105,7 @@ class AmazonSESService implements InitializingBean {
     }
 
     def getServiceConfig() {
-        config[SERVICE_NAME]
+        config['ses']
     }
 
 }
