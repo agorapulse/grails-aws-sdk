@@ -176,6 +176,80 @@ endpointArn = amazonSNSService.unregisterDevice(
 )
 ```
 
+## Create a Topic
+
+To create a SNS Topic
+
+```groovy
+topicArn = amazonSNSService.createTopic(
+	String topicName
+)
+```
+
+## Delete a topic
+
+To delete a topic
+
+```groovy
+amazomSNSService.deleteTopic(
+	String topicArn
+)
+```
+
+## Subscribe on Topic 
+
+To subscribe in a topic , choose the protocol , ex: (SMS,email,HTTP,HTTPS...), just pass the endpoint
+```groovy
+subscribeArn = amazonSNSService.subscribeTopic(
+	String topic,
+	String protocol,
+	String endpoint
+)
+```
+
+## Unsubscribe on Topic 
+
+To delete a subscription
+
+```groovy
+amazomSNSService.unsubscribeTopic(
+	String arn
+)
+```
+
+## Subscribe with SMS Protocol , ex: use phone number with area codes (55 21 98889-8899)
+
+The following regions are currently supported:
+
+* us-east-1
+* us-east-1
+* us-west-2
+* eu-west-1
+* ap-northeast-1
+* ap-southeast-1
+* ap-southeast-2	
+
+To subscribe in topic with SMS protocol 
+
+```groovy
+subscribeArn = amazomSNSService.subscribeTopicWithSMS(
+	String topicArn,
+	String number
+)
+```
+
+## Publish a topic
+
+To publish in topic
+
+```groovy
+amazomSNSService.publishTopic(
+	String arn,
+	String subject,
+	String message
+)
+```
+
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-aws-sdk-sns/issues) section on GitHub.
