@@ -61,7 +61,8 @@ class AmazonS3Service implements InitializingBean {
      * @return
      */
     ObjectMetadata buildMetadataFromType(String type,
-                                         String fileExtension) {
+                                         String fileExtension,
+                                         CannedAccessControlList cannedAcl = null) {
         Map contentInfo
         if (HTTP_CONTENTS[type]) {
             contentInfo = HTTP_CONTENTS[type] as Map
@@ -77,6 +78,9 @@ class AmazonS3Service implements InitializingBean {
         metadata.setContentType(contentInfo.contentType)
         if (contentInfo.contentDisposition) {
             metadata.setContentDisposition(contentInfo.contentDisposition)
+        }
+        if (cannedAcl) {
+            metadata.setHeader('x-amz-acl', cannedAcl.toString())
         }
         metadata
     }

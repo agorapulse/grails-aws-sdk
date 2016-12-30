@@ -30,7 +30,7 @@ Add plugin dependency to your `build.gradle`:
 ```groovy
 dependencies {
   ...
-  compile 'org.grails.plugins:aws-sdk-s3:2.0.6'
+  compile 'org.grails.plugins:aws-sdk-s3:2.1.5'
   ...
 ```
 
@@ -148,6 +148,10 @@ if (multipartFile && !multipartFile.empty) {
     // Or if you have defined default bucket
     amazonS3Service.storeMultipartFile('asset/foo/' + multipartFile.originalFilename, multipartFile)
 }
+
+// Store an input stream
+ObjectMetadata metadata = amazonS3Service.buildMetadataFromType('image', 'jpg', CannedAccessControlList.PublicRead)
+amazonS3Service.storeInputStream('asset/foo/someKey.jpg', thumbnailInputStream, metadata)
 
 // Store a file asynchronously with transfer manager (https://java.awsblog.com/post/Tx2Q9SGR6OKSVYX/Amazon-S3-TransferManager)
 upload = amazonS3Service.transferFile('my-bucket', 'asset/foo/someKey.jpg', new File('/Users/ben/Desktop/photo.jpg'), CannedAccessControlList.PublicRead)
