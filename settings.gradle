@@ -1,0 +1,17 @@
+rootProject.name = "aws-sdk"
+
+include (        
+        'grails-aws-sdk-dynamodb',
+        'grails-aws-sdk-kinesis',
+        'grails-aws-sdk-s3',        
+        'grails-aws-sdk-ses',
+        'grails-aws-sdk-sns',
+        'grails-aws-sdk-sqs'
+)
+
+project(":grails-aws-sdk-dynamodb").name = "aws-sdk-dynamodb"
+project(":grails-aws-sdk-kinesis").name = "aws-sdk-kinesis"
+project(":grails-aws-sdk-s3").name = "aws-sdk-s3"
+project(":grails-aws-sdk-ses").name = "aws-sdk-ses"
+project(":grails-aws-sdk-sns").name = "aws-sdk-sns"
+project(":grails-aws-sdk-sqs").name = "aws-sdk-sqs"

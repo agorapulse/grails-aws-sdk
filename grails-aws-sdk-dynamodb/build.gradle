@@ -1,0 +1,24 @@
+apply from: "../gradle/grails.commons.gradle"
+
+dependencies {
+    // Latest Joda Time
+    compile 'joda-time:joda-time:2.9.4'
+
+    // Latest AWS SDK DynamoDB lib
+    compile "com.amazonaws:aws-java-sdk-dynamodb:$awsJavaSdkVersion"
+}
+
+grailsPublish {
+    user = System.getenv("BINTRAY_USER") ?: ''
+    key = System.getenv("BINTRAY_KEY") ?: ''
+    userOrg = 'agorapulse'
+    githubSlug = "agorapulse/grails-$project.name"
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "AWS SDK DynamoDB"
+    desc = "Grails AWS SDK DynamoDB plugin"
+    developers = [benorama:"Benoit Hediard", jvdrean:"Jean-Vincent Drean"]
+    portalUser = System.getenv("GRAILS_PORTAL_USER") ?: ''
+    portalPassword = System.getenv("GRAILS_PORTAL_PASSWORD") ?: ''
+}

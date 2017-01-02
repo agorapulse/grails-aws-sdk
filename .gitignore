@@ -1,17 +1,11 @@
-# Grails files
-/grails-aws-sdk-*.zip
-/grails-aws-sdk-*.zip.sha1
-/plugin.xml
-/target
-/target-eclipse
-/web-app
-
-# IDE files
-.classpath
-.idea/
+Thumbs.db
+.DS_Store
+.gradle
+build/
+.idea
+*.iml
+*.ipr
+*.iws
 .project
 .settings
-
-*.iml
-/out
-.DS_Store
+.classpath
