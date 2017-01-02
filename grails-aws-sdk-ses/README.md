@@ -2,6 +2,7 @@ Grails AWS SDK SES Plugin
 =========================
 
 [![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)
+[![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-ses/images/download.svg)](https://bintray.com/agorapulse/plugins/aws-sdk-ses/_latestVersion)
 
 # Introduction
 
