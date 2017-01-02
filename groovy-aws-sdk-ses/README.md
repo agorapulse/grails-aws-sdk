@@ -1,6 +1,6 @@
 # groovy-aws-sdk-ses
 
-Groovy library used by the plugin: [Grails AWS SDK S3S](https://github.com/agorapulse/grails-aws-sdk-ses)
+Groovy library used by the plugin: [AWS SDK SES Grails Plugin](https://github.com/agorapulse/grails-aws-sdk/tree/master/grails-aws-sdk-ses)
 
 ## Usage
 
