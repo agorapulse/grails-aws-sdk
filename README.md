@@ -1,8 +1,13 @@
 AWS SDK Grails Plugin
 =====================
 
-[![Coverage Status](https://img.shields.io/coveralls/agorapulse/grails-aws-sdk.svg)](https://coveralls.io/r/agorapulse/grails-aws-sdk?branch=master)
 [![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)
+
+# LEGACY BRANCH FOR GRAILS2
+
+This legacy `grails2` branch is the initial version of the plugin for Grails2.
+
+It is not maintained anymore, please check [Grails 3 version](https://github.com/agorapulse/grails-aws-sdk).
 
 # Introduction
 
@@ -16,13 +21,6 @@ The Grails plugin handles :
 
 * convenient Grails configuration/management of all AWS API clients for each AWS region,
 * easy access to all AWS API java clients through the **amazonWebService** Grails service wrapper.
-
-# Grails 3 AWS Plugins
-
-For Grails 3 AWS Plugins, the plugin has been splitted by services.
-
-Please check this article:
-https://medium.com/@benorama/aws-sdk-plugins-for-grails-3-cc7f910fdc0d#.82945fvd6
 
 # Installation
 
