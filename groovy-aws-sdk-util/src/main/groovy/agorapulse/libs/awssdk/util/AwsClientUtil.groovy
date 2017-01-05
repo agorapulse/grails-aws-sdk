@@ -1,4 +1,4 @@
-package grails.plugin.awssdk
+package agorapulse.libs.awssdk.util
 
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol

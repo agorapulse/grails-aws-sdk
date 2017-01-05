@@ -1,4 +1,4 @@
-package grails.plugin.awssdk.util
+package agorapulse.libs.awssdk.util
 
 class ResultsPage<T> {
 

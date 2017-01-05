@@ -1,12 +1,12 @@
 package grails.plugin.awssdk.kinesis
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.kinesis.AmazonKinesis
 import com.amazonaws.services.kinesis.AmazonKinesisClient
 import com.amazonaws.services.kinesis.model.*
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import groovy.util.logging.Commons
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean

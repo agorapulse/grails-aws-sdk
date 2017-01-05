@@ -1,5 +1,6 @@
 package grails.plugin.awssdk.s3
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
@@ -9,7 +10,6 @@ import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.transfer.TransferManager
 import com.amazonaws.services.s3.transfer.Upload
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import groovy.util.logging.Slf4j
 import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.InitializingBean

@@ -1,5 +1,6 @@
 package grails.plugin.awssdk.dynamodb
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
@@ -7,7 +8,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.amazonaws.services.dynamodbv2.model.*
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
 

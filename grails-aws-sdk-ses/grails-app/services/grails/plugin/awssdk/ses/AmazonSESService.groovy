@@ -1,5 +1,6 @@
 package grails.plugin.awssdk.ses
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.agorapulse.awssdk.ses.AwsSesMailer
 import com.agorapulse.awssdk.ses.TransactionalEmail
 import com.agorapulse.awssdk.ses.UnsupportedAttachmentTypeException
@@ -8,7 +9,6 @@ import com.amazonaws.regions.Region
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import grails.util.Environment
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean

@@ -1,5 +1,6 @@
 package grails.plugin.awssdk.kinesis
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
@@ -11,7 +12,6 @@ import com.amazonaws.services.kinesis.clientlibrary.lib.worker.InitialPositionIn
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.KinesisClientLibConfiguration
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.Worker
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import grails.util.Environment
 
 import java.util.concurrent.ExecutorService

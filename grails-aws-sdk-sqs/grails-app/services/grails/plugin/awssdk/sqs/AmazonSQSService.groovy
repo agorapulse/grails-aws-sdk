@@ -1,5 +1,6 @@
 package grails.plugin.awssdk.sqs
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.ClientConfiguration
@@ -8,7 +9,6 @@ import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.sqs.model.*
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import groovy.transform.Synchronized
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean

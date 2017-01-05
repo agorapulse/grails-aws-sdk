@@ -1,12 +1,12 @@
 package grails.plugin.awssdk.sns
 
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.sns.AmazonSNS
 import com.amazonaws.services.sns.AmazonSNSClient
 import com.amazonaws.services.sns.model.*
 import grails.core.GrailsApplication
-import grails.plugin.awssdk.AwsClientUtil
 import groovy.json.JsonOutput
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
