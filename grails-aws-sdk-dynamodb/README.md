@@ -29,6 +29,12 @@ It is a fully managed cloud database and supports both document and key-value st
 Add plugin dependency to your `build.gradle`:
 
 ```groovy
+repositories {
+    ...
+    maven { url 'http://dl.bintray.com/agorapulse/libs' }
+    ...
+}
+
 dependencies {
   ...
   compile 'org.grails.plugins:aws-sdk-dynamodb:2.1.5'

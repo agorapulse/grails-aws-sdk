@@ -30,6 +30,12 @@ Right now, the plugin is only used to push mobile notifications to Apple iOS and
 Add plugin dependency to your `build.gradle`:
 
 ```groovy
+repositories {
+    ...
+    maven { url 'http://dl.bintray.com/agorapulse/libs' }
+    ...
+}
+
 dependencies {
   ...
   compile 'org.grails.plugins:aws-sdk-sns:2.1.5'

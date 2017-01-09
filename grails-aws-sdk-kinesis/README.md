@@ -30,6 +30,12 @@ It's a Grails wrapper around the officieal [Amazon Kinesis Client](https://githu
 Add plugin dependency to your `build.gradle`:
 
 ```groovy
+repositories {
+    ...
+    maven { url 'http://dl.bintray.com/agorapulse/libs' }
+    ...
+}
+
 dependencies {
   ...
   compile 'org.grails.plugins:aws-sdk-kinesis:2.1.5'
