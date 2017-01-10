@@ -137,12 +137,10 @@ class AmazonSQSService implements InitializingBean  {
     /**
      *
      * @param jobName
-     * @param groupName
      * @param autoCreate
      * @return
      */
-    String getQueueUrl(String queueName,
-                       boolean autoCreate = false) {
+    String getQueueUrl(String queueName) {
         if (serviceConfig?.queueNamePrefix) {
             queueName = serviceConfig.queueNamePrefix + queueName
         }
@@ -151,7 +149,7 @@ class AmazonSQSService implements InitializingBean  {
         }
 
         String queueUrl = queueUrlByNames[queueName]
-        if (!queueUrl && autoCreate) {
+        if (!queueUrl && (serviceConfig?.autoCreateQueue)) {
             queueUrl = createQueue(queueName)
         }
         if (!queueUrl) {
@@ -162,10 +160,9 @@ class AmazonSQSService implements InitializingBean  {
 
     /**
      *
-     * @param autoCreate
      * @return
      */
-    String getQueueUrl(boolean autoCreate = false) {
+    String getQueueUrl() {
         assertDefaultQueueName()
         getQueueUrl(defaultQueueName)
     }
