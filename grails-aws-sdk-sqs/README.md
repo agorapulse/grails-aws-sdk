@@ -97,6 +97,7 @@ grails:
                 accessKey: {ACCESS_KEY} # (optional)
                 secretKey: {SECRET_KEY} # (optional)
                 region: eu-west-1       # (optional)
+                autoCreateQueue         # (optional), default false
                 queue: my-queue         # (optional)
                 queueNamePrefix: ben_   # (optional)
                 delaySeconds: 262144    # (optional)

@@ -131,8 +131,11 @@ class AmazonSQSServiceSpec extends Specification {
      */
 
     def "Get queue url with autocreate"() {
+        given:
+        service.serviceConfig.autoCreateQueue = true
+
         when:
-        String queueUrl = service.getQueueUrl('queueName', true)
+        String queueUrl = service.getQueueUrl('queueName')
 
         then:
         service.client.listQueues(_) >> ['queueUrls': ['somepath/queueName1', 'somepath/queueName2', 'somepath/queueName3']]
