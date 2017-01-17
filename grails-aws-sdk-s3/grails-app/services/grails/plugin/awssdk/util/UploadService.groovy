@@ -42,7 +42,7 @@ class UploadService {
             redirectConnection.readTimeout = READ_TIMEOUT
 
             // uncompressing if needed
-            if (redirectConnection.contentEncoding == 'gzip') {
+            if (redirectConnection?.contentEncoding?.contains('gzip')) {
                 GZIPInputStream gzipInputStream = new GZIPInputStream(redirectConnection.inputStream)
                 out << gzipInputStream
             } else {
