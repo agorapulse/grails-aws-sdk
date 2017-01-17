@@ -27,6 +27,9 @@ class UploadService {
 
             // Detect potential redirects (Code 3xx)
             HttpURLConnection connection = (HttpURLConnection) url.openConnection()
+            connection.setRequestProperty('Content-Type', 'application/x-www-form-urlencoded')
+            connection.setRequestProperty('Accept', '*/*')
+            connection.setRequestProperty('Accept-Encoding', 'gzip, deflate')
             connection.connectTimeout = CONNECT_TIMEOUT
             connection.readTimeout = READ_TIMEOUT
             int status = connection.getResponseCode();
