@@ -1,10 +1,12 @@
 package grails.plugin.awssdk.util
 
 import grails.core.GrailsApplication
+import groovy.util.logging.Slf4j
 import org.springframework.web.multipart.MultipartFile
 
 import java.util.zip.GZIPInputStream
 
+@Slf4j
 class UploadService {
 
     static lazyInit = false
