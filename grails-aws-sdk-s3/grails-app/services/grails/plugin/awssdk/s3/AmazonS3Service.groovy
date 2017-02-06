@@ -93,9 +93,13 @@ class AmazonS3Service implements InitializingBean {
     void createBucket(String bucketName,
                       String region = '') {
         if (!region) {
-            region = serviceConfig.region ?: config.region ?: AwsClientUtil.DEFAULT_REGION
+            region = serviceConfig.region ?: config.region
         }
-        client.createBucket(bucketName, region)
+        if (!region || region == AwsClientUtil.DEFAULT_REGION) {
+            client.createBucket(bucketName) // Default region US-EAST-1
+        } else {
+            client.createBucket(bucketName, region)
+        }
     }
 
     /**
