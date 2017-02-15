@@ -22,5 +22,12 @@ class FooItem {
     String message
     @DynamoDBAttribute
     String title
+    @DynamoDBAttribute
+    HashSet<String> tags = new HashSet<>()
+
+    @DynamoDBIgnore
+    HashSet<String> getSources() {
+        return new HashSet<>()
+    }
 
 }

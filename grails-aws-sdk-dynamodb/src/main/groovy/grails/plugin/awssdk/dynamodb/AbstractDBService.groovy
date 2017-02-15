@@ -714,14 +714,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
         // Nullify empty collection properties
         itemsToSave.each { object ->
-            object.properties.each { String prop, val ->
-                if (object.hasProperty(prop)
-                        && object[prop] instanceof HashSet
-                        && object[prop]?.size() == 0) {
-                    // log.debug("Nullifying collection ${prop} before sending to DynamoDB")
-                    object[prop] = null
-                }
-            }
+            nullifyHashSets(object)
         }
 
         log.debug "Saving items in DynamoDB ${itemsToSave}"
@@ -1030,6 +1023,25 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             return 'S'
         } else {
             throw new RuntimeException("DynamoDB Invalid property type: ${field.type.name}, property: ${field.name}")
+        }
+    }
+
+    static void nullifyHashSets(Object object) {
+        try {
+            for (Field field : object.getClass().getDeclaredFields()) {
+                if (object.hasProperty(field.name) && object.hasProperty(field.name).modifiers == 1) {
+                    Object fieldObject = object[field.name]
+                    if (fieldObject != null && fieldObject instanceof HashSet && fieldObject.size() == 0) {
+                        String getterName = "get" + field.name.substring(0, 1).toUpperCase() + field.name.substring(1);
+                        Method getter = object.getClass().getMethod(getterName)
+                        if ((getter == null || getter.getAnnotation(DynamoDBIgnore.class) == null) && field.getAnnotation(DynamoDBIgnore.class) == null) {
+                            object[field.name] = null
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.debug "failed to nullify collection of ${object} before sending to DynamoDB", e
         }
     }
 
