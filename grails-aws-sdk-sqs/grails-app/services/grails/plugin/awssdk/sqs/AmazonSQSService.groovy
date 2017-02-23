@@ -231,7 +231,7 @@ class AmazonSQSService implements InitializingBean  {
                          int visibilityTimeout = 0,
                          int waitTimeSeconds = 0) {
         assertDefaultQueueName()
-        receiveMessages(maxNumberOfMessages, visibilityTimeout, waitTimeSeconds)
+        receiveMessages(defaultQueueName, maxNumberOfMessages, visibilityTimeout, waitTimeSeconds)
     }
 
     /**
