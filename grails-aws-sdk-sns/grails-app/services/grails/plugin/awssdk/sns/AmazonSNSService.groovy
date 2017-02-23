@@ -37,6 +37,56 @@ class AmazonSNSService implements InitializingBean  {
     }
 
     /**
+     * @param topicName
+     * @return
+     */
+    String createTopic(String topicName){
+
+        log.debug("Creating topic sns with name " + topicName)
+        CreateTopicRequest createTopicRequest = new CreateTopicRequest(topicName);
+
+        try {
+            CreateTopicResult createTopicResult = client.createTopic(createTopicRequest);
+            createTopicResult.topicArn
+        } catch (Exception e){
+            log.error 'An exception was catched while creating a topic',  e
+        }
+    }
+
+    /**
+     * @param topicArn
+     */
+    void deleteTopic(String topicArn){
+        log.debug("Deleting topic sns with arn " + topicArn)
+        DeleteTopicRequest deleteTopicRequest = new DeleteTopicRequest(topicArn);
+
+        try {
+            client.deleteTopic(deleteTopicRequest)
+        } catch (Exception e){
+            log.error 'An exception was catched while creating a topic',  e
+        }
+    }
+
+    /**
+     * @param topicArn
+     * @param subject
+     * @param message
+     * @return
+     */
+    String publishTopic(String topicArn,
+                        String subject,
+                        String message){
+        PublishRequest publishRequest = new PublishRequest(topicArn, message,subject);
+        try {
+            PublishResult publishResult = client.publish(publishRequest);
+            publishResult.messageId
+        } catch (Exception e){
+            log.error 'An exception was catched while publishing',  e
+        }
+    }
+
+
+    /**
      *
      * @param deviceToken
      * @param customUserData
@@ -137,6 +187,56 @@ class AmazonSNSService implements InitializingBean  {
                 sandbox ? 'APNS_SANDBOX' : 'APNS',
                 message
         )
+    }
+
+    /**
+     * @param topic
+     * @param protocol
+     * @param endpoint
+     * @return
+     */
+    String subscribeTopic(String topic,
+                          String protocol,
+                          String endpoint){
+
+        log.debug("Creating a topic subscription to endpoit " + endpoint)
+        SubscribeRequest subRequest = new SubscribeRequest(topic, protocol, endpoint);
+
+        try {
+            SubscribeResult result = client.subscribe(subRequest);
+            result.subscriptionArn
+        } catch (Exception e){
+            log.error 'An exception was catched while subscribe a topic',  e
+        }
+    }
+
+    /**
+     * @param topicArn
+     * @param number
+     * @return
+     */
+    String subscribeTopicWithSMS(String topicArn,
+                                 String number){
+        try {
+            subscribeTopic(topicArn,'sms',number)
+        } catch (Exception e){
+            log.error 'An exception was catched while subscribe a topic with sms protocol',  e
+        }
+    }
+
+    /**
+     * @param arn
+     */
+    void unsubscribeTopic(String arn){
+
+        log.debug("Deleting a topic subscription to number " + arn)
+        UnsubscribeRequest unSubRequest = new UnsubscribeRequest(arn);
+
+        try {
+            client.unsubscribe(unSubRequest);
+        } catch (Exception e){
+            log.error 'An exception was catched while unsubscribe a topic',  e
+        }
     }
 
     /**
@@ -353,105 +453,5 @@ class AmazonSNSService implements InitializingBean  {
         }
         endpointArn
     }
-
-    /**
-     * @param topicName
-     * @return
-     */
-    String createTopic(String topicName){
-
-        log.debug("Creating topic sns with name " + topicName)
-        CreateTopicRequest createTopicRequest = new CreateTopicRequest(topicName);
-
-        try {
-            CreateTopicResult createTopicResult = client.createTopic(createTopicRequest);
-            createTopicResult.topicArn
-        }catch (Exception e){
-            log.error 'An exception was catched while creating a topic',  e
-        }
-
-    }
-
-    /**
-     * @param topicArn
-     */
-    void deleteTopic(String topicArn){
-        log.debug("Deleting topic sns with arn " + topicArn)
-        DeleteTopicRequest deleteTopicRequest = new DeleteTopicRequest(topicArn);
-
-        try {
-            client.deleteTopic(deleteTopicRequest)
-        }catch (Exception e){
-            log.error 'An exception was catched while creating a topic',  e
-        }
-    }
-
-    /**
-     * @param topic
-     * @param protocol
-     * @param endpoint
-     * @return
-     */
-    String subscribeTopic(String topic,String protocol,String endpoint){
-
-        log.debug("Creating a topic subscription to endpoit " + endpoint)
-        SubscribeRequest subRequest = new SubscribeRequest(topic, protocol, endpoint);
-
-        try{
-            SubscribeResult result = client.subscribe(subRequest);
-            result.subscriptionArn
-        }catch (Exception e){
-            log.error 'An exception was catched while subscribe a topic',  e
-        }
-
-    }
-
-    /**
-     * @param arn
-     */
-    void unsubscribeTopic(String arn){
-
-        log.debug("Deleting a topic subscription to number " + arn)
-        UnsubscribeRequest unSubRequest = new UnsubscribeRequest(arn);
-
-        try{
-            client.unsubscribe(unSubRequest);
-        }catch (Exception e){
-            log.error 'An exception was catched while unsubscribe a topic',  e
-        }
-    }
-
-    /**
-     * @param topicArn
-     * @param number
-     * @return
-     */
-     String subscribeTopicWithSMS(String topicArn,String number){
-        try{
-            subscribeTopic(topicArn,'sms',number)
-        }catch (Exception e){
-            log.error 'An exception was catched while subscribe a topic with sms protocol',  e
-        }
-    }
-
-    /**
-     * @param topicArn
-     * @param subject
-     * @param message
-     * @return
-     */
-     String publishTopic(String topicArn,String subject,String message){
-        PublishRequest publishRequest = new PublishRequest(topicArn, message,subject);
-        try{
-            PublishResult publishResult = client.publish(publishRequest);
-            publishResult.messageId
-        }catch (Exception e){
-            log.error 'An exception was catched while publishing',  e
-        }
-    }
-
-
-
-
 
 }
