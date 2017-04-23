@@ -21,16 +21,16 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
     static SERVICE_NAME = AmazonDynamoDB.ENDPOINT_PREFIX
 
-    static final String INDEX_NAME_SUFFIX = 'Index' // Specific ranges ending with 'Index' are String concatenated indexes, to keep ordering (ex.: createdByUserIdIndex=37641047|2011-02-21T17:15:23.000Z|2424353910)
-    static final int DEFAULT_QUERY_LIMIT = 20
-    static final int DEFAULT_COUNT_LIMIT = 100
-    static final String ID_SEPARATOR = '_'
-    static final String SERIALIZED_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    static final String SERIALIZED_DATE_DAILY_FORMAT = "yyyy-MM-dd"
-    static final String SERIALIZED_DATE_TIMEZONE = 'GMT'
+    static String INDEX_NAME_SUFFIX = 'Index' // Specific ranges ending with 'Index' are String concatenated indexes, to keep ordering (ex.: createdByUserIdIndex=37641047|2011-02-21T17:15:23.000Z|2424353910)
+    static int DEFAULT_QUERY_LIMIT = 20
+    static int DEFAULT_COUNT_LIMIT = 100
+    static String ID_SEPARATOR = '_'
+    static String SERIALIZED_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    static String SERIALIZED_DATE_DAILY_FORMAT = "yyyy-MM-dd"
+    static String SERIALIZED_DATE_TIMEZONE = 'GMT'
 
-    protected static final int BATCH_DELETE_LIMIT = 100
-    protected static final int WRITE_BATCH_SIZE = 100 // Max number of elements to write at once in DynamoDB (mixed tables)
+    protected static int BATCH_DELETE_LIMIT = 100
+    protected static int WRITE_BATCH_SIZE = 100 // Max number of elements to write at once in DynamoDB (mixed tables)
 
     GrailsApplication grailsApplication
     AmazonDynamoDBClient client
