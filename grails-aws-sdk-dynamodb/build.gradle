@@ -2,7 +2,7 @@ apply from: "../gradle/grails.commons.gradle"
 
 dependencies {
     // Latest Joda Time
-    compile 'joda-time:joda-time:2.9.4'
+    compile 'joda-time:joda-time:2.9.9'
 
     // Latest AWS SDK DynamoDB lib
     compile "com.amazonaws:aws-java-sdk-dynamodb:$awsJavaSdkVersion"
