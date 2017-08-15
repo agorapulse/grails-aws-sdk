@@ -1,6 +1,7 @@
 package grails.plugin.awssdk.cognito
 
-import com.amazonaws.regions.RegionUtils
+import agorapulse.libs.awssdk.util.AwsClientUtil
+import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentity
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClient
 import com.amazonaws.services.cognitoidentity.model.GetOpenIdTokenForDeveloperIdentityRequest
 import com.amazonaws.services.cognitoidentity.model.GetOpenIdTokenForDeveloperIdentityResult
@@ -19,17 +20,38 @@ import javax.servlet.http.HttpServletResponse
 @Slf4j
 abstract class AbstractCognitoAuthService implements GrailsApplicationAware {
 
-    AmazonCognitoIdentityClient client
+    AmazonCognitoIdentity client
     GrailsApplication grailsApplication
 
+    /**
+     * Registers new key device.
+     * @param uid unique id of the device
+     * @param encryptionKey encryption key of the device - 16 random characters
+     * @param username username of user associated with the device
+     * @return true if the device was registered successfully
+     */
     protected abstract boolean registerDevice(String uid, String encryptionKey, String username)
+
+    /**
+     * Loads information about device identified by given uid.
+     * @param uid unique id of the device
+     * @return authenticated device object or null if not found
+     */
     protected abstract AuthDevice loadDevice(String uid)
+
+    /**
+     * Loads information about user identified by given username.
+     * @param username username of the user
+     * @return authenticated user object or null if not found
+     */
     protected abstract AuthUser loadUser(String username)
 
     @PostConstruct
     init() {
-        client = new AmazonCognitoIdentityClient()
-        client.setRegion(RegionUtils.getRegion(cognitoConfig.region ?: 'eu-west-1'))
+        client = AmazonCognitoIdentityClient.builder()
+           .withCredentials(AwsClientUtil.buildCredentials(config, cognitoConfig))
+           .withRegion(AwsClientUtil.buildRegion(config, cognitoConfig))
+           .build()
     }
 
     String getSaltedPassword(String password, String username, String endpoint) {
@@ -290,8 +312,12 @@ abstract class AbstractCognitoAuthService implements GrailsApplicationAware {
         }
     }
 
+    def getConfig() {
+        grailsApplication.config.grails?.plugin?.awssdk ?: grailsApplication.config.grails?.plugins?.awssdk
+    }
+
     def getCognitoConfig() {
-        grailsApplication.config.grails.plugin.awssdk.cognito
+        config.cognito
     }
 
 
