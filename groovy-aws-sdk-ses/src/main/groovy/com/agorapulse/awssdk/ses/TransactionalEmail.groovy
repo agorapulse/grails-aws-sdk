@@ -48,6 +48,9 @@ class TransactionalEmail {
         this.recipients = [str]
     }
 
+    /**
+     * @deprecated this ignores multiple recipients if there are more then one for the email
+     */
     String getDestinationEmail() {
         (this.recipients.isEmpty()) ? null : this.recipients.first()
     }
