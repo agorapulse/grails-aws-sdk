@@ -1,6 +1,7 @@
 rootProject.name = "aws-sdk"
 
-include (        
+include (
+        'grails-aws-sdk-cognito',
         'grails-aws-sdk-dynamodb',
         'grails-aws-sdk-kinesis',
         'grails-aws-sdk-s3',        
@@ -9,6 +10,7 @@ include (
         'grails-aws-sdk-sqs'
 )
 
+project(":grails-aws-sdk-cognito").name = "aws-sdk-cognito"
 project(":grails-aws-sdk-dynamodb").name = "aws-sdk-dynamodb"
 project(":grails-aws-sdk-kinesis").name = "aws-sdk-kinesis"
 project(":grails-aws-sdk-s3").name = "aws-sdk-s3"
