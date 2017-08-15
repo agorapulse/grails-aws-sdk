@@ -1,8 +1,8 @@
-Grails AWS SDK DynamoDB Plugin
+Grails AWS SDK Cognito Plugin
 ==============================
 
 [![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)
-[![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-dynamodb/images/download.svg)](https://bintray.com/agorapulse/plugins/aws-sdk-dynamodb/_latestVersion)
+[![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-cognito/images/download.svg)](https://bintray.com/agorapulse/plugins/aws-sdk-cognito/_latestVersion)
 
 # Introduction
 
@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
   // ...
-  compile 'org.grails.plugins:aws-sdk-dynamodb:2.1.18'
+  compile 'org.grails.plugins:aws-sdk-cognito:2.1.18'
   // ...
  }
 ```
