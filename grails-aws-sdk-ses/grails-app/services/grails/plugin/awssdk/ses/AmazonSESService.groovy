@@ -57,7 +57,7 @@ class AmazonSESService implements InitializingBean {
     int mail(@DelegatesTo(TransactionalEmail) Closure composer) throws Exception {
         def transactionalEmail = AwsSesMailer.transactionalEmailWithClosure(composer)
         transactionalEmail.subject = preffixSubject(transactionalEmail.subject)
-        mailer.send(transactionalEmail.destinationEmail,
+        mailer.send(transactionalEmail.recipients,
                 transactionalEmail.subject,
                 transactionalEmail.htmlBody,
                 transactionalEmail.sourceEmail,
@@ -84,6 +84,28 @@ class AmazonSESService implements InitializingBean {
         }
         subject = preffixSubject(subject)
         mailer.send(destinationEmail, subject, htmlBody, sourceEmail, replyToEmail)
+    }
+
+    /**
+     *
+     * @param destinationEmails
+     * @param subject
+     * @param htmlBody
+     * @param sourceEmail
+     * @param replyToEmail
+     * @return 1 if successful, 0 if not sent, -1 if blacklisted
+     */
+    int send(List<String> destinationEmails,
+             String subject,
+             String htmlBody,
+             String sourceEmail = '',
+             String replyToEmail = '') {
+        if (!sourceEmail) {
+            assert this.sourceEmail, "Default sourceEmail must be set in config"
+            sourceEmail = this.sourceEmail
+        }
+        subject = preffixSubject(subject)
+        mailer.send(destinationEmails, subject, htmlBody, sourceEmail, replyToEmail)
     }
 
 

@@ -142,17 +142,17 @@ class AwsSesMailer {
      * @return 1 if successful, 0 if not sent, -1 if blacklisted
      */
     @SuppressWarnings(['LineLength', 'ElseBlockBraces'])
-    int send(String destinationEmail,
+    int send(List<String> destinationEmails,
              String subject,
              String htmlBody,
              String sourceEmail = '',
              String replyToEmail = '') {
         int statusId = STATUS_NOT_DELIVERED
-        if ( !destinationEmail ) {
+        if ( !destinationEmails ) {
             return statusId
         }
 
-        Destination destination = new Destination([destinationEmail])
+        Destination destination = new Destination(destinationEmails)
         Content messageSubject = new Content(subject)
         Body messageBody = new Body().withHtml(new Content(htmlBody))
         Message message = new Message(messageSubject, messageBody)
@@ -166,11 +166,11 @@ class AwsSesMailer {
         } catch (AmazonServiceException exception) {
 
             if (exception.message.find('Address blacklisted')) {
-                log.debug "Address blacklisted destinationEmail=$destinationEmail"
+                log.debug "Address blacklisted destinationEmails=${destinationEmails}"
                 statusId = STATUS_BLACKLISTED
 
             } else if (exception.message.find('Missing final')) {
-                log.warn "An amazon service exception was catched while sending email: destinationEmail=$destinationEmail, sourceEmail=$sourceEmail, replyToEmail=$replyToEmail, subject=$subject"
+                log.warn "An amazon service exception was catched while sending email: destinationEmails=$destinationEmails, sourceEmail=$sourceEmail, replyToEmail=$replyToEmail, subject=$subject"
 
             } else {
                 log.warn 'An amazon service exception was catched while send +ng email' + exception.message
@@ -180,6 +180,24 @@ class AwsSesMailer {
             log.warn 'An amazon client exception was catched while sending email' + exception.message
         }
         statusId
+    }
+
+    /**
+     *
+     * @param destinationEmail
+     * @param subject
+     * @param htmlBody
+     * @param sourceEmail
+     * @param replyToEmail
+     * @return 1 if successful, 0 if not sent, -1 if blacklisted
+     */
+    @SuppressWarnings(['LineLength', 'ElseBlockBraces'])
+    int send(String destinationEmail,
+             String subject,
+             String htmlBody,
+             String sourceEmail = '',
+             String replyToEmail = '') {
+        send([destinationEmail], subject, htmlBody, sourceEmail, replyToEmail)
     }
 
     static TransactionalEmail transactionalEmailWithClosure(@DelegatesTo(TransactionalEmail) Closure composer) {
