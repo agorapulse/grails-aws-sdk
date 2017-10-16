@@ -180,4 +180,17 @@ class AmazonSQSServiceSpec extends Specification {
         messageId == 'msg_id'
     }
 
+    void 'queue name can be url'() {
+        given:
+            String myQueueUrl = 'http://test.example.com/my-queue'
+        when:
+            service.queueUrlByNames = ['my-queue': myQueueUrl]
+            String url = service.getQueueUrl('my-queue')
+        then:
+            url == myQueueUrl
+        and:
+            service.getQueueUrl(myQueueUrl) == myQueueUrl
+
+    }
+
 }

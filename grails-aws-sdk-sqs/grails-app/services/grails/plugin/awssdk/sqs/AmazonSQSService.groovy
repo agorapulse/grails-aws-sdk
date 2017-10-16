@@ -141,6 +141,9 @@ class AmazonSQSService implements InitializingBean  {
      * @return
      */
     String getQueueUrl(String queueName) {
+        if (queueName.startsWith('http://') || queueName.startsWith('https://')) {
+            return queueName
+        }
         if (serviceConfig?.queueNamePrefix) {
             queueName = serviceConfig.queueNamePrefix + queueName
         }
