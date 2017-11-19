@@ -5,6 +5,7 @@ import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.kinesis.AmazonKinesis
 import com.amazonaws.services.kinesis.AmazonKinesisClient
+import com.amazonaws.services.kinesis.AmazonKinesisClientBuilder
 import com.amazonaws.services.kinesis.model.*
 import grails.core.GrailsApplication
 import groovy.util.logging.Commons
@@ -40,10 +41,11 @@ class AmazonKinesisService implements InitializingBean {
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
-        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
-        client = new AmazonKinesisClient(credentials, configuration)
+        client = AmazonKinesisClientBuilder.standard()
                 .withRegion(region)
+                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                .build()
 
         if (!defaultStreamName) {
             defaultStreamName = serviceConfig?.stream ?: ''

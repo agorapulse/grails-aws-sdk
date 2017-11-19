@@ -7,6 +7,7 @@ import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClient
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder
 import com.amazonaws.services.sqs.model.*
 import grails.core.GrailsApplication
 import groovy.transform.Synchronized
@@ -33,10 +34,11 @@ class AmazonSQSService implements InitializingBean  {
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
-        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
-        client = new AmazonSQSClient(credentials, configuration)
+        client = AmazonSQSClientBuilder.standard()
                 .withRegion(region)
+                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                .build()
 
         defaultQueueName = serviceConfig?.queue ?: ''
     }

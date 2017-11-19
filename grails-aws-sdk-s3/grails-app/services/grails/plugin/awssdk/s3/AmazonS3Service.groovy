@@ -5,6 +5,7 @@ import com.amazonaws.AmazonClientException
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.s3.Headers
 import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.transfer.TransferManager
@@ -41,10 +42,11 @@ class AmazonS3Service implements InitializingBean {
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
-        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
-        client = new AmazonS3Client(credentials, configuration)
+        client = AmazonS3ClientBuilder.standard()
                 .withRegion(region)
+                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                .build()
 
         defaultBucketName = serviceConfig?.bucket ?: ''
     }

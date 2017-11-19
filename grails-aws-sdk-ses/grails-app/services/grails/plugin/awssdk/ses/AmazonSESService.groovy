@@ -8,6 +8,7 @@ import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder
 import grails.core.GrailsApplication
 import grails.util.Environment
 import groovy.util.logging.Slf4j
@@ -30,10 +31,11 @@ class AmazonSESService implements InitializingBean {
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
-        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
-        mailer.client = new AmazonSimpleEmailServiceClient(credentials, configuration)
+        mailer.client = AmazonSimpleEmailServiceClientBuilder.standard()
                 .withRegion(region)
+                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                .build()
 
         sourceEmail = serviceConfig?.sourceEmail ?: ''
         subjectPrefix = serviceConfig?.subjectPrefix ?: ''

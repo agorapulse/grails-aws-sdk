@@ -5,6 +5,7 @@ import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.sns.AmazonSNS
 import com.amazonaws.services.sns.AmazonSNSClient
+import com.amazonaws.services.sns.AmazonSNSClientBuilder
 import com.amazonaws.services.sns.model.*
 import grails.core.GrailsApplication
 import groovy.json.JsonOutput
@@ -30,10 +31,11 @@ class AmazonSNSService implements InitializingBean  {
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
-        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
-        client = new AmazonSNSClient(credentials, configuration)
+        client = AmazonSNSClientBuilder.standard()
                 .withRegion(region)
+                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                .build()
     }
 
     /**

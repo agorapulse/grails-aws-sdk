@@ -44,5 +44,5 @@ dependencies {
     provided "org.grails:grails-plugin-domain-class"
     testCompile "org.grails:grails-plugin-testing"
 
-    compile "agorapulse.libs:groovy-aws-sdk-util:1.0"
+    compile "agorapulse.libs:groovy-aws-sdk-util:1.1"
 }

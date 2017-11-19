@@ -5,6 +5,7 @@ import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.amazonaws.services.dynamodbv2.model.*
 import grails.core.GrailsApplication
@@ -50,10 +51,11 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
-        def credentials = AwsClientUtil.buildCredentials(config, serviceConfig)
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, serviceConfig)
-        client = new AmazonDynamoDBClient(credentials, configuration)
+        client = AmazonDynamoDBClientBuilder.standard()
                 .withRegion(region)
+                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                .build()
         mapper = new DynamoDBMapper(client)
     }
 
