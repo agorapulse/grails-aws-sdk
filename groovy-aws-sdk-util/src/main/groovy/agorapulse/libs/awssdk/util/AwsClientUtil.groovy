@@ -2,9 +2,10 @@ package agorapulse.libs.awssdk.util
 
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol
+import com.amazonaws.auth.AWSCredentialsProvider
+import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
-import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 
 class AwsClientUtil {
@@ -72,7 +73,7 @@ class AwsClientUtil {
      * @param serviceConfig
      * @return
      */
-    static buildCredentials(defaultConfig, serviceConfig) {
+    static AWSCredentialsProvider buildCredentials(defaultConfig, serviceConfig) {
         Map config = [
                 accessKey: defaultConfig.accessKey ?: '',
                 secretKey: defaultConfig.secretKey ?: ''
@@ -85,7 +86,7 @@ class AwsClientUtil {
         if (!config.accessKey || !config.secretKey) {
             new DefaultAWSCredentialsProviderChain()
         } else {
-            new BasicAWSCredentials(config.accessKey, config.secretKey)
+            new AWSStaticCredentialsProvider(new BasicAWSCredentials(config.accessKey, config.secretKey))
         }
     }
 
