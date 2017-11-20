@@ -4,6 +4,7 @@ import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
+import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.s3.Headers
@@ -32,7 +33,7 @@ class AmazonS3Service implements InitializingBean {
     ]
 
     GrailsApplication grailsApplication
-    AmazonS3Client client
+    AmazonS3 client
     TransferManager transferManager
     private String defaultBucketName = ''
 
@@ -43,7 +44,7 @@ class AmazonS3Service implements InitializingBean {
 
         // Create client
         client = AmazonS3ClientBuilder.standard()
-                .withRegion(region)
+                .withRegion(region.name)
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()

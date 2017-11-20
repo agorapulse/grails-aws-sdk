@@ -32,7 +32,7 @@ class AmazonKinesisService implements InitializingBean {
     CharsetDecoder decoder = Charset.forName('UTF-8').newDecoder()
 
     GrailsApplication grailsApplication
-    AmazonKinesisClient client
+    AmazonKinesis client
     protected String defaultStreamName = ''
 
     void afterPropertiesSet() throws Exception {
@@ -42,7 +42,7 @@ class AmazonKinesisService implements InitializingBean {
 
         // Create client
         client = AmazonKinesisClientBuilder.standard()
-                .withRegion(region)
+                .withRegion(region.name)
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()

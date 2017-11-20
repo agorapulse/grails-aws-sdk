@@ -35,7 +35,7 @@ class AmazonSQSService implements InitializingBean  {
 
         // Create client
         client = AmazonSQSClientBuilder.standard()
-                .withRegion(region)
+                .withRegion(region.name)
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()

@@ -37,7 +37,7 @@ import java.nio.ByteBuffer
 @Slf4j
 @CompileStatic
 class AwsSesMailer {
-    AmazonWebServiceClient client
+    AmazonSimpleEmailService client
 
     void initClient(String accessKey, String secretKey, String regionName) {
         Region region = RegionUtils.getRegion(regionName)
