@@ -1,10 +1,8 @@
 package grails.plugin.awssdk.dynamodb
 
 import agorapulse.libs.awssdk.util.AwsClientUtil
-import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.amazonaws.services.dynamodbv2.model.*
@@ -34,7 +32,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
     protected static int WRITE_BATCH_SIZE = 100 // Max number of elements to write at once in DynamoDB (mixed tables)
 
     GrailsApplication grailsApplication
-    AmazonDynamoDBClient client
+    AmazonDynamoDB client
     DynamoDBMapper mapper
 
     protected String hashKeyName
@@ -52,7 +50,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
         // Create client
         client = AmazonDynamoDBClientBuilder.standard()
-                .withRegion(region)
+                .withRegion(region.name)
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()
