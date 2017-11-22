@@ -3,10 +3,8 @@ package grails.plugin.awssdk.sqs
 import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
-import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.sqs.AmazonSQS
-import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
 import com.amazonaws.services.sqs.model.*
 import grails.core.GrailsApplication
@@ -20,7 +18,7 @@ class AmazonSQSService implements InitializingBean  {
     static SERVICE_NAME = AmazonSQS.ENDPOINT_PREFIX
 
     GrailsApplication grailsApplication
-    AmazonSQSClient client
+    AmazonSQS client
     private String defaultQueueName = ''
 
     private Map queueUrlByNames = [:]

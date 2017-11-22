@@ -23,7 +23,7 @@ class AmazonSNSService implements InitializingBean  {
     static MOBILE_PLATFORM_IOS = 'ios'
 
     GrailsApplication grailsApplication
-    AmazonSNSClient client
+    AmazonSNS client
     
     void afterPropertiesSet() throws Exception {
         // Set region

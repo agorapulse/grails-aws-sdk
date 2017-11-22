@@ -2,7 +2,6 @@ package grails.plugin.awssdk.s3
 
 import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
-import com.amazonaws.ClientConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3Client
