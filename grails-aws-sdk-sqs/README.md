@@ -176,6 +176,8 @@ messages.each { message ->
 }
 ```
 
+> You can use queue URL instead of queue name if you only have access to specific queue but you lack the privileges to list all queues.
+
 You will probably use `receiveMessages` in a [Quartz](https://github.com/grails-plugins/grails-quartz) job running periodically.
 
 Some interesting settings when receiving messages:
