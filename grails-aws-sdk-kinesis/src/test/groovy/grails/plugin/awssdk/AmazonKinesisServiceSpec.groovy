@@ -2,19 +2,18 @@ package grails.plugin.awssdk
 
 import com.amazonaws.services.kinesis.AmazonKinesisClient
 import grails.plugin.awssdk.kinesis.AmazonKinesisService
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-@TestFor(AmazonKinesisService)
-class AmazonKinesisServiceSpec extends Specification {
+class AmazonKinesisServiceSpec extends Specification implements ServiceUnitTest<AmazonKinesisService>{
 
     static String STREAM_NAME = 'streamName'
     static String SHARD_ID = '000001'
 
-    static doWithConfig(conf) {
+    Closure doWithConfig() {{ conf ->
         conf.grails.plugin.awssdk.kinesis.stream = STREAM_NAME
         conf.grails.plugin.awssdk.kinesis.region = 'eu-west-1'
-    }
+    }}
 
     def setup() {
         // Mock collaborators

@@ -3,22 +3,20 @@ package grails.plugin.awssdk.s3
 import com.amazonaws.AmazonClientException
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.AmazonS3Exception
-import com.amazonaws.services.s3.model.CannedAccessControlList
 import com.amazonaws.services.s3.model.ObjectListing
 import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.model.S3ObjectSummary
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-@TestFor(AmazonS3Service)
-class AmazonS3ServiceSpec extends Specification {
+class AmazonS3ServiceSpec extends Specification implements ServiceUnitTest<AmazonS3Service> {
 
     static String BUCKET_NAME = 'bucket'
 
-    static doWithConfig(conf) {
+    Closure doWithConfig() {{ conf ->
         conf.grails.plugin.awssdk.s3.bucket = BUCKET_NAME
         conf.grails.plugin.awssdk.s3.region = 'eu-west-1'
-    }
+    }}
 
     def setup() {
         // Mock collaborator
