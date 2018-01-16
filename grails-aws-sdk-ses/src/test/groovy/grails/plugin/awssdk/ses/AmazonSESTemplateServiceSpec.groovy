@@ -1,12 +1,11 @@
 package grails.plugin.awssdk.ses
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import org.springframework.context.MessageSource
 import org.springframework.context.NoSuchMessageException
 import spock.lang.Specification
 
-@TestFor(AmazonSESTemplateService)
-class AmazonSESTemplateServiceSpec extends Specification {
+class AmazonSESTemplateServiceSpec extends Specification implements ServiceUnitTest<AmazonSESTemplateService> {
 
     def "test subjectWithSubjectKey"() {
         given:

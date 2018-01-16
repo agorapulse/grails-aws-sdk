@@ -3,17 +3,16 @@ package grails.plugin.awssdk.ses
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.*
 
 
-@TestFor(AmazonSESService)
-class AmazonSESServiceSpec extends Specification {
+class AmazonSESServiceSpec extends Specification implements ServiceUnitTest<AmazonSESService> {
 
-    static doWithConfig(conf) {
+    Closure doWithConfig() {{ conf ->
         conf.grails.plugin.awssdk.ses.sourceEmail = 'foo@domain.com'
-    }
+    }}
 
     void setup() {
         // Mock collaborator

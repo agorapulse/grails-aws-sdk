@@ -4,11 +4,10 @@ import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.services.sqs.AmazonSQSClient
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-@TestFor(AmazonSQSService)
-class AmazonSQSServiceSpec extends Specification {
+class AmazonSQSServiceSpec extends Specification implements ServiceUnitTest<AmazonSQSService> {
 
     void setup() {
         // Mock collaborator

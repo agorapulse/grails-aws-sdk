@@ -3,14 +3,10 @@ package grails.plugin.awssdk
 import grails.plugin.awssdk.dynamodb.AbstractDBService
 import grails.plugin.awssdk.test.FooItem
 import grails.plugin.awssdk.test.FooItemDBService
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
-@TestFor(FooItemDBService)
-class FooItemDBServiceSpec extends Specification {
+class FooItemDBServiceSpec extends Specification implements ServiceUnitTest<FooItemDBService>{
 
     def setup() {
     }
