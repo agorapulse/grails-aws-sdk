@@ -192,6 +192,29 @@ class AmazonSNSService implements InitializingBean  {
     }
 
     /**
+     *
+     * @param phoneNumber
+     * @param message
+     * @param smsAttributes
+     * @return
+     */
+    String sendSMSMessage(String phoneNumber,
+                          String message,
+                          Map smsAttributes) {
+        PublishResult result
+        try {
+            result = client.publish(new PublishRequest()
+                    .withMessage(message)
+                    .withPhoneNumber(phoneNumber)
+                    .withMessageAttributes(smsAttributes))
+        } catch (Exception e){
+            log.error 'An exception was catched while publishing',  e
+        }
+
+        result ? result.messageId : ''
+    }
+
+    /**
      * @param topic
      * @param protocol
      * @param endpoint
