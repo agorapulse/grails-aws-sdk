@@ -799,7 +799,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3().class == AmazonS3Client
         assert amazonWebService.getS3().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
-        assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
+        assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3.eu-west-1.amazonaws.com'
     }
 
     void testS3ClientWithoutCredentials() {
@@ -814,7 +814,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3().class == AmazonS3Client
         assert amazonWebService.getS3().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3('eu-west-1').class == AmazonS3Client
-        assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
+        assert amazonWebService.getS3('eu-west-1').endpoint.toString() == 'https://s3.eu-west-1.amazonaws.com'
     }
 
     /**
@@ -832,7 +832,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3Encryption().class == AmazonS3EncryptionClient
         assert amazonWebService.getS3Encryption().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3Encryption('eu-west-1').class == AmazonS3EncryptionClient
-        assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
+        assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3.eu-west-1.amazonaws.com'
     }
 
     void testS3EncryptionClientWithoutCredentials() {
@@ -847,7 +847,7 @@ class AmazonWebServiceTests {
         assert amazonWebService.getS3Encryption().class == AmazonS3EncryptionClient
         assert amazonWebService.getS3Encryption().endpoint.toString() == 'https://s3.amazonaws.com'
         assert amazonWebService.getS3Encryption('eu-west-1').class == AmazonS3EncryptionClient
-        assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3-eu-west-1.amazonaws.com'
+        assert amazonWebService.getS3Encryption('eu-west-1').endpoint.toString() == 'https://s3.eu-west-1.amazonaws.com'
     }
 
     /**
