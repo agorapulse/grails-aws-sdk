@@ -1,26 +1,14 @@
 package com.agorapulse.awssdk.ses
 
-import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.STATUS_DELIVERED
-import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.STATUS_BLACKLISTED
-import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.STATUS_NOT_DELIVERED
-
 import com.agorapulse.awssdk.AwsSdkUtils
+import com.amazonaws.AmazonClientException
+import com.amazonaws.AmazonServiceException
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
-
-import com.amazonaws.AmazonClientException
-import com.amazonaws.AmazonServiceException
-import com.amazonaws.AmazonWebServiceClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
-import com.amazonaws.services.simpleemail.model.Body
-import com.amazonaws.services.simpleemail.model.Content
-import com.amazonaws.services.simpleemail.model.Destination
-import com.amazonaws.services.simpleemail.model.Message
-import com.amazonaws.services.simpleemail.model.RawMessage
-import com.amazonaws.services.simpleemail.model.SendEmailRequest
-import com.amazonaws.services.simpleemail.model.SendRawEmailRequest
+import com.amazonaws.services.simpleemail.model.*
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 
@@ -33,6 +21,8 @@ import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
 import javax.mail.util.ByteArrayDataSource
 import java.nio.ByteBuffer
+
+import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.*
 
 @Slf4j
 @CompileStatic
@@ -47,7 +37,7 @@ class AwsSesMailer {
         }
         def credentials = new BasicAWSCredentials(accessKey, secretKey)
         def clientConfiguration = AwsSdkUtils.clientConfigurationWithMap([:])
-        client = new AmazonSimpleEmailServiceClient(credentials, clientConfiguration).withRegion(region)
+        client = new AmazonSimpleEmailServiceClient(credentials, clientConfiguration).withRegion(region) as AmazonSimpleEmailServiceClient
     }
 
     /**

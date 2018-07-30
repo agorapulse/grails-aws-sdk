@@ -5,6 +5,7 @@ apply plugin: "maven-publish"
 project.apply plugin: "codenarc"
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
