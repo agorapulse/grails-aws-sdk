@@ -69,7 +69,7 @@ grails:
 If you do not provide credentials, a credentials provider chain will be used that searches for credentials in this order:
 
 * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_KEY`
-* Java System Properties - `aws.accessKeyId and `aws.secretKey`
+* Java System Properties - `aws.accessKeyId` and `aws.secretKey`
 * Instance profile credentials delivered through the Amazon EC2 metadata service (IAM role)
 
 ## Region
