@@ -22,6 +22,10 @@ The following services are currently supported:
 
 Please check each README for usage info.
 
+# Testing
+
+[How to Unit Test AWS Services with LocalStack and Testcontainers](https://medium.com/agorapulse-stories/how-to-unit-test-aws-services-with-localstack-and-testcontainers-1d39fe5dc6c2)
+
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-aws-sdk/issues) section on GitHub.
