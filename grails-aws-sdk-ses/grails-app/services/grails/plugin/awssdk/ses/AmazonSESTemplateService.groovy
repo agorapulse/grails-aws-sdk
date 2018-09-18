@@ -58,7 +58,7 @@ class AmazonSESTemplateService extends AmazonSESService {
      * @param replyToEmail
      * @return 1 if successful, 0 if not sent, -1 if blacklisted
      */
-    int sendTemplate(String destinationEmail,
+    int sendTemplate(List<String> destinationEmails,
                      String subjectKey,
                      List subjectVariables,
                      Map model,
@@ -68,12 +68,37 @@ class AmazonSESTemplateService extends AmazonSESService {
                      String replyToEmail = '',
                      String defaultSubject = '') {
         int statusId = 0
-        if (destinationEmail != '') {
-            String htmlBody = renderHtmlForTemplate(locale, model, destinationEmail, templateName, timeZoneGmt)
+        if (destinationEmails.findAll()) {
+            String htmlBody = renderHtmlForTemplate(locale, model, destinationEmails, templateName, timeZoneGmt)
             String subject = subjectWithSubjectKey(subjectKey, subjectVariables, locale, defaultSubject)
-            statusId = send(destinationEmail, subject, htmlBody, '', replyToEmail)
+            statusId = send(destinationEmails, subject, htmlBody, '', replyToEmail)
         }
         statusId
+    }
+
+    /**
+     * Global method to send email to anybody
+     *
+     * @param destinationEmail
+     * @param subjectKey
+     * @param subjectVariables
+     * @param model
+     * @param templateName
+     * @param locale
+     * @param timeZoneGmt
+     * @param replyToEmail
+     * @return 1 if successful, 0 if not sent, -1 if blacklisted
+     */
+    int sendTemplate(String destinationEmail,
+                     String subjectKey,
+                     List subjectVariables,
+                     Map model,
+                     String templateName,
+                     Locale locale = Locale.ENGLISH,
+                     int timeZoneGmt = 0,
+                     String replyToEmail = '',
+                     String defaultSubject = '') {
+        return sendTemplate(Collections.singletonList(destinationEmail), subjectKey, subjectVariables, model, templateName, locale, timeZoneGmt, replyToEmail, defaultSubject)
     }
 
     private String subjectWithSubjectKey(String subjectKey, List subjectVariables, Locale locale = Locale.ENGLISH, String defaultSubject = '') {
@@ -86,12 +111,13 @@ class AmazonSESTemplateService extends AmazonSESService {
         }
     }
 
-    String renderHtmlForTemplate(Locale locale, Map model, String destinationEmail, String templateName, int timeZoneGmt = 0) {
+    String renderHtmlForTemplate(Locale locale, Map model, List<String> destinationEmails, String templateName, int timeZoneGmt = 0) {
         def t = "${templatePath}/${templateName}" as String
         groovyPageRenderer.render(
                 model: model + [
                         locale  : locale,
-                        notificationEmail: destinationEmail,
+                        notificationEmail: destinationEmails.first(),
+                        destinationEmails: destinationEmails,
                         sentDate: new LocalDateTime().plusMinutes((timeZoneGmt * 60).toInteger()).toDate()
                 ],
                 template: t
