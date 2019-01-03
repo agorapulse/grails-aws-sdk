@@ -64,6 +64,10 @@ class AmazonSQSService implements InitializingBean  {
         if (serviceConfig?.visibilityTimeout) {
             createQueueRequest.attributes['VisibilityTimeout'] = serviceConfig.visibilityTimeout.toString()
         }
+        if (serviceConfig?.fifo) {
+            createQueueRequest.attributes['FifoQueue'] = Boolean.valueOf(serviceConfig.fifo.toString())
+        }
+
         String queueUrl = client.createQueue(createQueueRequest).queueUrl
         log.debug "Queue created (queueUrl=$queueUrl)"
         addQueue(queueUrl)
