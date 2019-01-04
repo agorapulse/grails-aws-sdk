@@ -32,6 +32,7 @@ class UploadService {
             connection.setRequestProperty('Content-Type', 'application/x-www-form-urlencoded')
             connection.setRequestProperty('Accept', '*/*')
             connection.setRequestProperty('Accept-Encoding', 'gzip, deflate')
+            connection.addRequestProperty("User-Agent", "Java")
             connection.connectTimeout = CONNECT_TIMEOUT
             connection.readTimeout = READ_TIMEOUT
             int status = connection.getResponseCode();
@@ -41,8 +42,9 @@ class UploadService {
                 url = new URL(connection.getHeaderField('Location'))
             }
             connection.disconnect()
-
+            
             URLConnection redirectConnection = url.openConnection()
+            redirectConnection.addRequestProperty("User-Agent", "Java")
             redirectConnection.connectTimeout = CONNECT_TIMEOUT
             redirectConnection.readTimeout = READ_TIMEOUT
 
