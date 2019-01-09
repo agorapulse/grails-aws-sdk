@@ -111,6 +111,10 @@ class AmazonSESTemplateService extends AmazonSESService {
         }
     }
 
+    String renderHtmlForTemplate(Locale locale, Map model, String destinationEmail, String templateName, int timeZoneGmt = 0) {
+        renderHtmlForTemplate(locale, model, Collections.singletonList(destinationEmail), templateName, timeZoneGmt)
+    }
+
     String renderHtmlForTemplate(Locale locale, Map model, List<String> destinationEmails, String templateName, int timeZoneGmt = 0) {
         def t = "${templatePath}/${templateName}" as String
         groovyPageRenderer.render(
