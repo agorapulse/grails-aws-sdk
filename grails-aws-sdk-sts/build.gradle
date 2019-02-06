@@ -1,0 +1,25 @@
+apply from: "../gradle/grails.commons.gradle"
+
+dependencies {
+    compile "org.grails:grails-web"
+
+    // Latest AWS SDK STS lib
+    compile "com.amazonaws:aws-java-sdk-sts:$awsJavaSdkVersion"
+
+    provided "org.springframework.boot:spring-boot-starter-tomcat"
+}
+
+grailsPublish {
+    user = System.getenv("BINTRAY_USER") ?: ''
+    key = System.getenv("BINTRAY_KEY") ?: ''
+    userOrg = 'agorapulse'
+    githubSlug = "agorapulse/grails-$project.name"
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "AWS SDK STS"
+    desc = "Grails AWS SDK STS plugin"
+    developers = [benorama:"Benoit Hediard", musketyr: "Vladimir Orany"]
+    portalUser = System.getenv("GRAILS_PORTAL_USER") ?: ''
+    portalPassword = System.getenv("GRAILS_PORTAL_PASSWORD") ?: ''
+}
