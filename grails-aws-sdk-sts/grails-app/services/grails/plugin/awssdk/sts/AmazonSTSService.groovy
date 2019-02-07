@@ -2,6 +2,7 @@ package grails.plugin.awssdk.sts
 
 import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.regions.Region
+import com.amazonaws.services.securitytoken.AWSSecurityTokenService
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest
@@ -16,11 +17,11 @@ class AmazonSTSService implements InitializingBean {
     static SERVICE_NAME = 'sts'
 
     GrailsApplication grailsApplication
-    AWSSecurityTokenServiceClient client
+    AWSSecurityTokenService client
 
     void afterPropertiesSet() throws Exception {
         // Set region
-        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
+        Region region = AwsClientUtil.buildRegion(config, serviceConfig) as Region
         assert region?.isServiceSupported(SERVICE_NAME)
 
         // Create client
