@@ -50,7 +50,7 @@ class AmazonSQSService implements InitializingBean  {
      * @param queueName
      * @return
      */
-    String createQueue(String queueName) {
+    String createQueue(String queueName, Map<String, String> attributesOverrides = [:]) {
         CreateQueueRequest createQueueRequest = new CreateQueueRequest(queueName)
         if (serviceConfig?.delaySeconds) {
             createQueueRequest.attributes['DelaySeconds'] = serviceConfig.delaySeconds.toString()
@@ -65,8 +65,10 @@ class AmazonSQSService implements InitializingBean  {
             createQueueRequest.attributes['VisibilityTimeout'] = serviceConfig.visibilityTimeout.toString()
         }
         if (serviceConfig?.fifo) {
-            createQueueRequest.attributes['FifoQueue'] = Boolean.valueOf(serviceConfig.fifo.toString())
+            createQueueRequest.attributes['FifoQueue'] = serviceConfig.fifo.toString()
         }
+
+        createQueueRequest.attributes.putAll(attributesOverrides)
 
         String queueUrl = client.createQueue(createQueueRequest).queueUrl
         log.debug "Queue created (queueUrl=$queueUrl)"
