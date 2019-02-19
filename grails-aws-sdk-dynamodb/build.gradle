@@ -6,6 +6,7 @@ dependencies {
 
     // Latest AWS SDK DynamoDB lib
     compile "com.amazonaws:aws-java-sdk-dynamodb:$awsJavaSdkVersion"
+    compileOnly "com.amazonaws:amazon-dax-client:1.0.202017.0"
 }
 
 grailsPublish {
