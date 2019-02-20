@@ -1,6 +1,10 @@
 package grails.plugin.awssdk.dynamodb
 
 import agorapulse.libs.awssdk.util.AwsClientUtil
+import com.amazon.dax.client.dynamodbv2.AmazonDaxClientBuilder
+import com.amazon.dax.client.dynamodbv2.ClientConfig
+import com.amazonaws.ClientConfiguration
+import com.amazonaws.Protocol
 import com.amazonaws.regions.Region
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
@@ -14,13 +18,15 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 
 @Slf4j
 abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
     static SERVICE_NAME = AmazonDynamoDB.ENDPOINT_PREFIX
 
-    static String INDEX_NAME_SUFFIX = 'Index' // Specific ranges ending with 'Index' are String concatenated indexes, to keep ordering (ex.: createdByUserIdIndex=37641047|2011-02-21T17:15:23.000Z|2424353910)
+    static String INDEX_NAME_SUFFIX = 'Index'
+    // Specific ranges ending with 'Index' are String concatenated indexes, to keep ordering (ex.: createdByUserIdIndex=37641047|2011-02-21T17:15:23.000Z|2424353910)
     static int DEFAULT_QUERY_LIMIT = 20
     static int DEFAULT_COUNT_LIMIT = 100
     static String ID_SEPARATOR = '_'
@@ -48,12 +54,30 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
         Region region = AwsClientUtil.buildRegion(config, serviceConfig)
         assert region?.isServiceSupported(SERVICE_NAME)
 
-        // Create client
-        client = AmazonDynamoDBClientBuilder.standard()
-                .withRegion(region.name)
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                .build()
+        String daxEndpoint = config?.dax?.endpoint
+
+        if (daxEndpoint) {
+            ClientConfig clientConfig = buildClientConfiguration(config, serviceConfig)
+                    .withRegion(region)
+                    .withEndpoints(daxEndpoint)
+
+            client = AmazonDaxClientBuilder
+                    .standard()
+                    .withEndpointConfiguration(daxEndpoint)
+                    .withRegion(region.name)
+                    .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                    .withClientConfiguration(clientConfig)
+                    .build()
+        } else {
+            // Create client
+            client = AmazonDynamoDBClientBuilder
+                    .standard()
+                    .withRegion(region.name)
+                    .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                    .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
+                    .build()
+        }
+
         mapper = new DynamoDBMapper(client)
     }
 
@@ -196,7 +220,8 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             // Check if the table exists
             client.describeTable(table.tableName())
         } catch (ResourceNotFoundException e) {
-            CreateTableRequest createTableRequest = mapper.generateCreateTableRequest(classToCreate) // new CreateTableRequest().withTableName(table.tableName())
+            CreateTableRequest createTableRequest = mapper.generateCreateTableRequest(classToCreate)
+            // new CreateTableRequest().withTableName(table.tableName())
 
             // ProvisionedThroughput
             ProvisionedThroughput provisionedThroughput = new ProvisionedThroughput()
@@ -273,7 +298,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             settings.batchEnabled = true
         }
 
-        if (settings.batchEnabled  && itemsToDelete.size() > 1) {
+        if (settings.batchEnabled && itemsToDelete.size() > 1) {
             itemsToDelete.collate(WRITE_BATCH_SIZE).each { List batchItems ->
                 log.debug("Deleting items from DynamoDB ${batchItems}")
                 mapper.batchDelete(batchItems)
@@ -507,7 +532,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
                                       Map settings = [:]) {
         if (rangeKeyValue == 'ANY' || !operator) {
             if (!rangeKeyName.endsWith(INDEX_NAME_SUFFIX)) {
-                rangeKeyName =+ INDEX_NAME_SUFFIX
+                rangeKeyName = +INDEX_NAME_SUFFIX
             }
             queryByConditions(hashKey, [:], settings, rangeKeyName)
         } else {
@@ -555,7 +580,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             }
 
             // Query all
-            Map lastEvaluatedKey = [items:'none']
+            Map lastEvaluatedKey = [items: 'none']
             resultPage.results = []
             while (lastEvaluatedKey) {
                 QueryResultPage currentPage = mapper.queryPage(itemClass, query)
@@ -666,7 +691,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             assert rangeKeyDates['before'].after(rangeKeyDates['after'])
             Date afterDate = rangeKeyDates['after'] as Date
             Date date = rangeKeyDates['before'] as Date
-            while(date.after(afterDate + 1)) {
+            while (date.after(afterDate + 1)) {
                 String dateKey = serializeDailyDate(date)
                 if (itemByDay[dateKey]) {
                     resultPage.results << itemByDay[dateKey]
@@ -759,7 +784,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
         UpdateItemRequest request = new UpdateItemRequest(
                 tableName: mainTable.tableName(),
                 key: [
-                        (hashKeyName): buildAttributeValue(hashKey),
+                        (hashKeyName) : buildAttributeValue(hashKey),
                         (rangeKeyName): buildAttributeValue(rangeKey)
                 ],
                 returnValues: ReturnValue.UPDATED_NEW
@@ -790,7 +815,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
         UpdateItemRequest request = new UpdateItemRequest(
                 tableName: mainTable.tableName(),
                 key: [
-                        (hashKeyName): buildAttributeValue(hashKey),
+                        (hashKeyName) : buildAttributeValue(hashKey),
                         (rangeKeyName): buildAttributeValue(rangeKey)
                 ],
                 returnValues: ReturnValue.UPDATED_NEW
@@ -1057,6 +1082,29 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
     def getServiceConfig() {
         config[SERVICE_NAME]
+    }
+
+    static ClientConfig buildClientConfiguration(defaultConfig, serviceConfig) {
+        Map config = [
+                connectionTimeout: defaultConfig.connectionTimeout ?: 0,
+                maxConnections: defaultConfig.maxConnections ?: 0,
+                maxErrorRetry: defaultConfig.maxErrorRetry ?: 0,
+                socketTimeout: defaultConfig.socketTimeout ?: 0,
+        ]
+        if (serviceConfig) {
+            if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
+            if (serviceConfig.maxConnections) config.maxConnections = serviceConfig.maxConnections
+            if (serviceConfig.maxErrorRetry) config.maxErrorRetry = serviceConfig.maxErrorRetry
+            if (serviceConfig.socketTimeout) config.socketTimeout = serviceConfig.socketTimeout
+        }
+
+        ClientConfig clientConfiguration = new ClientConfig()
+        if (config.connectionTimeout) clientConfiguration.withConnectTimeout(config.connectionTimeout, TimeUnit.MILLISECONDS)
+        if (config.maxConnections) clientConfiguration.withMaxPendingConnectsPerHost(config.maxConnections)
+        if (config.maxErrorRetry) clientConfiguration.withReadRetries(config.maxErrorRetry)
+        if (config.maxErrorRetry) clientConfiguration.withReadRetries(config.maxErrorRetry)
+        if (config.socketTimeout) clientConfiguration.withRequestTimeout(config.socketTimeout, TimeUnit.MILLISECONDS)
+        clientConfiguration
     }
 
 }

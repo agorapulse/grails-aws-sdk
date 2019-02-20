@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
   // ...
-  compile 'org.grails.plugins:aws-sdk-cognito:2.1.18'
+  compile 'org.grails.plugins:aws-sdk-cognito:2.2.10'
   // ...
  }
 ```
