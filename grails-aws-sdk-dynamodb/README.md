@@ -292,6 +292,12 @@ Services extending `AbstractDynamoDBService` will automatically access DAX inste
 configuration property is set (including the DAX endpoint port. Ensure that the IAM account or role has access to the DAX endpoint and the application is running
 in the same VPC.
 
+You need to add additional dependency to your `build.gradle` file:
+
+```
+compile "com.amazonaws:amazon-dax-client:1.0.202017.0"
+```
+
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-aws-sdk/issues) section on GitHub.
