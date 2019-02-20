@@ -38,7 +38,7 @@ repositories {
 
 dependencies {
   ...
-  compile 'org.grails.plugins:aws-sdk-dynamodb:2.1.5'
+  compile 'org.grails.plugins:aws-sdk-dynamodb:2.2.10'
   ...
 ```
 
@@ -286,6 +286,11 @@ For more info, AWS SDK for Java documentation is located here:
 
 * [AWS SDK for Java](http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/index.html)
 
+## DynamoDB Accelerator (DAX)
+
+Services extending `AbstractDynamoDBService` will automatically access DAX instead of DynamoDB when `grails.plugin.awssdk.dax.endpoint` 
+configuration property is set (including the DAX endpoint port. Ensure that the IAM account or role has access to the DAX endpoint and the application is running
+in the same VPC.
 
 # Bugs
 

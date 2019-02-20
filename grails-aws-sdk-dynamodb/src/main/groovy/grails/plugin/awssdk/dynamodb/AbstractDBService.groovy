@@ -57,13 +57,16 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
         String daxEndpoint = config?.dax?.endpoint
 
         if (daxEndpoint) {
+            ClientConfig clientConfig = buildClientConfiguration(config, serviceConfig)
+                    .withRegion(region)
+                    .withEndpoints(daxEndpoint)
+
             client = AmazonDaxClientBuilder
                     .standard()
                     .withEndpointConfiguration(daxEndpoint)
                     .withRegion(region.name)
                     .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-
-                    .withClientConfiguration(buildClientConfiguration(config, serviceConfig))
+                    .withClientConfiguration(clientConfig)
                     .build()
         } else {
             // Create client
