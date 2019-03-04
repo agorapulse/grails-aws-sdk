@@ -269,6 +269,42 @@ class AmazonSQSService implements InitializingBean  {
      * @param messageBody
      * @return
      */
+    String sendMessage(String messageBody,
+                       @DelegatesTo(value = SendMessageRequest, strategy = Closure.DELEGATE_FIRST)
+                       Closure messageConfiguration
+    ) {
+        assertDefaultQueueName()
+        sendMessage(defaultQueueName, messageBody, messageConfiguration)
+    }
+
+    /**
+     *
+     * @param queueName
+     * @param messageBody
+     * @param delaySeconds
+     * @return
+     */
+    String sendMessage(String queueName,
+                       String messageBody,
+                       @DelegatesTo(value = SendMessageRequest, strategy = Closure.DELEGATE_FIRST)
+                       Closure messageConfiguration
+    ) {
+        String queueUrl = getQueueUrl(queueName)
+
+        SendMessageRequest request = new SendMessageRequest(queueUrl, messageBody)
+
+        request.with messageConfiguration
+
+        String messageId = client.sendMessage(request).messageId
+        log.debug "Message sent (messageId=$messageId)"
+        messageId
+    }
+
+    /**
+     *
+     * @param messageBody
+     * @return
+     */
     String sendMessage(String messageBody) {
         assertDefaultQueueName()
         sendMessage(defaultQueueName, messageBody)
