@@ -38,7 +38,7 @@ repositories {
 
 dependencies {
   ...
-  compile 'org.grails.plugins:aws-sdk-dynamodb:2.1.5'
+  compile 'org.grails.plugins:aws-sdk-dynamodb:2.2.11'
   ...
 ```
 

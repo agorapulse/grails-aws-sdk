@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
   ...
-  compile 'org.grails.plugins:aws-sdk-sns:2.1.5'
+  compile 'org.grails.plugins:aws-sdk-sns:2.2.11'
   ...
 }
 ```

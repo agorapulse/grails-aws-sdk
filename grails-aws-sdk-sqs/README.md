@@ -38,7 +38,7 @@ repositories {
 
 dependencies {
   ...
-  compile 'org.grails.plugins:aws-sdk-sqs:2.1.5'
+  compile 'org.grails.plugins:aws-sdk-sqs:2.2.11'
   ...
 ```
 
@@ -142,6 +142,9 @@ The plugin provides the following Grails artefact:
 // Create queue
 amazonSQSService.createQueue(queueName)
 
+// Create with additional arguments
+amazonSQSService.createQueue(queueName, [FifoQueue: 'true', ContentBasedDeduplication: 'true'])
+
 // List queue names
 amazonSQSService.listQueueNames()
 
@@ -161,8 +164,15 @@ amazonSQSService.deleteQueue(queueName)
 ```groovy
 // Send message
 amazonSQSService.sendMessage(queueName, messageBody)
+
 // Or if you have define default queue
 amazonSQSService.sendMessage(messageBody)
+
+// Or specify more attributes to the messages
+amazonSQSService.sendMessage(messageBody) {
+    messsageGroupId = 'my-group-id'
+    messageDeduplicationId = 'my-deduplication-id'
+}
 
 // Receive and delete messages
 messages = amazonSQSService.receiveMessages(queueName, maxNumberOfMessages, visibilityTimeout, waitTimeSeconds)
