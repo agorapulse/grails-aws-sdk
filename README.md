@@ -1,7 +1,7 @@
 AWS SDK Grails Plugin
 =====================
 
-[![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)
+[![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)  [ ![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-dynamodb/images/download.svg?version=2.2.11) ](https://bintray.com/agorapulse/plugins/aws-sdk-dynamodb/2.2.11/link)
 
 # Introduction
 
