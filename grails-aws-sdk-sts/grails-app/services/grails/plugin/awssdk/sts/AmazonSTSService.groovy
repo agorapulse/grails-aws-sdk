@@ -8,6 +8,8 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult
 import grails.core.GrailsApplication
+import groovy.transform.stc.ClosureParams
+import groovy.transform.stc.SimpleType
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
 
@@ -40,11 +42,21 @@ class AmazonSTSService implements InitializingBean {
         config[SERVICE_NAME]
     }
 
-    AssumeRoleResult assumeRole(String sessionName, String roleArn, int durationInSeconds) {
+    AssumeRoleResult assumeRole(
+            String sessionName,
+            String roleArn,
+            int durationInSeconds,
+            @DelegatesTo(value = AssumeRoleRequest, strategy = Closure.DELEGATE_FIRST)
+            @ClosureParams(value = SimpleType, options = 'com.amazonaws.services.securitytoken.model.AssumeRoleRequest')
+            Closure additionParameters = Closure.IDENTITY
+    ) {
         AssumeRoleRequest request = new AssumeRoleRequest()
                 .withRoleSessionName(sessionName)
                 .withRoleArn(roleArn)
                 .withDurationSeconds(durationInSeconds)
+
+        request.with additionParameters
+
         client.assumeRole(request)
     }
 }
