@@ -1,10 +1,6 @@
 package grails.plugin.awssdk.dynamodb
 
 import agorapulse.libs.awssdk.util.AwsClientUtil
-import com.amazon.dax.client.dynamodbv2.AmazonDaxClientBuilder
-import com.amazon.dax.client.dynamodbv2.ClientConfig
-import com.amazonaws.ClientConfiguration
-import com.amazonaws.Protocol
 import com.amazonaws.regions.Region
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
@@ -18,7 +14,6 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
 
 @Slf4j
 abstract class AbstractDBService<TItemClass> implements InitializingBean {
@@ -57,17 +52,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
         String daxEndpoint = config?.dax?.endpoint
 
         if (daxEndpoint) {
-            ClientConfig clientConfig = buildClientConfiguration(config, serviceConfig)
-                    .withRegion(region)
-                    .withEndpoints(daxEndpoint)
-
-            client = AmazonDaxClientBuilder
-                    .standard()
-                    .withEndpointConfiguration(daxEndpoint)
-                    .withRegion(region.name)
-                    .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                    .withClientConfiguration(clientConfig)
-                    .build()
+            client = DaxHelper.buildDaxClient(daxEndpoint, region, config, serviceConfig)
         } else {
             // Create client
             client = AmazonDynamoDBClientBuilder
@@ -1082,29 +1067,6 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
     def getServiceConfig() {
         config[SERVICE_NAME]
-    }
-
-    static ClientConfig buildClientConfiguration(defaultConfig, serviceConfig) {
-        Map config = [
-                connectionTimeout: defaultConfig.connectionTimeout ?: 0,
-                maxConnections: defaultConfig.maxConnections ?: 0,
-                maxErrorRetry: defaultConfig.maxErrorRetry ?: 0,
-                socketTimeout: defaultConfig.socketTimeout ?: 0,
-        ]
-        if (serviceConfig) {
-            if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
-            if (serviceConfig.maxConnections) config.maxConnections = serviceConfig.maxConnections
-            if (serviceConfig.maxErrorRetry) config.maxErrorRetry = serviceConfig.maxErrorRetry
-            if (serviceConfig.socketTimeout) config.socketTimeout = serviceConfig.socketTimeout
-        }
-
-        ClientConfig clientConfiguration = new ClientConfig()
-        if (config.connectionTimeout) clientConfiguration.withConnectTimeout(config.connectionTimeout, TimeUnit.MILLISECONDS)
-        if (config.maxConnections) clientConfiguration.withMaxPendingConnectsPerHost(config.maxConnections)
-        if (config.maxErrorRetry) clientConfiguration.withReadRetries(config.maxErrorRetry)
-        if (config.maxErrorRetry) clientConfiguration.withReadRetries(config.maxErrorRetry)
-        if (config.socketTimeout) clientConfiguration.withRequestTimeout(config.socketTimeout, TimeUnit.MILLISECONDS)
-        clientConfiguration
     }
 
 }
