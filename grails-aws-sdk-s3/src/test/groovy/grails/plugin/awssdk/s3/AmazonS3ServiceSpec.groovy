@@ -3,11 +3,15 @@ package grails.plugin.awssdk.s3
 import com.amazonaws.AmazonClientException
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.AmazonS3Exception
+import com.amazonaws.services.s3.model.CopyObjectRequest
+import com.amazonaws.services.s3.model.CopyObjectResult
 import com.amazonaws.services.s3.model.ObjectListing
 import com.amazonaws.services.s3.model.ObjectMetadata
+import com.amazonaws.services.s3.model.ObjectTagging
 import com.amazonaws.services.s3.model.S3ObjectSummary
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class AmazonS3ServiceSpec extends Specification implements ServiceUnitTest<AmazonS3Service> {
 
@@ -288,6 +292,35 @@ class AmazonS3ServiceSpec extends Specification implements ServiceUnitTest<Amazo
         1 * service.client.putObject(BUCKET_NAME, _, _, _) >> {
             throw new AmazonClientException('some exception')
         }
+    }
+
+    void 'Moving object'() {
+        when:
+            String newUrl = service.moveObject(BUCKET_NAME, 'uploads/key', BUCKET_NAME.reverse(), 'files/key')
+        then:
+            newUrl == "https://s3-eu-west-1.amazonaws.com/${BUCKET_NAME}/files/key"
+
+            1 * service.client.copyObject({ CopyObjectRequest request ->
+                request.sourceBucketName == BUCKET_NAME &&
+                        request.sourceKey == 'uploads/key' &&
+                        request.destinationBucketName == BUCKET_NAME.reverse() &&
+                        request.destinationKey == 'files/key'
+            } as CopyObjectRequest) >> new CopyObjectResult()
+            1 * service.client.deleteObject(BUCKET_NAME, 'uploads/key')
+            1 * service.client.getUrl(BUCKET_NAME.reverse(), 'files/key') >> new URL("https://s3-eu-west-1.amazonaws.com/${BUCKET_NAME}/files/key")
+    }
+
+    @Unroll
+    void 'extract bucket name #bucket and key #key from uri #uri'() {
+        expect:
+            AmazonS3Service.getBucketFromUri(uri) == bucket
+            AmazonS3Service.getKeyFromUri(uri) == key
+        where:
+            uri                                                                                                                                 | bucket                        | key
+            'https://s3.eu-west-1.amazonaws.com/publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'  | 'publishing.agorapulse.com'   | 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
+            'publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'                                     | 'publishing.agorapulse.com'   | 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
+            'https://publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'                             | 'publishing.agorapulse.com'   | 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
+
     }
 
 }

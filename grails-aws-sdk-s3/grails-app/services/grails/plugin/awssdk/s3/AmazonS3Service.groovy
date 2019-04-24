@@ -11,6 +11,8 @@ import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.transfer.TransferManager
 import com.amazonaws.services.s3.transfer.Upload
 import grails.core.GrailsApplication
+import groovy.transform.stc.ClosureParams
+import groovy.transform.stc.SimpleType
 import groovy.util.logging.Slf4j
 import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.InitializingBean
@@ -449,6 +451,62 @@ class AmazonS3Service implements InitializingBean {
                         CannedAccessControlList cannedAcl = CannedAccessControlList.PublicRead) {
         assertDefaultBucketName()
         transferFile(defaultBucketName, path, file, cannedAcl)
+    }
+
+    /**
+     * Move S3 object to different location (key).
+     *
+     * Moving objects is useful in combination with <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html">S3 Lifecycle Configurations</a> for prefixes.
+     *
+     * @param sourceBucketName      the name of the source bucket
+     * @param sourceKey             the key of the source object
+     * @param destinationBucketName the name of the destination bucket
+     * @param destinationKey        the key of the destination object
+     * @return the destination URL or <code>null</code> if the file wasn't moved
+     */
+    String moveObject(
+            String sourceBucketName,
+            String sourceKey,
+            String destinationBucketName,
+            String destinationKey
+    ) {
+        try {
+            CopyObjectRequest request = new CopyObjectRequest(sourceBucketName, sourceKey, destinationBucketName, destinationKey)
+            client.copyObject(request)
+            client.deleteObject(sourceBucketName, sourceKey)
+            return client.getUrl(destinationBucketName, destinationKey)
+        } catch (AmazonClientException e) {
+            log.error("Exception moving object $sourceBucketName/$sourceKey to $destinationBucketName/$destinationKey", e)
+            return null
+        }
+    }
+
+    static String getBucketFromUri(String aURI) {
+        URI uri = new URI(aURI)
+        String path = uri.path.startsWith('/') ? uri.path.substring(1, uri.path.length()) : uri.path
+        if (uri.host) {
+            // direct bucket URI not using any CNAME
+            if (uri.host.endsWith('amazonaws.com')) {
+                return path.substring(0, path.indexOf('/'))
+            }
+            return uri.host
+        }
+        // consider the bucket name is using CNAME of the same name as the bucket
+        return path.substring(0, path.indexOf('/'))
+    }
+
+    static String getKeyFromUri(String aURI) {
+        URI uri = new URI(aURI)
+        String path = uri.path.startsWith('/') ? uri.path.substring(1, uri.path.length()) : uri.path
+        if (uri.host) {
+            // direct bucket URI not using any CNAME
+            if (uri.host.endsWith('amazonaws.com')) {
+                return path.substring(path.indexOf('/') + 1, path.length())
+            }
+            return path
+        }
+        // consider the bucket name is using CNAME of the same name as the bucket
+        return path.substring(path.indexOf('/') + 1, path.length())
     }
 
     // PRIVATE
