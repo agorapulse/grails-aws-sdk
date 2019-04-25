@@ -2,13 +2,17 @@ package grails.plugin.awssdk.s3
 
 import com.amazonaws.AmazonClientException
 import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.model.AccessControlList
 import com.amazonaws.services.s3.model.AmazonS3Exception
 import com.amazonaws.services.s3.model.CopyObjectRequest
 import com.amazonaws.services.s3.model.CopyObjectResult
+import com.amazonaws.services.s3.model.GetObjectTaggingResult
 import com.amazonaws.services.s3.model.ObjectListing
 import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.model.ObjectTagging
+import com.amazonaws.services.s3.model.S3Object
 import com.amazonaws.services.s3.model.S3ObjectSummary
+import com.amazonaws.services.s3.model.Tag
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -308,19 +312,23 @@ class AmazonS3ServiceSpec extends Specification implements ServiceUnitTest<Amazo
             } as CopyObjectRequest) >> new CopyObjectResult()
             1 * service.client.deleteObject(BUCKET_NAME, 'uploads/key')
             1 * service.client.getUrl(BUCKET_NAME.reverse(), 'files/key') >> new URL("https://s3-eu-west-1.amazonaws.com/${BUCKET_NAME}/files/key")
+            1 * service.client.getObject(BUCKET_NAME, 'uploads/key') >> new S3Object(taggingCount: 1)
+            1 * service.client.getObjectAcl(BUCKET_NAME, 'uploads/key') >> new AccessControlList()
+            1 * service.client.getObjectTagging(_) >> new GetObjectTaggingResult([new Tag('key', 'value')])
     }
 
     @Unroll
-    void 'extract bucket name #bucket and key #key from uri #uri'() {
+    void 'extract bucket name from uri #uri'() {
         expect:
-            AmazonS3Service.getBucketFromUri(uri) == bucket
-            AmazonS3Service.getKeyFromUri(uri) == key
+            AmazonS3Service.getBucketFromUri(uri) == 'publishing.agorapulse.com'
+            AmazonS3Service.getKeyFromUri(uri) == 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
         where:
-            uri                                                                                                                                 | bucket                        | key
-            'https://s3.eu-west-1.amazonaws.com/publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'  | 'publishing.agorapulse.com'   | 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
-            'publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'                                     | 'publishing.agorapulse.com'   | 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
-            'https://publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'                             | 'publishing.agorapulse.com'   | 'publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png'
-
+            uri << [
+                    'https://s3.eu-west-1.amazonaws.com/publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png',
+                    'publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png',
+                    'https://publishing.agorapulse.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png',
+                    'http://publishing.agorapulse.com.s3.eu-west-1.amazonaws.com/publishingItemMedia/109098/f02f2a8c-1b80-50cb-f9ef-2d7850ed0525.png',
+            ]
     }
 
 }
