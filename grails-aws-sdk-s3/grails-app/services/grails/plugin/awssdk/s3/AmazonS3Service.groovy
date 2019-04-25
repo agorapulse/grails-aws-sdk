@@ -472,6 +472,22 @@ class AmazonS3Service implements InitializingBean {
     ) {
         try {
             CopyObjectRequest request = new CopyObjectRequest(sourceBucketName, sourceKey, destinationBucketName, destinationKey)
+
+            S3Object object = client.getObject(sourceBucketName, sourceKey)
+
+            if (object.taggingCount) {
+                GetObjectTaggingRequest taggingRequest = new GetObjectTaggingRequest(sourceBucketName, sourceKey)
+                GetObjectTaggingResult taggingResult = client.getObjectTagging(taggingRequest)
+                request.withNewObjectTagging(new ObjectTagging(taggingResult.tagSet))
+            }
+
+            request.withNewObjectMetadata(object.objectMetadata)
+
+            AccessControlList acl = client.getObjectAcl(sourceBucketName, sourceKey)
+            AccessControlList newAcls = new AccessControlList()
+            newAcls.grantAllPermissions(*acl.grantsAsList)
+            request.withAccessControlList(newAcls)
+
             client.copyObject(request)
             client.deleteObject(sourceBucketName, sourceKey)
             return client.getUrl(destinationBucketName, destinationKey)
@@ -487,7 +503,10 @@ class AmazonS3Service implements InitializingBean {
         if (uri.host) {
             // direct bucket URI not using any CNAME
             if (uri.host.endsWith('amazonaws.com')) {
-                return path.substring(0, path.indexOf('/'))
+                if (uri.host.startsWith('s3')) {
+                    return path.substring(0, path.indexOf('/'))
+                }
+                return uri.host.substring(0, uri.host.indexOf('.s3.'))
             }
             return uri.host
         }
@@ -500,7 +519,7 @@ class AmazonS3Service implements InitializingBean {
         String path = uri.path.startsWith('/') ? uri.path.substring(1, uri.path.length()) : uri.path
         if (uri.host) {
             // direct bucket URI not using any CNAME
-            if (uri.host.endsWith('amazonaws.com')) {
+            if (uri.host.endsWith('amazonaws.com') && uri.host.startsWith('s3')) {
                 return path.substring(path.indexOf('/') + 1, path.length())
             }
             return path
