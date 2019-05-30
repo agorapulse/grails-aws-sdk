@@ -470,10 +470,11 @@ class AmazonS3Service implements InitializingBean {
             String destinationBucketName,
             String destinationKey
     ) {
+        S3Object object
         try {
             CopyObjectRequest request = new CopyObjectRequest(sourceBucketName, sourceKey, destinationBucketName, destinationKey)
 
-            S3Object object = client.getObject(sourceBucketName, sourceKey)
+            object = client.getObject(sourceBucketName, sourceKey)
 
             if (object.taggingCount) {
                 GetObjectTaggingRequest taggingRequest = new GetObjectTaggingRequest(sourceBucketName, sourceKey)
@@ -494,6 +495,8 @@ class AmazonS3Service implements InitializingBean {
         } catch (AmazonClientException e) {
             log.error("Exception moving object $sourceBucketName/$sourceKey to $destinationBucketName/$destinationKey", e)
             return null
+        } finally {
+            object?.close()
         }
     }
 
