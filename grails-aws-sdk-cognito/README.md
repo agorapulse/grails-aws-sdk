@@ -34,6 +34,7 @@ Add plugin dependency to your `build.gradle`:
 repositories {
     // ...
     maven { url 'http://dl.bintray.com/agorapulse/libs' }
+    maven { url 'https://dl.bintray.com/agorapulse/plugins' }
     // ...
 }
 
