@@ -53,7 +53,7 @@ Create an AWS account [Amazon Web Services](http://aws.amazon.com/), in order to
 You can override the default AWS SDK for Java and Kinesis Client version by setting it in your _gradle.properties_:
 
 ```
-awsJavaSdkVersion=1.10.66
+awsJavaSdkVersion=1.11.592
 awsKinesisClientVersion=1.6.2
 ```
 
