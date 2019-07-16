@@ -61,7 +61,7 @@ Required permissions:
 You can override the default AWS SDK for Java version by setting it in your _gradle.properties_:
 
 ```
-awsJavaSdkVersion=1.10.66
+awsJavaSdkVersion=1.11.592
 ```
 
 ## Credentials
