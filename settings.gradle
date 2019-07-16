@@ -10,9 +10,9 @@ include (
         'grails-aws-sdk-sqs',
         'grails-aws-sdk-sts',
 
-/*        'groovy-aws-sdk-s3',
+        'groovy-aws-sdk-s3',
         'groovy-aws-sdk-ses',
-        'groovy-aws-sdk-util'*/
+        'groovy-aws-sdk-util'
 )
 
 project(":grails-aws-sdk-cognito").name = "aws-sdk-cognito"
@@ -24,6 +24,6 @@ project(":grails-aws-sdk-sns").name = "aws-sdk-sns"
 project(":grails-aws-sdk-sqs").name = "aws-sdk-sqs"
 project(":grails-aws-sdk-sts").name = "aws-sdk-sts"
 
-/*project(":groovy-aws-sdk-s3").name = "groovy-aws-sdk-s3"
+project(":groovy-aws-sdk-s3").name = "groovy-aws-sdk-s3"
 project(":groovy-aws-sdk-ses").name = "groovy-aws-sdk-ses"
-project(":groovy-aws-sdk-util").name = "groovy-aws-sdk-util"*/
+project(":groovy-aws-sdk-util").name = "groovy-aws-sdk-util"
