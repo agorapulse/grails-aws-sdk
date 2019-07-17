@@ -17,6 +17,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
 
 @Slf4j
 abstract class AbstractDBService<TItemClass> implements InitializingBean {
@@ -32,6 +33,8 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
     @Deprecated static String SERIALIZED_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     @Deprecated static String SERIALIZED_DATE_DAILY_FORMAT = "yyyy-MM-dd"
     @Deprecated static String SERIALIZED_DATE_TIMEZONE = 'GMT'
+
+    protected static final DateTimeFormatter ISO_FORMAT_MILLIS = new DateTimeFormatterBuilder().appendInstant(3).toFormatter();
 
     protected static int BATCH_DELETE_LIMIT = 100
     protected static int WRITE_BATCH_SIZE = 100 // Max number of elements to write at once in DynamoDB (mixed tables)
@@ -827,7 +830,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
     }
 
     static String serializeDate(Date date) {
-        DateTimeFormatter.ISO_INSTANT.format(date.toInstant())
+        ISO_FORMAT_MILLIS.format(date.toInstant())
     }
 
     static String serializeDailyDate(Date date) {
