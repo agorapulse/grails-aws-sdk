@@ -13,7 +13,10 @@ import org.springframework.beans.factory.InitializingBean
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.text.ParseException
-import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 @Slf4j
 abstract class AbstractDBService<TItemClass> implements InitializingBean {
@@ -25,9 +28,10 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
     static int DEFAULT_QUERY_LIMIT = 20
     static int DEFAULT_COUNT_LIMIT = 100
     static String ID_SEPARATOR = '_'
-    static String SERIALIZED_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    static String SERIALIZED_DATE_DAILY_FORMAT = "yyyy-MM-dd"
-    static String SERIALIZED_DATE_TIMEZONE = 'GMT'
+
+    @Deprecated static String SERIALIZED_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    @Deprecated static String SERIALIZED_DATE_DAILY_FORMAT = "yyyy-MM-dd"
+    @Deprecated static String SERIALIZED_DATE_TIMEZONE = 'GMT'
 
     protected static int BATCH_DELETE_LIMIT = 100
     protected static int WRITE_BATCH_SIZE = 100 // Max number of elements to write at once in DynamoDB (mixed tables)
@@ -815,27 +819,19 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
     }
 
     static Date deserializeDate(String date) throws ParseException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat(SERIALIZED_DATE_FORMAT)
-        dateFormatter.timeZone = TimeZone.getTimeZone(SERIALIZED_DATE_TIMEZONE)
-        dateFormatter.parse(date)
+        Date.from(Instant.parse(date))
     }
 
     static Date deserializeDayDate(String date) throws ParseException {
-        SimpleDateFormat dateDailyFormatter = new SimpleDateFormat(SERIALIZED_DATE_DAILY_FORMAT)
-        dateDailyFormatter.timeZone = TimeZone.getTimeZone(SERIALIZED_DATE_TIMEZONE)
-        dateDailyFormatter.parse(date)
+        Date.from(LocalDate.parse(date).atStartOfDay(ZoneOffset.UTC).toInstant())
     }
 
     static String serializeDate(Date date) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat(SERIALIZED_DATE_FORMAT)
-        dateFormatter.timeZone = TimeZone.getTimeZone(SERIALIZED_DATE_TIMEZONE)
-        dateFormatter.format(date)
+        DateTimeFormatter.ISO_INSTANT.format(date.toInstant())
     }
 
     static String serializeDailyDate(Date date) {
-        SimpleDateFormat dateDailyFormatter = new SimpleDateFormat(SERIALIZED_DATE_DAILY_FORMAT)
-        dateDailyFormatter.timeZone = TimeZone.getTimeZone(SERIALIZED_DATE_TIMEZONE)
-        dateDailyFormatter.format(date)
+        DateTimeFormatter.ISO_LOCAL_DATE.withZone(ZoneOffset.UTC).format(date.toInstant())
     }
 
     /**
