@@ -4,10 +4,6 @@ import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 
-/**
- * @deprecated use <code>java.time</code> classes directly
- */
-@Deprecated
 class JsonDateUtils {
 
     public static final DateTimeFormatter ISO_FORMAT_MILLIS = new DateTimeFormatterBuilder().appendInstant(3).toFormatter();
