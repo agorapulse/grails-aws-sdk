@@ -2,7 +2,7 @@ Grails AWS SDK Kinesis Plugin
 =============================
 
 [![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)
-[![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-kinesis/images/download.svg)](https://bintray.com/agorapulse/plugins/aws-sdk-kinesis/_latestVersion)
+[![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-dynamodb/images/download.svg) ](https://bintray.com/agorapulse/plugins/aws-sdk-dynamodb/_latestVersion)
 
 # Introduction
 
