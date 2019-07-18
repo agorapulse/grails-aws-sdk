@@ -1,27 +1,23 @@
 package grails.plugin.awssdk.util
 
-import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
 
+/**
+ * @deprecated use <code>java.time</code> classes directly
+ */
+@Deprecated
 class JsonDateUtils {
 
-    static JSON_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-
-    static SimpleDateFormat jsonDateFormatter
+    public static final DateTimeFormatter ISO_FORMAT_MILLIS = new DateTimeFormatterBuilder().appendInstant(3).toFormatter();
 
     static Date parseJsonDate(String date) {
-        if (!jsonDateFormatter) {
-            jsonDateFormatter = new SimpleDateFormat(JSON_DATE_FORMAT)
-            jsonDateFormatter.timeZone = TimeZone.getTimeZone('GMT')
-        }
-        jsonDateFormatter.parse(date)
+        Date.from(Instant.parse(date))
     }
 
     static String formatDate(Date date) {
-        if (!jsonDateFormatter) {
-            jsonDateFormatter = new SimpleDateFormat(JSON_DATE_FORMAT)
-            jsonDateFormatter.timeZone = TimeZone.getTimeZone('GMT')
-        }
-        jsonDateFormatter.format(date)
+        ISO_FORMAT_MILLIS.format(date.toInstant())
     }
 
 }
