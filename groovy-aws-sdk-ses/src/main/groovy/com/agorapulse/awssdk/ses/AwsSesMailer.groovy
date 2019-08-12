@@ -3,11 +3,15 @@ package com.agorapulse.awssdk.ses
 import com.agorapulse.awssdk.AwsSdkUtils
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
+import com.amazonaws.ClientConfiguration
+import com.amazonaws.auth.AWSCredentials
+import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder
 import com.amazonaws.services.simpleemail.model.*
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
@@ -35,9 +39,16 @@ class AwsSesMailer {
             log.error("${AmazonSimpleEmailService.ENDPOINT_PREFIX} is not supported in region $regionName")
             return
         }
-        def credentials = new BasicAWSCredentials(accessKey, secretKey)
-        def clientConfiguration = AwsSdkUtils.clientConfigurationWithMap([:])
-        client = new AmazonSimpleEmailServiceClient(credentials, clientConfiguration).withRegion(region) as AmazonSimpleEmailServiceClient
+
+        ClientConfiguration clientConfiguration = AwsSdkUtils.clientConfigurationWithMap([:])
+        client = AmazonSimpleEmailServiceClientBuilder.standard()
+                .withCredentials(new AWSCredentialsProvider() {
+                    @Override AWSCredentials getCredentials() { return new BasicAWSCredentials(accessKey, secretKey) }
+
+                    @Override void refresh() { }
+                })
+                .withClientConfiguration(clientConfiguration)
+                .withRegion(region.name).build()
     }
 
     /**

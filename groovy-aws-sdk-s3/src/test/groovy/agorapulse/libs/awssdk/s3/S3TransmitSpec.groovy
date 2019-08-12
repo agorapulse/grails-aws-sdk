@@ -21,7 +21,7 @@ class S3TransmitSpec extends Specification {
         def credentials = new BasicAWSCredentials(accessKey, secretKey)
         def clientConfiguration = AwsSdkUtils.clientConfigurationWithMap([:])
 
-        s3transmit.client = new AmazonS3Client(credentials, clientConfiguration).withRegion(RegionUtils.getRegion(regionName)) as AmazonS3Client
+        s3transmit.client = new AmazonS3Client(credentials, clientConfiguration).withRegion(regionName) as AmazonS3Client
         def result = s3transmit.listBucketNames()
 
         then:

@@ -50,7 +50,7 @@ abstract class AbstractCognitoAuthService implements GrailsApplicationAware {
     init() {
         client = AmazonCognitoIdentityClient.builder()
            .withCredentials(AwsClientUtil.buildCredentials(config, cognitoConfig))
-           .withRegion(AwsClientUtil.buildRegion(config, cognitoConfig))
+           .withRegion(AwsClientUtil.buildRegion(config, cognitoConfig).name)
            .build()
     }
 
