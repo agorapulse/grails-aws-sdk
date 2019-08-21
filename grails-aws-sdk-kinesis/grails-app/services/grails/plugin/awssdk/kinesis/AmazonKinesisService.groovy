@@ -15,6 +15,8 @@ import java.nio.charset.Charset
 import java.nio.charset.CharsetDecoder
 import java.nio.charset.CharsetEncoder
 
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
+
 @Slf4j
 class AmazonKinesisService implements InitializingBean {
 
@@ -33,17 +35,8 @@ class AmazonKinesisService implements InitializingBean {
     protected String defaultStreamName = ''
 
     void afterPropertiesSet() throws Exception {
-        // Set region
-        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
-        assert region?.isServiceSupported(SERVICE_NAME)
-
         // Create client
-        client = AmazonKinesisClientBuilder.standard()
-                .withRegion(region.name)
-                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                .build()
+        client = configure(AmazonKinesisClientBuilder.standard(), SERVICE_NAME, config, serviceConfig).build()
 
         if (!defaultStreamName) {
             defaultStreamName = serviceConfig?.stream ?: ''

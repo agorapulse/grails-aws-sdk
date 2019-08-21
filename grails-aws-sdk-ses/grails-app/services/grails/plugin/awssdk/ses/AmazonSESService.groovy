@@ -1,18 +1,16 @@
 package grails.plugin.awssdk.ses
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.agorapulse.awssdk.ses.AwsSesMailer
 import com.agorapulse.awssdk.ses.TransactionalEmail
 import com.agorapulse.awssdk.ses.UnsupportedAttachmentTypeException
-import com.amazonaws.ClientConfiguration
-import com.amazonaws.regions.Region
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder
 import grails.core.GrailsApplication
 import grails.util.Environment
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
+
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonSESService implements InitializingBean {
@@ -26,17 +24,8 @@ class AmazonSESService implements InitializingBean {
     AwsSesMailer mailer = new AwsSesMailer()
 
     void afterPropertiesSet() throws Exception {
-        // Set region
-        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
-        assert region?.isServiceSupported(SERVICE_NAME)
-
         // Create client
-        mailer.client = AmazonSimpleEmailServiceClientBuilder.standard()
-                .withRegion(region.name)
-                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                .build()
+        mailer.client = configure(AmazonSimpleEmailServiceClientBuilder.standard(), SERVICE_NAME, config, serviceConfig).build()
 
         sourceEmail = serviceConfig?.sourceEmail ?: ''
         subjectPrefix = serviceConfig?.subjectPrefix ?: ''

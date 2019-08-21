@@ -7,12 +7,30 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.client.builder.AwsClientBuilder
+import com.amazonaws.client.builder.AwsSyncClientBuilder
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 
 class AwsClientUtil {
 
     static final String DEFAULT_REGION = 'us-east-1'
+
+    static <C, B extends AwsSyncClientBuilder<B, C>> B configure(B builder, String serviceName, config, serviceConfig) {
+        Region region = buildRegion(config, serviceConfig)
+        assert region.isServiceSupported(serviceName)
+
+        AwsClientBuilder.EndpointConfiguration endpointConfiguration = buildEndpointConfiguration(config, serviceConfig)
+
+        if (endpointConfiguration) {
+            builder.withEndpointConfiguration(endpointConfiguration)
+        } else {
+            builder.withRegion(region.name)
+        }
+
+        AWSCredentialsProvider credentials = buildCredentials(config, serviceConfig)
+        ClientConfiguration clientConfiguration = buildClientConfiguration(config, serviceConfig)
+        builder.withCredentials(credentials).withClientConfiguration(clientConfiguration)
+    }
 
     /**
      *
