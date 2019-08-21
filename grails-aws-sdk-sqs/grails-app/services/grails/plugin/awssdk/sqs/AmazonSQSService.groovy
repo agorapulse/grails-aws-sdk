@@ -1,10 +1,8 @@
 package grails.plugin.awssdk.sqs
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
+
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
-import com.amazonaws.client.builder.AwsClientBuilder
-import com.amazonaws.regions.Region
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
 import com.amazonaws.services.sqs.model.*
@@ -12,6 +10,8 @@ import grails.core.GrailsApplication
 import groovy.transform.Synchronized
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
+
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonSQSService implements InitializingBean  {
@@ -28,17 +28,8 @@ class AmazonSQSService implements InitializingBean  {
     }
 
     void afterPropertiesSet() throws Exception {
-        // Set region
-        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
-        assert region?.isServiceSupported(SERVICE_NAME)
-
         // Create client
-        client = AmazonSQSClientBuilder.standard()
-                .withRegion(region.name)
-                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                .build()
+        client = configure(AmazonSQSClientBuilder.standard(), SERVICE_NAME, config, serviceConfig).build()
 
         defaultQueueName = serviceConfig?.queue ?: ''
     }

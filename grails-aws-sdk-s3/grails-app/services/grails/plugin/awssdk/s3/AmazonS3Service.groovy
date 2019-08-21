@@ -16,6 +16,8 @@ import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.web.multipart.MultipartFile
 
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
+
 @Slf4j
 class AmazonS3Service implements InitializingBean {
 
@@ -37,17 +39,8 @@ class AmazonS3Service implements InitializingBean {
     private String defaultBucketName = ''
 
     void afterPropertiesSet() throws Exception {
-        // Set region
-        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
-        assert region?.isServiceSupported(SERVICE_NAME)
-
         // Create client
-        client = AmazonS3ClientBuilder.standard()
-                .withRegion(region.name)
-                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                .build()
+        client = configure(AmazonS3ClientBuilder.standard(), SERVICE_NAME, config, serviceConfig).build()
 
         defaultBucketName = serviceConfig?.bucket ?: ''
     }

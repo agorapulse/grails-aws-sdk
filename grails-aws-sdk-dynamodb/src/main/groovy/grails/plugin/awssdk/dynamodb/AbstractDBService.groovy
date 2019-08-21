@@ -19,6 +19,8 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
+
 @Slf4j
 abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
@@ -62,13 +64,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             client = DaxHelper.buildDaxClient(daxEndpoint, region, config, serviceConfig)
         } else {
             // Create client
-            client = AmazonDynamoDBClientBuilder
-                    .standard()
-                    .withRegion(region.name)
-                    .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
-                    .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                    .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                    .build()
+            client = configure(AmazonDynamoDBClientBuilder.standard(), SERVICE_NAME, config, serviceConfig).build()
         }
 
         mapper = new DynamoDBMapper(client)
