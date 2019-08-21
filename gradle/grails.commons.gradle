@@ -39,7 +39,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
 
-    compile "agorapulse.libs:groovy-aws-sdk-util:1.1"
+    compile "agorapulse.libs:groovy-aws-sdk-util:1.2.2"
 
     console "org.grails:grails-console"
 

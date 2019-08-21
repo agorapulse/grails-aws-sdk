@@ -11,8 +11,6 @@ import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.transfer.TransferManager
 import com.amazonaws.services.s3.transfer.Upload
 import grails.core.GrailsApplication
-import groovy.transform.stc.ClosureParams
-import groovy.transform.stc.SimpleType
 import groovy.util.logging.Slf4j
 import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.InitializingBean
@@ -46,6 +44,7 @@ class AmazonS3Service implements InitializingBean {
         // Create client
         client = AmazonS3ClientBuilder.standard()
                 .withRegion(region.name)
+                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()

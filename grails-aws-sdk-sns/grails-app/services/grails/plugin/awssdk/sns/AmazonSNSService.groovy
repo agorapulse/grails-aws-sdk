@@ -32,7 +32,8 @@ class AmazonSNSService implements InitializingBean  {
 
         // Create client
         client = AmazonSNSClientBuilder.standard()
-                .withRegion(region)
+                .withRegion(region.name)
+                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()
