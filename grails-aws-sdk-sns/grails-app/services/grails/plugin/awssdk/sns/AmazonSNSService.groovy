@@ -1,10 +1,7 @@
 package grails.plugin.awssdk.sns
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
-import com.amazonaws.ClientConfiguration
-import com.amazonaws.regions.Region
+
 import com.amazonaws.services.sns.AmazonSNS
-import com.amazonaws.services.sns.AmazonSNSClient
 import com.amazonaws.services.sns.AmazonSNSClientBuilder
 import com.amazonaws.services.sns.model.*
 import grails.core.GrailsApplication
@@ -14,6 +11,8 @@ import org.springframework.beans.factory.InitializingBean
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonSNSService implements InitializingBean  {
@@ -26,17 +25,7 @@ class AmazonSNSService implements InitializingBean  {
     AmazonSNS client
     
     void afterPropertiesSet() throws Exception {
-        // Set region
-        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
-        assert region?.isServiceSupported(SERVICE_NAME)
-
-        // Create client
-        client = AmazonSNSClientBuilder.standard()
-                .withRegion(region.name)
-                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
-                .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
-                .build()
+        client = configure(AmazonSNSClientBuilder.standard(), SERVICE_NAME, config, serviceConfig).build()
     }
 
     /**

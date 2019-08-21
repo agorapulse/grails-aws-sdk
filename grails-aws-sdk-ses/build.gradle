@@ -3,7 +3,7 @@ apply from: "../gradle/grails.commons.gradle"
 dependencies {
 
     // Location : ../groovy-aws-sdk-ses
-    compile "agorapulse.libs:groovy-aws-sdk-ses:1.2.2"
+    compile "agorapulse.libs:groovy-aws-sdk-ses:1.2.3"
 
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
