@@ -4,6 +4,7 @@ import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.regions.Region
 import com.amazonaws.services.kinesis.AmazonKinesis
 import com.amazonaws.services.kinesis.AmazonKinesisClientBuilder
+import com.amazonaws.services.kinesis.model.*
 import grails.core.GrailsApplication
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
