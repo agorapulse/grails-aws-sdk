@@ -6,6 +6,8 @@ import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
+import com.amazonaws.client.builder.AwsClientBuilder
+import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 
 class AwsClientUtil {
@@ -103,6 +105,16 @@ class AwsClientUtil {
             regionName = defaultConfig.region
         }
         RegionUtils.getRegion(regionName)
+    }
+
+    static AwsClientBuilder.EndpointConfiguration buildEndpointConfiguration(defaultConfig, serviceConfig) {
+        Region region = buildRegion(defaultConfig, serviceConfig)
+        if (serviceConfig?.endpoint) {
+            return new AwsClientBuilder.EndpointConfiguration(serviceConfig.endpoint as String, region.name)
+        } else if (defaultConfig?.endpoint) {
+            return new AwsClientBuilder.EndpointConfiguration(defaultConfig.endpoint as String, region.name)
+        }
+        return null
     }
 
 

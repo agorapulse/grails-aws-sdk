@@ -65,6 +65,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
             client = AmazonDynamoDBClientBuilder
                     .standard()
                     .withRegion(region.name)
+                    .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
                     .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                     .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                     .build()
