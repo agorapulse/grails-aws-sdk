@@ -3,6 +3,7 @@ package grails.plugin.awssdk.sqs
 import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
+import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.regions.Region
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
@@ -34,6 +35,7 @@ class AmazonSQSService implements InitializingBean  {
         // Create client
         client = AmazonSQSClientBuilder.standard()
                 .withRegion(region.name)
+                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build()

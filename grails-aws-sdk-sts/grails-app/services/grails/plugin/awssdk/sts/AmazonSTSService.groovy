@@ -29,6 +29,7 @@ class AmazonSTSService implements InitializingBean {
         // Create client
         client = AWSSecurityTokenServiceClientBuilder.standard()
                 .withRegion(region.name)
+                .withEndpointConfiguration(AwsClientUtil.buildEndpointConfiguration(config, serviceConfig))
                 .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(AwsClientUtil.buildClientConfiguration(config, serviceConfig))
                 .build() as AWSSecurityTokenServiceClient
