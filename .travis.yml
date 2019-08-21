@@ -1,5 +1,5 @@
 language: groovy
-jdk: oraclejdk8
+jdk: openjdk8
 sudo: false
 
 env:
