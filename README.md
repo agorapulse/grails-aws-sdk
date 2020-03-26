@@ -30,3 +30,11 @@ Please check each README for usage info.
 
 To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-aws-sdk/issues) section on GitHub.
 
+# Compatibilty 
+
+| Grails        | Plugin        |
+| ------------- |---------------|
+| 3.3.x, 4.x    | 2.2.x         |
+| 3.2.x         | 2.1.x         |
+| 2.x           | 1.x           |
+
