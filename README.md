@@ -32,6 +32,8 @@ To report any bug, please use the project [Issues](http://github.com/agorapulse/
 
 # Compatibilty 
 
+NOTE: For Grails 4 you should consider migrating to [Micronaut AWS SDK](https://agorapulse.github.io/micronaut-aws-sdk/) as Miconaut is now the first class citizen in Grails. Use `-micronaut-1.2` releases for Grails `4.0.x`.
+
 | Grails        | Plugin        |
 | ------------- |---------------|
 | 3.3.x, 4.x    | 2.2.x         |
