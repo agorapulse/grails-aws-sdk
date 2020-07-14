@@ -51,7 +51,7 @@ apply plugin:"org.grails.grails-gsp"
 
 dependencies {
     ...
-    compile "org.grails:grails-plugin-gsp"
+    compile "org.grails.plugins:gsp"
     ...
 }
 ```
