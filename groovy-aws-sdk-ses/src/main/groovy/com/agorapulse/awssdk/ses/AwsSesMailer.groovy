@@ -20,6 +20,7 @@ import javax.activation.DataHandler
 import javax.activation.DataSource
 import javax.mail.BodyPart
 import javax.mail.Session
+import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
@@ -76,6 +77,14 @@ class AwsSesMailer {
 
         Session session = Session.getInstance(new Properties())
         MimeMessage mimeMessage = new MimeMessage(session)
+        mimeMessage.setFrom(new InternetAddress(transactionalEmail.sourceEmail))
+        if (transactionalEmail.replyToEmail) {
+            InternetAddress[] replyToArray = [new InternetAddress(transactionalEmail.replyToEmail)]
+            mimeMessage.setReplyTo(replyToArray)
+        }
+        transactionalEmail.recipients.each { recipient ->
+            mimeMessage.addRecipients(javax.mail.Message.RecipientType.TO, new InternetAddress(recipient))
+        }
         def subject = transactionalEmail.subject
         mimeMessage.setSubject(subject)
         MimeMultipart mimeMultipart = new MimeMultipart()
