@@ -77,7 +77,6 @@ class AwsSesMailerSpec extends Specification {
         awsSesMailer.mailWithAttachment {
             subject subjectStr
             htmlBody '<p>This is an example body</p>'
-            to System.getProperty('TEST_INBOX_EMAIL')
             from System.getProperty('TEST_FROM_EMAIL')
             attachment {
                 filepath '/temp/virus.exe'

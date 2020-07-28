@@ -77,7 +77,9 @@ class AwsSesMailer {
 
         Session session = Session.getInstance(new Properties())
         MimeMessage mimeMessage = new MimeMessage(session)
-        mimeMessage.setFrom(new InternetAddress(transactionalEmail.sourceEmail))
+        if (transactionalEmail.sourceEmail) {
+            mimeMessage.setFrom(new InternetAddress(transactionalEmail.sourceEmail))
+        }
         if (transactionalEmail.replyToEmail) {
             InternetAddress[] replyToArray = [new InternetAddress(transactionalEmail.replyToEmail)]
             mimeMessage.setReplyTo(replyToArray)
