@@ -1,6 +1,6 @@
 package grails.plugin.awssdk.cognito
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
+import agorapulse.libs.awssdk.util.AwsClientBuilder
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentity
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClient
 import com.amazonaws.services.cognitoidentity.model.GetOpenIdTokenForDeveloperIdentityRequest
@@ -49,8 +49,8 @@ abstract class AbstractCognitoAuthService implements GrailsApplicationAware {
     @PostConstruct
     init() {
         client = AmazonCognitoIdentityClient.builder()
-           .withCredentials(AwsClientUtil.buildCredentials(config, cognitoConfig))
-           .withRegion(AwsClientUtil.buildRegion(config, cognitoConfig).name)
+           .withCredentials(AwsClientBuilder.buildCredentials(config, cognitoConfig))
+           .withRegion(AwsClientBuilder.buildRegion(config, cognitoConfig).name)
            .build()
     }
 

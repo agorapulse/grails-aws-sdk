@@ -1,7 +1,7 @@
 package grails.plugin.awssdk.ses
 
 import com.agorapulse.awssdk.ses.UnsupportedAttachmentTypeException
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import grails.util.Environment
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.IgnoreIf
@@ -102,6 +102,7 @@ class AmazonSESServiceIntegrationSpec extends Specification {
         !emailFound
     }
 
+    @IgnoreIf({ !System.getenv('TEST_INBOX_EMAIL') })
     void "test that if you try to send an unsupported attachment an exception is thrown "() {
         when:
         def subjectStr = 'GRAILS AWS SDK SES with Attachment'

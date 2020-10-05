@@ -1,6 +1,6 @@
 package grails.plugin.awssdk.dynamodb
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
+import agorapulse.libs.awssdk.util.AwsClientBuilder
 import com.amazon.dax.client.dynamodbv2.AmazonDaxClientBuilder
 import com.amazon.dax.client.dynamodbv2.ClientConfig
 import com.amazonaws.regions.Region
@@ -22,7 +22,7 @@ class DaxHelper {
                 .standard()
                 .withEndpointConfiguration(daxEndpoint)
                 .withRegion(region.name)
-                .withCredentials(AwsClientUtil.buildCredentials(config, serviceConfig))
+                .withCredentials(AwsClientBuilder.buildCredentials(config, serviceConfig))
                 .withClientConfiguration(clientConfig)
                 .build()
     }

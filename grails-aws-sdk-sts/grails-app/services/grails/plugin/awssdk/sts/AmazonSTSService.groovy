@@ -10,7 +10,7 @@ import groovy.transform.stc.SimpleType
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
 
-import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
+import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
 
 @Slf4j
 class AmazonSTSService implements InitializingBean {

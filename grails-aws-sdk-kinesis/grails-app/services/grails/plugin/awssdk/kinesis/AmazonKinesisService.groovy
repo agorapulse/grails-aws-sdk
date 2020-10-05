@@ -1,7 +1,6 @@
 package grails.plugin.awssdk.kinesis
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
-import com.amazonaws.regions.Region
+
 import com.amazonaws.services.kinesis.AmazonKinesis
 import com.amazonaws.services.kinesis.AmazonKinesisClientBuilder
 import com.amazonaws.services.kinesis.model.*
@@ -15,7 +14,7 @@ import java.nio.charset.Charset
 import java.nio.charset.CharsetDecoder
 import java.nio.charset.CharsetEncoder
 
-import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
+import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
 
 @Slf4j
 class AmazonKinesisService implements InitializingBean {

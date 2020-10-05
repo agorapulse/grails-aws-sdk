@@ -1,6 +1,6 @@
 package grails.plugin.awssdk.kinesis
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
+import agorapulse.libs.awssdk.util.AwsClientBuilder
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
@@ -58,11 +58,11 @@ abstract class AbstractClientService {
         }
 
         // Set region
-        Region region = AwsClientUtil.buildRegion(config, config[SERVICE_NAME])
+        Region region = AwsClientBuilder.buildRegion(config, config[SERVICE_NAME])
 
         // Create client
         AWSCredentialsProvider credentials = new DefaultAWSCredentialsProviderChain()
-        ClientConfiguration configuration = AwsClientUtil.buildClientConfiguration(config, config[SERVICE_NAME])
+        ClientConfiguration configuration = AwsClientBuilder.buildClientConfiguration(config, config[SERVICE_NAME])
         kinesis = new AmazonKinesisClient(credentials, configuration)
                 .withRegion(region)
 
