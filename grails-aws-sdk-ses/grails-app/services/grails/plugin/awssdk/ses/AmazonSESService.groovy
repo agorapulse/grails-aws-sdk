@@ -10,7 +10,7 @@ import grails.util.Environment
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.InitializingBean
 
-import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonSESService implements InitializingBean {

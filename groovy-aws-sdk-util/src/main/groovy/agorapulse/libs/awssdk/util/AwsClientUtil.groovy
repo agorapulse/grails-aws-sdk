@@ -11,7 +11,8 @@ import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 
-class AwsClientBuilder {
+@SuppressWarnings(['FactoryMethodName'])
+class AwsClientUtil {
 
     static final String DEFAULT_REGION = 'us-east-1'
 

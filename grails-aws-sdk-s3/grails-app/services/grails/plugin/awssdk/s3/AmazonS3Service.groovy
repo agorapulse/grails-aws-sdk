@@ -1,6 +1,6 @@
 package grails.plugin.awssdk.s3
 
-import agorapulse.libs.awssdk.util.AwsClientBuilder
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.AmazonClientException
 import com.amazonaws.regions.Region
 import com.amazonaws.services.s3.AmazonS3
@@ -16,7 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.web.multipart.MultipartFile
 
-import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonS3Service implements InitializingBean {
@@ -91,7 +91,7 @@ class AmazonS3Service implements InitializingBean {
         if (!region) {
             region = serviceConfig.region ?: config.region
         }
-        if (!region || region == AwsClientBuilder.DEFAULT_REGION) {
+        if (!region || region == AwsClientUtil.DEFAULT_REGION) {
             client.createBucket(bucketName) // Default region US-EAST-1
         } else {
             client.createBucket(bucketName, region)
@@ -539,8 +539,8 @@ class AmazonS3Service implements InitializingBean {
 
     private String buildAbsoluteUrl(String bucketName,
                                     String path) {
-        Region region = AwsClientBuilder.buildRegion(config, serviceConfig)
-        "https://${region.name == AwsClientBuilder.DEFAULT_REGION ? 's3' : "s3-${region.name}"}.amazonaws.com/${bucketName}/${path}"
+        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
+        "https://${region.name == AwsClientUtil.DEFAULT_REGION ? 's3' : "s3-${region.name}"}.amazonaws.com/${bucketName}/${path}"
 
     }
 

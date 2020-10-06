@@ -14,7 +14,7 @@ import java.nio.charset.Charset
 import java.nio.charset.CharsetDecoder
 import java.nio.charset.CharsetEncoder
 
-import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonKinesisService implements InitializingBean {

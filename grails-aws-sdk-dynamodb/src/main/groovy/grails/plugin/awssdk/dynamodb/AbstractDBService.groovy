@@ -1,6 +1,6 @@
 package grails.plugin.awssdk.dynamodb
 
-import agorapulse.libs.awssdk.util.AwsClientBuilder
+import agorapulse.libs.awssdk.util.AwsClientUtil
 import com.amazonaws.regions.Region
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
@@ -19,7 +19,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 
-import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 abstract class AbstractDBService<TItemClass> implements InitializingBean {
@@ -55,7 +55,7 @@ abstract class AbstractDBService<TItemClass> implements InitializingBean {
 
     void afterPropertiesSet() throws Exception {
         // Set region
-        Region region = AwsClientBuilder.buildRegion(config, serviceConfig)
+        Region region = AwsClientUtil.buildRegion(config, serviceConfig)
         assert region?.isServiceSupported(SERVICE_NAME)
 
         String daxEndpoint = config?.dax?.endpoint

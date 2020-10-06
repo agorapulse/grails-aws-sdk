@@ -12,7 +12,7 @@ import org.springframework.beans.factory.InitializingBean
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-import static agorapulse.libs.awssdk.util.AwsClientBuilder.configure
+import static agorapulse.libs.awssdk.util.AwsClientUtil.configure
 
 @Slf4j
 class AmazonSNSService implements InitializingBean  {
