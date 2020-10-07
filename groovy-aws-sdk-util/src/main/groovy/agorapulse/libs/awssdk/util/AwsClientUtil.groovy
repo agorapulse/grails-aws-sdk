@@ -6,11 +6,12 @@ import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
-import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.client.builder.AwsSyncClientBuilder
+import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
 
+@SuppressWarnings(['FactoryMethodName'])
 class AwsClientUtil {
 
     static final String DEFAULT_REGION = 'us-east-1'
@@ -19,7 +20,7 @@ class AwsClientUtil {
         Region region = buildRegion(config, serviceConfig)
         assert region.isServiceSupported(serviceName)
 
-        AwsClientBuilder.EndpointConfiguration endpointConfiguration = buildEndpointConfiguration(config, serviceConfig)
+        EndpointConfiguration endpointConfiguration = buildEndpointConfiguration(config, serviceConfig)
 
         if (endpointConfiguration) {
             builder.withEndpointConfiguration(endpointConfiguration)
@@ -38,6 +39,7 @@ class AwsClientUtil {
      * @param serviceConfig
      * @return
      */
+    @SuppressWarnings(['CyclomaticComplexity', 'AbcMetric', 'MethodSize'])
     static ClientConfiguration buildClientConfiguration(defaultConfig, serviceConfig) {
         Map config = [
                 connectionTimeout: defaultConfig.connectionTimeout ?: 0,
@@ -54,36 +56,85 @@ class AwsClientUtil {
                 proxyWorkstation: defaultConfig.proxyWorkstation ?: ''
         ]
         if (serviceConfig) {
-            if (serviceConfig.connectionTimeout) config.connectionTimeout = serviceConfig.connectionTimeout
-            if (serviceConfig.maxConnections) config.maxConnections = serviceConfig.maxConnections
-            if (serviceConfig.maxErrorRetry) config.maxErrorRetry = serviceConfig.maxErrorRetry
-            if (serviceConfig.protocol) config.protocol = serviceConfig.protocol
-            if (serviceConfig.socketTimeout) config.socketTimeout = serviceConfig.socketTimeout
-            if (serviceConfig.userAgent) config.userAgent = serviceConfig.userAgent
-            if (serviceConfig.proxyDomain) config.proxyDomain = serviceConfig.proxyDomain
-            if (serviceConfig.proxyHost) config.proxyHost = serviceConfig.proxyHost
-            if (serviceConfig.proxyPassword) config.proxyPassword = serviceConfig.proxyPassword
-            if (serviceConfig.proxyPort) config.proxyPort = serviceConfig.proxyPort
-            if (serviceConfig.proxyUsername) config.proxyUsername = serviceConfig.proxyUsername
-            if (serviceConfig.proxyWorkstation) config.proxyWorkstation = serviceConfig.proxyWorkstation
+            if (serviceConfig.connectionTimeout) {
+                config.connectionTimeout = serviceConfig.connectionTimeout
+            }
+            if (serviceConfig.maxConnections) {
+                config.maxConnections = serviceConfig.maxConnections
+            }
+            if (serviceConfig.maxErrorRetry) {
+                config.maxErrorRetry = serviceConfig.maxErrorRetry
+            }
+            if (serviceConfig.protocol) {
+                config.protocol = serviceConfig.protocol
+            }
+            if (serviceConfig.socketTimeout) {
+                config.socketTimeout = serviceConfig.socketTimeout
+            }
+            if (serviceConfig.userAgent) {
+                config.userAgent = serviceConfig.userAgent
+            }
+            if (serviceConfig.proxyDomain) {
+                config.proxyDomain = serviceConfig.proxyDomain
+            }
+            if (serviceConfig.proxyHost) {
+                config.proxyHost = serviceConfig.proxyHost
+            }
+            if (serviceConfig.proxyPassword) {
+                config.proxyPassword = serviceConfig.proxyPassword
+            }
+            if (serviceConfig.proxyPort) {
+                config.proxyPort = serviceConfig.proxyPort
+            }
+            if (serviceConfig.proxyUsername) {
+                config.proxyUsername = serviceConfig.proxyUsername
+            }
+            if (serviceConfig.proxyWorkstation) {
+                config.proxyWorkstation = serviceConfig.proxyWorkstation
+            }
         }
 
         ClientConfiguration clientConfiguration = new ClientConfiguration()
-        if (config.connectionTimeout) clientConfiguration.connectionTimeout = config.connectionTimeout
-        if (config.maxConnections) clientConfiguration.maxConnections = config.maxConnections
-        if (config.maxErrorRetry) clientConfiguration.maxErrorRetry = config.maxErrorRetry
-        if (config.protocol) {
-            if (config.protocol.toUpperCase() == 'HTTP') clientConfiguration.protocol = Protocol.HTTP
-            else clientConfiguration.protocol = Protocol.HTTPS
+        if (config.connectionTimeout) {
+            clientConfiguration.connectionTimeout = config.connectionTimeout
         }
-        if (config.socketTimeout) clientConfiguration.socketTimeout = config.socketTimeout
-        if (config.userAgent) clientConfiguration.userAgent = config.userAgent
-        if (config.proxyDomain) clientConfiguration.proxyDomain = config.proxyDomain
-        if (config.proxyHost) clientConfiguration.proxyHost = config.proxyHost
-        if (config.proxyPassword) clientConfiguration.proxyPassword = config.proxyPassword
-        if (config.proxyPort) clientConfiguration.proxyPort = config.proxyPort
-        if (config.proxyUsername) clientConfiguration.proxyUsername = config.proxyUsername
-        if (config.proxyWorkstation) clientConfiguration.proxyWorkstation = config.proxyWorkstation
+        if (config.maxConnections) {
+            clientConfiguration.maxConnections = config.maxConnections
+        }
+        if (config.maxErrorRetry) {
+            clientConfiguration.maxErrorRetry = config.maxErrorRetry
+        }
+        if (config.protocol) {
+            if (config.protocol.toUpperCase() == 'HTTP') {
+                clientConfiguration.protocol = Protocol.HTTP
+            } else {
+                clientConfiguration.protocol = Protocol.HTTPS
+            }
+        }
+        if (config.socketTimeout) {
+            clientConfiguration.socketTimeout = config.socketTimeout
+        }
+        if (config.userAgent) {
+            clientConfiguration.userAgent = config.userAgent
+        }
+        if (config.proxyDomain) {
+            clientConfiguration.proxyDomain = config.proxyDomain
+        }
+        if (config.proxyHost) {
+            clientConfiguration.proxyHost = config.proxyHost
+        }
+        if (config.proxyPassword) {
+            clientConfiguration.proxyPassword = config.proxyPassword
+        }
+        if (config.proxyPort) {
+            clientConfiguration.proxyPort = config.proxyPort
+        }
+        if (config.proxyUsername) {
+            clientConfiguration.proxyUsername = config.proxyUsername
+        }
+        if (config.proxyWorkstation) {
+            clientConfiguration.proxyWorkstation = config.proxyWorkstation
+        }
         clientConfiguration
     }
 
@@ -99,8 +150,12 @@ class AwsClientUtil {
                 secretKey: defaultConfig.secretKey ?: ''
         ]
         if (serviceConfig) {
-            if (serviceConfig.accessKey) config.accessKey = serviceConfig.accessKey
-            if (serviceConfig.secretKey) config.secretKey = serviceConfig.secretKey
+            if (serviceConfig.accessKey) {
+                config.accessKey = serviceConfig.accessKey
+            }
+            if (serviceConfig.secretKey) {
+                config.secretKey = serviceConfig.secretKey
+            }
         }
 
         if (!config.accessKey || !config.secretKey) {
@@ -115,6 +170,7 @@ class AwsClientUtil {
      * @param defaultConfig
      * @param serviceConfig
      */
+    @SuppressWarnings(['ElseBlockBraces'])
     static buildRegion(defaultConfig, serviceConfig) {
         String regionName = DEFAULT_REGION
         if (serviceConfig?.region) {
@@ -125,15 +181,15 @@ class AwsClientUtil {
         RegionUtils.getRegion(regionName)
     }
 
-    static AwsClientBuilder.EndpointConfiguration buildEndpointConfiguration(defaultConfig, serviceConfig) {
+    @SuppressWarnings(['ElseBlockBraces'])
+    static EndpointConfiguration buildEndpointConfiguration(defaultConfig, serviceConfig) {
         Region region = buildRegion(defaultConfig, serviceConfig)
         if (serviceConfig?.endpoint) {
-            return new AwsClientBuilder.EndpointConfiguration(serviceConfig.endpoint as String, region.name)
+            return new EndpointConfiguration(serviceConfig.endpoint as String, region.name)
         } else if (defaultConfig?.endpoint) {
-            return new AwsClientBuilder.EndpointConfiguration(defaultConfig.endpoint as String, region.name)
+            return new EndpointConfiguration(defaultConfig.endpoint as String, region.name)
         }
-        return null
+        null
     }
-
 
 }

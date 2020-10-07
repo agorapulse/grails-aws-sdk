@@ -1,5 +1,9 @@
 package com.agorapulse.awssdk.ses
 
+import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.STATUS_DELIVERED
+import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.STATUS_NOT_DELIVERED
+import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.STATUS_BLACKLISTED
+
 import com.agorapulse.awssdk.AwsSdkUtils
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
@@ -12,7 +16,13 @@ import com.amazonaws.regions.RegionUtils
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder
-import com.amazonaws.services.simpleemail.model.*
+import com.amazonaws.services.simpleemail.model.Body
+import com.amazonaws.services.simpleemail.model.Content
+import com.amazonaws.services.simpleemail.model.Destination
+import com.amazonaws.services.simpleemail.model.Message
+import com.amazonaws.services.simpleemail.model.RawMessage
+import com.amazonaws.services.simpleemail.model.SendEmailRequest
+import com.amazonaws.services.simpleemail.model.SendRawEmailRequest
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 
@@ -26,8 +36,6 @@ import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
 import javax.mail.util.ByteArrayDataSource
 import java.nio.ByteBuffer
-
-import static com.agorapulse.awssdk.ses.AwsSdkSesEmailDeliveryStatus.*
 
 @Slf4j
 @CompileStatic
@@ -44,7 +52,7 @@ class AwsSesMailer {
         ClientConfiguration clientConfiguration = AwsSdkUtils.clientConfigurationWithMap([:])
         client = AmazonSimpleEmailServiceClientBuilder.standard()
                 .withCredentials(new AWSCredentialsProvider() {
-                    @Override AWSCredentials getCredentials() { return new BasicAWSCredentials(accessKey, secretKey) }
+                    @Override AWSCredentials getCredentials() { new BasicAWSCredentials(accessKey, secretKey) }
 
                     @Override void refresh() { }
                 })
@@ -71,7 +79,7 @@ class AwsSesMailer {
         sendEmailWithAttachment(transactionalEmail)
     }
 
-    @SuppressWarnings(['LineLength', 'ElseBlockBraces', 'JavaIoPackageAccess'])
+    @SuppressWarnings(['LineLength', 'ElseBlockBraces', 'JavaIoPackageAccess', 'AbcMetric'])
     int sendEmailWithAttachment(TransactionalEmail transactionalEmail) throws UnsupportedAttachmentTypeException {
         int statusId = STATUS_NOT_DELIVERED
 

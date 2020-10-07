@@ -1,7 +1,6 @@
 package grails.plugin.awssdk.kinesis
 
-import agorapulse.libs.awssdk.util.AwsClientUtil
-import com.amazonaws.regions.Region
+
 import com.amazonaws.services.kinesis.AmazonKinesis
 import com.amazonaws.services.kinesis.AmazonKinesisClientBuilder
 import com.amazonaws.services.kinesis.model.*

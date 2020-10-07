@@ -1,6 +1,6 @@
 package grails.plugin.awssdk.ses
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import grails.util.Environment
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.IgnoreIf
