@@ -9,18 +9,3 @@ dependencies {
     compileOnly "com.amazonaws:amazon-dax-client:1.0.202017.0"
     testCompile "com.amazonaws:amazon-dax-client:1.0.202017.0"
 }
-
-grailsPublish {
-    user = System.getenv("BINTRAY_USER") ?: ''
-    key = System.getenv("BINTRAY_KEY") ?: ''
-    userOrg = 'agorapulse'
-    githubSlug = "agorapulse/grails-$project.name"
-    license {
-        name = 'Apache-2.0'
-    }
-    title = "AWS SDK DynamoDB"
-    desc = "Grails AWS SDK DynamoDB plugin"
-    developers = [benorama:"Benoit Hediard", jvdrean:"Jean-Vincent Drean"]
-    portalUser = System.getenv("GRAILS_PORTAL_USER") ?: ''
-    portalPassword = System.getenv("GRAILS_PORTAL_PASSWORD") ?: ''
-}

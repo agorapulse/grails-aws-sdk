@@ -1,9 +1,8 @@
 apply from: "../gradle/groovy.commons.gradle"
-apply plugin: "com.jfrog.bintray"
 
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
@@ -13,22 +12,4 @@ buildscript {
 
 dependencies {
     compile "com.amazonaws:aws-java-sdk-s3:$awsJavaSdkVersion"
-}
-
-bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
-    publications = ['maven']
-    publish = true
-    pkg {
-        repo = 'libs'
-        name = 'groovy-aws-sdk-s3'
-        userOrg = 'agorapulse'
-        licenses = ['Apache-2.0']
-        publish = true
-        version {
-            name = project.version
-            released = new Date()
-        }
-    }
 }

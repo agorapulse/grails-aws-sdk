@@ -6,7 +6,6 @@ project.apply plugin: "codenarc"
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {

@@ -7,18 +7,3 @@ dependencies {
     // Latest AWS SDK Kinesis lib
     compile "com.amazonaws:aws-java-sdk-kinesis:$awsJavaSdkVersion"
 }
-
-grailsPublish {
-    user = System.getenv("BINTRAY_USER") ?: ''
-    key = System.getenv("BINTRAY_KEY") ?: ''
-    userOrg = 'agorapulse'
-    githubSlug = "agorapulse/grails-$project.name"
-    license {
-        name = 'Apache-2.0'
-    }
-    title = "AWS SDK Kinesis"
-    desc = "Grails AWS SDK Kinesis plugin"
-    developers = [benorama:"Benoit Hediard"]
-    portalUser = System.getenv("GRAILS_PORTAL_USER") ?: ''
-    portalPassword = System.getenv("GRAILS_PORTAL_PASSWORD") ?: ''
-}
