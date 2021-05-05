@@ -63,6 +63,19 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
+        if (System.getenv('DEPLOYER_PASSWORD')) {
+            maven {
+                credentials {
+                    username "deployer"
+                    password System.getenv('DEPLOYER_PASSWORD')
+                }
+                if (project.version.endsWith('-SNAPSHOT')) {
+                    url 'https://agorapulse.jfrog.io/agorapulse/plugins-snapshots-local/'
+                } else {
+                    url 'https://agorapulse.jfrog.io/agorapulse/plugins-releases-local/'
+                }
+            }
+        }
     }
     publications {
         gpr(MavenPublication) {
