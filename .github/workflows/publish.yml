@@ -14,8 +14,10 @@ jobs:
         with:
           java-version: 8
           distribution: adopt
-      - name: Publish package
-        run: gradle publish
+      - name: Publish plugins
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
