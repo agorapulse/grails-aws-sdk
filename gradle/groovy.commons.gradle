@@ -55,6 +55,7 @@ publishing {
         }
         if (System.getenv('DEPLOYER_PASSWORD')) {
             maven {
+                name = "JFrog"
                 credentials {
                     username "deployer"
                     password System.getenv('DEPLOYER_PASSWORD')
