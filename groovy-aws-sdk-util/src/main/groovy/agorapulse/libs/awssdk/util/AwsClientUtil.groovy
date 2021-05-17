@@ -2,17 +2,24 @@ package agorapulse.libs.awssdk.util
 
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol
+import com.amazonaws.SdkClientException
+import com.amazonaws.auth.AWSCredentials
 import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.AWSStaticCredentialsProvider
+import com.amazonaws.auth.AnonymousAWSCredentials
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.client.builder.AwsSyncClientBuilder
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.RegionUtils
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 @SuppressWarnings(['FactoryMethodName'])
 class AwsClientUtil {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AwsClientUtil)
 
     static final String DEFAULT_REGION = 'us-east-1'
 
@@ -159,7 +166,15 @@ class AwsClientUtil {
         }
 
         if (!config.accessKey || !config.secretKey) {
-            new DefaultAWSCredentialsProviderChain()
+            try {
+                // only fetch the credentials once when inititalized
+                AWSCredentials credentials = new DefaultAWSCredentialsProviderChain().getCredentials()
+                return new AWSStaticCredentialsProvider(credentials)
+            } catch(SdkClientException e) {
+                LOGGER.warn('Failed to obtain credentials from the chain. ' +
+                        'Please, configure grails.plugin.awssdk.accessKey and  grails.plugin.awssdk.secretKey ', e)
+                return new AWSStaticCredentialsProvider(new AnonymousAWSCredentials())
+            }
         } else {
             new AWSStaticCredentialsProvider(new BasicAWSCredentials(config.accessKey, config.secretKey))
         }
