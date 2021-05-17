@@ -1,8 +1,6 @@
 AWS SDK Grails Plugin
 =====================
 
-[![Build Status](https://travis-ci.org/agorapulse/grails-aws-sdk.svg)](https://travis-ci.org/agorapulse/grails-aws-sdk)  [ ![Download](https://api.bintray.com/packages/agorapulse/plugins/aws-sdk-dynamodb/images/download.svg?version=2.2.12) ](https://bintray.com/agorapulse/plugins/aws-sdk-dynamodb/2.2.12/link)
-
 # Introduction
 
 The [AWS SDK Plugins for Grails3](https://medium.com/@benorama/aws-sdk-plugins-for-grails-3-cc7f910fdc0d#.5gdwdxei3) are a suite of plugins that adds support for the [Amazon Web Services](http://aws.amazon.com/) infrastructure services.
@@ -21,6 +19,12 @@ The following services are currently supported:
 * [AWS SDK SQS Grails Plugin](https://github.com/agorapulse/grails-aws-sdk/tree/master/grails-aws-sdk-sqs)
 
 Please check each README for usage info.
+
+# Installation
+
+After the Bintray sunset, the packages are hosted on GitHub. 
+
+See https://github.com/orgs/agorapulse/packages?repo_name=grails-aws-sdk
 
 # Testing
 
