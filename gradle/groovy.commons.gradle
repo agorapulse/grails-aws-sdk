@@ -1,5 +1,3 @@
-group "agorapulse.libs"
-
 apply plugin: "groovy"
 apply plugin: "maven-publish"
 project.apply plugin: "codenarc"
