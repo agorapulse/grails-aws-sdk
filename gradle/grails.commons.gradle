@@ -9,7 +9,7 @@ buildscript {
     }
 }
 
-group "org.grails.plugins"
+group(System.getenv('GROUP') ?: 'org.grails.plugins')
 
 apply plugin:"eclipse"
 apply plugin:"idea"
