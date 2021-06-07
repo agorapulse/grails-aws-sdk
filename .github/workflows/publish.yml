@@ -20,15 +20,7 @@ jobs:
       - name: Publish plugins
         uses: eskatos/gradle-command-action@v1
         with:
-          arguments: publish -x :groovy-aws-sdk-s3:publish -x  :groovy-aws-sdk-ses:publish -x :groovy-aws-sdk-util:publish  -Pversion=${{ steps.version.outputs.tag }} -Pgroup=org.grails.plugins
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-          DEPLOYER_PASSWORD: ${{ secrets.DEPLOYER_PASSWORD }}
-      - name: Publish libraries
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: :groovy-aws-sdk-s3:publish :groovy-aws-sdk-ses:publish :groovy-aws-sdk-util:publish -Pversion=${{ steps.version.outputs.tag }} -Pgroup=agorapulse.libs
+          arguments: publish -Pversion=${{ steps.version.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}

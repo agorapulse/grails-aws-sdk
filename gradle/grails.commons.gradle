@@ -9,6 +9,8 @@ buildscript {
     }
 }
 
+group "org.grails.plugins"
+
 apply plugin:"eclipse"
 apply plugin:"idea"
 apply plugin:"org.grails.grails-plugin"
