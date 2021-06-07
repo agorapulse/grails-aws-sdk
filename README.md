@@ -22,9 +22,19 @@ Please check each README for usage info.
 
 # Installation
 
-After the Bintray sunset, the packages are hosted on GitHub. 
+The plugins have switched to Jitpack:
 
-See https://github.com/orgs/agorapulse/packages?repo_name=grails-aws-sdk
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    // example dependency
+    compile 'com.github.agorapulse.grails-aws-sdk:aws-sdk-s3:2.4.14'
+}
+
+```
 
 # Testing
 
