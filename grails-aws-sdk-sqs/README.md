@@ -121,10 +121,10 @@ class MyQueueService extends AmazonSQSService {
 
     static final QUEUE_NAME = 'my-queue'
 
-    @PostConstruct
-    def init() {
-        init(QUEUE_NAME)
-    }
+	void afterPropertiesSet() {
+		super.afterPropertiesSet()
+		init(QUEUE_NAME)
+	}
 
 }
 ```
