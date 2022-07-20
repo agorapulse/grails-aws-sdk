@@ -13,11 +13,13 @@ import com.amazonaws.services.kinesis.clientlibrary.lib.worker.KinesisClientLibC
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.Worker
 import grails.core.GrailsApplication
 import grails.util.Environment
+import groovy.util.logging.Slf4j
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
+@Slf4j
 abstract class AbstractClientService {
 
     static SERVICE_NAME = ServiceAbbreviations.Kinesis
