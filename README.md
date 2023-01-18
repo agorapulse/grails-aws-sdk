@@ -1,6 +1,11 @@
 AWS SDK Grails Plugin
 =====================
 
+IMPORTANT: Project retirement
+-------------------------------
+
+**This project is retired. As Micronaut become core of the Grails starting at Grails 4, please, use [Micronaut AWS SDK](https://agorapulse.github.io/micronaut-aws-sdk) instead.**
+
 # Introduction
 
 The [AWS SDK Plugins for Grails3](https://medium.com/@benorama/aws-sdk-plugins-for-grails-3-cc7f910fdc0d#.5gdwdxei3) are a suite of plugins that adds support for the [Amazon Web Services](http://aws.amazon.com/) infrastructure services.
