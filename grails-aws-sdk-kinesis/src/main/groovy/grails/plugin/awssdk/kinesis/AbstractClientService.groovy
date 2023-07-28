@@ -6,6 +6,7 @@ import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.ServiceAbbreviations
+import com.amazonaws.services.dynamodbv2.model.BillingMode
 import com.amazonaws.services.kinesis.AmazonKinesisClient
 import com.amazonaws.services.kinesis.clientlibrary.interfaces.IRecordProcessorFactory
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.InitialPositionInStream
@@ -87,6 +88,7 @@ abstract class AbstractClientService {
                 .withRegionName(region.name)
                 .withInitialPositionInStream(InitialPositionInStream.LATEST)
                 .withIdleTimeBetweenReadsInMillis(idleTimeBetweenReadsInMillis)
+                .withBillingMode(BillingMode.PAY_PER_REQUEST)
 
         // Create a new worker for each stream
         Worker worker = new Worker(recordProcessorFactory, kclConfig)
